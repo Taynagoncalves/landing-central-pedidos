@@ -848,6 +848,51 @@
 
     .dual-phone-dark img { filter: brightness(0.95); }
 
+    /* ── Hero carousel ── */
+    .hero-carousel {
+      position: relative;
+      width: 100%;
+    }
+
+    .hero-slide {
+      width: 100%;
+      border-radius: 36px;
+      display: block;
+      position: absolute;
+      top: 0; left: 0;
+      opacity: 0;
+      transition: opacity 0.7s ease;
+      cursor: zoom-in;
+    }
+
+    .hero-slide.active {
+      position: relative;
+      opacity: 1;
+    }
+
+    .hero-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 16px;
+    }
+
+    .hero-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.25);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      padding: 0;
+    }
+
+    .hero-dot.active {
+      background: var(--orange);
+      width: 22px;
+    }
+
     /* ── Lightbox ── */
     .lb-trigger { cursor: zoom-in; }
 
@@ -976,7 +1021,58 @@
         <div class="phone-mockup-hero">
           <div class="phone-frame">
             <div class="phone-notch"></div>
-            <img id="heroImg" src="imagens/cliente/temadark/telahome-dark.png" alt="Cardápio do cliente" loading="lazy">
+            <div class="hero-carousel" id="heroCarousel">
+              <img class="hero-slide active"
+                src="imagens/cliente/temadark/telahome-dark.png"
+                data-light="imagens/cliente/temaclaro/telahome.png"
+                data-dark="imagens/cliente/temadark/telahome-dark.png"
+                alt="Cardápio">
+              <img class="hero-slide"
+                src="imagens/cliente/temadark/teladetalhes-dark.png"
+                data-light="imagens/cliente/temaclaro/teladetalhes.png"
+                data-dark="imagens/cliente/temadark/teladetalhes-dark.png"
+                alt="Detalhes do produto">
+              <img class="hero-slide"
+                src="imagens/cliente/temadark/telacarrinho-dark.png"
+                data-light="imagens/cliente/temaclaro/telacarrinho.png"
+                data-dark="imagens/cliente/temadark/telacarrinho-dark.png"
+                alt="Carrinho">
+              <img class="hero-slide"
+                src="imagens/cliente/temadark/telafinalizar-dark.png"
+                data-light="imagens/cliente/temaclaro/telafinalizar.png"
+                data-dark="imagens/cliente/temadark/telafinalizar-dark.png"
+                alt="Finalizar pedido">
+              <img class="hero-slide"
+                src="imagens/cliente/temadark/telastatus1-dark.png"
+                data-light="imagens/cliente/temaclaro/telastatus1.png"
+                data-dark="imagens/cliente/temadark/telastatus1-dark.png"
+                alt="Status do pedido">
+              <img class="hero-slide"
+                src="imagens/cliente/temadark/telastatus2-dark.png"
+                data-light="imagens/cliente/temaclaro/telastatus2.png"
+                data-dark="imagens/cliente/temadark/telastatus2-dark.png"
+                alt="Rastreamento">
+              <img class="hero-slide"
+                src="imagens/cliente/temadark/telahistorico-dark.png"
+                data-light="imagens/cliente/temaclaro/telahistorico.png"
+                data-dark="imagens/cliente/temadark/telahistorico-dark.png"
+                alt="Histórico">
+              <img class="hero-slide"
+                src="imagens/cliente/temadark/telalogin-dark.png"
+                data-light="imagens/cliente/temaclaro/telalogin.png"
+                data-dark="imagens/cliente/temadark/telalogin-dark.png"
+                alt="Login">
+            </div>
+          </div>
+          <div class="hero-dots" id="heroDots">
+            <button class="hero-dot active" aria-label="Slide 1"></button>
+            <button class="hero-dot" aria-label="Slide 2"></button>
+            <button class="hero-dot" aria-label="Slide 3"></button>
+            <button class="hero-dot" aria-label="Slide 4"></button>
+            <button class="hero-dot" aria-label="Slide 5"></button>
+            <button class="hero-dot" aria-label="Slide 6"></button>
+            <button class="hero-dot" aria-label="Slide 7"></button>
+            <button class="hero-dot" aria-label="Slide 8"></button>
           </div>
         </div>
       </div>
@@ -1367,20 +1463,64 @@
   }
 
   function swapImages(theme) {
-    const heroImg = document.getElementById('heroImg');
-    if (heroImg) heroImg.src = theme === 'dark'
-      ? 'imagens/cliente/temadark/telahome-dark.png'
-      : 'imagens/cliente/temaclaro/telahome.png';
-
-    document.querySelectorAll('.theme-img').forEach(img => {
+    document.querySelectorAll('[data-light][data-dark]').forEach(img => {
       img.src = theme === 'dark' ? img.dataset.dark : img.dataset.light;
     });
   }
+
+  // ── Hero auto-carousel ──
+  const heroSlides = Array.from(document.querySelectorAll('.hero-slide'));
+  const heroDotEls = Array.from(document.querySelectorAll('.hero-dot'));
+  let heroIdx = 0;
+  let heroTimer;
+
+  function heroGoTo(idx) {
+    heroSlides[heroIdx].classList.remove('active');
+    heroDotEls[heroIdx].classList.remove('active');
+    heroIdx = (idx + heroSlides.length) % heroSlides.length;
+    heroSlides[heroIdx].classList.add('active');
+    heroDotEls[heroIdx].classList.add('active');
+  }
+
+  function heroStart() {
+    clearInterval(heroTimer);
+    heroTimer = setInterval(() => heroGoTo(heroIdx + 1), 3200);
+  }
+
+  heroStart();
+
+  heroDotEls.forEach((dot, i) => {
+    dot.addEventListener('click', () => { heroGoTo(i); heroStart(); });
+  });
+
+  // Swipe touch
+  let heroTouchX = null;
+  const heroEl = document.getElementById('heroCarousel');
+  heroEl.addEventListener('touchstart', e => { heroTouchX = e.touches[0].clientX; }, { passive: true });
+  heroEl.addEventListener('touchend', e => {
+    if (heroTouchX === null) return;
+    const diff = heroTouchX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) { heroGoTo(heroIdx + (diff > 0 ? 1 : -1)); heroStart(); }
+    heroTouchX = null;
+  });
 
   // ── Lightbox ──
   const lightbox = document.getElementById('lightbox');
   const lbImg    = document.getElementById('lbImg');
   const lbClose  = document.getElementById('lbClose');
+
+  // Lightbox no carrossel hero (abre a slide ativa)
+  heroEl.style.cursor = 'zoom-in';
+  heroEl.addEventListener('click', () => {
+    const src = heroSlides[heroIdx].src;
+    lbImg.classList.remove('loaded');
+    lbImg.src = '';
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    const tmp = new Image();
+    tmp.onload = () => { lbImg.src = tmp.src; requestAnimationFrame(() => lbImg.classList.add('loaded')); };
+    tmp.src = src;
+  });
 
   const SELECTORS = [
     '.feature-screenshot img',
