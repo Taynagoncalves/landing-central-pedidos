@@ -46,7 +46,7 @@
 
     .nav-logo img { height: 70px; }
 
-    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
     .nav-links a {
       text-decoration: none;
       color: var(--text);
@@ -70,29 +70,42 @@
     }
     .nav-cta:hover { background: var(--orange-dark); }
 
-    /* Hero */
+    /* ── Hero ── */
     .hero {
-      padding: 150px 24px 90px;
+      padding: 110px 24px 80px;
       background: linear-gradient(135deg, var(--dark) 0%, var(--dark-2) 100%);
       color: white;
-      text-align: center;
       position: relative;
       overflow: hidden;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
     }
 
     .hero::before {
       content: '';
       position: absolute;
-      top: -50%; left: -50%;
+      top: -50%; left: 20%;
       width: 200%; height: 200%;
-      background: radial-gradient(circle at 65% 35%, rgba(255,107,0,0.18) 0%, transparent 60%);
+      background: radial-gradient(circle at 65% 40%, rgba(255,107,0,0.2) 0%, transparent 55%);
       pointer-events: none;
     }
+
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      gap: 64px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-text { flex: 1; min-width: 0; }
 
     .hero-badge {
       display: inline-block;
       background: rgba(255,107,0,0.15);
-      border: 1px solid rgba(255,107,0,0.3);
+      border: 1px solid rgba(255,107,0,0.35);
       color: var(--orange-light);
       padding: 6px 18px;
       border-radius: 20px;
@@ -103,7 +116,7 @@
     }
 
     .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-size: clamp(1.9rem, 3.8vw, 3.4rem);
       font-weight: 800;
       line-height: 1.2;
       margin-bottom: 20px;
@@ -112,17 +125,17 @@
     .hero h1 span { color: var(--orange); }
 
     .hero p {
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      color: rgba(255,255,255,0.75);
-      max-width: 600px;
-      margin: 0 auto 44px;
+      font-size: clamp(1rem, 1.6vw, 1.15rem);
+      color: rgba(255,255,255,0.72);
+      max-width: 500px;
+      margin-bottom: 44px;
     }
 
     .hero-buttons {
       display: flex;
       gap: 16px;
-      justify-content: center;
       flex-wrap: wrap;
+      margin-bottom: 60px;
     }
 
     .btn-primary {
@@ -142,7 +155,7 @@
     .btn-primary:hover {
       background: var(--orange-dark);
       transform: translateY(-2px);
-      box-shadow: 0 6px 28px rgba(255,107,0,0.5);
+      box-shadow: 0 6px 28px rgba(255,107,0,0.55);
     }
 
     .btn-secondary {
@@ -160,17 +173,71 @@
 
     .hero-stats {
       display: flex;
-      justify-content: center;
-      gap: 56px;
-      margin-top: 72px;
+      gap: 48px;
       flex-wrap: wrap;
     }
 
-    .stat { text-align: center; }
-    .stat-value { font-size: 2.2rem; font-weight: 800; color: var(--orange); }
-    .stat-label { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 4px; }
+    .stat { text-align: left; }
+    .stat-value { font-size: 2rem; font-weight: 800; color: var(--orange); }
+    .stat-label { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 4px; }
 
-    /* Sections */
+    /* Hero phone mockup */
+    .hero-visual {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-visual::before {
+      content: '';
+      position: absolute;
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(255,107,0,0.22) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .phone-mockup-hero {
+      width: 270px;
+      animation: float 4s ease-in-out infinite;
+      position: relative;
+      z-index: 1;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-18px); }
+    }
+
+    .phone-frame {
+      background: #0d0d1a;
+      border-radius: 50px;
+      padding: 14px 10px 10px;
+      box-shadow:
+        0 0 0 2px #383850,
+        0 0 0 4px #22223a,
+        0 40px 100px rgba(0,0,0,0.7),
+        inset 0 0 0 1px rgba(255,255,255,0.04);
+    }
+
+    .phone-notch {
+      width: 88px;
+      height: 10px;
+      background: #0d0d1a;
+      border-radius: 0 0 8px 8px;
+      margin: 0 auto 6px;
+    }
+
+    .phone-frame img {
+      border-radius: 36px;
+      width: 100%;
+      display: block;
+    }
+
+    /* ── Common section styles ── */
     section { padding: 88px 24px; }
     .container { max-width: 1100px; margin: 0 auto; }
 
@@ -198,7 +265,7 @@
       max-width: 550px;
     }
 
-    /* Features */
+    /* ── Features ── */
     .features { background: var(--gray-light); }
     .features-header { text-align: center; margin-bottom: 60px; }
     .features-header .section-subtitle { margin: 0 auto; }
@@ -212,51 +279,72 @@
     .feature-card {
       background: white;
       border-radius: 18px;
-      padding: 34px;
+      overflow: hidden;
       box-shadow: 0 2px 16px rgba(0,0,0,0.06);
       transition: all 0.3s;
       border: 1px solid rgba(0,0,0,0.05);
     }
     .feature-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 36px rgba(0,0,0,0.1);
+      transform: translateY(-6px);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.11);
     }
 
+    .feature-screenshot {
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+      background: var(--gray-light);
+    }
+
+    .feature-screenshot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform 0.5s ease;
+      display: block;
+    }
+    .feature-card:hover .feature-screenshot img {
+      transform: scale(1.05);
+    }
+
+    .feature-card-body { padding: 28px; }
+
     .feature-icon {
-      width: 58px;
-      height: 58px;
+      width: 52px;
+      height: 52px;
       background: linear-gradient(135deg, var(--orange), var(--orange-light));
-      border-radius: 15px;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 26px;
-      margin-bottom: 20px;
+      font-size: 24px;
+      margin-bottom: 16px;
     }
 
     .feature-card h3 {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 700;
       color: var(--dark);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .feature-card p {
-      font-size: 0.93rem;
+      font-size: 0.92rem;
       color: var(--gray);
       line-height: 1.7;
     }
 
     .feature-list {
       list-style: none;
-      margin-top: 16px;
+      margin-top: 14px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 7px;
     }
 
     .feature-list li {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: var(--gray);
       display: flex;
       align-items: flex-start;
@@ -271,7 +359,135 @@
       margin-top: 1px;
     }
 
-    /* How it works */
+    /* ── Screenshots Gallery ── */
+    .screenshots {
+      background: var(--dark);
+      padding: 88px 0 72px;
+      overflow: hidden;
+    }
+
+    .screenshots .container { padding: 0 24px; }
+
+    .screenshots-header {
+      text-align: center;
+      margin-bottom: 56px;
+      padding: 0 24px;
+    }
+    .screenshots-header .section-title { color: white; }
+    .screenshots-header .section-subtitle { color: rgba(255,255,255,0.55); margin: 0 auto; }
+
+    .ss-track-wrapper {
+      overflow-x: auto;
+      padding: 24px 48px 40px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      scroll-snap-type: x mandatory;
+      cursor: grab;
+    }
+    .ss-track-wrapper::-webkit-scrollbar { display: none; }
+    .ss-track-wrapper:active { cursor: grabbing; }
+
+    .ss-track {
+      display: flex;
+      gap: 28px;
+      width: max-content;
+    }
+
+    .ss-item { scroll-snap-align: start; flex: 0 0 auto; }
+    .ss-item.phone-type { width: 200px; }
+    .ss-item.laptop-type { width: 360px; }
+
+    /* Phone frame (gallery) */
+    .ss-phone {
+      background: #0d0d1a;
+      border-radius: 40px;
+      padding: 10px 8px 8px;
+      box-shadow:
+        0 0 0 2px #383850,
+        0 20px 60px rgba(0,0,0,0.55);
+    }
+    .ss-phone::before {
+      content: '';
+      display: block;
+      width: 72px;
+      height: 8px;
+      background: #0d0d1a;
+      border-radius: 0 0 7px 7px;
+      margin: 0 auto 4px;
+    }
+    .ss-phone img {
+      border-radius: 28px;
+      width: 100%;
+      display: block;
+    }
+
+    /* Laptop frame (gallery) */
+    .ss-laptop {
+      background: #1a1a2e;
+      border-radius: 8px 8px 0 0;
+      padding: 8px 8px 0;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+    }
+    .ss-laptop::before {
+      content: '';
+      display: block;
+      width: 7px;
+      height: 7px;
+      background: #444460;
+      border-radius: 50%;
+      margin: 0 auto 5px;
+    }
+    .ss-laptop img {
+      border-radius: 3px 3px 0 0;
+      width: 100%;
+      display: block;
+    }
+    .ss-laptop-base {
+      background: #2a2a40;
+      height: 10px;
+      border-radius: 0 0 5px 5px;
+      margin: 0 -20px;
+    }
+    .ss-laptop-wrap { padding-bottom: 10px; }
+
+    .ss-label {
+      text-align: center;
+      color: rgba(255,255,255,0.45);
+      font-size: 12px;
+      font-weight: 500;
+      margin-top: 14px;
+      letter-spacing: 0.3px;
+    }
+
+    .ss-controls {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 12px;
+      padding: 0 24px;
+    }
+
+    .ss-btn {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: white;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .ss-btn:hover {
+      background: var(--orange);
+      border-color: var(--orange);
+    }
+
+    /* ── How it works ── */
     .how-it-works { background: white; }
     .how-header { text-align: center; margin-bottom: 60px; }
 
@@ -301,7 +517,7 @@
     .step h3 { font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
     .step p { font-size: 0.9rem; color: var(--gray); }
 
-    /* CTA */
+    /* ── CTA ── */
     .cta-section {
       background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
       color: white;
@@ -343,7 +559,7 @@
       box-shadow: 0 8px 32px rgba(0,0,0,0.2);
     }
 
-    /* Contact */
+    /* ── Contact ── */
     .contact { background: var(--gray-light); }
 
     .contact-grid {
@@ -416,13 +632,9 @@
       font-size: 0.95rem;
     }
 
-    .btn-full {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-    }
+    .btn-full { display: flex; justify-content: center; width: 100%; }
 
-    /* Footer */
+    /* ── Footer ── */
     footer {
       background: var(--dark);
       color: rgba(255,255,255,0.55);
@@ -433,7 +645,7 @@
 
     footer span { color: var(--orange); }
 
-    /* WhatsApp float */
+    /* ── WhatsApp float ── */
     .whatsapp-float {
       position: fixed;
       bottom: 28px;
@@ -464,12 +676,27 @@
       50% { box-shadow: 0 4px 32px rgba(37,211,102,0.8), 0 0 0 10px rgba(37,211,102,0.12); }
     }
 
-    /* Responsive */
+    /* ── Responsive ── */
+    @media (max-width: 960px) {
+      .hero-inner {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 40px;
+      }
+      .hero-text p { margin-left: auto; margin-right: auto; }
+      .hero-buttons { justify-content: center; }
+      .hero-stats { justify-content: center; }
+      .stat { text-align: center; }
+      .phone-mockup-hero { width: 210px; }
+      .hero { min-height: auto; padding: 130px 24px 60px; }
+    }
+
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
       .nav-links { display: none; }
       .contact-grid { grid-template-columns: 1fr; gap: 32px; }
-      .hero-stats { gap: 28px; }
+      .hero-stats { gap: 24px; }
+      .ss-track-wrapper { padding: 16px 24px 32px; }
     }
   </style>
 </head>
@@ -482,6 +709,7 @@
   </a>
   <ul class="nav-links">
     <li><a href="#funcionalidades">Funcionalidades</a></li>
+    <li><a href="#preview">Veja o sistema</a></li>
     <li><a href="#como-funciona">Como funciona</a></li>
     <li><a href="#contato">Contato</a></li>
   </ul>
@@ -491,27 +719,43 @@
 <!-- Hero -->
 <section class="hero">
   <div class="container">
-    <div class="hero-badge">Sistema de Pedidos Online</div>
-    <h1>Seu negócio vendendo mais,<br>com <span>tecnologia de verdade</span></h1>
-    <p>Plataforma completa para receber pedidos online com gestão de delivery, mesas com QR Code, controle de motoboys e notificações automáticas no WhatsApp.</p>
-    <div class="hero-buttons">
-      <a href="https://wa.me/5545999278792?text=Olá!%20Quero%20contratar%20o%20sistema." target="_blank" class="btn-primary">
-        Quero contratar
-      </a>
-      <a href="#funcionalidades" class="btn-secondary">Ver funcionalidades</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat">
-        <div class="stat-value">100%</div>
-        <div class="stat-label">Online, sem instalar app</div>
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-badge">Sistema de Pedidos Online</div>
+        <h1>Seu negócio vendendo mais,<br>com <span>tecnologia de verdade</span></h1>
+        <p>Plataforma completa para receber pedidos online com gestão de delivery, mesas com QR Code, controle de motoboys e notificações automáticas no WhatsApp.</p>
+        <div class="hero-buttons">
+          <a href="https://wa.me/5545999278792?text=Olá!%20Quero%20contratar%20o%20sistema." target="_blank" class="btn-primary">
+            Quero contratar
+          </a>
+          <a href="#preview" class="btn-secondary">Ver o sistema</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-value">100%</div>
+            <div class="stat-label">Online, sem instalar app</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">PIX</div>
+            <div class="stat-label">Pagamento integrado</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">24h</div>
+            <div class="stat-label">Suporte disponível</div>
+          </div>
+        </div>
       </div>
-      <div class="stat">
-        <div class="stat-value">PIX</div>
-        <div class="stat-label">Pagamento integrado</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value">24h</div>
-        <div class="stat-label">Suporte disponível</div>
+      <div class="hero-visual">
+        <div class="phone-mockup-hero">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <img
+              src="imagens/cliente/temaclaro/telahome.png"
+              alt="Cardápio do cliente – tela inicial"
+              loading="lazy"
+            >
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -528,84 +772,215 @@
     <div class="features-grid">
 
       <div class="feature-card">
-        <div class="feature-icon">🛵</div>
-        <h3>Sistema para Motoboy</h3>
-        <p>Painel exclusivo para entregadores gerenciarem suas entregas em tempo real, direto do celular.</p>
-        <ul class="feature-list">
-          <li>Aceite pedidos disponíveis com um clique</li>
-          <li>Visualize endereço e dados do cliente</li>
-          <li>Marque chegada no endereço</li>
-          <li>Histórico de entregas e ganhos por período</li>
-          <li>Acesso via navegador, sem instalar app</li>
-        </ul>
+        <div class="feature-screenshot">
+          <img src="imagens/cliente/temaclaro/telastatus1.png" alt="Rastreamento de entrega" loading="lazy">
+        </div>
+        <div class="feature-card-body">
+          <div class="feature-icon">🛵</div>
+          <h3>Sistema para Motoboy</h3>
+          <p>Painel exclusivo para entregadores gerenciarem suas entregas em tempo real, direto do celular.</p>
+          <ul class="feature-list">
+            <li>Aceite pedidos disponíveis com um clique</li>
+            <li>Visualize endereço e dados do cliente</li>
+            <li>Marque chegada no endereço</li>
+            <li>Histórico de entregas e ganhos por período</li>
+            <li>Acesso via navegador, sem instalar app</li>
+          </ul>
+        </div>
       </div>
 
       <div class="feature-card">
-        <div class="feature-icon">🪑</div>
-        <h3>Mesas e Garçom com QR Code</h3>
-        <p>Cada mesa tem seu próprio QR Code. O cliente escaneia e faz o pedido diretamente pelo celular.</p>
-        <ul class="feature-list">
-          <li>QR Code exclusivo por mesa</li>
-          <li>Pedido sem precisar chamar o garçom</li>
-          <li>Garçom acompanha pedidos em tempo real</li>
-          <li>Reduz erros e agiliza o atendimento</li>
-          <li>Funciona em qualquer celular com câmera</li>
-        </ul>
+        <div class="feature-screenshot">
+          <img src="imagens/admin/admin-mesagarcom.png" alt="Tela de gestão de mesas e garçom" loading="lazy">
+        </div>
+        <div class="feature-card-body">
+          <div class="feature-icon">🪑</div>
+          <h3>Mesas e Garçom com QR Code</h3>
+          <p>Cada mesa tem seu próprio QR Code. O cliente escaneia e faz o pedido diretamente pelo celular.</p>
+          <ul class="feature-list">
+            <li>QR Code exclusivo por mesa</li>
+            <li>Pedido sem precisar chamar o garçom</li>
+            <li>Garçom acompanha pedidos em tempo real</li>
+            <li>Reduz erros e agiliza o atendimento</li>
+            <li>Funciona em qualquer celular com câmera</li>
+          </ul>
+        </div>
       </div>
 
       <div class="feature-card">
-        <div class="feature-icon">💬</div>
-        <h3>Notificações no WhatsApp</h3>
-        <p>O cliente recebe uma mensagem automática no WhatsApp em cada etapa do pedido, sem precisar abrir o app.</p>
-        <ul class="feature-list">
-          <li>Pedido em preparo</li>
-          <li>Pronto para retirada ou saiu para entrega</li>
-          <li>Entregador chegou no endereço</li>
-          <li>Pedido concluído com sucesso</li>
-          <li>Sem custo extra para o lojista</li>
-        </ul>
+        <div class="feature-screenshot">
+          <img src="imagens/cliente/temaclaro/telastatus3.png" alt="Acompanhamento do status do pedido" loading="lazy">
+        </div>
+        <div class="feature-card-body">
+          <div class="feature-icon">💬</div>
+          <h3>Notificações no WhatsApp</h3>
+          <p>O cliente recebe uma mensagem automática no WhatsApp em cada etapa do pedido, sem precisar abrir o app.</p>
+          <ul class="feature-list">
+            <li>Pedido em preparo</li>
+            <li>Pronto para retirada ou saiu para entrega</li>
+            <li>Entregador chegou no endereço</li>
+            <li>Pedido concluído com sucesso</li>
+            <li>Sem custo extra para o lojista</li>
+          </ul>
+        </div>
       </div>
 
       <div class="feature-card">
-        <div class="feature-icon">📋</div>
-        <h3>Gestão de Pedidos</h3>
-        <p>Painel administrativo completo para acompanhar todos os pedidos em tempo real.</p>
-        <ul class="feature-list">
-          <li>Atualização de status com um clique</li>
-          <li>Visualização por tipo: delivery, retirada, mesa</li>
-          <li>Histórico completo de vendas</li>
-          <li>Controle de cardápio e categorias</li>
-          <li>Relatórios de desempenho</li>
-        </ul>
+        <div class="feature-screenshot">
+          <img src="imagens/admin/tela-admin.png" alt="Painel administrativo de pedidos" loading="lazy">
+        </div>
+        <div class="feature-card-body">
+          <div class="feature-icon">📋</div>
+          <h3>Gestão de Pedidos</h3>
+          <p>Painel administrativo completo para acompanhar todos os pedidos em tempo real.</p>
+          <ul class="feature-list">
+            <li>Atualização de status com um clique</li>
+            <li>Visualização por tipo: delivery, retirada, mesa</li>
+            <li>Histórico completo de vendas</li>
+            <li>Controle de cardápio e categorias</li>
+            <li>Relatórios de desempenho</li>
+          </ul>
+        </div>
       </div>
 
       <div class="feature-card">
-        <div class="feature-icon">💳</div>
-        <h3>Pagamentos Integrados</h3>
-        <p>Aceite PIX e cartão de crédito diretamente na plataforma, com segurança e praticidade.</p>
-        <ul class="feature-list">
-          <li>PIX com confirmação automática</li>
-          <li>Cartão de crédito online</li>
-          <li>Pagamento na entrega (dinheiro/maquininha)</li>
-          <li>Integração com Mercado Pago</li>
-          <li>Controle de troco</li>
-        </ul>
+        <div class="feature-screenshot">
+          <img src="imagens/cliente/temaclaro/telafinalizar.png" alt="Tela de pagamento e finalização do pedido" loading="lazy">
+        </div>
+        <div class="feature-card-body">
+          <div class="feature-icon">💳</div>
+          <h3>Pagamentos Integrados</h3>
+          <p>Aceite PIX e cartão de crédito diretamente na plataforma, com segurança e praticidade.</p>
+          <ul class="feature-list">
+            <li>PIX com confirmação automática</li>
+            <li>Cartão de crédito online</li>
+            <li>Pagamento na entrega (dinheiro/maquininha)</li>
+            <li>Integração com Mercado Pago</li>
+            <li>Controle de troco</li>
+          </ul>
+        </div>
       </div>
 
       <div class="feature-card">
-        <div class="feature-icon">🏪</div>
-        <h3>Personalização da Loja</h3>
-        <p>Cada loja tem sua própria identidade visual, com logo, banner e cores personalizadas.</p>
-        <ul class="feature-list">
-          <li>Logo e banner próprios</li>
-          <li>Link exclusivo da loja</li>
-          <li>Horário de funcionamento configurável</li>
-          <li>Área de cobertura para entrega</li>
-          <li>Bairros e taxas personalizáveis</li>
-        </ul>
+        <div class="feature-screenshot">
+          <img src="imagens/admin/admin-cardapio-digital.png" alt="Cardápio digital personalizado" loading="lazy">
+        </div>
+        <div class="feature-card-body">
+          <div class="feature-icon">🏪</div>
+          <h3>Personalização da Loja</h3>
+          <p>Cada loja tem sua própria identidade visual, com logo, banner e cores personalizadas.</p>
+          <ul class="feature-list">
+            <li>Logo e banner próprios</li>
+            <li>Link exclusivo da loja</li>
+            <li>Horário de funcionamento configurável</li>
+            <li>Área de cobertura para entrega</li>
+            <li>Bairros e taxas personalizáveis</li>
+          </ul>
+        </div>
       </div>
 
     </div>
+  </div>
+</section>
+
+<!-- Screenshots Preview -->
+<section class="screenshots" id="preview">
+  <div class="container">
+    <div class="screenshots-header">
+      <div class="section-badge" style="background:rgba(255,107,0,0.2);color:var(--orange-light);">Preview</div>
+      <h2 class="section-title">Veja como funciona na prática</h2>
+      <p class="section-subtitle">Conheça as principais telas do sistema, do cardápio ao painel do lojista.</p>
+    </div>
+  </div>
+
+  <div class="ss-track-wrapper" id="ssTrack">
+    <div class="ss-track">
+
+      <div class="ss-item phone-type">
+        <div class="ss-phone">
+          <img src="imagens/cliente/temaclaro/telahome.png" alt="Cardápio do cliente" loading="lazy">
+        </div>
+        <p class="ss-label">Cardápio</p>
+      </div>
+
+      <div class="ss-item phone-type">
+        <div class="ss-phone">
+          <img src="imagens/cliente/temaclaro/teladetalhes.png" alt="Detalhes do produto" loading="lazy">
+        </div>
+        <p class="ss-label">Detalhes do produto</p>
+      </div>
+
+      <div class="ss-item phone-type">
+        <div class="ss-phone">
+          <img src="imagens/cliente/temaclaro/telacarrinho.png" alt="Carrinho de compras" loading="lazy">
+        </div>
+        <p class="ss-label">Carrinho</p>
+      </div>
+
+      <div class="ss-item phone-type">
+        <div class="ss-phone">
+          <img src="imagens/cliente/temaclaro/telafinalizar.png" alt="Finalizar pedido" loading="lazy">
+        </div>
+        <p class="ss-label">Finalizar pedido</p>
+      </div>
+
+      <div class="ss-item phone-type">
+        <div class="ss-phone">
+          <img src="imagens/cliente/temaclaro/telastatus1.png" alt="Status do pedido" loading="lazy">
+        </div>
+        <p class="ss-label">Status do pedido</p>
+      </div>
+
+      <div class="ss-item phone-type">
+        <div class="ss-phone">
+          <img src="imagens/cliente/temaclaro/telastatus2.png" alt="Rastreamento em tempo real" loading="lazy">
+        </div>
+        <p class="ss-label">Rastreamento</p>
+      </div>
+
+      <div class="ss-item phone-type">
+        <div class="ss-phone">
+          <img src="imagens/cliente/temaclaro/telahistorico.png" alt="Histórico de pedidos" loading="lazy">
+        </div>
+        <p class="ss-label">Histórico</p>
+      </div>
+
+      <div class="ss-item laptop-type">
+        <div class="ss-laptop-wrap">
+          <div class="ss-laptop">
+            <img src="imagens/admin/tela-admin.png" alt="Painel do lojista" loading="lazy">
+          </div>
+          <div class="ss-laptop-base"></div>
+        </div>
+        <p class="ss-label">Painel do lojista</p>
+      </div>
+
+      <div class="ss-item laptop-type">
+        <div class="ss-laptop-wrap">
+          <div class="ss-laptop">
+            <img src="imagens/admin/admin-mesagarcom.png" alt="Gestão de mesas e garçom" loading="lazy">
+          </div>
+          <div class="ss-laptop-base"></div>
+        </div>
+        <p class="ss-label">Mesas e garçom</p>
+      </div>
+
+      <div class="ss-item laptop-type">
+        <div class="ss-laptop-wrap">
+          <div class="ss-laptop">
+            <img src="imagens/admin/admin-cardapio-digital.png" alt="Cardápio digital admin" loading="lazy">
+          </div>
+          <div class="ss-laptop-base"></div>
+        </div>
+        <p class="ss-label">Cardápio digital</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="ss-controls">
+    <button class="ss-btn" id="ssPrev" aria-label="Anterior">&#8249;</button>
+    <button class="ss-btn" id="ssNext" aria-label="Próximo">&#8250;</button>
   </div>
 </section>
 
@@ -695,6 +1070,34 @@
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
   </svg>
 </a>
+
+<script>
+  // Screenshot carousel
+  const track = document.getElementById('ssTrack');
+
+  document.getElementById('ssPrev').addEventListener('click', () => {
+    track.scrollBy({ left: -260, behavior: 'smooth' });
+  });
+  document.getElementById('ssNext').addEventListener('click', () => {
+    track.scrollBy({ left: 260, behavior: 'smooth' });
+  });
+
+  // Drag-to-scroll
+  let dragging = false, startX, scrollLeft;
+  track.addEventListener('mousedown', e => {
+    dragging = true;
+    startX = e.pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+  });
+  track.addEventListener('mouseleave', () => { dragging = false; });
+  track.addEventListener('mouseup', () => { dragging = false; });
+  track.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    track.scrollLeft = scrollLeft - (x - startX) * 1.5;
+  });
+</script>
 
 </body>
 </html>
