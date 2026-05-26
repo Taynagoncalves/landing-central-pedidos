@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Central Pedidos Online – Sistema de Pedidos para Restaurantes</title>
   <meta name="description" content="Sistema completo de pedidos online para restaurantes, lanchonetes e delivery. Motoboy, mesas com QR Code, notificações no WhatsApp e muito mais.">
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://centralpedidosonline.com.br/">
+  <meta property="og:title" content="Central Pedidos Online – Sistema de Pedidos para Restaurantes">
+  <meta property="og:description" content="Plataforma completa para receber pedidos online com gestão de delivery, mesas com QR Code, controle de motoboys e notificações automáticas no WhatsApp.">
+  <meta property="og:image" content="https://centralpedidosonline.com.br/imagens/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Central Pedidos Online – Sistema de Pedidos para Restaurantes">
+  <meta name="twitter:description" content="Plataforma completa para receber pedidos online com gestão de delivery, mesas com QR Code e notificações no WhatsApp.">
+  <meta name="twitter:image" content="https://centralpedidosonline.com.br/imagens/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -115,24 +125,30 @@
       border-radius: 10px;
       border: 1px solid var(--card-border);
       background: var(--card-bg);
-      color: var(--text);
+      color: var(--text-muted);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
-      transition: all 0.2s;
+      transition: all 0.25s;
       flex-shrink: 0;
     }
     .theme-toggle:hover {
       border-color: var(--orange);
       color: var(--orange);
+      background: rgba(255,107,0,0.08);
+      transform: rotate(15deg) scale(1.08);
     }
-
-    .icon-sun  { display: block; }
-    .icon-moon { display: none; }
-    [data-theme="dark"] .icon-sun  { display: none; }
-    [data-theme="dark"] .icon-moon { display: block; }
+    .icon-sun, .icon-moon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 0;
+    }
+    .icon-sun  { display: none; }
+    .icon-moon { display: flex; }
+    [data-theme="dark"] .icon-sun  { display: flex; }
+    [data-theme="dark"] .icon-moon { display: none; }
 
     .nav-cta {
       background: var(--orange);
@@ -1152,6 +1168,198 @@
       font-size: 13px;
       pointer-events: none;
     }
+
+    /* ── Hamburger menu ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      z-index: 1200;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1150;
+      background: var(--nav-bg);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .mobile-menu.open { opacity: 1; }
+    .mobile-menu a {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--orange); }
+    .mobile-menu .btn-primary { font-size: 16px; margin-top: 8px; }
+
+    /* ── Scrollspy active nav ── */
+    .nav-links a.active {
+      color: var(--orange);
+    }
+    .nav-links a.active::after { width: 100%; }
+
+    /* ── Back to top button ── */
+    .back-to-top {
+      position: fixed;
+      bottom: 100px;
+      right: 28px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--orange);
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 4px 16px rgba(255,107,0,0.4);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 900;
+    }
+    .back-to-top.visible { opacity: 1; transform: translateY(0); }
+    .back-to-top:hover { background: var(--orange-light); transform: translateY(-2px); }
+
+    /* ── LGPD cookie banner ── */
+    .lgpd-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 1300;
+      background: var(--card-bg);
+      border-top: 1px solid var(--card-border);
+      box-shadow: 0 -4px 24px rgba(0,0,0,0.15);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.34,1.2,0.64,1);
+    }
+    .lgpd-banner.show { transform: translateY(0); }
+    .lgpd-banner p {
+      flex: 1;
+      font-size: 13px;
+      color: var(--text-muted);
+      min-width: 200px;
+      line-height: 1.5;
+    }
+    .lgpd-banner p a { color: var(--orange); text-decoration: none; }
+    .lgpd-banner p a:hover { text-decoration: underline; }
+    .lgpd-accept {
+      background: var(--orange);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .lgpd-accept:hover { background: var(--orange-light); }
+
+    /* ── FAQ section ── */
+    .faq { padding: 100px 0; }
+    .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+    .faq-item {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+    .faq-item:hover { box-shadow: 0 4px 20px var(--card-shadow); }
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      cursor: pointer;
+      text-align: left;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      font-family: inherit;
+      transition: color 0.2s;
+    }
+    .faq-q:hover { color: var(--orange); }
+    .faq-q.open { color: var(--orange); }
+    .faq-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255,107,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+      transition: transform 0.3s, background 0.2s;
+      color: var(--orange);
+      font-style: normal;
+    }
+    .faq-q.open .faq-icon { transform: rotate(45deg); background: var(--orange); color: white; }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+      padding: 0 24px;
+    }
+    .faq-a.open { max-height: 400px; padding: 0 24px 20px; }
+    .faq-a p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ── Animated counters ── */
+    .stat-value[data-count] { transition: none; }
+
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav-links { display: none; }
+      .mobile-menu { display: flex; }
+      .back-to-top { bottom: 80px; right: 16px; }
+      .lgpd-banner { flex-direction: column; align-items: flex-start; padding: 16px; }
+      .faq-q { font-size: 14px; padding: 16px 18px; }
+      .faq-a { padding: 0 18px; }
+      .faq-a.open { padding: 0 18px 16px; }
+    }
   </style>
 </head>
 <body>
@@ -1165,22 +1373,52 @@
     <li><a href="#funcionalidades">Funcionalidades</a></li>
     <li><a href="#preview">Veja o sistema</a></li>
     <li><a href="#como-funciona">Como funciona</a></li>
+    <li><a href="#faq">FAQ</a></li>
     <li><a href="#contato">Contato</a></li>
   </ul>
   <div class="nav-right">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
     <div class="theme-hint-wrap">
       <button class="theme-toggle" id="themeToggle" aria-label="Alternar modo escuro">
-        <span class="icon-sun">☀️</span>
-        <span class="icon-moon">🌙</span>
+        <span class="icon-sun">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"/>
+            <line x1="12" y1="2" x2="12" y2="4"/>
+            <line x1="12" y1="20" x2="12" y2="22"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="2" y1="12" x2="4" y2="12"/>
+            <line x1="20" y1="12" x2="22" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </span>
+        <span class="icon-moon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </span>
       </button>
       <div class="theme-hint" id="themeHint">
-        Clique para ver o modo claro do sistema!
+        Clique aqui para ver o sistema no modo claro!
         <button class="theme-hint-close" id="themeHintClose" aria-label="Fechar">×</button>
       </div>
     </div>
     <a href="https://wa.me/5545999278792?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20sistema." class="nav-cta" target="_blank">Falar com vendas</a>
   </div>
 </nav>
+
+<!-- Mobile menu overlay -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#funcionalidades" class="mobile-link">Funcionalidades</a>
+  <a href="#preview" class="mobile-link">Veja o sistema</a>
+  <a href="#como-funciona" class="mobile-link">Como funciona</a>
+  <a href="#faq" class="mobile-link">FAQ</a>
+  <a href="#contato" class="mobile-link">Contato</a>
+  <a href="https://wa.me/5545999278792?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20sistema." class="btn-primary" target="_blank">Falar com vendas</a>
+</div>
 
 <!-- Hero -->
 <section class="hero">
@@ -1196,7 +1434,7 @@
         </div>
         <div class="hero-stats">
           <div class="stat">
-            <div class="stat-value">100%</div>
+            <div class="stat-value" data-count="100" data-suffix="%">100%</div>
             <div class="stat-label">Online, sem instalar app</div>
           </div>
           <div class="stat">
@@ -1204,7 +1442,7 @@
             <div class="stat-label">Pagamento integrado</div>
           </div>
           <div class="stat">
-            <div class="stat-value">24h</div>
+            <div class="stat-value" data-count="24" data-suffix="h">24h</div>
             <div class="stat-label">Suporte disponível</div>
           </div>
         </div>
@@ -1593,6 +1831,80 @@
   </div>
 </section>
 
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="features-header fade-up">
+      <div class="section-badge">Dúvidas frequentes</div>
+      <h2 class="section-title">Perguntas frequentes</h2>
+      <p class="section-subtitle">Tudo que você precisa saber antes de começar.</p>
+    </div>
+    <div class="faq-list fade-up delay-1">
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Preciso instalar algum aplicativo?
+          <i class="faq-icon">+</i>
+        </button>
+        <div class="faq-a">
+          <p>Não. O sistema funciona 100% pelo navegador, tanto para o restaurante quanto para o cliente. Basta acessar o link e usar — sem download, sem instalação.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Quanto tempo leva para o sistema estar funcionando?
+          <i class="faq-icon">+</i>
+        </button>
+        <div class="faq-a">
+          <p>A configuração é rápida. Em poucos minutos seu cardápio digital já está online e pronto para receber pedidos. Nossa equipe te acompanha em todo o processo.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          O sistema funciona para delivery e mesas ao mesmo tempo?
+          <i class="faq-icon">+</i>
+        </button>
+        <div class="faq-a">
+          <p>Sim! Você pode ativar delivery, mesas com QR Code e retirada no balcão — todos ao mesmo tempo, com painel único de gestão. Cada pedido chega separado por tipo.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Como funciona o pagamento pelo sistema?
+          <i class="faq-icon">+</i>
+        </button>
+        <div class="faq-a">
+          <p>O cliente pode pagar via PIX diretamente no pedido. O pagamento é confirmado automaticamente e o pedido avança para preparo sem precisar de nenhuma ação manual.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Existe suporte disponível se eu tiver dúvidas?
+          <i class="faq-icon">+</i>
+        </button>
+        <div class="faq-a">
+          <p>Sim, oferecemos suporte via WhatsApp 24 horas por dia. Nossa equipe está disponível para tirar dúvidas, ajudar nas configurações e resolver qualquer problema.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Posso testar antes de contratar?
+          <i class="faq-icon">+</i>
+        </button>
+        <div class="faq-a">
+          <p>Claro! Entre em contato pelo WhatsApp e vamos te mostrar o sistema funcionando ao vivo. Você verá todas as funcionalidades antes de tomar qualquer decisão.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- Footer -->
 <footer>
   <div class="footer-inner">
@@ -1612,6 +1924,15 @@
   <p class="lightbox-hint">Pressione ESC ou clique fora para fechar</p>
 </div>
 
+<!-- Back to top -->
+<button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">&#8679;</button>
+
+<!-- LGPD Cookie banner -->
+<div class="lgpd-banner" id="lgpdBanner">
+  <p>Usamos cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa <a href="#" onclick="return false;">Política de Privacidade</a>.</p>
+  <button class="lgpd-accept" id="lgpdAccept">Entendido</button>
+</div>
+
 <!-- WhatsApp Float -->
 <a href="https://wa.me/5545999278792?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20sistema." target="_blank" class="whatsapp-float" title="Falar no WhatsApp">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1628,7 +1949,7 @@
 
   const saved  = localStorage.getItem('theme');
   const initial = saved || 'dark';
-  applyTheme(initial, true);
+  applyTheme(initial);
 
   // Centraliza o balão sob o botão de tema e aponta a seta para ele
   function alignHint() {
@@ -1661,17 +1982,16 @@
     setTimeout(() => hint.remove(), 300);
   }
 
-  function applyTheme(theme, skipHintUpdate) {
+  function applyTheme(theme) {
     html.dataset.theme = theme;
     localStorage.setItem('theme', theme);
     swapImages(theme);
 
-    // Atualiza texto da dica conforme o tema atual
-    if (!skipHintUpdate && hint && hint.isConnected) {
+    if (hint && hint.isConnected) {
       const span = hint.childNodes[0];
       span.textContent = theme === 'dark'
-        ? 'Clique para ver o modo claro do sistema!'
-        : 'Clique para ver o modo escuro do sistema!';
+        ? 'Clique aqui para ver o sistema no modo claro!'
+        : 'Clique aqui para ver o sistema no modo escuro!';
     }
   }
 
@@ -1810,6 +2130,109 @@
     });
   }, { threshold: 0.12 });
   fadeEls.forEach(el => scrollObserver.observe(el));
+
+  // ── Animated stat counters ──
+  const counterEls = document.querySelectorAll('.stat-value[data-count]');
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseInt(el.dataset.count, 10);
+      const suffix = el.dataset.suffix || '';
+      const duration = 1400;
+      const start = performance.now();
+      function tick(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(eased * target) + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      counterObserver.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  counterEls.forEach(el => counterObserver.observe(el));
+
+  // ── Scrollspy ──
+  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+  const sections = Array.from(navLinks).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const spyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const id = entry.target.id;
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+      });
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => spyObserver.observe(s));
+
+  // ── Hamburger menu ──
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  function toggleMobileMenu(open) {
+    hamburger.classList.toggle('open', open);
+    if (open) {
+      mobileMenu.style.display = 'flex';
+      requestAnimationFrame(() => mobileMenu.classList.add('open'));
+      document.body.style.overflow = 'hidden';
+    } else {
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+      setTimeout(() => { mobileMenu.style.display = 'none'; }, 260);
+    }
+  }
+
+  hamburger.addEventListener('click', () => {
+    toggleMobileMenu(!hamburger.classList.contains('open'));
+  });
+
+  document.querySelectorAll('.mobile-link, .mobile-menu .btn-primary').forEach(a => {
+    a.addEventListener('click', () => toggleMobileMenu(false));
+  });
+
+  // ── Back to top ──
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // ── LGPD banner ──
+  const lgpdBanner = document.getElementById('lgpdBanner');
+  const lgpdAccept = document.getElementById('lgpdAccept');
+  if (!localStorage.getItem('lgpd_ok')) {
+    setTimeout(() => lgpdBanner.classList.add('show'), 1000);
+  }
+  lgpdAccept.addEventListener('click', () => {
+    localStorage.setItem('lgpd_ok', '1');
+    lgpdBanner.classList.remove('show');
+    setTimeout(() => lgpdBanner.remove(), 400);
+  });
+
+  // ── FAQ accordion ──
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const answer = item.querySelector('.faq-a');
+      const isOpen = btn.classList.contains('open');
+
+      // Close all others
+      document.querySelectorAll('.faq-q.open').forEach(b => {
+        b.classList.remove('open');
+        b.setAttribute('aria-expanded', 'false');
+        b.closest('.faq-item').querySelector('.faq-a').classList.remove('open');
+      });
+
+      if (!isOpen) {
+        btn.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        answer.classList.add('open');
+      }
+    });
+  });
 </script>
 
 </body>
