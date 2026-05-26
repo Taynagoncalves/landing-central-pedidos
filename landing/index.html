@@ -1630,16 +1630,19 @@
   const initial = saved || 'dark';
   applyTheme(initial, true);
 
-  // Alinha a seta do balão com o centro exato do botão de tema
-  function alignHintArrow() {
+  // Centraliza o balão sob o botão de tema e aponta a seta para ele
+  function alignHint() {
     if (!hint || !hint.isConnected) return;
-    const toggleRect = btn.getBoundingClientRect();
-    const hintRect   = hint.getBoundingClientRect();
-    const arrowX = (toggleRect.left + toggleRect.width / 2) - hintRect.left;
-    hint.style.setProperty('--arrow-x', Math.max(16, arrowX) + 'px');
+    const toggleRect  = btn.getBoundingClientRect();
+    const btnCenterX  = toggleRect.left + toggleRect.width / 2;
+    const hintW       = hint.offsetWidth;
+    // right = distância do centro do botão até a borda direita da tela, menos metade do balão
+    const rightVal = Math.max(8, window.innerWidth - btnCenterX - hintW / 2);
+    hint.style.right = rightVal + 'px';
+    hint.style.setProperty('--arrow-x', '50%');
   }
-  requestAnimationFrame(alignHintArrow);
-  window.addEventListener('resize', alignHintArrow);
+  requestAnimationFrame(alignHint);
+  window.addEventListener('resize', alignHint);
 
   // Balão: fecha ao clicar no × ou após 6 s
   let hintTimer = setTimeout(dismissHint, 6000);
