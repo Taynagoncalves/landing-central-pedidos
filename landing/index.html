@@ -1225,10 +1225,10 @@
     /* ── Back to top button ── */
     .back-to-top {
       position: fixed;
-      bottom: 100px;
+      bottom: 104px;
       right: 28px;
-      width: 44px;
-      height: 44px;
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
       background: var(--orange);
       color: white;
@@ -1237,15 +1237,15 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
       box-shadow: 0 4px 16px rgba(255,107,0,0.4);
       opacity: 0;
       transform: translateY(12px);
-      transition: opacity 0.3s, transform 0.3s;
-      z-index: 900;
+      transition: opacity 0.3s, transform 0.3s, background 0.2s;
+      z-index: 1001;
     }
     .back-to-top.visible { opacity: 1; transform: translateY(0); }
-    .back-to-top:hover { background: var(--orange-light); transform: translateY(-2px); }
+    .back-to-top:hover { background: var(--orange-light); transform: translateY(-4px); }
+    .back-to-top svg { width: 20px; height: 20px; stroke: white; }
 
     /* ── LGPD cookie banner ── */
     .lgpd-banner {
@@ -1353,13 +1353,85 @@
     @media (max-width: 768px) {
       .hamburger { display: flex; }
       .nav-links { display: none; }
-      .mobile-menu { display: flex; }
-      .back-to-top { bottom: 80px; right: 16px; }
+      .back-to-top { bottom: 100px; right: 16px; }
       .lgpd-banner { flex-direction: column; align-items: flex-start; padding: 16px; }
+      .lgpd-actions { width: 100%; }
+      .lgpd-actions button { flex: 1; }
       .faq-q { font-size: 14px; padding: 16px 18px; }
       .faq-a { padding: 0 18px; }
       .faq-a.open { padding: 0 18px 16px; }
     }
+
+    /* ── Privacy policy modal ── */
+    .privacy-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    .privacy-modal.open { opacity: 1; pointer-events: all; }
+    .privacy-modal-box {
+      background: var(--card-bg);
+      border-radius: 18px;
+      max-width: 640px;
+      width: 100%;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+      transform: translateY(16px) scale(0.97);
+      transition: transform 0.3s cubic-bezier(0.34,1.2,0.64,1);
+    }
+    .privacy-modal.open .privacy-modal-box { transform: translateY(0) scale(1); }
+    .privacy-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 24px 16px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .privacy-modal-header h3 { font-size: 18px; font-weight: 700; color: var(--text); }
+    .privacy-modal-close {
+      width: 34px; height: 34px; border-radius: 50%;
+      border: none; background: var(--bg-alt); color: var(--text-muted);
+      font-size: 18px; cursor: pointer; display: flex;
+      align-items: center; justify-content: center; transition: background 0.2s;
+    }
+    .privacy-modal-close:hover { background: rgba(255,107,0,0.15); color: var(--orange); }
+    .privacy-modal-body {
+      overflow-y: auto;
+      padding: 20px 24px 28px;
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .privacy-modal-body h4 { color: var(--text); font-size: 15px; margin: 18px 0 6px; }
+    .privacy-modal-body p { margin-bottom: 10px; }
+    .privacy-modal-body ul { padding-left: 18px; margin-bottom: 10px; }
+    .privacy-modal-body ul li { margin-bottom: 4px; }
+
+    /* LGPD actions row */
+    .lgpd-actions { display: flex; gap: 10px; flex-shrink: 0; }
+    .lgpd-decline {
+      border: 1.5px solid var(--card-border);
+      background: transparent;
+      color: var(--text-muted);
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .lgpd-decline:hover { border-color: var(--text-muted); color: var(--text); }
   </style>
 </head>
 <body>
@@ -1925,12 +1997,59 @@
 </div>
 
 <!-- Back to top -->
-<button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">&#8679;</button>
+<button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="18 15 12 9 6 15"/>
+  </svg>
+</button>
 
 <!-- LGPD Cookie banner -->
 <div class="lgpd-banner" id="lgpdBanner">
-  <p>Usamos cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa <a href="#" onclick="return false;">Política de Privacidade</a>.</p>
-  <button class="lgpd-accept" id="lgpdAccept">Entendido</button>
+  <p>Usamos cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa <a href="#" id="privacyLink">Política de Privacidade</a>.</p>
+  <div class="lgpd-actions">
+    <button class="lgpd-decline" id="lgpdDecline">Recusar</button>
+    <button class="lgpd-accept" id="lgpdAccept">Aceitar</button>
+  </div>
+</div>
+
+<!-- Privacy policy modal -->
+<div class="privacy-modal" id="privacyModal">
+  <div class="privacy-modal-box">
+    <div class="privacy-modal-header">
+      <h3>Política de Privacidade</h3>
+      <button class="privacy-modal-close" id="privacyModalClose">&#x2715;</button>
+    </div>
+    <div class="privacy-modal-body">
+      <p>Última atualização: maio de 2026</p>
+      <p>A <strong>Central Pedidos Online</strong> valoriza a privacidade dos seus usuários e está comprometida com a proteção dos dados pessoais, em conformidade com a Lei Geral de Proteção de Dados (LGPD – Lei nº 13.709/2018).</p>
+
+      <h4>1. Dados que coletamos</h4>
+      <ul>
+        <li>Nome, e-mail e telefone fornecidos em formulários de contato</li>
+        <li>Dados de navegação (páginas visitadas, tempo de sessão) via cookies</li>
+        <li>Informações de dispositivo e navegador para fins de segurança</li>
+      </ul>
+
+      <h4>2. Como usamos seus dados</h4>
+      <ul>
+        <li>Para responder suas solicitações e prestar suporte</li>
+        <li>Para melhorar a experiência de navegação no site</li>
+        <li>Para enviar informações sobre nossos serviços, com seu consentimento</li>
+      </ul>
+
+      <h4>3. Cookies</h4>
+      <p>Utilizamos cookies próprios para garantir o funcionamento do site e cookies analíticos para entender como os visitantes interagem com nossas páginas. Você pode recusar o uso de cookies a qualquer momento.</p>
+
+      <h4>4. Compartilhamento de dados</h4>
+      <p>Não vendemos nem compartilhamos seus dados pessoais com terceiros, exceto quando exigido por lei ou para prestação de serviços essenciais (ex.: envio de notificações via WhatsApp).</p>
+
+      <h4>5. Seus direitos</h4>
+      <p>Conforme a LGPD, você tem direito a acessar, corrigir, excluir ou portar seus dados. Para exercer esses direitos, entre em contato pelo WhatsApp ou e-mail disponíveis no site.</p>
+
+      <h4>6. Contato</h4>
+      <p>Dúvidas sobre esta política? Fale conosco pelo WhatsApp <strong>(45) 99927-8792</strong> ou acesse a seção de contato no site.</p>
+    </div>
+  </div>
 </div>
 
 <!-- WhatsApp Float -->
@@ -2201,16 +2320,46 @@
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
   // ── LGPD banner ──
-  const lgpdBanner = document.getElementById('lgpdBanner');
-  const lgpdAccept = document.getElementById('lgpdAccept');
+  const lgpdBanner  = document.getElementById('lgpdBanner');
+  const lgpdAccept  = document.getElementById('lgpdAccept');
+  const lgpdDecline = document.getElementById('lgpdDecline');
+
+  function dismissLgpd() {
+    lgpdBanner.classList.remove('show');
+    setTimeout(() => lgpdBanner.remove(), 400);
+  }
+
   if (!localStorage.getItem('lgpd_ok')) {
     setTimeout(() => lgpdBanner.classList.add('show'), 1000);
   }
   lgpdAccept.addEventListener('click', () => {
-    localStorage.setItem('lgpd_ok', '1');
-    lgpdBanner.classList.remove('show');
-    setTimeout(() => lgpdBanner.remove(), 400);
+    localStorage.setItem('lgpd_ok', 'accepted');
+    dismissLgpd();
   });
+  lgpdDecline.addEventListener('click', () => {
+    localStorage.setItem('lgpd_ok', 'declined');
+    dismissLgpd();
+  });
+
+  // ── Privacy policy modal ──
+  const privacyModal = document.getElementById('privacyModal');
+  const privacyLink  = document.getElementById('privacyLink');
+  const privacyClose = document.getElementById('privacyModalClose');
+
+  function openPrivacy(e) {
+    e.preventDefault();
+    privacyModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closePrivacy() {
+    privacyModal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  privacyLink.addEventListener('click', openPrivacy);
+  privacyClose.addEventListener('click', closePrivacy);
+  privacyModal.addEventListener('click', e => { if (e.target === privacyModal) closePrivacy(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && privacyModal.classList.contains('open')) closePrivacy(); });
 
   // ── FAQ accordion ──
   document.querySelectorAll('.faq-q').forEach(btn => {
