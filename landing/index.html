@@ -859,6 +859,70 @@
     }
 
     .dual-phone-dark img { filter: brightness(0.95); }
+
+    /* ── Lightbox ── */
+    .lb-trigger { cursor: zoom-in; }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    .lightbox.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .lightbox-img {
+      max-width: min(90vw, 480px);
+      max-height: 90vh;
+      border-radius: 16px;
+      box-shadow: 0 30px 100px rgba(0,0,0,0.8);
+      object-fit: contain;
+      transform: scale(0.88);
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+      display: block;
+    }
+    .lightbox.open .lightbox-img { transform: scale(1); }
+
+    .lightbox-close {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      z-index: 10000;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,0.25); }
+
+    .lightbox-hint {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.45);
+      font-size: 13px;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
@@ -1254,6 +1318,13 @@
   <p>&copy; 2026 <span>Central Pedidos Online</span>. Todos os direitos reservados.</p>
 </footer>
 
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <button class="lightbox-close" id="lbClose" aria-label="Fechar">&#x2715;</button>
+  <img class="lightbox-img" id="lbImg" src="" alt="Preview">
+  <p class="lightbox-hint">Pressione ESC ou clique fora para fechar</p>
+</div>
+
 <!-- WhatsApp Float -->
 <a href="https://wa.me/5545999278792?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20sistema." target="_blank" class="whatsapp-float" title="Falar no WhatsApp">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1313,6 +1384,38 @@
       img.src = theme === 'dark' ? img.dataset.dark : img.dataset.light;
     });
   }
+
+  // ── Lightbox ──
+  const lightbox = document.getElementById('lightbox');
+  const lbImg    = document.getElementById('lbImg');
+  const lbClose  = document.getElementById('lbClose');
+
+  const SELECTORS = [
+    '.feature-screenshot img',
+    '.ss-phone img',
+    '.ss-laptop img',
+    '.dual-phone-light img',
+    '.dual-phone-dark img',
+  ].join(', ');
+
+  document.querySelectorAll(SELECTORS).forEach(img => {
+    img.classList.add('lb-trigger');
+    img.addEventListener('click', e => {
+      e.stopPropagation();
+      lbImg.src = img.src;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  lbClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
   // ── Screenshot carousel ──
   const track = document.getElementById('ssTrack');
