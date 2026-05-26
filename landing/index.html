@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,16 +8,40 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* ── Variáveis de tema ── */
     :root {
       --orange: #FF6B00;
       --orange-light: #FF8C2A;
       --orange-dark: #E05A00;
       --dark: #1E1E2E;
       --dark-2: #2D2D3E;
-      --gray: #6B7280;
-      --gray-light: #F3F4F6;
-      --white: #FFFFFF;
+
+      /* Light mode */
+      --bg: #FFFFFF;
+      --bg-alt: #F3F4F6;
+      --card-bg: #FFFFFF;
+      --card-border: rgba(0,0,0,0.05);
+      --card-shadow: rgba(0,0,0,0.06);
+      --nav-bg: rgba(255,255,255,0.97);
+      --nav-border: rgba(0,0,0,0.08);
       --text: #1F2937;
+      --text-muted: #6B7280;
+      --icon-bg: #FFFFFF;
+      --step-text: #1E1E2E;
+    }
+
+    [data-theme="dark"] {
+      --bg: #12121e;
+      --bg-alt: #1a1a2b;
+      --card-bg: #22223a;
+      --card-border: rgba(255,255,255,0.06);
+      --card-shadow: rgba(0,0,0,0.35);
+      --nav-bg: rgba(18,18,30,0.97);
+      --nav-border: rgba(255,255,255,0.07);
+      --text: #e0e0f2;
+      --text-muted: #8888aa;
+      --icon-bg: #2d2d4e;
+      --step-text: #e0e0f2;
     }
 
     html { scroll-behavior: smooth; }
@@ -25,23 +49,26 @@
     body {
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
       color: var(--text);
+      background: var(--bg);
       line-height: 1.6;
       overflow-x: hidden;
+      transition: background 0.3s, color 0.3s;
     }
 
-    /* Nav */
+    /* ── Nav ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 1000;
-      background: rgba(255,255,255,0.97);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(0,0,0,0.08);
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--nav-border);
       padding: 0 32px;
       height: 90px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      transition: background 0.3s, border-color 0.3s;
     }
 
     .nav-logo img { height: 70px; }
@@ -56,6 +83,38 @@
     }
     .nav-links a:hover { color: var(--orange); }
 
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Theme toggle */
+    .theme-toggle {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .theme-toggle:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+
+    .icon-sun  { display: block; }
+    .icon-moon { display: none; }
+    [data-theme="dark"] .icon-sun  { display: none; }
+    [data-theme="dark"] .icon-moon { display: block; }
+
     .nav-cta {
       background: var(--orange);
       color: white;
@@ -67,6 +126,7 @@
       cursor: pointer;
       text-decoration: none;
       transition: background 0.2s;
+      white-space: nowrap;
     }
     .nav-cta:hover { background: var(--orange-dark); }
 
@@ -171,11 +231,7 @@
     }
     .btn-secondary:hover { background: rgba(255,255,255,0.18); }
 
-    .hero-stats {
-      display: flex;
-      gap: 48px;
-      flex-wrap: wrap;
-    }
+    .hero-stats { display: flex; gap: 48px; flex-wrap: wrap; }
 
     .stat { text-align: left; }
     .stat-value { font-size: 2rem; font-weight: 800; color: var(--orange); }
@@ -235,9 +291,10 @@
       border-radius: 36px;
       width: 100%;
       display: block;
+      transition: opacity 0.3s;
     }
 
-    /* ── Common section styles ── */
+    /* ── Common sections ── */
     section { padding: 88px 24px; }
     .container { max-width: 1100px; margin: 0 auto; }
 
@@ -255,18 +312,20 @@
     .section-title {
       font-size: clamp(1.6rem, 3vw, 2.4rem);
       font-weight: 800;
-      color: var(--dark);
+      color: var(--text);
       margin-bottom: 12px;
+      transition: color 0.3s;
     }
 
     .section-subtitle {
       font-size: 1.05rem;
-      color: var(--gray);
+      color: var(--text-muted);
       max-width: 550px;
+      transition: color 0.3s;
     }
 
     /* ── Features ── */
-    .features { background: var(--gray-light); }
+    .features { background: var(--bg-alt); transition: background 0.3s; }
     .features-header { text-align: center; margin-bottom: 60px; }
     .features-header .section-subtitle { margin: 0 auto; }
 
@@ -277,23 +336,23 @@
     }
 
     .feature-card {
-      background: white;
+      background: var(--card-bg);
       border-radius: 18px;
       overflow: hidden;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
-      transition: all 0.3s;
-      border: 1px solid rgba(0,0,0,0.05);
+      box-shadow: 0 2px 16px var(--card-shadow);
+      transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+      border: 1px solid var(--card-border);
     }
     .feature-card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 14px 40px rgba(0,0,0,0.11);
+      box-shadow: 0 14px 40px var(--card-shadow);
     }
 
     .feature-screenshot {
       width: 100%;
       height: 180px;
       overflow: hidden;
-      background: var(--gray-light);
+      background: var(--bg-alt);
     }
 
     .feature-screenshot img {
@@ -304,9 +363,7 @@
       transition: transform 0.5s ease;
       display: block;
     }
-    .feature-card:hover .feature-screenshot img {
-      transform: scale(1.05);
-    }
+    .feature-card:hover .feature-screenshot img { transform: scale(1.05); }
 
     .feature-card-body { padding: 28px; }
 
@@ -325,14 +382,16 @@
     .feature-card h3 {
       font-size: 1.1rem;
       font-weight: 700;
-      color: var(--dark);
+      color: var(--text);
       margin-bottom: 8px;
+      transition: color 0.3s;
     }
 
     .feature-card p {
       font-size: 0.92rem;
-      color: var(--gray);
+      color: var(--text-muted);
       line-height: 1.7;
+      transition: color 0.3s;
     }
 
     .feature-list {
@@ -345,10 +404,11 @@
 
     .feature-list li {
       font-size: 0.88rem;
-      color: var(--gray);
+      color: var(--text-muted);
       display: flex;
       align-items: flex-start;
       gap: 8px;
+      transition: color 0.3s;
     }
 
     .feature-list li::before {
@@ -387,24 +447,17 @@
     .ss-track-wrapper::-webkit-scrollbar { display: none; }
     .ss-track-wrapper:active { cursor: grabbing; }
 
-    .ss-track {
-      display: flex;
-      gap: 28px;
-      width: max-content;
-    }
+    .ss-track { display: flex; gap: 28px; width: max-content; }
 
     .ss-item { scroll-snap-align: start; flex: 0 0 auto; }
     .ss-item.phone-type { width: 200px; }
     .ss-item.laptop-type { width: 360px; }
 
-    /* Phone frame (gallery) */
     .ss-phone {
       background: #0d0d1a;
       border-radius: 40px;
       padding: 10px 8px 8px;
-      box-shadow:
-        0 0 0 2px #383850,
-        0 20px 60px rgba(0,0,0,0.55);
+      box-shadow: 0 0 0 2px #383850, 0 20px 60px rgba(0,0,0,0.55);
     }
     .ss-phone::before {
       content: '';
@@ -415,13 +468,8 @@
       border-radius: 0 0 7px 7px;
       margin: 0 auto 4px;
     }
-    .ss-phone img {
-      border-radius: 28px;
-      width: 100%;
-      display: block;
-    }
+    .ss-phone img { border-radius: 28px; width: 100%; display: block; }
 
-    /* Laptop frame (gallery) */
     .ss-laptop {
       background: #1a1a2e;
       border-radius: 8px 8px 0 0;
@@ -437,17 +485,8 @@
       border-radius: 50%;
       margin: 0 auto 5px;
     }
-    .ss-laptop img {
-      border-radius: 3px 3px 0 0;
-      width: 100%;
-      display: block;
-    }
-    .ss-laptop-base {
-      background: #2a2a40;
-      height: 10px;
-      border-radius: 0 0 5px 5px;
-      margin: 0 -20px;
-    }
+    .ss-laptop img { border-radius: 3px 3px 0 0; width: 100%; display: block; }
+    .ss-laptop-base { background: #2a2a40; height: 10px; border-radius: 0 0 5px 5px; margin: 0 -20px; }
     .ss-laptop-wrap { padding-bottom: 10px; }
 
     .ss-label {
@@ -482,13 +521,10 @@
       justify-content: center;
       transition: all 0.2s;
     }
-    .ss-btn:hover {
-      background: var(--orange);
-      border-color: var(--orange);
-    }
+    .ss-btn:hover { background: var(--orange); border-color: var(--orange); }
 
     /* ── How it works ── */
-    .how-it-works { background: white; }
+    .how-it-works { background: var(--bg); transition: background 0.3s; }
     .how-header { text-align: center; margin-bottom: 60px; }
 
     .steps {
@@ -514,8 +550,8 @@
       box-shadow: 0 4px 16px rgba(255,107,0,0.35);
     }
 
-    .step h3 { font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
-    .step p { font-size: 0.9rem; color: var(--gray); }
+    .step h3 { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 8px; transition: color 0.3s; }
+    .step p { font-size: 0.9rem; color: var(--text-muted); transition: color 0.3s; }
 
     /* ── CTA ── */
     .cta-section {
@@ -554,13 +590,10 @@
       transition: all 0.2s;
       box-shadow: 0 4px 20px rgba(0,0,0,0.15);
     }
-    .btn-white:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
 
     /* ── Contact ── */
-    .contact { background: var(--gray-light); }
+    .contact { background: var(--bg-alt); transition: background 0.3s; }
 
     .contact-grid {
       display: grid;
@@ -572,14 +605,16 @@
     .contact-info h2 {
       font-size: 2rem;
       font-weight: 800;
-      color: var(--dark);
+      color: var(--text);
       margin-bottom: 16px;
+      transition: color 0.3s;
     }
 
     .contact-info p {
-      color: var(--gray);
+      color: var(--text-muted);
       margin-bottom: 36px;
       font-size: 1.05rem;
+      transition: color 0.3s;
     }
 
     .contact-items { display: flex; flex-direction: column; gap: 16px; }
@@ -599,22 +634,25 @@
     .contact-item-icon {
       width: 46px;
       height: 46px;
-      background: white;
+      background: var(--icon-bg);
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 10px var(--card-shadow);
       flex-shrink: 0;
+      transition: background 0.3s;
     }
 
     .contact-card {
-      background: white;
+      background: var(--card-bg);
       border-radius: 20px;
       padding: 44px;
-      box-shadow: 0 4px 28px rgba(0,0,0,0.07);
+      box-shadow: 0 4px 28px var(--card-shadow);
       text-align: center;
+      border: 1px solid var(--card-border);
+      transition: background 0.3s, box-shadow 0.3s;
     }
 
     .contact-card-icon { font-size: 3rem; margin-bottom: 16px; }
@@ -622,14 +660,16 @@
     .contact-card h3 {
       font-size: 1.25rem;
       font-weight: 700;
-      color: var(--dark);
+      color: var(--text);
       margin-bottom: 10px;
+      transition: color 0.3s;
     }
 
     .contact-card p {
-      color: var(--gray);
+      color: var(--text-muted);
       margin-bottom: 28px;
       font-size: 0.95rem;
+      transition: color 0.3s;
     }
 
     .btn-full { display: flex; justify-content: center; width: 100%; }
@@ -664,11 +704,7 @@
       animation: pulse-wpp 2.5s infinite;
     }
 
-    .whatsapp-float:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 30px rgba(37,211,102,0.65);
-    }
-
+    .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(37,211,102,0.65); }
     .whatsapp-float svg { width: 34px; height: 34px; fill: white; }
 
     @keyframes pulse-wpp {
@@ -678,11 +714,7 @@
 
     /* ── Responsive ── */
     @media (max-width: 960px) {
-      .hero-inner {
-        flex-direction: column-reverse;
-        text-align: center;
-        gap: 40px;
-      }
+      .hero-inner { flex-direction: column-reverse; text-align: center; gap: 40px; }
       .hero-text p { margin-left: auto; margin-right: auto; }
       .hero-buttons { justify-content: center; }
       .hero-stats { justify-content: center; }
@@ -692,7 +724,7 @@
     }
 
     @media (max-width: 768px) {
-      nav { padding: 0 20px; }
+      nav { padding: 0 16px; }
       .nav-links { display: none; }
       .contact-grid { grid-template-columns: 1fr; gap: 32px; }
       .hero-stats { gap: 24px; }
@@ -713,7 +745,13 @@
     <li><a href="#como-funciona">Como funciona</a></li>
     <li><a href="#contato">Contato</a></li>
   </ul>
-  <a href="https://wa.me/5545999278792?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20sistema." class="nav-cta" target="_blank">Falar com vendas</a>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Alternar modo escuro" title="Alternar tema">
+      <span class="icon-sun">☀️</span>
+      <span class="icon-moon">🌙</span>
+    </button>
+    <a href="https://wa.me/5545999278792?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20sistema." class="nav-cta" target="_blank">Falar com vendas</a>
+  </div>
 </nav>
 
 <!-- Hero -->
@@ -725,9 +763,7 @@
         <h1>Seu negócio vendendo mais,<br>com <span>tecnologia de verdade</span></h1>
         <p>Plataforma completa para receber pedidos online com gestão de delivery, mesas com QR Code, controle de motoboys e notificações automáticas no WhatsApp.</p>
         <div class="hero-buttons">
-          <a href="https://wa.me/5545999278792?text=Olá!%20Quero%20contratar%20o%20sistema." target="_blank" class="btn-primary">
-            Quero contratar
-          </a>
+          <a href="https://wa.me/5545999278792?text=Olá!%20Quero%20contratar%20o%20sistema." target="_blank" class="btn-primary">Quero contratar</a>
           <a href="#preview" class="btn-secondary">Ver o sistema</a>
         </div>
         <div class="hero-stats">
@@ -749,11 +785,7 @@
         <div class="phone-mockup-hero">
           <div class="phone-frame">
             <div class="phone-notch"></div>
-            <img
-              src="imagens/cliente/temaclaro/telahome.png"
-              alt="Cardápio do cliente – tela inicial"
-              loading="lazy"
-            >
+            <img id="heroImg" src="imagens/cliente/temaclaro/telahome.png" alt="Cardápio do cliente" loading="lazy">
           </div>
         </div>
       </div>
@@ -773,7 +805,7 @@
 
       <div class="feature-card">
         <div class="feature-screenshot">
-          <img src="imagens/cliente/temaclaro/telastatus1.png" alt="Rastreamento de entrega" loading="lazy">
+          <img src="imagens/cliente/temaclaro/telastatus1.png" alt="Rastreamento de entrega" loading="lazy" class="theme-img" data-light="imagens/cliente/temaclaro/telastatus1.png" data-dark="imagens/cliente/temadark/telastatus1-dark.png">
         </div>
         <div class="feature-card-body">
           <div class="feature-icon">🛵</div>
@@ -791,7 +823,7 @@
 
       <div class="feature-card">
         <div class="feature-screenshot">
-          <img src="imagens/admin/admin-mesagarcom.png" alt="Tela de gestão de mesas e garçom" loading="lazy">
+          <img src="imagens/admin/admin-mesagarcom.png" alt="Tela de mesas e garçom" loading="lazy">
         </div>
         <div class="feature-card-body">
           <div class="feature-icon">🪑</div>
@@ -809,7 +841,7 @@
 
       <div class="feature-card">
         <div class="feature-screenshot">
-          <img src="imagens/cliente/temaclaro/telastatus3.png" alt="Acompanhamento do status do pedido" loading="lazy">
+          <img src="imagens/cliente/temaclaro/telastatus3.png" alt="Status do pedido" loading="lazy" class="theme-img" data-light="imagens/cliente/temaclaro/telastatus3.png" data-dark="imagens/cliente/temadark/telastatus3-dark.png">
         </div>
         <div class="feature-card-body">
           <div class="feature-icon">💬</div>
@@ -827,7 +859,7 @@
 
       <div class="feature-card">
         <div class="feature-screenshot">
-          <img src="imagens/admin/tela-admin.png" alt="Painel administrativo de pedidos" loading="lazy">
+          <img src="imagens/admin/tela-admin.png" alt="Painel administrativo" loading="lazy">
         </div>
         <div class="feature-card-body">
           <div class="feature-icon">📋</div>
@@ -845,7 +877,7 @@
 
       <div class="feature-card">
         <div class="feature-screenshot">
-          <img src="imagens/cliente/temaclaro/telafinalizar.png" alt="Tela de pagamento e finalização do pedido" loading="lazy">
+          <img src="imagens/cliente/temaclaro/telafinalizar.png" alt="Tela de pagamento" loading="lazy" class="theme-img" data-light="imagens/cliente/temaclaro/telafinalizar.png" data-dark="imagens/cliente/temadark/telafinalizar-dark.png">
         </div>
         <div class="feature-card-body">
           <div class="feature-icon">💳</div>
@@ -863,7 +895,7 @@
 
       <div class="feature-card">
         <div class="feature-screenshot">
-          <img src="imagens/admin/admin-cardapio-digital.png" alt="Cardápio digital personalizado" loading="lazy">
+          <img src="imagens/admin/admin-cardapio-digital.png" alt="Cardápio digital" loading="lazy">
         </div>
         <div class="feature-card-body">
           <div class="feature-icon">🏪</div>
@@ -898,49 +930,49 @@
 
       <div class="ss-item phone-type">
         <div class="ss-phone">
-          <img src="imagens/cliente/temaclaro/telahome.png" alt="Cardápio do cliente" loading="lazy">
+          <img src="imagens/cliente/temaclaro/telahome.png" alt="Cardápio" loading="lazy" class="theme-img" data-light="imagens/cliente/temaclaro/telahome.png" data-dark="imagens/cliente/temadark/telahome-dark.png">
         </div>
         <p class="ss-label">Cardápio</p>
       </div>
 
       <div class="ss-item phone-type">
         <div class="ss-phone">
-          <img src="imagens/cliente/temaclaro/teladetalhes.png" alt="Detalhes do produto" loading="lazy">
+          <img src="imagens/cliente/temaclaro/teladetalhes.png" alt="Detalhes do produto" loading="lazy" class="theme-img" data-light="imagens/cliente/temaclaro/teladetalhes.png" data-dark="imagens/cliente/temadark/teladetalhes-dark.png">
         </div>
         <p class="ss-label">Detalhes do produto</p>
       </div>
 
       <div class="ss-item phone-type">
         <div class="ss-phone">
-          <img src="imagens/cliente/temaclaro/telacarrinho.png" alt="Carrinho de compras" loading="lazy">
+          <img src="imagens/cliente/temaclaro/telacarrinho.png" alt="Carrinho" loading="lazy" class="theme-img" data-light="imagens/cliente/temaclaro/telacarrinho.png" data-dark="imagens/cliente/temadark/telacarrinho-dark.png">
         </div>
         <p class="ss-label">Carrinho</p>
       </div>
 
       <div class="ss-item phone-type">
         <div class="ss-phone">
-          <img src="imagens/cliente/temaclaro/telafinalizar.png" alt="Finalizar pedido" loading="lazy">
+          <img src="imagens/cliente/temaclaro/telafinalizar.png" alt="Finalizar pedido" loading="lazy" class="theme-img" data-light="imagens/cliente/temaclaro/telafinalizar.png" data-dark="imagens/cliente/temadark/telafinalizar-dark.png">
         </div>
         <p class="ss-label">Finalizar pedido</p>
       </div>
 
       <div class="ss-item phone-type">
         <div class="ss-phone">
-          <img src="imagens/cliente/temaclaro/telastatus1.png" alt="Status do pedido" loading="lazy">
+          <img src="imagens/cliente/temaclaro/telastatus1.png" alt="Status do pedido" loading="lazy" class="theme-img" data-light="imagens/cliente/temaclaro/telastatus1.png" data-dark="imagens/cliente/temadark/telastatus1-dark.png">
         </div>
         <p class="ss-label">Status do pedido</p>
       </div>
 
       <div class="ss-item phone-type">
         <div class="ss-phone">
-          <img src="imagens/cliente/temaclaro/telastatus2.png" alt="Rastreamento em tempo real" loading="lazy">
+          <img src="imagens/cliente/temaclaro/telastatus2.png" alt="Rastreamento" loading="lazy" class="theme-img" data-light="imagens/cliente/temaclaro/telastatus2.png" data-dark="imagens/cliente/temadark/telastatus2-dark.png">
         </div>
         <p class="ss-label">Rastreamento</p>
       </div>
 
       <div class="ss-item phone-type">
         <div class="ss-phone">
-          <img src="imagens/cliente/temaclaro/telahistorico.png" alt="Histórico de pedidos" loading="lazy">
+          <img src="imagens/cliente/temaclaro/telahistorico.png" alt="Histórico" loading="lazy" class="theme-img" data-light="imagens/cliente/temaclaro/telahistorico.png" data-dark="imagens/cliente/temadark/telahistorico-dark.png">
         </div>
         <p class="ss-label">Histórico</p>
       </div>
@@ -958,7 +990,7 @@
       <div class="ss-item laptop-type">
         <div class="ss-laptop-wrap">
           <div class="ss-laptop">
-            <img src="imagens/admin/admin-mesagarcom.png" alt="Gestão de mesas e garçom" loading="lazy">
+            <img src="imagens/admin/admin-mesagarcom.png" alt="Mesas e garçom" loading="lazy">
           </div>
           <div class="ss-laptop-base"></div>
         </div>
@@ -1072,7 +1104,39 @@
 </a>
 
 <script>
-  // Screenshot carousel
+  // ── Theme toggle ──
+  const html = document.documentElement;
+  const btn  = document.getElementById('themeToggle');
+
+  const saved = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const initial = saved || (prefersDark ? 'dark' : 'light');
+  applyTheme(initial);
+
+  btn.addEventListener('click', () => {
+    applyTheme(html.dataset.theme === 'dark' ? 'light' : 'dark');
+  });
+
+  function applyTheme(theme) {
+    html.dataset.theme = theme;
+    localStorage.setItem('theme', theme);
+    swapImages(theme);
+  }
+
+  function swapImages(theme) {
+    // Hero image
+    const heroImg = document.getElementById('heroImg');
+    heroImg.src = theme === 'dark'
+      ? 'imagens/cliente/temadark/telahome-dark.png'
+      : 'imagens/cliente/temaclaro/telahome.png';
+
+    // All images with data-light / data-dark
+    document.querySelectorAll('.theme-img').forEach(img => {
+      img.src = theme === 'dark' ? img.dataset.dark : img.dataset.light;
+    });
+  }
+
+  // ── Screenshot carousel ──
   const track = document.getElementById('ssTrack');
 
   document.getElementById('ssPrev').addEventListener('click', () => {
@@ -1090,12 +1154,11 @@
     scrollLeft = track.scrollLeft;
   });
   track.addEventListener('mouseleave', () => { dragging = false; });
-  track.addEventListener('mouseup', () => { dragging = false; });
+  track.addEventListener('mouseup',    () => { dragging = false; });
   track.addEventListener('mousemove', e => {
     if (!dragging) return;
     e.preventDefault();
-    const x = e.pageX - track.offsetLeft;
-    track.scrollLeft = scrollLeft - (x - startX) * 1.5;
+    track.scrollLeft = scrollLeft - (e.pageX - track.offsetLeft - startX) * 1.5;
   });
 </script>
 
