@@ -730,6 +730,120 @@
       .hero-stats { gap: 24px; }
       .ss-track-wrapper { padding: 16px 24px 32px; }
     }
+
+    /* ── Dica do modo escuro ── */
+    .theme-hint-wrap {
+      position: relative;
+    }
+
+    .theme-hint {
+      position: absolute;
+      top: calc(100% + 14px);
+      right: 0;
+      background: var(--orange);
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 14px 10px 12px;
+      border-radius: 10px;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 6px 24px rgba(255,107,0,0.45);
+      animation: hint-in 0.4s ease forwards;
+      z-index: 1100;
+    }
+
+    .theme-hint::before {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      right: 14px;
+      border: 7px solid transparent;
+      border-bottom-color: var(--orange);
+    }
+
+    .theme-hint-close {
+      background: rgba(255,255,255,0.25);
+      border: none;
+      color: white;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      font-size: 12px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      padding: 0;
+    }
+    .theme-hint-close:hover { background: rgba(255,255,255,0.4); }
+
+    .theme-hint.hint-out {
+      animation: hint-out 0.3s ease forwards;
+    }
+
+    @keyframes hint-in {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes hint-out {
+      from { opacity: 1; transform: translateY(0); }
+      to   { opacity: 0; transform: translateY(-8px); }
+    }
+
+    /* ── Card modo escuro — preview duplo ── */
+    .dual-theme-preview {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      background: linear-gradient(135deg, #f0f0f5 50%, #12121e 50%);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .dual-theme-preview::after {
+      content: '☀️ / 🌙';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 20px;
+      background: white;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+      z-index: 2;
+      font-size: 14px;
+      letter-spacing: -1px;
+    }
+
+    .dual-phone-light,
+    .dual-phone-dark {
+      width: 50%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .dual-phone-light img,
+    .dual-phone-dark img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    .dual-phone-dark img { filter: brightness(0.95); }
   </style>
 </head>
 <body>
@@ -746,10 +860,16 @@
     <li><a href="#contato">Contato</a></li>
   </ul>
   <div class="nav-right">
-    <button class="theme-toggle" id="themeToggle" aria-label="Alternar modo escuro" title="Alternar tema">
-      <span class="icon-sun">☀️</span>
-      <span class="icon-moon">🌙</span>
-    </button>
+    <div class="theme-hint-wrap">
+      <button class="theme-toggle" id="themeToggle" aria-label="Alternar modo escuro">
+        <span class="icon-sun">☀️</span>
+        <span class="icon-moon">🌙</span>
+      </button>
+      <div class="theme-hint" id="themeHint">
+        Clique para ver o modo claro do sistema!
+        <button class="theme-hint-close" id="themeHintClose" aria-label="Fechar">×</button>
+      </div>
+    </div>
     <a href="https://wa.me/5545999278792?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20sistema." class="nav-cta" target="_blank">Falar com vendas</a>
   </div>
 </nav>
@@ -907,6 +1027,29 @@
             <li>Horário de funcionamento configurável</li>
             <li>Área de cobertura para entrega</li>
             <li>Bairros e taxas personalizáveis</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-screenshot dual-theme-preview">
+          <div class="dual-phone-light">
+            <img src="imagens/cliente/temaclaro/telahome.png" alt="Tema claro" loading="lazy">
+          </div>
+          <div class="dual-phone-dark">
+            <img src="imagens/cliente/temadark/telahome-dark.png" alt="Tema escuro" loading="lazy">
+          </div>
+        </div>
+        <div class="feature-card-body">
+          <div class="feature-icon">🌙</div>
+          <h3>Modo Escuro e Modo Claro</h3>
+          <p>O cliente escolhe como prefere visualizar o cardápio. O sistema oferece tema claro e escuro com troca instantânea.</p>
+          <ul class="feature-list">
+            <li>Alternância instantânea sem recarregar</li>
+            <li>Preferência salva automaticamente no dispositivo</li>
+            <li>Detecta o tema do celular automaticamente</li>
+            <li>Design moderno nos dois modos</li>
+            <li>Experimente clicando no botão ☀️/🌙 acima</li>
           </ul>
         </div>
       </div>
@@ -1105,31 +1248,52 @@
 
 <script>
   // ── Theme toggle ──
-  const html = document.documentElement;
-  const btn  = document.getElementById('themeToggle');
+  const html  = document.documentElement;
+  const btn   = document.getElementById('themeToggle');
+  const hint  = document.getElementById('themeHint');
+  const hintClose = document.getElementById('themeHintClose');
 
-  const saved = localStorage.getItem('theme');
+  const saved  = localStorage.getItem('theme');
   const initial = saved || 'dark';
-  applyTheme(initial);
+  applyTheme(initial, true);
+
+  // Balão: fecha ao clicar no × ou após 6 s
+  let hintTimer = setTimeout(dismissHint, 6000);
+
+  hintClose.addEventListener('click', dismissHint);
 
   btn.addEventListener('click', () => {
+    dismissHint();
     applyTheme(html.dataset.theme === 'dark' ? 'light' : 'dark');
   });
 
-  function applyTheme(theme) {
+  function dismissHint() {
+    clearTimeout(hintTimer);
+    if (!hint) return;
+    hint.classList.add('hint-out');
+    setTimeout(() => hint.remove(), 300);
+  }
+
+  function applyTheme(theme, skipHintUpdate) {
     html.dataset.theme = theme;
     localStorage.setItem('theme', theme);
     swapImages(theme);
+
+    // Atualiza texto da dica conforme o tema atual
+    if (!skipHintUpdate && hint && hint.isConnected) {
+      const span = hint.childNodes[0];
+      span.textContent = theme === 'dark'
+        ? 'Clique para ver o modo claro do sistema!'
+        : 'Clique para ver o modo escuro do sistema!';
+    }
   }
 
   function swapImages(theme) {
-    // Hero image
     const heroImg = document.getElementById('heroImg');
-    heroImg.src = theme === 'dark'
+    if (heroImg) heroImg.src = theme === 'dark'
       ? 'imagens/cliente/temadark/telahome-dark.png'
       : 'imagens/cliente/temaclaro/telahome.png';
 
-    // All images with data-light / data-dark
     document.querySelectorAll('.theme-img').forEach(img => {
       img.src = theme === 'dark' ? img.dataset.dark : img.dataset.light;
     });
