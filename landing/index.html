@@ -875,11 +875,15 @@
       border-radius: 16px;
       box-shadow: 0 30px 100px rgba(0,0,0,0.8);
       object-fit: contain;
+      opacity: 0;
       transform: scale(0.88);
-      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+      transition: opacity 0.2s, transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
       display: block;
     }
-    .lightbox.open .lightbox-img { transform: scale(1); }
+    .lightbox-img.loaded {
+      opacity: 1;
+      transform: scale(1);
+    }
 
     .lightbox-close {
       position: fixed;
@@ -1390,15 +1394,27 @@
     img.classList.add('lb-trigger');
     img.addEventListener('click', e => {
       e.stopPropagation();
-      lbImg.src = img.src;
+      lbImg.classList.remove('loaded');
+      lbImg.src = '';
       lightbox.classList.add('open');
       document.body.style.overflow = 'hidden';
+
+      const tmp = new Image();
+      tmp.onload = () => {
+        lbImg.src = tmp.src;
+        requestAnimationFrame(() => lbImg.classList.add('loaded'));
+      };
+      tmp.src = img.src;
     });
   });
 
   function closeLightbox() {
     lightbox.classList.remove('open');
     document.body.style.overflow = '';
+    setTimeout(() => {
+      lbImg.classList.remove('loaded');
+      lbImg.src = '';
+    }, 250);
   }
 
   lbClose.addEventListener('click', closeLightbox);
