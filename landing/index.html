@@ -953,7 +953,8 @@
       content: '';
       position: absolute;
       bottom: 100%;
-      right: 22px;
+      left: var(--arrow-x, 50%);
+      transform: translateX(-50%);
       border: 7px solid transparent;
       border-bottom-color: var(--orange);
     }
@@ -1628,6 +1629,17 @@
   const saved  = localStorage.getItem('theme');
   const initial = saved || 'dark';
   applyTheme(initial, true);
+
+  // Alinha a seta do balão com o centro exato do botão de tema
+  function alignHintArrow() {
+    if (!hint || !hint.isConnected) return;
+    const toggleRect = btn.getBoundingClientRect();
+    const hintRect   = hint.getBoundingClientRect();
+    const arrowX = (toggleRect.left + toggleRect.width / 2) - hintRect.left;
+    hint.style.setProperty('--arrow-x', Math.max(16, arrowX) + 'px');
+  }
+  requestAnimationFrame(alignHintArrow);
+  window.addEventListener('resize', alignHintArrow);
 
   // Balão: fecha ao clicar no × ou após 6 s
   let hintTimer = setTimeout(dismissHint, 6000);
