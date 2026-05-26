@@ -730,20 +730,7 @@
       .hero-stats { gap: 24px; }
       .ss-track-wrapper { padding: 16px 24px 32px; }
 
-      .theme-hint {
-        right: auto;
-        left: 50%;
-        transform: translateX(-50%);
-        white-space: normal;
-        max-width: 180px;
-        text-align: center;
-        font-size: 12px;
-      }
-      .theme-hint::before {
-        right: auto;
-        left: 50%;
-        transform: translateX(-50%);
-      }
+      .theme-hint { right: 12px; max-width: 170px; font-size: 12px; }
     }
 
     /* ── Dica do modo escuro ── */
@@ -752,18 +739,19 @@
     }
 
     .theme-hint {
-      position: absolute;
-      top: calc(100% + 14px);
-      right: 0;
+      position: fixed;
+      top: 96px;
+      right: 16px;
+      max-width: 210px;
       background: var(--orange);
       color: white;
       font-size: 13px;
       font-weight: 600;
       padding: 10px 14px 10px 12px;
       border-radius: 10px;
-      white-space: nowrap;
+      white-space: normal;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 8px;
       box-shadow: 0 6px 24px rgba(255,107,0,0.45);
       animation: hint-in 0.4s ease forwards;
@@ -774,7 +762,7 @@
       content: '';
       position: absolute;
       bottom: 100%;
-      right: 14px;
+      right: 22px;
       border: 7px solid transparent;
       border-bottom-color: var(--orange);
     }
