@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
+<html lang="pt-BR" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -137,8 +137,14 @@
       border-color: var(--orange);
       color: var(--orange);
       background: rgba(255,107,0,0.08);
-      transform: rotate(15deg) scale(1.08);
     }
+    @keyframes toggle-spin {
+      0%   { transform: rotate(0deg) scale(1); }
+      40%  { transform: rotate(200deg) scale(1.12); }
+      70%  { transform: rotate(340deg) scale(0.95); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+    .theme-toggle.spinning { animation: toggle-spin 0.5s cubic-bezier(0.4,0,0.2,1) forwards; }
     .icon-sun, .icon-moon {
       display: flex;
       align-items: center;
@@ -1204,6 +1210,7 @@
       gap: 32px;
       opacity: 0;
       transition: opacity 0.25s ease;
+      /* needed for absolute-positioned close button */
     }
     .mobile-menu.open { opacity: 1; }
     .mobile-menu a {
@@ -1215,6 +1222,24 @@
     }
     .mobile-menu a:hover { color: var(--orange); }
     .mobile-menu .btn-primary { font-size: 16px; margin-top: 8px; }
+    .mobile-menu-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1.5px solid var(--card-border);
+      background: var(--bg-alt);
+      color: var(--text);
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, color 0.2s;
+    }
+    .mobile-menu-close:hover { background: rgba(255,107,0,0.12); color: var(--orange); }
 
     /* ── Scrollspy active nav ── */
     .nav-links a.active {
@@ -1474,7 +1499,7 @@
         </span>
       </button>
       <div class="theme-hint" id="themeHint">
-        Clique aqui para ver o sistema no modo claro!
+        Clique aqui para ver o sistema no modo escuro!
         <button class="theme-hint-close" id="themeHintClose" aria-label="Fechar">×</button>
       </div>
     </div>
@@ -1484,6 +1509,7 @@
 
 <!-- Mobile menu overlay -->
 <div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Fechar menu">&#x2715;</button>
   <a href="#funcionalidades" class="mobile-link">Funcionalidades</a>
   <a href="#preview" class="mobile-link">Veja o sistema</a>
   <a href="#como-funciona" class="mobile-link">Como funciona</a>
@@ -2066,9 +2092,7 @@
   const hint  = document.getElementById('themeHint');
   const hintClose = document.getElementById('themeHintClose');
 
-  const saved  = localStorage.getItem('theme');
-  const initial = saved || 'dark';
-  applyTheme(initial);
+  applyTheme('light');
 
   // Centraliza o balão sob o botão de tema e aponta a seta para ele
   function alignHint() {
@@ -2092,6 +2116,10 @@
   btn.addEventListener('click', () => {
     dismissHint();
     applyTheme(html.dataset.theme === 'dark' ? 'light' : 'dark');
+    btn.classList.remove('spinning');
+    void btn.offsetWidth; // força reflow para reiniciar a animação
+    btn.classList.add('spinning');
+    btn.addEventListener('animationend', () => btn.classList.remove('spinning'), { once: true });
   });
 
   function dismissHint() {
@@ -2307,6 +2335,8 @@
   hamburger.addEventListener('click', () => {
     toggleMobileMenu(!hamburger.classList.contains('open'));
   });
+
+  document.getElementById('mobileMenuClose').addEventListener('click', () => toggleMobileMenu(false));
 
   document.querySelectorAll('.mobile-link, .mobile-menu .btn-primary').forEach(a => {
     a.addEventListener('click', () => toggleMobileMenu(false));
