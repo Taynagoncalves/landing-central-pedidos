@@ -1399,6 +1399,142 @@
       .faq-a.open { padding: 0 18px 16px; }
     }
 
+    /* ── Plans section ── */
+    .plans { padding: 100px 0; background: var(--bg-alt); }
+    .plans-scroll-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 12px;
+    }
+    .plans-scroll-wrap::-webkit-scrollbar { height: 4px; }
+    .plans-scroll-wrap::-webkit-scrollbar-track { background: transparent; }
+    .plans-scroll-wrap::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 2px; }
+    .plans-table {
+      width: 100%;
+      min-width: 680px;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+    /* Header row */
+    .plans-table thead tr th {
+      padding: 0 8px 24px;
+      text-align: center;
+      vertical-align: bottom;
+    }
+    .plans-table thead tr th:first-child {
+      text-align: left;
+      padding-left: 0;
+      width: 38%;
+    }
+    .plan-head {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px 16px 0 0;
+      padding: 20px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+    }
+    .plan-head.master {
+      background: var(--orange);
+      border-color: var(--orange);
+    }
+    .plan-badge {
+      background: white;
+      color: var(--orange);
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .plan-name {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .plan-head.master .plan-name { color: white; }
+    .plan-cta {
+      display: inline-block;
+      width: 100%;
+      padding: 10px 0;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .plan-cta-default {
+      background: rgba(255,107,0,0.1);
+      color: var(--orange);
+      border: 1.5px solid var(--orange);
+    }
+    .plan-cta-default:hover { background: var(--orange); color: white; }
+    .plan-cta-master {
+      background: white;
+      color: var(--orange);
+    }
+    .plan-cta-master:hover { background: rgba(255,255,255,0.85); }
+
+    /* Body rows */
+    .plans-table tbody tr td {
+      padding: 0;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .plans-table tbody tr td:first-child {
+      text-align: left;
+    }
+    .plans-table tbody tr:last-child td .plan-cell { border-radius: 0 0 16px 16px; }
+
+    .plan-label {
+      font-size: 14px;
+      color: var(--text);
+      padding: 13px 0;
+      font-weight: 500;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .plan-label.group-header {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--orange);
+      padding: 20px 0 8px;
+      border-bottom: none;
+    }
+    .plan-cell {
+      background: var(--card-bg);
+      border-left: 1px solid var(--card-border);
+      border-right: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--card-border);
+      padding: 13px 8px;
+      font-size: 17px;
+    }
+    .plan-cell.master-col {
+      background: rgba(255,107,0,0.06);
+      border-left-color: rgba(255,107,0,0.2);
+      border-right-color: rgba(255,107,0,0.2);
+      border-bottom-color: rgba(255,107,0,0.12);
+    }
+    .plan-cell.group-header-cell {
+      border-bottom: none;
+      padding: 18px 8px 6px;
+      background: var(--card-bg);
+    }
+    .plan-cell.group-header-cell.master-col { background: rgba(255,107,0,0.06); }
+    .check { color: #22c55e; font-weight: 700; font-size: 18px; }
+    .cross { color: var(--text-muted); opacity: 0.4; font-size: 18px; }
+
+    @media (max-width: 768px) {
+      .plans { padding: 70px 0; }
+    }
+
     /* ── Privacy policy modal ── */
     .privacy-modal {
       position: fixed;
@@ -1481,6 +1617,7 @@
   <ul class="nav-links">
     <li><a href="#funcionalidades">Funcionalidades</a></li>
     <li><a href="#preview">Veja o sistema</a></li>
+    <li><a href="#planos">Planos</a></li>
     <li><a href="#como-funciona">Como funciona</a></li>
     <li><a href="#faq">FAQ</a></li>
     <li><a href="#contato">Contato</a></li>
@@ -1524,6 +1661,7 @@
   <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Fechar menu">&#x2715;</button>
   <a href="#funcionalidades" class="mobile-link">Funcionalidades</a>
   <a href="#preview" class="mobile-link">Veja o sistema</a>
+  <a href="#planos" class="mobile-link">Planos</a>
   <a href="#como-funciona" class="mobile-link">Como funciona</a>
   <a href="#faq" class="mobile-link">FAQ</a>
   <a href="#contato" class="mobile-link">Contato</a>
@@ -1914,6 +2052,211 @@
   <div class="ss-controls">
     <button class="ss-btn" id="ssPrev" aria-label="Anterior">&#8249;</button>
     <button class="ss-btn" id="ssNext" aria-label="Próximo">&#8250;</button>
+  </div>
+</section>
+
+<!-- Plans -->
+<section class="plans" id="planos">
+  <div class="container">
+    <div class="features-header fade-up">
+      <div class="section-badge">Planos</div>
+      <h2 class="section-title">Nossos Planos</h2>
+      <p class="section-subtitle">Escolha o plano ideal para o seu negócio e comece a vender mais hoje.</p>
+    </div>
+    <div class="plans-scroll-wrap fade-up delay-1">
+      <table class="plans-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>
+              <div class="plan-head">
+                <div class="plan-name">Essencial</div>
+                <a href="https://wa.me/5545999278792?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20plano%20Essencial" target="_blank" class="plan-cta plan-cta-default">Consultar preço</a>
+              </div>
+            </th>
+            <th>
+              <div class="plan-head">
+                <div class="plan-name">Gourmet</div>
+                <a href="https://wa.me/5545999278792?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20plano%20Gourmet" target="_blank" class="plan-cta plan-cta-default">Consultar preço</a>
+              </div>
+            </th>
+            <th>
+              <div class="plan-head">
+                <div class="plan-name">Express</div>
+                <a href="https://wa.me/5545999278792?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20plano%20Express" target="_blank" class="plan-cta plan-cta-default">Consultar preço</a>
+              </div>
+            </th>
+            <th>
+              <div class="plan-head master">
+                <div class="plan-badge">Mais completo</div>
+                <div class="plan-name">Master</div>
+                <a href="https://wa.me/5545999278792?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20plano%20Master" target="_blank" class="plan-cta plan-cta-master">Consultar preço</a>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Base features -->
+          <tr>
+            <td><div class="plan-label group-header">Recursos básicos</div></td>
+            <td><div class="plan-cell group-header-cell"></div></td>
+            <td><div class="plan-cell group-header-cell"></div></td>
+            <td><div class="plan-cell group-header-cell"></div></td>
+            <td><div class="plan-cell group-header-cell master-col"></div></td>
+          </tr>
+          <tr>
+            <td><div class="plan-label">Cardápio online por categorias</div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell master-col"><span class="check">✓</span></div></td>
+          </tr>
+          <tr>
+            <td><div class="plan-label">Pedidos para entrega e retirada</div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell master-col"><span class="check">✓</span></div></td>
+          </tr>
+          <tr>
+            <td><div class="plan-label">Pagamento online (Pix e cartão)</div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell master-col"><span class="check">✓</span></div></td>
+          </tr>
+          <tr>
+            <td><div class="plan-label">Controle de troco</div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell master-col"><span class="check">✓</span></div></td>
+          </tr>
+          <tr>
+            <td><div class="plan-label">Painel administrativo completo</div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell master-col"><span class="check">✓</span></div></td>
+          </tr>
+          <tr>
+            <td><div class="plan-label">Notificações automáticas no WhatsApp</div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell master-col"><span class="check">✓</span></div></td>
+          </tr>
+          <tr>
+            <td><div class="plan-label">Impressão automática de pedidos</div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell master-col"><span class="check">✓</span></div></td>
+          </tr>
+          <tr>
+            <td><div class="plan-label">Histórico e acompanhamento em tempo real</div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell master-col"><span class="check">✓</span></div></td>
+          </tr>
+          <tr>
+            <td><div class="plan-label">Controle de abertura e fechamento</div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell master-col"><span class="check">✓</span></div></td>
+          </tr>
+          <tr>
+            <td><div class="plan-label">Modo claro e escuro</div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell master-col"><span class="check">✓</span></div></td>
+          </tr>
+          <tr>
+            <td><div class="plan-label">Cupons de desconto</div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell master-col"><span class="check">✓</span></div></td>
+          </tr>
+          <!-- Mesas -->
+          <tr>
+            <td><div class="plan-label group-header">Mesas e salão</div></td>
+            <td><div class="plan-cell group-header-cell"></div></td>
+            <td><div class="plan-cell group-header-cell"></div></td>
+            <td><div class="plan-cell group-header-cell"></div></td>
+            <td><div class="plan-cell group-header-cell master-col"></div></td>
+          </tr>
+          <tr>
+            <td><div class="plan-label">Mesas com QR Code individual</div></td>
+            <td><div class="plan-cell"><span class="cross">✗</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell"><span class="cross">✗</span></div></td>
+            <td><div class="plan-cell master-col"><span class="check">✓</span></div></td>
+          </tr>
+          <tr>
+            <td><div class="plan-label">Sistema de garçom digital</div></td>
+            <td><div class="plan-cell"><span class="cross">✗</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell"><span class="cross">✗</span></div></td>
+            <td><div class="plan-cell master-col"><span class="check">✓</span></div></td>
+          </tr>
+          <tr>
+            <td><div class="plan-label">Comanda eletrônica por mesa</div></td>
+            <td><div class="plan-cell"><span class="cross">✗</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell"><span class="cross">✗</span></div></td>
+            <td><div class="plan-cell master-col"><span class="check">✓</span></div></td>
+          </tr>
+          <!-- Delivery -->
+          <tr>
+            <td><div class="plan-label group-header">Delivery e motoboys</div></td>
+            <td><div class="plan-cell group-header-cell"></div></td>
+            <td><div class="plan-cell group-header-cell"></div></td>
+            <td><div class="plan-cell group-header-cell"></div></td>
+            <td><div class="plan-cell group-header-cell master-col"></div></td>
+          </tr>
+          <tr>
+            <td><div class="plan-label">Painel exclusivo para motoboys</div></td>
+            <td><div class="plan-cell"><span class="cross">✗</span></div></td>
+            <td><div class="plan-cell"><span class="cross">✗</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell master-col"><span class="check">✓</span></div></td>
+          </tr>
+          <tr>
+            <td><div class="plan-label">Controle de entregas em tempo real</div></td>
+            <td><div class="plan-cell"><span class="cross">✗</span></div></td>
+            <td><div class="plan-cell"><span class="cross">✗</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell master-col"><span class="check">✓</span></div></td>
+          </tr>
+          <tr>
+            <td><div class="plan-label">Notificação de chegada ao cliente</div></td>
+            <td><div class="plan-cell"><span class="cross">✗</span></div></td>
+            <td><div class="plan-cell"><span class="cross">✗</span></div></td>
+            <td><div class="plan-cell"><span class="check">✓</span></div></td>
+            <td><div class="plan-cell master-col"><span class="check">✓</span></div></td>
+          </tr>
+          <!-- Suporte -->
+          <tr>
+            <td><div class="plan-label group-header">Suporte</div></td>
+            <td><div class="plan-cell group-header-cell"></div></td>
+            <td><div class="plan-cell group-header-cell"></div></td>
+            <td><div class="plan-cell group-header-cell"></div></td>
+            <td><div class="plan-cell group-header-cell master-col"></div></td>
+          </tr>
+          <tr>
+            <td><div class="plan-label">Suporte prioritário</div></td>
+            <td><div class="plan-cell"><span class="cross">✗</span></div></td>
+            <td><div class="plan-cell"><span class="cross">✗</span></div></td>
+            <td><div class="plan-cell"><span class="cross">✗</span></div></td>
+            <td><div class="plan-cell master-col"><span class="check">✓</span></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 
