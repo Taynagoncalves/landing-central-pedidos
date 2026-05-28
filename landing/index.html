@@ -1554,6 +1554,31 @@
       box-shadow: 0 6px 22px rgba(255,107,0,0.45);
       transform: translateY(-1px);
     }
+    .plan-trial-note {
+      text-align: center;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .plan-trial-note svg { width: 11px; height: 11px; stroke: #16a34a; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    .trial-banner {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, rgba(22,163,74,0.10) 0%, rgba(22,163,74,0.06) 100%);
+      border: 1.5px solid rgba(22,163,74,0.3);
+      border-radius: 50px;
+      padding: 10px 22px;
+      font-size: 14px;
+      color: var(--text);
+      margin-top: 18px;
+    }
+    .trial-banner svg { width: 16px; height: 16px; stroke: #16a34a; flex-shrink: 0; }
+    .trial-banner strong { color: #16a34a; }
 
     @media (max-width: 1024px) {
       .plans-grid { grid-template-columns: repeat(2, 1fr); }
@@ -2090,6 +2115,10 @@
       <div class="section-badge">Planos</div>
       <h2 class="section-title">Nossos Planos</h2>
       <p class="section-subtitle">Escolha o plano ideal para o seu negócio e comece a vender mais hoje.</p>
+      <div class="trial-banner fade-up">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span><strong>7 dias grátis</strong> em qualquer plano — sem cartão de crédito, sem compromisso.</span>
+      </div>
     </div>
     <div class="plans-grid fade-up delay-1">
       <!-- Essencial -->
@@ -2123,6 +2152,7 @@
         </ul>
         <div class="plan-card-foot">
           <a href="https://wa.me/5545999278792?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20plano%20Essencial" target="_blank" class="plan-card-cta default">Consultar preço</a>
+          <p class="plan-trial-note"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 7 dias grátis, sem cartão</p>
         </div>
       </div>
 
@@ -2157,6 +2187,7 @@
         </ul>
         <div class="plan-card-foot">
           <a href="https://wa.me/5545999278792?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20plano%20Gourmet" target="_blank" class="plan-card-cta default">Consultar preço</a>
+          <p class="plan-trial-note"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 7 dias grátis, sem cartão</p>
         </div>
       </div>
 
@@ -2191,6 +2222,7 @@
         </ul>
         <div class="plan-card-foot">
           <a href="https://wa.me/5545999278792?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20plano%20Express" target="_blank" class="plan-card-cta default">Consultar preço</a>
+          <p class="plan-trial-note"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 7 dias grátis, sem cartão</p>
         </div>
       </div>
 
@@ -2226,6 +2258,7 @@
         </ul>
         <div class="plan-card-foot">
           <a href="https://wa.me/5545999278792?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20plano%20Master" target="_blank" class="plan-card-cta primary">Consultar preço</a>
+          <p class="plan-trial-note"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 7 dias grátis, sem cartão</p>
         </div>
       </div>
     </div>
