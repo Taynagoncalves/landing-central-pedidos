@@ -1564,17 +1564,18 @@
       box-shadow: 0 6px 22px rgba(255,107,0,0.45);
       transform: translateY(-1px);
     }
-    .plan-trial-note {
-      text-align: center;
-      font-size: 11.5px;
-      color: var(--text-muted);
+    .plan-card-cta.trial {
+      background: transparent;
+      color: #16a34a;
+      border: 1.5px solid rgba(22,163,74,0.35);
       margin-top: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 4px;
+      gap: 6px;
     }
-    .plan-trial-note svg { width: 11px; height: 11px; stroke: #16a34a; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    .plan-card-cta.trial svg { width: 13px; height: 13px; stroke: #16a34a; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    .plan-card-cta.trial:hover { background: rgba(22,163,74,0.10); border-color: #16a34a; }
     .trial-banner {
       display: inline-flex;
       align-items: center;
@@ -1745,7 +1746,7 @@
         </div>
         <div class="hero-trial">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <span><strong>7 dias grátis</strong> — sem cartão de crédito, sem compromisso</span>
+          <span><strong>Teste grátis por 7 dias</strong> — sem cartão de crédito, sem compromisso</span>
         </div>
         <div class="hero-stats">
           <div class="stat">
@@ -2131,7 +2132,7 @@
       <p class="section-subtitle">Escolha o plano ideal para o seu negócio e comece a vender mais hoje.</p>
       <div class="trial-banner fade-up">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        <span><strong>7 dias grátis</strong> em qualquer plano — sem cartão de crédito, sem compromisso.</span>
+        <span><strong>Teste grátis por 7 dias</strong> em qualquer plano — sem cartão de crédito, sem compromisso.</span>
       </div>
     </div>
     <div class="plans-grid fade-up delay-1">
@@ -2166,7 +2167,7 @@
         </ul>
         <div class="plan-card-foot">
           <a href="https://wa.me/5545999278792?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20plano%20Essencial" target="_blank" class="plan-card-cta default">Consultar preço</a>
-          <p class="plan-trial-note"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 7 dias grátis, sem cartão</p>
+          <a href="https://wa.me/5545999278792?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Essencial.%20Pode%20me%20ajudar%3F" target="_blank" class="plan-card-cta trial"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Começar teste grátis</a>
         </div>
       </div>
 
@@ -2201,7 +2202,7 @@
         </ul>
         <div class="plan-card-foot">
           <a href="https://wa.me/5545999278792?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20plano%20Gourmet" target="_blank" class="plan-card-cta default">Consultar preço</a>
-          <p class="plan-trial-note"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 7 dias grátis, sem cartão</p>
+          <a href="https://wa.me/5545999278792?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Gourmet.%20Pode%20me%20ajudar%3F" target="_blank" class="plan-card-cta trial"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Começar teste grátis</a>
         </div>
       </div>
 
@@ -2236,7 +2237,7 @@
         </ul>
         <div class="plan-card-foot">
           <a href="https://wa.me/5545999278792?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20plano%20Express" target="_blank" class="plan-card-cta default">Consultar preço</a>
-          <p class="plan-trial-note"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 7 dias grátis, sem cartão</p>
+          <a href="https://wa.me/5545999278792?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Express.%20Pode%20me%20ajudar%3F" target="_blank" class="plan-card-cta trial"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Começar teste grátis</a>
         </div>
       </div>
 
@@ -2272,7 +2273,7 @@
         </ul>
         <div class="plan-card-foot">
           <a href="https://wa.me/5545999278792?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20plano%20Master" target="_blank" class="plan-card-cta primary">Consultar preço</a>
-          <p class="plan-trial-note"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 7 dias grátis, sem cartão</p>
+          <a href="https://wa.me/5545999278792?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Master.%20Pode%20me%20ajudar%3F" target="_blank" class="plan-card-cta trial"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Começar teste grátis</a>
         </div>
       </div>
     </div>
