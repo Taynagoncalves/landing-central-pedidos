@@ -1176,6 +1176,27 @@
 
     .dual-phone-dark img { filter: brightness(0.95); }
 
+    /* ── Bot slideshow ── */
+    .bot-slideshow { position: relative; width: 100%; height: 100%; }
+    .bot-slideshow img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      opacity: 0;
+      animation: bot-cycle 9s infinite;
+      display: block;
+    }
+    .bot-slideshow img:nth-child(1) { animation-delay: 0s; }
+    .bot-slideshow img:nth-child(2) { animation-delay: 3s; }
+    .bot-slideshow img:nth-child(3) { animation-delay: 6s; }
+    @keyframes bot-cycle {
+      0%, 28% { opacity: 1; }
+      33%, 100% { opacity: 0; }
+    }
+
     /* ── Hero carousel ── */
     .hero-carousel {
       position: relative;
@@ -1931,6 +1952,30 @@
 
       <div class="feature-card fade-up delay-1">
         <div class="feature-screenshot">
+          <div class="bot-slideshow">
+            <img src="imagens/bot/1.png" alt="Bot WhatsApp - boas-vindas" loading="lazy">
+            <img src="imagens/bot/2.png" alt="Bot WhatsApp - menu de opções" loading="lazy">
+            <img src="imagens/bot/3.png" alt="Bot WhatsApp - cardápio" loading="lazy">
+          </div>
+        </div>
+        <div class="feature-card-body">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="15" rx="3"/><path d="M8 20l4-5 4 5"/><circle cx="8" cy="9.5" r="1.2" fill="white" stroke="none"/><circle cx="12" cy="9.5" r="1.2" fill="white" stroke="none"/><circle cx="16" cy="9.5" r="1.2" fill="white" stroke="none"/></svg>
+          </div>
+          <h3>Bot Automático no WhatsApp</h3>
+          <p>Atenda seus clientes 24h por dia automaticamente. O bot responde no WhatsApp com menu interativo, cardápio completo e consulta de status do pedido.</p>
+          <ul class="feature-list">
+            <li>Menu de opções interativo no WhatsApp</li>
+            <li>Acesso ao cardápio completo pelo chat</li>
+            <li>Consulta de status do pedido em tempo real</li>
+            <li>Informa horário de funcionamento automaticamente</li>
+            <li>Transferência para atendente humano quando necessário</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="feature-card fade-up delay-2">
+        <div class="feature-screenshot">
           <img src="imagens/cliente/temaclaro/motoboy.png" alt="Sistema para Motoboy" loading="lazy">
         </div>
         <div class="feature-card-body">
@@ -1971,7 +2016,7 @@
 
       <div class="feature-card fade-up delay-3">
         <div class="feature-screenshot">
-          <img src="imagens/cliente/temadark/telastatus3-dark.png" alt="Status do pedido" loading="lazy" class="theme-img" data-light="imagens/cliente/temaclaro/telastatus3.png" data-dark="imagens/cliente/temadark/telastatus3-dark.png">
+          <img src="imagens/cliente/temaclaro/notificacoeswhats.png" alt="Notificações no WhatsApp" loading="lazy">
         </div>
         <div class="feature-card-body">
           <div class="feature-icon">
