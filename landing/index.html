@@ -1310,6 +1310,45 @@
       pointer-events: none;
     }
 
+    .lightbox-nav {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.22);
+      color: white;
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+      z-index: 10000;
+      padding: 0;
+    }
+    .lightbox-nav:hover { background: rgba(255,255,255,0.28); }
+    .lb-prev { left: 16px; }
+    .lb-next { right: 16px; }
+    .lightbox.gallery-mode .lightbox-nav { display: flex; }
+
+    .lightbox-counter {
+      position: fixed;
+      bottom: 52px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.5);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      display: none;
+      pointer-events: none;
+    }
+    .lightbox.gallery-mode .lightbox-counter { display: block; }
+
     /* ── Hamburger menu ── */
     .hamburger {
       display: none;
@@ -2633,7 +2672,10 @@
 <!-- Lightbox -->
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
   <button class="lightbox-close" id="lbClose" aria-label="Fechar">&#x2715;</button>
+  <button class="lightbox-nav lb-prev" id="lbPrev" aria-label="Anterior">&#8249;</button>
   <img class="lightbox-img" id="lbImg" src="" alt="Preview">
+  <button class="lightbox-nav lb-next" id="lbNext" aria-label="Próxima">&#8250;</button>
+  <span class="lightbox-counter" id="lbCounter"></span>
   <p class="lightbox-hint">Pressione ESC ou clique fora para fechar</p>
 </div>
 
@@ -2884,21 +2926,48 @@
   });
 
   // ── Lightbox ──
-  const lightbox = document.getElementById('lightbox');
-  const lbImg    = document.getElementById('lbImg');
-  const lbClose  = document.getElementById('lbClose');
+  const lightbox   = document.getElementById('lightbox');
+  const lbImg      = document.getElementById('lbImg');
+  const lbClose    = document.getElementById('lbClose');
+  const lbPrev     = document.getElementById('lbPrev');
+  const lbNext     = document.getElementById('lbNext');
+  const lbCounter  = document.getElementById('lbCounter');
+
+  let lbGallery = [];
+  let lbGalleryIdx = 0;
+
+  function lbLoad(src) {
+    lbImg.classList.remove('loaded');
+    lbImg.src = '';
+    const tmp = new Image();
+    tmp.onload = () => { lbImg.src = tmp.src; requestAnimationFrame(() => lbImg.classList.add('loaded')); };
+    tmp.src = src;
+  }
+
+  function openLightbox(srcs, startIdx) {
+    lbGallery = srcs;
+    lbGalleryIdx = startIdx || 0;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    if (lbGallery.length > 1) {
+      lightbox.classList.add('gallery-mode');
+      lbCounter.textContent = (lbGalleryIdx + 1) + ' / ' + lbGallery.length;
+    } else {
+      lightbox.classList.remove('gallery-mode');
+    }
+    lbLoad(lbGallery[lbGalleryIdx]);
+  }
+
+  function lbNavigate(dir) {
+    lbGalleryIdx = (lbGalleryIdx + dir + lbGallery.length) % lbGallery.length;
+    lbCounter.textContent = (lbGalleryIdx + 1) + ' / ' + lbGallery.length;
+    lbLoad(lbGallery[lbGalleryIdx]);
+  }
 
   // Lightbox no carrossel hero (abre a slide ativa)
   heroEl.style.cursor = 'zoom-in';
   heroEl.addEventListener('click', () => {
-    const src = heroSlides[heroIdx].src;
-    lbImg.classList.remove('loaded');
-    lbImg.src = '';
-    lightbox.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    const tmp = new Image();
-    tmp.onload = () => { lbImg.src = tmp.src; requestAnimationFrame(() => lbImg.classList.add('loaded')); };
-    tmp.src = src;
+    openLightbox([heroSlides[heroIdx].src]);
   });
 
   const SELECTORS = [
@@ -2913,32 +2982,58 @@
     img.classList.add('lb-trigger');
     img.addEventListener('click', e => {
       e.stopPropagation();
-      lbImg.classList.remove('loaded');
-      lbImg.src = '';
-      lightbox.classList.add('open');
-      document.body.style.overflow = 'hidden';
+      // Se a imagem estiver dentro de um bot-slideshow, abre todas em galeria
+      const slideshow = img.closest('.bot-slideshow');
+      if (slideshow) {
+        const imgs = Array.from(slideshow.querySelectorAll('img'));
+        const idx = imgs.indexOf(img);
+        openLightbox(imgs.map(i => i.src), idx >= 0 ? idx : 0);
+      } else {
+        openLightbox([img.src]);
+      }
+    });
+  });
 
-      const tmp = new Image();
-      tmp.onload = () => {
-        lbImg.src = tmp.src;
-        requestAnimationFrame(() => lbImg.classList.add('loaded'));
-      };
-      tmp.src = img.src;
+  // Delegação de clique para imagens do bot-slideshow (slideshow cobre com position:absolute)
+  document.querySelectorAll('.bot-slideshow').forEach(slideshow => {
+    slideshow.style.cursor = 'zoom-in';
+    slideshow.addEventListener('click', e => {
+      const imgs = Array.from(slideshow.querySelectorAll('img'));
+      // Abre na imagem visível no momento (maior opacidade calculada pelo animation)
+      openLightbox(imgs.map(i => i.src), 0);
     });
   });
 
   function closeLightbox() {
-    lightbox.classList.remove('open');
+    lightbox.classList.remove('open', 'gallery-mode');
     document.body.style.overflow = '';
+    lbGallery = [];
     setTimeout(() => {
       lbImg.classList.remove('loaded');
       lbImg.src = '';
     }, 250);
   }
 
+  lbPrev.addEventListener('click', e => { e.stopPropagation(); lbNavigate(-1); });
+  lbNext.addEventListener('click', e => { e.stopPropagation(); lbNavigate(1); });
   lbClose.addEventListener('click', closeLightbox);
-  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+  lightbox.addEventListener('click', e => { if (e.target === lightbox || e.target === lbImg) closeLightbox(); });
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight' && lbGallery.length > 1) lbNavigate(1);
+    if (e.key === 'ArrowLeft'  && lbGallery.length > 1) lbNavigate(-1);
+  });
+
+  // Swipe para navegar no mobile
+  let lbTouchX = null;
+  lightbox.addEventListener('touchstart', e => { lbTouchX = e.touches[0].clientX; });
+  lightbox.addEventListener('touchend', e => {
+    if (lbTouchX === null || lbGallery.length < 2) return;
+    const diff = lbTouchX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) lbNavigate(diff > 0 ? 1 : -1);
+    lbTouchX = null;
+  });
 
   // ── Screenshot carousel ──
   const track = document.getElementById('ssTrack');
