@@ -175,7 +175,19 @@
     .hero-proof span { font-size: 13px; color: var(--night-muted); }
 
     .hero-stage { position: relative; aspect-ratio: 1 / .95; }
-    .hero-desk { position: absolute; right: -6%; top: 0; width: 104%; filter: drop-shadow(0 40px 60px rgba(0,0,0,.6)); }
+    .hero-desk { position: absolute; right: -6%; top: 6%; width: 104%; }
+
+    /* Moldura de navegador para prints sem moldura própria */
+    .browser { border-radius: 14px; overflow: hidden; background: #fff; border: 1px solid var(--line); box-shadow: 0 30px 60px -25px rgba(17,18,22,.35); }
+    .browser-bar { display: flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px; background: #EEEAE4; border-bottom: 1px solid var(--line); }
+    .browser-bar i { width: 10px; height: 10px; border-radius: 50%; background: #FF5F57; flex-shrink: 0; }
+    .browser-bar i:nth-child(2) { background: #FEBC2E; }
+    .browser-bar i:nth-child(3) { background: #28C840; }
+    .browser-bar span { margin: 0 auto; padding: 2px 14px; border-radius: 6px; background: rgba(255,255,255,.7); font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .browser img { display: block; width: 100%; height: auto; }
+    .browser.night { background: #14161C; border-color: rgba(255,255,255,.12); box-shadow: 0 40px 80px -20px rgba(0,0,0,.75); }
+    .browser.night .browser-bar { background: #1E2129; border-color: rgba(255,255,255,.08); }
+    .browser.night .browser-bar span { background: rgba(255,255,255,.06); color: var(--night-muted); }
     .hero-phone { position: absolute; left: -10%; bottom: -2%; width: 50%; aspect-ratio: 1080 / 1350; filter: drop-shadow(0 30px 50px rgba(0,0,0,.7)); }
     .hero-phone img { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity .7s var(--ease); }
     .hero-phone img.on { opacity: 1; }
@@ -244,7 +256,10 @@
     .tour-stage.dark { background: radial-gradient(600px 400px at 50% 40%, rgba(255,106,19,.16), transparent 70%), var(--night); }
     .tour-stage img { max-height: 560px; width: auto; cursor: zoom-in; transition: opacity .35s var(--ease), transform .35s var(--ease); }
     .tour-stage img.desk { max-height: none; width: 100%; }
-    .tour-stage img.fading { opacity: 0; transform: scale(.98); }
+    #stageFrame { transition: opacity .35s var(--ease), transform .35s var(--ease); }
+    #stageFrame.wide { width: 100%; }
+    #stageFrame:not(.browser) .browser-bar { display: none; }
+    #stageFrame.fading { opacity: 0; transform: scale(.98); }
     .zoom-hint { position: absolute; right: 18px; bottom: 16px; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; color: var(--muted); background: rgba(255,255,255,.8); padding: 6px 10px; border-radius: 999px; }
     .tour-stage.dark .zoom-hint { background: rgba(255,255,255,.08); color: var(--night-muted); }
     .zoom-hint .i { width: 14px; height: 14px; }
@@ -264,6 +279,8 @@
     .media.night { background: radial-gradient(400px 260px at 50% 30%, rgba(255,106,19,.18), transparent 70%), var(--night); }
     .media img { height: 100%; width: auto; object-fit: contain; cursor: zoom-in; transition: transform .5s var(--ease); }
     .media img.desk { width: 100%; height: auto; padding: 18px; }
+    .media .browser { width: calc(100% - 40px); }
+    .media .browser img { width: 100%; height: auto; }
     .card:hover .media img { transform: scale(1.03); }
     .card-body { padding: 26px 28px 30px; display: flex; flex-direction: column; gap: 10px; }
     .card.wide .card-body { justify-content: center; padding: 36px; }
@@ -646,7 +663,10 @@
       </div>
 
       <div class="hero-stage" aria-label="Prévia do sistema">
-        <img class="hero-desk" src="imagens/admin/tela-admin.png" alt="Painel do lojista com pedidos em tempo real">
+        <div class="hero-desk browser night">
+          <div class="browser-bar"><i></i><i></i><i></i><span>centralpedidosonline.com.br</span></div>
+          <img src="imagens/admin/tela-admin.png" alt="Painel do lojista com pedidos em tempo real">
+        </div>
         <div class="hero-phone" id="heroPhone">
           <img class="on" src="imagens/cliente/temadark/telahome-dark.png" alt="Cardápio no celular">
           <img src="imagens/cliente/temadark/teladetalhes-dark.png" alt="" loading="lazy">
@@ -695,7 +715,7 @@
         </div>
 
         <div class="tour-list" data-list="lojista" role="tablist" aria-label="Telas do lojista" hidden>
-          <button class="tour-tab" role="tab" aria-selected="true" data-desk="imagens/admin/tela-admin.png"><b>Pedidos em tempo real</b><span>Todos os pedidos ativos, pagamentos e status da loja em um só lugar.</span></button>
+          <button class="tour-tab" role="tab" aria-selected="true" data-desk="imagens/admin/tela-admin.png" data-frame><b>Pedidos em tempo real</b><span>Quadro com novos pedidos, em preparo, prontos, em rota e finalizados — com totais do dia e status da loja.</span></button>
           <button class="tour-tab" role="tab" aria-selected="false" data-desk="imagens/admin/admin-mesagarcom.png"><b>Mesas e garçom</b><span>Comandas por mesa e pedidos do salão acompanhados ao vivo.</span></button>
           <button class="tour-tab" role="tab" aria-selected="false" data-desk="imagens/admin/admin-cardapio-digital.png"><b>Cardápio digital</b><span>Produtos, categorias, complementos e preços fáceis de editar.</span></button>
           <button class="tour-tab" role="tab" aria-selected="false" data-desk="imagens/admin/personalizacao.png"><b>Personalização</b><span>Logo, banner, cores, horários e taxas de entrega da sua loja.</span></button>
@@ -708,7 +728,10 @@
       </div>
 
       <div class="tour-stage" id="stage">
-        <img id="stageImg" src="imagens/cliente/temaclaro/telahome.png" alt="Cardápio">
+        <div id="stageFrame">
+          <div class="browser-bar"><i></i><i></i><i></i><span>centralpedidosonline.com.br</span></div>
+          <img id="stageImg" src="imagens/cliente/temaclaro/telahome.png" alt="Cardápio">
+        </div>
         <span class="zoom-hint"><svg class="i"><use href="#i-zoom"/></svg> Clique para ampliar</span>
       </div>
     </div>
@@ -726,7 +749,12 @@
 
     <div class="bento">
       <article class="card wide reveal">
-        <div class="media"><img class="desk" src="imagens/admin/tela-admin.png" alt="Painel administrativo" loading="lazy" data-zoom></div>
+        <div class="media">
+          <div class="browser">
+            <div class="browser-bar"><i></i><i></i><i></i><span>centralpedidosonline.com.br</span></div>
+            <img src="imagens/admin/tela-admin.png" alt="Painel administrativo" loading="lazy" data-zoom>
+          </div>
+        </div>
         <div class="card-body">
           <div class="ico"><svg class="i"><use href="#i-board"/></svg></div>
           <h3>Gestão de Pedidos</h3>
@@ -1322,6 +1350,7 @@
   // ── Tour ──
   const stage = document.getElementById('stage');
   const stageImg = document.getElementById('stageImg');
+  const stageFrame = document.getElementById('stageFrame');
   const themeRow = document.getElementById('themeRow');
   const themeSwitch = document.getElementById('themeSwitch');
   let view = 'cliente';
@@ -1339,13 +1368,16 @@
     const src = isDesk ? tab.dataset.desk : clientSrc(tab.dataset.img);
     stage.classList.toggle('dark', !isDesk && dark);
     if (stageImg.getAttribute('src') === src) return;
-    stageImg.classList.add('fading');
+    stageFrame.classList.add('fading');
     const next = new Image();
     next.onload = next.onerror = () => {
       stageImg.src = src;
       stageImg.alt = tab.querySelector('b').textContent;
       stageImg.classList.toggle('desk', isDesk);
-      requestAnimationFrame(() => stageImg.classList.remove('fading'));
+      stageFrame.classList.toggle('wide', isDesk);
+      // Prints sem moldura própria (data-frame) ganham a moldura de navegador
+      stageFrame.classList.toggle('browser', 'frame' in tab.dataset);
+      requestAnimationFrame(() => stageFrame.classList.remove('fading'));
     };
     next.src = src;
   }
