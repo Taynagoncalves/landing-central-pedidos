@@ -240,20 +240,12 @@
     .tour-tab[aria-selected="true"] { background: var(--brand-soft); border-left-color: var(--brand); }
     .tour-tab[aria-selected="true"] b { color: var(--ink); }
     .tour-tab[aria-selected="true"] span { display: block; }
-    .theme-switch { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; border-radius: 16px; background: var(--surface-2); font-size: 14px; font-weight: 500; }
-    .theme-switch[hidden] { display: none; }
-    .switch { position: relative; width: 56px; height: 30px; border-radius: 999px; background: #D8D2C9; transition: background .25s; }
-    .switch::after { content: ''; position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 50%; background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.2); transition: transform .3s var(--ease); }
-    .switch[aria-checked="true"] { background: var(--ink); }
-    .switch[aria-checked="true"]::after { transform: translateX(26px); }
     .tour-stage {
       position: relative; min-height: 600px; display: grid; place-items: center; padding: 32px;
       background:
         radial-gradient(600px 400px at 50% 40%, rgba(255,106,19,.10), transparent 70%),
         var(--surface-2);
-      transition: background .4s;
     }
-    .tour-stage.dark { background: radial-gradient(600px 400px at 50% 40%, rgba(255,106,19,.16), transparent 70%), var(--night); }
     .tour-stage img { max-height: 560px; width: auto; cursor: zoom-in; transition: opacity .35s var(--ease), transform .35s var(--ease); }
     .tour-stage img.desk { max-height: none; width: 100%; }
     #stageFrame { transition: opacity .35s var(--ease), transform .35s var(--ease); }
@@ -261,7 +253,6 @@
     #stageFrame:not(.browser) .browser-bar { display: none; }
     #stageFrame.fading { opacity: 0; transform: scale(.98); }
     .zoom-hint { position: absolute; right: 18px; bottom: 16px; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; color: var(--muted); background: rgba(255,255,255,.8); padding: 6px 10px; border-radius: 999px; }
-    .tour-stage.dark .zoom-hint { background: rgba(255,255,255,.08); color: var(--night-muted); }
     .zoom-hint .i { width: 14px; height: 14px; }
 
     /* ── Funcionalidades (bento) ── */
@@ -297,19 +288,6 @@
     .bot-show img:nth-child(2) { animation-delay: 3.5s; }
     .bot-show img:nth-child(3) { animation-delay: 7s; }
     @keyframes botFade { 0%, 4% { opacity: 0; } 8%, 31% { opacity: 1; } 36%, 100% { opacity: 0; } }
-
-    .mode-demo { position: absolute; inset: 0; transition: background .5s; }
-    .mode-demo.dark { background: var(--night); }
-    .mode-demo img { position: absolute; inset: 0; margin: auto; transition: opacity .5s var(--ease); }
-    .mode-demo .d { opacity: 0; }
-    .mode-demo.dark .d { opacity: 1; }
-    .mode-demo.dark .l { opacity: 0; }
-    .mode-btn {
-      position: absolute; top: 14px; right: 14px; z-index: 2;
-      display: inline-flex; align-items: center; gap: 8px; height: 38px; padding: 0 14px; border-radius: 999px;
-      background: #fff; color: var(--ink); font-size: 13px; font-weight: 600; box-shadow: 0 6px 18px -6px rgba(0,0,0,.35);
-    }
-    .mode-btn .i { width: 16px; height: 16px; }
 
     /* Impressora */
     .printer { position: relative; width: 210px; height: 260px; }
@@ -604,8 +582,6 @@
   <symbol id="i-card" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2.5"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></symbol>
   <symbol id="i-brush" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><circle cx="8.5" cy="7.5" r="1.5"/><circle cx="6.5" cy="12.5" r="1.5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.93 0 1.5-.75 1.5-1.5 0-.4-.15-.74-.4-1-.25-.26-.4-.6-.4-1 0-.83.67-1.5 1.5-1.5H16c3.31 0 6-2.69 6-6 0-4.96-4.48-9-10-9z"/></symbol>
   <symbol id="i-menu-book" viewBox="0 0 24 24"><path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/></symbol>
-  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></symbol>
-  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
   <symbol id="i-printer" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></symbol>
   <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></symbol>
   <symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
@@ -668,11 +644,11 @@
           <img src="imagens/admin/tela-admin-1.png" alt="Painel do lojista com pedidos em tempo real">
         </div>
         <div class="hero-phone" id="heroPhone">
-          <img class="on" src="imagens/cliente/temadark/telahome-dark.png" alt="Cardápio no celular">
-          <img src="imagens/cliente/temadark/teladetalhes-dark.png" alt="" loading="lazy">
-          <img src="imagens/cliente/temadark/telacarrinho-dark.png" alt="" loading="lazy">
-          <img src="imagens/cliente/temadark/telafinalizar-dark.png" alt="" loading="lazy">
-          <img src="imagens/cliente/temadark/telastatus1-dark.png" alt="" loading="lazy">
+          <img class="on" src="imagens/cliente/temaclaro/telahome.png" alt="Cardápio no celular">
+          <img src="imagens/cliente/temaclaro/teladetalhes.png" alt="" loading="lazy">
+          <img src="imagens/cliente/temaclaro/telacarrinho.png" alt="" loading="lazy">
+          <img src="imagens/cliente/temaclaro/telafinalizar.png" alt="" loading="lazy">
+          <img src="imagens/cliente/temaclaro/telastatus1.png" alt="" loading="lazy">
         </div>
         <div class="feed" id="feed" aria-live="off"></div>
       </div>
@@ -720,11 +696,6 @@
           <button class="tour-tab" role="tab" aria-selected="false" data-desk="imagens/admin/admin-mesagarcom.png"><b>Mesas e garçom</b><span>Comandas por mesa e pedidos do salão acompanhados ao vivo.</span></button>
           <button class="tour-tab" role="tab" aria-selected="false" data-desk="imagens/admin/admin-cardapio-digital.png"><b>Cardápio digital</b><span>Produtos, categorias, complementos e preços fáceis de editar.</span></button>
           <button class="tour-tab" role="tab" aria-selected="false" data-desk="imagens/admin/personalizacao.png"><b>Personalização</b><span>Logo, banner, cores, horários e taxas de entrega da sua loja.</span></button>
-        </div>
-
-        <div class="theme-switch" id="themeRow">
-          <span>Ver no modo escuro</span>
-          <button type="button" class="switch" id="themeSwitch" role="switch" aria-checked="false" aria-label="Modo escuro"></button>
         </div>
       </div>
 
@@ -857,28 +828,6 @@
       </article>
 
       <article class="card reveal">
-        <div class="media">
-          <div class="mode-demo" id="modeDemo">
-            <img class="l" src="imagens/cliente/temaclaro/telahome.png" alt="Cardápio no tema claro" loading="lazy">
-            <img class="d" src="imagens/cliente/temadark/telahome-dark.png" alt="Cardápio no tema escuro" loading="lazy">
-          </div>
-          <button type="button" class="mode-btn" id="modeBtn"><svg class="i"><use href="#i-moon"/></svg><span>Ver escuro</span></button>
-        </div>
-        <div class="card-body">
-          <div class="ico"><svg class="i"><use href="#i-sun"/></svg></div>
-          <h3>Modo Escuro e Modo Claro</h3>
-          <p>O cliente escolhe como prefere ver o cardápio, com troca instantânea entre os temas.</p>
-          <ul class="ticks">
-            <li><svg class="i"><use href="#i-check"/></svg>Alternância instantânea sem recarregar</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Preferência salva automaticamente no dispositivo</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Detecta o tema do celular automaticamente</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Design moderno nos dois modos</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Experimente no botão sobre a imagem</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card reveal">
         <div class="media night">
           <div class="printer" aria-hidden="true">
             <div class="printer-body"></div>
@@ -927,7 +876,7 @@
         </div>
       </article>
 
-      <article class="card reveal">
+      <article class="card wide reveal">
         <div class="media"><img class="desk" src="imagens/admin/admin-cardapio-digital.png" alt="Cardápio digital" loading="lazy" data-zoom></div>
         <div class="card-body">
           <div class="ico"><svg class="i"><use href="#i-menu-book"/></svg></div>
@@ -1029,7 +978,6 @@
           <span><svg class="i"><use href="#i-check"/></svg>Impressão automática de pedidos</span>
           <span><svg class="i"><use href="#i-check"/></svg>Histórico em tempo real</span>
           <span><svg class="i"><use href="#i-check"/></svg>Controle de abertura e fechamento</span>
-          <span><svg class="i"><use href="#i-check"/></svg>Modo claro e escuro</span>
           <span><svg class="i"><use href="#i-check"/></svg>Cupons de desconto</span>
           <span><svg class="i"><use href="#i-check"/></svg>Suporte prioritário</span>
         </div>
@@ -1352,22 +1300,15 @@
   const stage = document.getElementById('stage');
   const stageImg = document.getElementById('stageImg');
   const stageFrame = document.getElementById('stageFrame');
-  const themeRow = document.getElementById('themeRow');
-  const themeSwitch = document.getElementById('themeSwitch');
   let view = 'cliente';
-  let dark = false;
 
-  function clientSrc(key) {
-    return dark ? `imagens/cliente/temadark/${key}-dark.png` : `imagens/cliente/temaclaro/${key}.png`;
-  }
   function currentTab() {
     return document.querySelector(`[data-list="${view}"] [aria-selected="true"]`);
   }
   function renderStage() {
     const tab = currentTab();
     const isDesk = view === 'lojista';
-    const src = isDesk ? tab.dataset.desk : clientSrc(tab.dataset.img);
-    stage.classList.toggle('dark', !isDesk && dark);
+    const src = isDesk ? tab.dataset.desk : `imagens/cliente/temaclaro/${tab.dataset.img}.png`;
     if (stageImg.getAttribute('src') === src) return;
     stageFrame.classList.add('fading');
     const next = new Image();
@@ -1387,7 +1328,6 @@
       view = b.dataset.view;
       document.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed', x === b));
       document.querySelectorAll('.tour-list').forEach(l => l.hidden = l.dataset.list !== view);
-      themeRow.hidden = view !== 'cliente';
       renderStage();
     });
   });
@@ -1397,26 +1337,6 @@
       renderStage();
     });
   });
-  themeSwitch.addEventListener('click', () => {
-    dark = !dark;
-    themeSwitch.setAttribute('aria-checked', dark);
-    renderStage();
-  });
-
-  // ── Demonstração claro/escuro ──
-  const modeDemo = document.getElementById('modeDemo');
-  const modeBtn = document.getElementById('modeBtn');
-  function setMode(isDark) {
-    modeDemo.classList.toggle('dark', isDark);
-    modeBtn.querySelector('use').setAttribute('href', isDark ? '#i-sun' : '#i-moon');
-    modeBtn.querySelector('span').textContent = isDark ? 'Ver claro' : 'Ver escuro';
-  }
-  let modeAuto = reduceMotion ? null : setInterval(() => setMode(!modeDemo.classList.contains('dark')), 3500);
-  modeBtn.addEventListener('click', () => {
-    clearInterval(modeAuto);
-    setMode(!modeDemo.classList.contains('dark'));
-  });
-
   // ── Lightbox ──
   const lightbox = document.getElementById('lightbox');
   const lbImg = document.getElementById('lbImg');
