@@ -468,6 +468,45 @@
     .modal-body strong { color: var(--ink); }
     .modal-body ul { padding-left: 18px; margin-bottom: 10px; }
 
+    /* Demonstração ao vivo (sistema real dentro de um iframe) */
+    .demo-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    dialog.demo {
+      margin: auto; width: min(1280px, calc(100% - 32px)); height: min(860px, calc(100vh - 32px)); max-width: none; max-height: none;
+      border: 0; border-radius: 24px; padding: 0; overflow: hidden; background: var(--night); color: var(--night-text);
+      box-shadow: 0 40px 100px -20px rgba(0,0,0,.7);
+    }
+    dialog.demo[open] { display: flex; flex-direction: column; }
+    dialog.demo::backdrop { background: rgba(11,12,16,.75); backdrop-filter: blur(6px); }
+    .demo-head { display: flex; align-items: center; gap: 12px; padding: 12px 12px 12px 20px; border-bottom: 1px solid var(--night-line); flex-wrap: wrap; }
+    .demo-head h3 { font-size: 18px; margin-right: auto; display: flex; align-items: center; gap: 10px; }
+    .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--wa); box-shadow: 0 0 0 4px rgba(37,211,102,.2); }
+    .demo .seg { background: rgba(255,255,255,.06); }
+    .demo .seg button { color: var(--night-muted); padding: 0 14px; }
+    .demo .seg button[aria-pressed="true"] { background: #fff; color: var(--ink); }
+    .demo-ext { display: inline-flex; align-items: center; gap: 6px; height: 42px; padding: 0 14px; border-radius: 12px; font-size: 14px; font-weight: 600; color: var(--night-text); border: 1px solid var(--night-line); }
+    .demo-ext:hover { background: rgba(255,255,255,.06); }
+    .demo .x { background: rgba(255,255,255,.08); color: #fff; }
+    .demo-login { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; padding: 10px 20px; font-size: 13.5px; color: var(--night-muted); background: rgba(255,106,19,.08); border-bottom: 1px solid var(--night-line); }
+    .demo-login[hidden] { display: none; }
+    .demo-login button { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 10px; background: rgba(255,255,255,.07); border: 1px solid var(--night-line); font-size: 13px; color: var(--night-muted); }
+    .demo-login button b { color: #fff; font-weight: 600; }
+    .demo-login button:hover { background: rgba(255,255,255,.12); }
+    .demo-login button.copied { border-color: var(--wa); }
+    .demo-login small { font-size: 12px; }
+    .demo-body { flex: 1; min-height: 0; display: grid; place-items: center; padding: 16px; background: radial-gradient(600px 400px at 50% 0%, rgba(255,106,19,.14), transparent 70%); }
+    .demo-body iframe { width: 100%; height: 100%; border: 0; border-radius: 16px; background: #fff; }
+    .demo-body.phone iframe { width: min(420px, 100%); border-radius: 28px; box-shadow: 0 0 0 10px #000, 0 30px 60px -10px rgba(0,0,0,.7); }
+    @media (max-width: 640px) {
+      dialog.demo { width: 100%; height: 100%; border-radius: 0; }
+      .demo-head { padding: 10px; gap: 8px; }
+      .demo-head h3 { display: none; }
+      .demo .seg { flex: 1; }
+      .demo .seg button { padding: 0 6px; font-size: 13px; }
+      .demo-ext { height: 42px; padding: 0 10px; font-size: 13px; }
+      .demo-body { padding: 0; }
+      .demo-body iframe, .demo-body.phone iframe { width: 100%; border-radius: 0; box-shadow: none; }
+    }
+
     dialog.lightbox { margin: auto; max-width: 100vw; max-height: 100vh; width: 100%; height: 100%; background: transparent; border: 0; padding: 0; }
     dialog.lightbox::backdrop { background: rgba(11,12,16,.92); }
     .lb-inner { width: 100%; height: 100%; display: grid; place-items: center; padding: 56px 16px; }
@@ -629,7 +668,7 @@
         <p class="lead">Plataforma completa para receber pedidos online com gestão de delivery, mesas com QR Code, controle de motoboys e notificações automáticas no WhatsApp.</p>
         <div class="hero-actions">
           <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20contratar%20o%20sistema." target="_blank" class="btn btn-brand">Quero contratar <svg class="i"><use href="#i-arrow"/></svg></a>
-          <a href="#preview" class="btn btn-ghost-night">Ver o sistema</a>
+          <button type="button" class="btn btn-ghost-night" data-demo="cliente">Ver o sistema</button>
         </div>
         <div class="hero-proof">
           <div><strong>100%</strong><span>Online, sem instalar app</span></div>
@@ -670,6 +709,10 @@
       <span class="eyebrow">Veja o sistema</span>
       <h2 class="title">Por dentro da plataforma, <span class="serif-ital accent">tela por tela</span>.</h2>
       <p class="lead">Navegue pelas telas reais do sistema — do cardápio que o seu cliente vê ao painel onde você gerencia tudo.</p>
+      <div class="demo-ctas">
+        <button type="button" class="btn btn-brand" data-demo="cliente">Testar o app do cliente <svg class="i"><use href="#i-arrow"/></svg></button>
+        <button type="button" class="btn btn-line" data-demo="lojista">Testar o painel do lojista</button>
+      </div>
     </div>
 
     <div class="tour-shell reveal">
@@ -1152,6 +1195,28 @@
   </div>
 </div>
 
+<!-- Demonstração ao vivo -->
+<dialog class="demo" id="demo" aria-labelledby="demoTitle">
+  <div class="demo-head">
+    <h3 id="demoTitle"><span class="live-dot"></span>Teste o sistema ao vivo</h3>
+    <div class="seg" role="group" aria-label="Parte do sistema">
+      <button type="button" data-demo-view="cliente" aria-pressed="true">App do cliente</button>
+      <button type="button" data-demo-view="lojista" aria-pressed="false">Painel do lojista</button>
+    </div>
+    <a class="demo-ext" id="demoExt" href="https://teste.centralpedidosonline.com.br" target="_blank">Abrir em nova aba <svg class="i" style="width:16px;height:16px"><use href="#i-arrow"/></svg></a>
+    <button type="button" class="x" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button>
+  </div>
+  <div class="demo-login" id="demoLogin" hidden>
+    <span>Login de teste:</span>
+    <button type="button" data-copy="taynagon7302@gmail.com">E-mail <b>taynagon7302@gmail.com</b></button>
+    <button type="button" data-copy="123456">Senha <b>123456</b></button>
+    <small>Clique para copiar</small>
+  </div>
+  <div class="demo-body phone" id="demoBody">
+    <iframe id="demoFrame" title="Demonstração do sistema" loading="lazy"></iframe>
+  </div>
+</dialog>
+
 <!-- Lightbox -->
 <dialog class="lightbox" id="lightbox" aria-label="Imagem ampliada">
   <button type="button" class="x" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button>
@@ -1337,6 +1402,33 @@
       renderStage();
     });
   });
+  // ── Demonstração ao vivo ──
+  const DEMO_URLS = {
+    cliente: 'https://teste.centralpedidosonline.com.br',
+    lojista: 'https://teste.centralpedidosonline.com.br/admin',
+  };
+  const demo = document.getElementById('demo');
+  const demoFrame = document.getElementById('demoFrame');
+  const demoBody = document.getElementById('demoBody');
+  const demoExt = document.getElementById('demoExt');
+  function setDemoView(v) {
+    document.querySelectorAll('[data-demo-view]').forEach(b => b.setAttribute('aria-pressed', b.dataset.demoView === v));
+    demoBody.classList.toggle('phone', v === 'cliente');
+    document.getElementById('demoLogin').hidden = v !== 'lojista';
+    demoExt.href = DEMO_URLS[v];
+    if (demoFrame.getAttribute('src') !== DEMO_URLS[v]) demoFrame.src = DEMO_URLS[v];
+  }
+  document.querySelectorAll('[data-demo]').forEach(b => b.addEventListener('click', () => {
+    setDemoView(b.dataset.demo);
+    demo.showModal();
+  }));
+  document.querySelectorAll('[data-demo-view]').forEach(b => b.addEventListener('click', () => setDemoView(b.dataset.demoView)));
+  document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(b.dataset.copy); } catch (e) { return; }
+    b.classList.add('copied');
+    setTimeout(() => b.classList.remove('copied'), 1500);
+  }));
+
   // ── Lightbox ──
   const lightbox = document.getElementById('lightbox');
   const lbImg = document.getElementById('lbImg');
