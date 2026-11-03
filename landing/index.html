@@ -3,601 +3,518 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Central Pedidos Online – Sistema de Pedidos para Restaurantes</title>
+  <title>Central de Pedidos Online – Sistema de Pedidos para Restaurantes</title>
   <meta name="description" content="Sistema completo de pedidos online para restaurantes, lanchonetes e delivery. Motoboy, mesas com QR Code, notificações no WhatsApp e muito mais.">
   <link rel="icon" type="image/png" href="imagens/icon/icon.png">
   <link rel="apple-touch-icon" href="imagens/icon/icon.png">
-  <meta name="theme-color" content="#0B0C10">
+  <meta name="theme-color" content="#FBFBFA">
   <!-- Open Graph / Social -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://centralpedidosonline.com.br/">
-  <meta property="og:title" content="Central Pedidos Online – Sistema de Pedidos para Restaurantes">
+  <meta property="og:title" content="Central de Pedidos Online – Sistema de Pedidos para Restaurantes">
   <meta property="og:description" content="Plataforma completa para receber pedidos online com gestão de delivery, mesas com QR Code, controle de motoboys e notificações automáticas no WhatsApp.">
   <meta property="og:image" content="https://centralpedidosonline.com.br/imagens/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Central Pedidos Online – Sistema de Pedidos para Restaurantes">
+  <meta name="twitter:title" content="Central de Pedidos Online – Sistema de Pedidos para Restaurantes">
   <meta name="twitter:description" content="Plataforma completa para receber pedidos online com gestão de delivery, mesas com QR Code e notificações no WhatsApp.">
   <meta name="twitter:image" content="https://centralpedidosonline.com.br/imagens/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script>document.documentElement.classList.add('js');</script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #FAF8F5;
+      --bg: #FBFBFA;
       --surface: #FFFFFF;
-      --surface-2: #F3EFE9;
-      --ink: #111216;
-      --ink-2: #3A3D45;
-      --muted: #6B6F7A;
-      --line: rgba(17,18,22,0.08);
+      --subtle: #F4F3F1;
+      --line: #E9E7E3;
+      --line-2: #DCD9D4;
+      --ink: #0C0C0E;
+      --ink-2: #3F3F46;
+      --muted: #71717A;
 
-      --brand: #FF6A13;
-      --brand-strong: #E85600;
-      --brand-soft: #FFF0E5;
-
-      --night: #0B0C10;
-      --night-2: #15171D;
-      --night-3: #1E2129;
-      --night-line: rgba(255,255,255,0.09);
-      --night-text: #F4F1EC;
-      --night-muted: #A3A7B3;
+      --brand: #FF5500;
+      --brand-hover: #EB4E00;
+      --brand-text: #C2410C;
+      --brand-soft: #FFF2EA;
 
       --ok: #16A34A;
       --wa: #25D366;
+      --night: #0C0C0E;
+      --night-2: #18181B;
+      --night-line: rgba(255,255,255,.1);
+      --night-muted: #A1A1AA;
 
-      --display: 'Bricolage Grotesque', 'Inter', system-ui, sans-serif;
-      --body: 'Inter', system-ui, -apple-system, sans-serif;
-      --radius: 28px;
+      --font: 'Geist', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
       --ease: cubic-bezier(.2,.7,.2,1);
+      --shadow-sm: 0 1px 2px rgba(12,12,14,.05), 0 1px 1px rgba(12,12,14,.03);
+      --shadow-md: 0 1px 2px rgba(12,12,14,.04), 0 8px 24px -8px rgba(12,12,14,.12);
+      --shadow-lg: 0 2px 4px rgba(12,12,14,.04), 0 24px 60px -20px rgba(12,12,14,.22);
     }
 
-    html { scroll-behavior: smooth; scroll-padding-top: 96px; }
-    body {
-      font-family: var(--body);
-      background: var(--bg);
-      color: var(--ink);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: clip;
-    }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body { font-family: var(--font); background: var(--bg); color: var(--ink); line-height: 1.6; font-size: 16px; -webkit-font-smoothing: antialiased; overflow-x: clip; }
     img { max-width: 100%; display: block; }
     a { color: inherit; text-decoration: none; }
     button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; }
     svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
     :focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; border-radius: 8px; }
 
-    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .container { width: 100%; max-width: 1160px; margin: 0 auto; padding: 0 24px; }
     section { position: relative; }
+    .section { padding: 112px 0; }
 
     /* ── Tipografia ── */
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
-      color: var(--brand-strong);
-    }
-    .eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--brand); box-shadow: 0 0 0 4px rgba(255,106,19,.18); }
-    .on-night .eyebrow { color: #FF8A45; }
-    h1, h2, h3 { font-family: var(--display); letter-spacing: -0.025em; line-height: 1.05; font-weight: 700; }
-    h2.title { font-size: clamp(34px, 4.6vw, 58px); margin: 16px 0 18px; }
-    .lead { font-size: clamp(16px, 1.4vw, 19px); color: var(--muted); max-width: 620px; }
-    .on-night .lead { color: var(--night-muted); }
-    .section-head { margin-bottom: 56px; }
-    .section-head.center { text-align: center; }
-    .section-head.center .lead { margin: 0 auto; }
-    .accent { color: var(--brand); }
-    .serif-ital { font-style: italic; font-weight: 500; }
+    h1, h2, h3 { line-height: 1.1; letter-spacing: -0.035em; font-weight: 700; }
+    .kicker { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--brand-text); }
+    .kicker::before { content: ''; width: 16px; height: 2px; border-radius: 2px; background: var(--brand); }
+    .h2 { font-size: clamp(32px, 4.2vw, 50px); margin: 14px 0 16px; }
+    .lead { font-size: clamp(16px, 1.3vw, 18px); color: var(--muted); max-width: 600px; }
+    .head { margin-bottom: 56px; }
+    .head.center { text-align: center; }
+    .head.center .lead { margin: 0 auto; }
+    .brand-c { color: var(--brand); }
 
     /* ── Botões ── */
     .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-      height: 54px; padding: 0 26px; border-radius: 999px;
-      font-weight: 600; font-size: 16px; white-space: nowrap;
-      transition: transform .25s var(--ease), box-shadow .25s var(--ease), background .2s;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      height: 48px; padding: 0 20px; border-radius: 12px;
+      font-weight: 600; font-size: 15px; white-space: nowrap;
+      transition: background .2s, border-color .2s, box-shadow .2s, transform .2s var(--ease);
     }
-    .btn:hover { transform: translateY(-2px); }
-    .btn-brand { background: var(--brand); color: #fff; box-shadow: 0 10px 30px -10px rgba(255,106,19,.7), inset 0 1px 0 rgba(255,255,255,.25); }
-    .btn-brand:hover { background: var(--brand-strong); box-shadow: 0 16px 40px -12px rgba(255,106,19,.8); }
-    .btn-ghost-night { color: var(--night-text); border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.04); }
-    .btn-ghost-night:hover { background: rgba(255,255,255,.1); }
-    .btn-ink { background: var(--ink); color: #fff; }
-    .btn-ink:hover { background: #262830; }
-    .btn-line { border: 1px solid var(--line); background: var(--surface); }
-    .btn-line:hover { border-color: rgba(17,18,22,.25); }
+    .btn:active { transform: scale(.98); }
     .btn .i { width: 18px; height: 18px; }
+    .btn-lg { height: 54px; padding: 0 26px; font-size: 16px; border-radius: 14px; }
+    .btn-brand { background: var(--brand); color: #fff; box-shadow: 0 1px 0 rgba(255,255,255,.25) inset, 0 8px 20px -8px rgba(255,85,0,.6); }
+    .btn-brand:hover { background: var(--brand-hover); }
+    .btn-ink { background: var(--ink); color: #fff; }
+    .btn-ink:hover { background: #27272A; }
+    .btn-line { background: var(--surface); border: 1px solid var(--line-2); box-shadow: var(--shadow-sm); }
+    .btn-line:hover { border-color: #C9C5BE; }
+    .btn-ghost { color: var(--ink-2); }
+    .btn-ghost:hover { background: var(--subtle); }
+
+    /* ── Marca ── icon.png é quadrado com margem transparente, então recorta só o carrinho */
+    .brand { display: inline-flex; align-items: center; gap: 10px; }
+    .brand-mark { display: block; width: 44px; height: 30px; overflow: hidden; flex-shrink: 0; }
+    .brand-mark img { width: 62px; height: 62px; max-width: none; margin: -14px 0 0 -10px; }
+    .brand-name { display: flex; flex-direction: column; font-size: 17px; font-weight: 700; line-height: 1; letter-spacing: -0.03em; white-space: nowrap; }
+    .brand-name small { margin-top: 4px; font-size: 9.5px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--muted); }
 
     /* ── Nav ── */
-    .nav-wrap { position: fixed; top: 14px; left: 0; right: 0; z-index: 100; padding: 0 16px; pointer-events: none; }
     .nav {
-      pointer-events: auto;
-      max-width: 1200px; margin: 0 auto; height: 68px;
-      display: flex; align-items: center; justify-content: space-between; gap: 16px;
-      padding: 0 10px 0 18px;
-      background: rgba(255,255,255,.95);
-      backdrop-filter: saturate(1.6) blur(16px); -webkit-backdrop-filter: saturate(1.6) blur(16px);
-      border: 1px solid rgba(255,255,255,.6);
-      border-radius: 22px;
-      box-shadow: 0 10px 40px -12px rgba(0,0,0,.35);
-      transition: box-shadow .3s;
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(251,251,250,.82); backdrop-filter: saturate(1.8) blur(14px); -webkit-backdrop-filter: saturate(1.8) blur(14px);
+      border-bottom: 1px solid transparent; transition: border-color .25s;
     }
-    /* Marca: icon.png é quadrado com margem transparente, então recorta só o carrinho */
-    .brand { display: inline-flex; align-items: center; gap: 10px; }
-    .brand-mark { display: block; width: 50px; height: 34px; overflow: hidden; flex-shrink: 0; }
-    .brand-mark img { width: 70px; height: 70px; max-width: none; margin: -16px 0 0 -11px; }
-    .brand-name { display: flex; flex-direction: column; font-family: var(--display); font-size: 19px; font-weight: 800; line-height: 1; letter-spacing: -0.02em; color: var(--ink); white-space: nowrap; }
-    .brand-name small { margin-top: 4px; font-family: var(--body); font-size: 10px; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; color: var(--muted); }
-    .nav-links { display: flex; gap: 4px; list-style: none; }
-    .nav-links a { display: block; padding: 8px 14px; border-radius: 999px; font-size: 15px; font-weight: 500; color: var(--ink-2); transition: background .2s, color .2s; }
-    .nav-links a:hover, .nav-links a.active { background: var(--surface-2); color: var(--ink); }
-    .nav-cta { height: 48px; padding: 0 20px; font-size: 15px; }
-    .burger { display: none; width: 48px; height: 48px; border-radius: 14px; background: var(--surface-2); align-items: center; justify-content: center; }
-    .mobile-sheet {
-      pointer-events: auto;
-      display: none; max-width: 1200px; margin: 8px auto 0; padding: 12px;
-      background: #fff; border-radius: 22px; box-shadow: 0 20px 50px -15px rgba(0,0,0,.4);
-    }
-    .mobile-sheet.open { display: grid; gap: 4px; animation: drop .25s var(--ease); }
-    .mobile-sheet a:not(.btn) { padding: 14px 16px; border-radius: 14px; font-weight: 500; }
-    .mobile-sheet a:not(.btn):hover { background: var(--surface-2); }
-    .mobile-sheet .btn { margin-top: 8px; }
-    @keyframes drop { from { opacity: 0; transform: translateY(-8px); } }
+    .nav.scrolled { border-bottom-color: var(--line); }
+    .nav-in { height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .nav-links { display: flex; gap: 2px; list-style: none; }
+    .nav-links a { display: block; padding: 8px 14px; border-radius: 10px; font-size: 14.5px; font-weight: 500; color: var(--ink-2); transition: background .2s, color .2s; }
+    .nav-links a:hover { background: var(--subtle); color: var(--ink); }
+    .nav-links a.active { color: var(--ink); }
+    .nav-actions { display: flex; align-items: center; gap: 8px; }
+    .nav-actions .btn { height: 42px; padding: 0 16px; font-size: 14.5px; border-radius: 11px; }
+    .burger { display: none; width: 42px; height: 42px; border-radius: 11px; border: 1px solid var(--line-2); background: var(--surface); align-items: center; justify-content: center; }
+    .sheet { display: none; border-top: 1px solid var(--line); background: var(--surface); padding: 12px 16px 20px; }
+    .sheet.open { display: grid; gap: 2px; animation: drop .22s var(--ease); }
+    .sheet a:not(.btn) { padding: 13px 12px; border-radius: 10px; font-weight: 500; }
+    .sheet a:not(.btn):hover { background: var(--subtle); }
+    .sheet .btn { margin-top: 10px; }
+    @keyframes drop { from { opacity: 0; transform: translateY(-6px); } }
 
     /* ── Hero ── */
-    .hero {
-      background: var(--night); color: var(--night-text);
-      padding: 150px 0 0; overflow: hidden; isolation: isolate;
-    }
+    .hero { padding: 72px 0 0; text-align: center; overflow: hidden; }
     .hero::before {
-      content: ''; position: absolute; inset: 0; z-index: -1;
-      background:
-        radial-gradient(900px 520px at 78% 18%, rgba(255,106,19,.30), transparent 60%),
-        radial-gradient(600px 400px at 8% 90%, rgba(255,106,19,.10), transparent 60%);
+      content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+      background-image: radial-gradient(circle at 1px 1px, rgba(12,12,14,.07) 1px, transparent 0);
+      background-size: 24px 24px;
+      mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 20%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 20%, transparent 70%);
     }
-    .hero::after {
-      content: ''; position: absolute; inset: 0; z-index: -1;
-      background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
-      background-size: 56px 56px;
-      mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 30%, transparent 75%);
-      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 30%, transparent 75%);
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px 5px 5px; border-radius: 999px;
+      background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-sm);
+      font-size: 13.5px; color: var(--ink-2);
     }
-    .hero-grid { display: grid; grid-template-columns: 1fr 1.12fr; gap: 48px; align-items: center; }
-    .pill-trial {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 6px 14px 6px 6px; border-radius: 999px;
-      background: rgba(255,255,255,.06); border: 1px solid var(--night-line);
-      font-size: 14px; color: var(--night-muted);
-    }
-    .pill-trial b { background: var(--brand); color: #fff; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: .02em; }
-    .hero h1 { font-size: clamp(40px, 5vw, 66px); margin: 22px 0 22px; font-weight: 800; letter-spacing: -0.035em; }
-    .hero h1 .accent { background: linear-gradient(90deg, #FF8A45, #FF6A13 60%, #FFB27A); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 34px 0 40px; }
-    .hero-proof { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 28px; padding-top: 28px; border-top: 1px solid var(--night-line); }
-    .hero-proof strong { display: block; font-family: var(--display); font-size: 28px; font-weight: 700; color: #fff; line-height: 1.1; }
-    .hero-proof span { font-size: 13px; color: var(--night-muted); }
+    .badge b { padding: 3px 9px; border-radius: 999px; background: var(--brand-soft); color: var(--brand-text); font-size: 12px; font-weight: 600; }
+    .hero h1 { font-size: clamp(40px, 6.4vw, 76px); max-width: 920px; margin: 24px auto 20px; letter-spacing: -0.045em; }
+    .hero .lead { margin: 0 auto; max-width: 640px; }
+    .hero-ctas { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+    .trust { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px 28px; margin-top: 28px; font-size: 14px; color: var(--muted); }
+    .trust span { display: inline-flex; align-items: center; gap: 8px; }
+    .trust .i { width: 16px; height: 16px; color: var(--ok); stroke-width: 2.6; }
 
-    .hero-stage { position: relative; aspect-ratio: 1 / .95; }
-    .hero-desk { position: absolute; right: -6%; top: 6%; width: 104%; }
-
-    /* Moldura de navegador para prints sem moldura própria */
-    .browser { border-radius: 14px; overflow: hidden; background: #fff; border: 1px solid var(--line); box-shadow: 0 30px 60px -25px rgba(17,18,22,.35); }
-    .browser-bar { display: flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px; background: #EEEAE4; border-bottom: 1px solid var(--line); }
-    .browser-bar i { width: 10px; height: 10px; border-radius: 50%; background: #FF5F57; flex-shrink: 0; }
-    .browser-bar i:nth-child(2) { background: #FEBC2E; }
-    .browser-bar i:nth-child(3) { background: #28C840; }
-    .browser-bar span { margin: 0 auto; padding: 2px 14px; border-radius: 6px; background: rgba(255,255,255,.7); font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .browser img { display: block; width: 100%; height: auto; }
-    .browser.night { background: #14161C; border-color: rgba(255,255,255,.12); box-shadow: 0 40px 80px -20px rgba(0,0,0,.75); }
-    .browser.night .browser-bar { background: #1E2129; border-color: rgba(255,255,255,.08); }
-    .browser.night .browser-bar span { background: rgba(255,255,255,.06); color: var(--night-muted); }
-    .hero-phone { position: absolute; left: -10%; bottom: -2%; width: 50%; aspect-ratio: 1080 / 1350; filter: drop-shadow(0 30px 50px rgba(0,0,0,.7)); }
-    .hero-phone img { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity .7s var(--ease); }
-    .hero-phone img.on { opacity: 1; }
-
-    .feed { position: absolute; right: -2%; bottom: 0; width: 290px; display: grid; gap: 10px; }
-    .toast {
-      display: flex; align-items: center; gap: 12px;
-      padding: 12px 14px; border-radius: 18px;
-      background: rgba(28,30,38,.9); border: 1px solid rgba(255,255,255,.12);
-      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-      box-shadow: 0 16px 40px -12px rgba(0,0,0,.6);
-      animation: toastIn .55s var(--ease) both;
+    .stage { position: relative; max-width: 1040px; margin: 72px auto 0; padding-bottom: 96px; }
+    .stage::before { content: ''; position: absolute; left: 10%; right: 10%; top: 10%; height: 70%; z-index: -1; background: radial-gradient(closest-side, rgba(255,85,0,.22), transparent); filter: blur(40px); }
+    .browser { border-radius: 14px; overflow: hidden; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-lg); }
+    .browser-bar { display: flex; align-items: center; gap: 6px; height: 34px; padding: 0 14px; background: var(--subtle); border-bottom: 1px solid var(--line); }
+    .browser-bar i { width: 10px; height: 10px; border-radius: 50%; background: #E2DFDA; flex-shrink: 0; }
+    .browser-bar span { margin: 0 auto; padding: 2px 16px; border-radius: 6px; background: var(--surface); border: 1px solid var(--line); font-size: 11.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .browser img { width: 100%; height: auto; }
+    .stage .browser { width: 86%; text-align: left; }
+    .stage-phone { position: absolute; right: -2%; bottom: 0; width: 27%; aspect-ratio: 1080 / 1350; filter: drop-shadow(0 30px 40px rgba(12,12,14,.25)); }
+    .stage-phone img { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity .7s var(--ease); }
+    .stage-phone img.on { opacity: 1; }
+    .live {
+      position: absolute; left: -3%; top: 26%; z-index: 2; min-width: 250px;
+      display: flex; align-items: center; gap: 12px; padding: 12px 16px 12px 12px; text-align: left;
+      background: rgba(255,255,255,.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow-lg);
     }
-    .toast.out { animation: toastOut .4s var(--ease) both; }
-    .toast:nth-child(2) { opacity: .82; }
-    .toast:nth-child(3) { opacity: .55; }
-    .toast-ico { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; background: rgba(255,106,19,.16); color: #FF8A45; flex-shrink: 0; }
-    .toast-ico.g { background: rgba(37,211,102,.15); color: var(--wa); }
-    .toast-ico .i { width: 19px; height: 19px; }
-    .toast b { display: block; font-size: 14px; color: #fff; font-weight: 600; line-height: 1.3; }
-    .toast small { display: block; font-size: 12.5px; color: var(--night-muted); line-height: 1.35; }
-    .toast time { margin-left: auto; font-size: 11px; color: var(--night-muted); align-self: flex-start; }
-    @keyframes toastIn { from { opacity: 0; transform: translateY(-14px) scale(.96); } }
-    @keyframes toastOut { to { opacity: 0; transform: translateY(10px) scale(.96); } }
+    .live-ico { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; background: var(--brand-soft); color: var(--brand); flex-shrink: 0; }
+    .live-ico.g { background: #E9F9EF; color: #15A34A; }
+    .live-ico .i { width: 19px; height: 19px; }
+    .live b { display: block; font-size: 14px; font-weight: 600; line-height: 1.3; }
+    .live small { display: block; font-size: 12.5px; color: var(--muted); line-height: 1.3; }
+    .live-txt { transition: opacity .3s, transform .3s var(--ease); }
+    .live-txt.swap { opacity: 0; transform: translateY(6px); }
+    .pulse { position: absolute; top: 10px; right: 10px; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); }
+    .pulse::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: var(--ok); animation: ping 1.8s infinite; }
+    @keyframes ping { 75%, 100% { transform: scale(2.6); opacity: 0; } }
 
-    /* Faixa de recursos */
-    .ticker { margin-top: 64px; border-top: 1px solid var(--night-line); padding: 22px 0; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
-    .ticker-track { display: flex; gap: 48px; width: max-content; animation: marquee 38s linear infinite; }
-    .ticker-track span { display: inline-flex; align-items: center; gap: 12px; font-family: var(--display); font-size: 20px; font-weight: 600; color: rgba(244,241,236,.55); white-space: nowrap; }
-    .ticker-track span::before { content: '✦'; color: var(--brand); font-size: 14px; }
-    @keyframes marquee { to { transform: translateX(-50%); } }
+    .integrations { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--surface); }
+    .integrations .container { display: flex; align-items: center; justify-content: space-between; gap: 16px 32px; flex-wrap: wrap; padding-top: 26px; padding-bottom: 26px; }
+    .integrations p { font-size: 13.5px; color: var(--muted); }
+    .int-list { display: flex; flex-wrap: wrap; gap: 10px 28px; }
+    .int-list span { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: var(--ink-2); }
+    .int-list .i { color: var(--muted); }
 
-    /* ── Tour (Veja o sistema) ── */
-    .tour { padding: 120px 0; }
-    .tour-shell {
-      display: grid; grid-template-columns: 340px 1fr; gap: 0;
-      background: var(--surface); border: 1px solid var(--line); border-radius: 36px; overflow: hidden;
-      box-shadow: 0 30px 80px -40px rgba(17,18,22,.35);
+    /* ── Jornada do pedido ── */
+    .journey { display: grid; grid-template-columns: 1fr 1.08fr; gap: 56px; align-items: center; }
+    .j-steps { display: grid; gap: 8px; }
+    .j-step { position: relative; text-align: left; padding: 18px 20px 18px 64px; border-radius: 16px; border: 1px solid transparent; transition: background .25s, border-color .25s, box-shadow .25s; }
+    .j-step:hover { background: var(--surface); }
+    .j-step[aria-selected="true"] { background: var(--surface); border-color: var(--line); box-shadow: var(--shadow-md); }
+    .j-num { position: absolute; left: 20px; top: 18px; width: 28px; height: 28px; border-radius: 9px; display: grid; place-items: center; font-size: 13px; font-weight: 700; background: var(--subtle); color: var(--muted); transition: background .25s, color .25s; }
+    .j-step[aria-selected="true"] .j-num { background: var(--brand); color: #fff; }
+    .j-step h3 { font-size: 18px; letter-spacing: -0.02em; padding-top: 2px; color: var(--ink-2); }
+    .j-step[aria-selected="true"] h3 { color: var(--ink); }
+    .j-more { display: none; }
+    .j-step[aria-selected="true"] .j-more { display: block; animation: drop .3s var(--ease); }
+    .j-more p { font-size: 15px; color: var(--muted); margin-top: 6px; }
+    .j-more .ticks { margin-top: 12px; }
+    .j-bar { position: absolute; left: 20px; right: 20px; bottom: 0; height: 2px; border-radius: 2px; overflow: hidden; display: none; }
+    .j-step[aria-selected="true"] .j-bar { display: block; }
+    .j-bar::after { content: ''; display: block; height: 100%; width: 0; background: var(--brand); }
+    .j-steps.run .j-step[aria-selected="true"] .j-bar::after { animation: fill 6s linear forwards; }
+    @keyframes fill { to { width: 100%; } }
+    .j-view {
+      position: relative; height: 600px; border-radius: 28px; overflow: hidden;
+      background: radial-gradient(420px 320px at 50% 45%, rgba(255,85,0,.12), transparent 70%), var(--subtle);
+      border: 1px solid var(--line);
     }
-    .tour-side { min-width: 0; padding: 28px; border-right: 1px solid var(--line); display: flex; flex-direction: column; gap: 22px; }
-    .seg { display: grid; grid-template-columns: 1fr 1fr; padding: 5px; background: var(--surface-2); border-radius: 16px; }
-    .seg button { height: 42px; border-radius: 12px; font-size: 14px; font-weight: 600; color: var(--muted); transition: background .2s, color .2s, box-shadow .2s; }
-    .seg button[aria-pressed="true"] { background: #fff; color: var(--ink); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
-    .tour-list { display: grid; gap: 4px; }
-    .tour-list[hidden] { display: none; }
-    .tour-tab { text-align: left; padding: 12px 14px; border-radius: 14px; display: grid; gap: 2px; transition: background .2s; border-left: 3px solid transparent; }
-    .tour-tab b { font-size: 15px; font-weight: 600; color: var(--ink-2); }
-    .tour-tab span { font-size: 13px; color: var(--muted); line-height: 1.45; display: none; }
-    .tour-tab:hover { background: var(--surface-2); }
-    .tour-tab[aria-selected="true"] { background: var(--brand-soft); border-left-color: var(--brand); }
-    .tour-tab[aria-selected="true"] b { color: var(--ink); }
-    .tour-tab[aria-selected="true"] span { display: block; }
-    .tour-stage {
-      position: relative; min-height: 600px; display: grid; place-items: center; padding: 32px;
-      background:
-        radial-gradient(600px 400px at 50% 40%, rgba(255,106,19,.10), transparent 70%),
-        var(--surface-2);
-    }
-    .tour-stage img { max-height: 560px; width: auto; cursor: zoom-in; transition: opacity .35s var(--ease), transform .35s var(--ease); }
-    .tour-stage img.desk { max-height: none; width: 100%; }
-    #stageFrame { transition: opacity .35s var(--ease), transform .35s var(--ease); }
-    #stageFrame.wide { width: 100%; }
-    #stageFrame:not(.browser) .browser-bar { display: none; }
-    #stageFrame.fading { opacity: 0; transform: scale(.98); }
-    .zoom-hint { position: absolute; right: 18px; bottom: 16px; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; color: var(--muted); background: rgba(255,255,255,.8); padding: 6px 10px; border-radius: 999px; }
-    .zoom-hint .i { width: 14px; height: 14px; }
+    .j-pane { position: absolute; inset: 0; display: grid; place-items: center; padding: 28px; opacity: 0; transform: scale(.97); transition: opacity .45s var(--ease), transform .45s var(--ease); pointer-events: none; }
+    .j-pane.on { opacity: 1; transform: none; pointer-events: auto; }
+    .j-pane img { height: 100%; width: auto; max-height: 560px; object-fit: contain; filter: drop-shadow(0 20px 30px rgba(12,12,14,.18)); cursor: zoom-in; }
 
-    /* ── Funcionalidades (bento) ── */
-    .features { padding: 40px 0 120px; }
-    .bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .card {
-      background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
-      overflow: hidden; display: flex; flex-direction: column;
-      transition: transform .35s var(--ease), box-shadow .35s var(--ease);
-    }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 30px 60px -30px rgba(17,18,22,.3); }
-    .card.wide { grid-column: span 2; display: grid; grid-template-columns: 1fr 1.4fr; }
-    .card.wide .media { order: 2; height: auto; min-height: 340px; }
-    .media { position: relative; height: 300px; background: var(--surface-2); display: grid; place-items: center; overflow: hidden; }
-    .media.night { background: radial-gradient(400px 260px at 50% 30%, rgba(255,106,19,.18), transparent 70%), var(--night); }
-    .media img { height: 100%; width: auto; object-fit: contain; cursor: zoom-in; transition: transform .5s var(--ease); }
-    .media img.desk { width: 100%; height: auto; padding: 18px; }
-    .media .browser { width: calc(100% - 40px); }
-    .media .browser img { width: 100%; height: auto; }
-    .card:hover .media img { transform: scale(1.03); }
-    .card-body { padding: 26px 28px 30px; display: flex; flex-direction: column; gap: 10px; }
-    .card.wide .card-body { justify-content: center; padding: 36px; }
-    .ico { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; background: var(--brand-soft); color: var(--brand-strong); margin-bottom: 6px; }
-    .ico .i { width: 22px; height: 22px; }
-    .card h3 { font-size: 24px; }
-    .card p { color: var(--muted); font-size: 15px; }
-    .ticks { list-style: none; display: grid; gap: 8px; margin-top: 8px; }
+    .ticks { list-style: none; display: grid; gap: 8px; }
     .ticks li { display: flex; gap: 10px; font-size: 14.5px; color: var(--ink-2); line-height: 1.45; }
-    .ticks .i { width: 18px; height: 18px; color: var(--ok); margin-top: 1px; }
+    .ticks .i { width: 17px; height: 17px; color: var(--ok); margin-top: 2px; stroke-width: 2.6; }
 
-    .bot-show { position: absolute; inset: 0; }
-    .bot-show img { position: absolute; inset: 0; margin: auto; opacity: 0; animation: botFade 10.5s infinite; }
+    /* Impressora */
+    .printer { position: relative; width: 240px; height: 330px; }
+    .printer-body { position: absolute; top: 0; left: 0; right: 0; height: 78px; z-index: 2; background: linear-gradient(#2E2E33, #1B1B1F); border-radius: 18px 18px 10px 10px; box-shadow: 0 20px 40px -12px rgba(0,0,0,.45); }
+    .printer-body::before { content: ''; position: absolute; left: 20px; right: 20px; bottom: 13px; height: 6px; border-radius: 4px; background: #070708; }
+    .printer-body::after { content: ''; position: absolute; top: 18px; right: 22px; width: 8px; height: 8px; border-radius: 50%; background: var(--wa); box-shadow: 0 0 10px var(--wa); animation: blink 1.4s infinite; }
+    @keyframes blink { 50% { opacity: .3; } }
+    .receipt-clip { position: absolute; top: 64px; left: 30px; right: 30px; bottom: 0; overflow: hidden; }
+    .receipt {
+      background: #fff; color: #222; font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace; font-size: 11.5px; line-height: 1.65;
+      padding: 16px 14px 20px; border: 1px solid var(--line); border-top: 0; border-radius: 0 0 6px 6px; box-shadow: var(--shadow-md);
+      animation: print 5s var(--ease) infinite;
+    }
+    .receipt .c { text-align: center; font-weight: 700; }
+    .receipt .r { display: flex; justify-content: space-between; gap: 8px; }
+    .receipt hr { border: 0; border-top: 1px dashed #C9C5BE; margin: 7px 0; }
+    .receipt .paid { margin-top: 8px; text-align: center; font-weight: 700; color: var(--ok); }
+    @keyframes print { 0% { transform: translateY(-100%); } 40%, 88% { transform: translateY(0); } 100% { transform: translateY(0); opacity: 0; } }
+
+    /* ── Recursos ── */
+    .grid6 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+    .card { grid-column: span 2; display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; transition: box-shadow .3s var(--ease), border-color .3s; }
+    .card:hover { box-shadow: var(--shadow-md); border-color: var(--line-2); }
+    .card.s4 { grid-column: span 4; }
+    .card.s3 { grid-column: span 3; }
+    .media { position: relative; height: 280px; display: grid; place-items: center; overflow: hidden; background: var(--subtle); border-bottom: 1px solid var(--line); }
+    .media > img { height: 100%; width: auto; object-fit: contain; cursor: zoom-in; }
+    .media > img.desk { width: 100%; height: 100%; padding: 14px 20px; }
+    /* Prints em janela de navegador: encostam no topo e "saem" pela base do card */
+    .media .browser { align-self: start; width: calc(100% - 48px); margin-top: 24px; box-shadow: var(--shadow-md); }
+    .media .browser img { cursor: zoom-in; }
+    .card-body { padding: 22px 24px 20px; display: flex; flex-direction: column; flex: 1; }
+    .card-title { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+    .card-title .i { width: 20px; height: 20px; color: var(--brand); }
+    .card h3 { font-size: 19px; letter-spacing: -0.02em; }
+    .card p { font-size: 15px; color: var(--muted); }
+    details.more { margin-top: auto; padding-top: 14px; }
+    details.more summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: var(--ink-2); padding: 6px 0; }
+    details.more summary::-webkit-details-marker { display: none; }
+    details.more summary:hover { color: var(--brand-text); }
+    details.more summary .i { width: 16px; height: 16px; transition: transform .25s var(--ease); }
+    details.more[open] summary .i { transform: rotate(180deg); }
+    details.more .ticks { margin-top: 8px; }
+
+    .bot-show { position: absolute; inset: 0; cursor: zoom-in; }
+    .bot-show img { position: absolute; inset: 0; margin: auto; height: 100%; width: auto; opacity: 0; animation: botFade 10.5s infinite; }
     .bot-show img:nth-child(2) { animation-delay: 3.5s; }
     .bot-show img:nth-child(3) { animation-delay: 7s; }
     @keyframes botFade { 0%, 4% { opacity: 0; } 8%, 31% { opacity: 1; } 36%, 100% { opacity: 0; } }
 
-    /* Impressora */
-    .printer { position: relative; width: 210px; height: 260px; }
-    .printer-body {
-      position: absolute; top: 0; left: 0; right: 0; height: 70px; z-index: 2;
-      background: linear-gradient(#2A2D36, #1C1E25); border-radius: 18px 18px 10px 10px;
-      border: 1px solid rgba(255,255,255,.1);
-      box-shadow: 0 20px 40px -10px rgba(0,0,0,.6);
-    }
-    .printer-body::before { content: ''; position: absolute; left: 18px; right: 18px; bottom: 12px; height: 6px; border-radius: 4px; background: #08090C; }
-    .printer-body::after { content: ''; position: absolute; top: 16px; right: 20px; width: 8px; height: 8px; border-radius: 50%; background: var(--wa); box-shadow: 0 0 10px var(--wa); animation: blink 1.4s infinite; }
-    @keyframes blink { 50% { opacity: .3; } }
-    .receipt-clip { position: absolute; top: 58px; left: 26px; right: 26px; bottom: 0; overflow: hidden; }
-    .receipt {
-      background: #FFFDF8; color: #22242A; font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace; font-size: 10.5px; line-height: 1.6;
-      padding: 14px 12px 18px; border-radius: 0 0 4px 4px;
-      animation: print 5s var(--ease) infinite;
-      -webkit-mask-image: linear-gradient(#000 92%, transparent); mask-image: linear-gradient(#000 92%, transparent);
-    }
-    .receipt .c { text-align: center; font-weight: 700; }
-    .receipt .r { display: flex; justify-content: space-between; }
-    .receipt hr { border: 0; border-top: 1px dashed #B9B4AA; margin: 6px 0; }
-    .receipt .paid { margin-top: 6px; text-align: center; font-weight: 700; color: var(--ok); }
-    @keyframes print { 0% { transform: translateY(-100%); } 45%, 85% { transform: translateY(0); } 100% { transform: translateY(0); opacity: 0; } }
 
-    /* ── Planos ── */
-    .plans { padding: 120px 0; background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .trial-strip {
-      display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;
-      margin: 28px auto 0; padding: 12px 20px; border-radius: 999px; width: fit-content; max-width: 100%;
-      background: var(--brand-soft); color: var(--brand-strong); font-size: 15px; text-align: center;
-    }
-    .trial-strip .i { width: 18px; height: 18px; }
-    .plan-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-    .plan {
-      position: relative; display: flex; flex-direction: column; gap: 18px;
-      padding: 28px 24px 24px; border-radius: 26px; background: var(--bg); border: 1px solid var(--line);
-    }
-    .plan.featured { background: var(--night); color: var(--night-text); border-color: transparent; box-shadow: 0 30px 60px -25px rgba(255,106,19,.55); }
-    .plan.featured::before { content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1px; background: linear-gradient(160deg, var(--brand), transparent 55%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
-    .plan-badge { position: absolute; top: 22px; right: 20px; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; background: var(--brand); color: #fff; }
-    .plan h3 { font-size: 30px; }
-    .plan-desc { font-size: 14.5px; color: var(--muted); min-height: 66px; }
-    .plan.featured .plan-desc { color: var(--night-muted); }
-    .modules { display: grid; gap: 8px; padding: 16px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .plan.featured .modules { border-color: var(--night-line); }
-    .mod { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 500; }
-    .mod .dot { width: 22px; height: 22px; border-radius: 7px; display: grid; place-items: center; background: rgba(22,163,74,.12); color: var(--ok); }
-    .mod .dot .i { width: 14px; height: 14px; stroke-width: 2.6; }
-    .mod.off { color: var(--muted); text-decoration: line-through; text-decoration-color: rgba(107,111,122,.5); }
-    .mod.off .dot { background: rgba(107,111,122,.1); color: var(--muted); }
-    .plan.featured .mod.off { color: var(--night-muted); }
-    .plan-ctas { display: grid; gap: 8px; margin-top: auto; }
-    .plan-ctas .btn { height: 48px; font-size: 15px; width: 100%; }
-    .btn-trial { color: var(--ok); font-size: 14px !important; height: 40px !important; }
-    .btn-trial:hover { transform: none; text-decoration: underline; }
-    .plan.featured .btn-trial { color: #4ADE80; }
+    .all-in { margin-top: 16px; padding: 32px; border-radius: 22px; background: var(--surface); border: 1px solid var(--line); display: grid; grid-template-columns: 260px 1fr; gap: 32px; align-items: start; }
+    .all-in h3 { font-size: 20px; letter-spacing: -0.02em; }
+    .all-in p { font-size: 14.5px; color: var(--muted); margin-top: 6px; }
+    .all-in .ticks { grid-template-columns: repeat(3, 1fr); gap: 12px 20px; }
 
-    .compare { margin-top: 56px; display: grid; grid-template-columns: 1fr 1.6fr; gap: 20px; align-items: start; }
-    .included { padding: 30px; border-radius: 26px; background: var(--bg); border: 1px solid var(--line); }
-    .included h3 { font-size: 22px; margin-bottom: 6px; }
-    .included p { font-size: 14.5px; color: var(--muted); margin-bottom: 18px; }
-    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-    .chips span { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-size: 13.5px; font-weight: 500; }
-    .chips .i { width: 14px; height: 14px; color: var(--ok); stroke-width: 2.6; }
-    .table-wrap { border-radius: 26px; border: 1px solid var(--line); overflow-x: auto; background: var(--bg); }
-    table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 14.5px; }
-    th, td { padding: 14px 16px; text-align: center; border-bottom: 1px solid var(--line); }
-    th:first-child, td:first-child { text-align: left; }
-    thead th { font-family: var(--display); font-size: 17px; font-weight: 700; padding-top: 22px; }
-    thead th.hl { color: var(--brand-strong); }
-    tbody tr:last-child td { border-bottom: 0; }
-    td.grp { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); background: var(--surface-2); padding: 10px 16px; }
-    td.hl { background: rgba(255,106,19,.05); }
-    .yes { color: var(--ok); } .no { color: #B7B2AA; }
-    td .i { width: 20px; height: 20px; margin: 0 auto; stroke-width: 2.4; display: block; }
-
-    /* ── Como funciona ── */
-    .how { padding: 120px 0; }
-    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; counter-reset: s; }
-    .step { position: relative; padding: 30px 26px; border-radius: 26px; background: var(--surface); border: 1px solid var(--line); }
-    .step-num { font-family: var(--display); font-size: 64px; font-weight: 800; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px var(--brand); margin-bottom: 26px; }
-    .step h3 { font-size: 22px; margin-bottom: 8px; }
-    .step p { font-size: 15px; color: var(--muted); }
-    .step:not(:last-child)::after { content: ''; position: absolute; top: 62px; right: -21px; width: 22px; height: 2px; background: repeating-linear-gradient(90deg, var(--brand) 0 4px, transparent 4px 8px); }
-
-    /* ── CTA / Contato ── */
-    .cta { padding: 0 0 120px; }
-    .cta-box {
+    /* ── Demo ao vivo ── */
+    .demo-band {
       position: relative; overflow: hidden; isolation: isolate;
-      border-radius: 40px; background: var(--night); color: var(--night-text);
-      padding: 72px 64px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center;
+      border-radius: 32px; background: var(--night); color: #fff;
+      padding: 64px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center;
     }
-    .cta-box::before { content: ''; position: absolute; inset: 0; z-index: -1; background: radial-gradient(700px 400px at 100% 0%, rgba(255,106,19,.35), transparent 60%), radial-gradient(500px 300px at 0% 100%, rgba(255,106,19,.12), transparent 60%); }
-    .cta-box h2 { font-size: clamp(34px, 4.4vw, 56px); margin: 16px 0 16px; }
-    .cta-box .btn { margin-top: 30px; }
-    .contact-cards { display: grid; gap: 12px; }
-    .contact-card {
-      display: flex; align-items: center; gap: 16px; padding: 20px 22px; border-radius: 22px;
-      background: rgba(255,255,255,.05); border: 1px solid var(--night-line);
+    .demo-band::before { content: ''; position: absolute; inset: 0; z-index: -1; background: radial-gradient(520px 340px at 100% 0%, rgba(255,85,0,.32), transparent 65%); }
+    .demo-band::after {
+      content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+      background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.08) 1px, transparent 0); background-size: 22px 22px;
+      mask-image: linear-gradient(90deg, #000, transparent 70%); -webkit-mask-image: linear-gradient(90deg, #000, transparent 70%);
+    }
+    .demo-band .kicker { color: #FF8A4C; }
+    .demo-band .h2 { color: #fff; }
+    .demo-band .lead { color: var(--night-muted); }
+    .demo-tiles { display: grid; gap: 12px; }
+    .tile {
+      display: flex; align-items: center; gap: 16px; text-align: left; width: 100%;
+      padding: 20px; border-radius: 18px; background: rgba(255,255,255,.05); border: 1px solid var(--night-line);
       transition: background .2s, border-color .2s, transform .25s var(--ease);
     }
-    .contact-card:hover { background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.2); transform: translateX(4px); }
-    .contact-card .ico { margin: 0; background: rgba(255,106,19,.16); color: #FF8A45; }
-    .contact-card .ico.g { background: rgba(37,211,102,.15); color: var(--wa); }
-    .contact-card small { display: block; font-size: 13px; color: var(--night-muted); }
-    .contact-card b { font-size: 18px; font-weight: 600; word-break: break-word; }
-    .contact-card > .i { margin-left: auto; color: var(--night-muted); }
+    .tile:hover { background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.22); transform: translateY(-2px); }
+    .tile-ico { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: rgba(255,85,0,.16); color: #FF8A4C; flex-shrink: 0; }
+    .tile b { display: block; font-size: 17px; font-weight: 600; }
+    .tile small { display: block; font-size: 14px; color: var(--night-muted); }
+    .tile > .i { margin-left: auto; color: var(--night-muted); transition: transform .25s var(--ease); }
+    .tile:hover > .i { transform: translateX(3px); color: #fff; }
+
+    /* ── Planos ── */
+    .trial { display: inline-flex; align-items: center; gap: 10px; margin-top: 24px; padding: 10px 16px; border-radius: 12px; background: var(--brand-soft); color: var(--brand-text); font-size: 14.5px; }
+    .trial .i { width: 18px; height: 18px; }
+    .plans { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .plan { position: relative; display: flex; flex-direction: column; padding: 26px 22px 22px; border-radius: 22px; background: var(--surface); border: 1px solid var(--line); }
+    .plan.hl { border: 1.5px solid var(--brand); box-shadow: 0 24px 50px -24px rgba(255,85,0,.45); }
+    .plan-tag { position: absolute; top: -12px; left: 22px; padding: 4px 10px; border-radius: 8px; background: var(--brand); color: #fff; font-size: 12px; font-weight: 600; }
+    .plan h3 { font-size: 24px; letter-spacing: -0.03em; }
+    .plan-desc { margin-top: 8px; font-size: 14.5px; color: var(--muted); min-height: 66px; }
+    .mods { list-style: none; display: grid; gap: 10px; margin: 20px 0 24px; padding-top: 20px; border-top: 1px solid var(--line); }
+    .mods li { display: flex; align-items: center; gap: 10px; font-size: 14.5px; font-weight: 500; }
+    .mods .i { width: 18px; height: 18px; stroke-width: 2.6; color: var(--ok); }
+    .mods li.off { color: #A1A1AA; }
+    .mods li.off .i { color: #C4C4C8; }
+    .plan-ctas { margin-top: auto; display: grid; gap: 6px; }
+    .plan-ctas .btn { width: 100%; }
+    .link-trial { display: block; text-align: center; padding: 8px; font-size: 14px; font-weight: 600; color: var(--ok); border-radius: 10px; }
+    .link-trial:hover { background: #F0FBF4; }
+
+    .compare { margin-top: 24px; border-radius: 22px; background: var(--surface); border: 1px solid var(--line); overflow: hidden; }
+    .compare > summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 18px; font-weight: 600; font-size: 15px; }
+    .compare > summary::-webkit-details-marker { display: none; }
+    .compare > summary:hover { background: var(--subtle); }
+    .compare > summary .i { width: 18px; height: 18px; transition: transform .25s var(--ease); }
+    .compare[open] > summary { border-bottom: 1px solid var(--line); }
+    .compare[open] > summary .i { transform: rotate(180deg); }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; min-width: 620px; border-collapse: collapse; font-size: 14.5px; }
+    th, td { padding: 13px 20px; text-align: center; border-bottom: 1px solid var(--line); }
+    th:first-child, td:first-child { text-align: left; }
+    thead th { font-size: 15px; font-weight: 700; background: var(--subtle); }
+    thead th.hl { color: var(--brand-text); }
+    tbody tr:last-child td { border-bottom: 0; }
+    td.grp { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding-top: 22px; }
+    td .i { width: 18px; height: 18px; margin: 0 auto; display: block; stroke-width: 2.6; }
+    .y { color: var(--ok); } .n { color: #C4C4C8; }
+
+    /* ── Como começar ── */
+    .start { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; counter-reset: s; }
+    .start-step { position: relative; padding: 26px 24px; border-radius: 22px; background: var(--surface); border: 1px solid var(--line); }
+    .start-step .n-badge { display: inline-grid; place-items: center; width: 36px; height: 36px; border-radius: 11px; background: var(--ink); color: #fff; font-weight: 700; font-size: 15px; margin-bottom: 20px; }
+    .start-step h3 { font-size: 18px; letter-spacing: -0.02em; margin-bottom: 6px; }
+    .start-step p { font-size: 14.5px; color: var(--muted); }
 
     /* ── FAQ ── */
-    .faq { padding: 0 0 120px; }
-    .faq-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 64px; align-items: start; }
-    .faq-side { position: sticky; top: 120px; }
-    .faq-list { display: grid; gap: 10px; }
-    details { border-radius: 20px; background: var(--surface); border: 1px solid var(--line); transition: border-color .2s; }
-    details[open] { border-color: rgba(255,106,19,.35); }
-    summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 24px; font-weight: 600; font-size: 16.5px; }
-    summary::-webkit-details-marker { display: none; }
-    summary .pm { width: 32px; height: 32px; border-radius: 50%; background: var(--surface-2); display: grid; place-items: center; flex-shrink: 0; transition: transform .3s var(--ease), background .2s; }
-    summary .pm .i { width: 16px; height: 16px; }
-    details[open] summary .pm { transform: rotate(45deg); background: var(--brand); color: #fff; }
-    details p { padding: 0 24px 22px; color: var(--muted); font-size: 15.5px; }
+    .faq-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 64px; align-items: start; }
+    .faq-side { position: sticky; top: 112px; }
+    .help { margin-top: 28px; padding: 22px; border-radius: 18px; background: var(--surface); border: 1px solid var(--line); }
+    .help b { display: block; font-size: 16px; }
+    .help p { font-size: 14.5px; color: var(--muted); margin: 4px 0 16px; }
+    .faq-list { border-top: 1px solid var(--line); }
+    .faq-list details { border-bottom: 1px solid var(--line); }
+    .faq-list summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 22px 4px; font-weight: 600; font-size: 16.5px; letter-spacing: -0.01em; }
+    .faq-list summary::-webkit-details-marker { display: none; }
+    .faq-list summary:hover { color: var(--brand-text); }
+    .faq-list summary .i { width: 18px; height: 18px; color: var(--muted); transition: transform .3s var(--ease); }
+    .faq-list details[open] summary .i { transform: rotate(45deg); color: var(--brand); }
+    .faq-list details p { padding: 0 4px 22px; color: var(--muted); font-size: 15.5px; max-width: 640px; }
+
+    /* ── CTA final ── */
+    .final { text-align: center; padding: 88px 32px; border-radius: 32px; background: var(--surface); border: 1px solid var(--line); position: relative; overflow: hidden; isolation: isolate; }
+    .final::before { content: ''; position: absolute; left: 50%; top: -40%; width: 700px; height: 500px; transform: translateX(-50%); z-index: -1; background: radial-gradient(closest-side, rgba(255,85,0,.16), transparent); }
+    .final .h2 { max-width: 720px; margin-left: auto; margin-right: auto; }
+    .final .hero-ctas { margin-top: 32px; }
+    .contacts { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--line); }
+    .contact { display: inline-flex; align-items: center; gap: 12px; padding: 12px 18px 12px 12px; border-radius: 14px; border: 1px solid var(--line); background: var(--bg); text-align: left; transition: border-color .2s, background .2s; }
+    .contact:hover { border-color: var(--line-2); background: var(--surface); }
+    .contact .c-ico { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; background: var(--brand-soft); color: var(--brand); }
+    .contact .c-ico.g { background: #E9F9EF; color: #15A34A; }
+    .contact .c-ico .i { width: 18px; height: 18px; }
+    .contact small { display: block; font-size: 12px; color: var(--muted); line-height: 1.2; }
+    .contact b { font-size: 15px; font-weight: 600; word-break: break-word; }
 
     /* ── Footer ── */
-    footer { border-top: 1px solid var(--line); background: var(--surface); padding: 64px 0 28px; }
-    .foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px; }
-    .foot-brand .brand { margin-bottom: 16px; }
-    .foot-brand .brand-mark { width: 66px; height: 45px; }
-    .foot-brand .brand-mark img { width: 92px; height: 92px; margin: -21px 0 0 -14px; }
-    .foot-brand .brand-name { font-size: 24px; }
-    .foot-brand p { font-size: 14.5px; color: var(--muted); max-width: 320px; }
+    footer { margin-top: 112px; border-top: 1px solid var(--line); background: var(--surface); padding: 56px 0 28px; }
+    .foot { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px; }
+    .foot-brand p { font-size: 14.5px; color: var(--muted); max-width: 300px; margin-top: 16px; }
     .social { display: flex; gap: 8px; margin-top: 18px; }
-    .social a { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: var(--surface-2); transition: background .2s, color .2s; }
-    .social a:hover { background: var(--brand); color: #fff; }
-    .social .i { width: 19px; height: 19px; }
-    footer h4 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 14px; }
+    .social a { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; border: 1px solid var(--line); color: var(--ink-2); transition: background .2s, color .2s, border-color .2s; }
+    .social a:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
+    .social .i { width: 17px; height: 17px; }
+    footer h4 { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 14px; }
     footer ul { list-style: none; display: grid; gap: 10px; }
-    footer ul a, footer ul button { font-size: 15px; color: var(--ink-2); text-align: left; padding: 0; }
-    footer ul a:hover, footer ul button:hover { color: var(--brand-strong); }
+    footer ul a, footer ul button { font-size: 14.5px; color: var(--muted); text-align: left; padding: 0; }
+    footer ul a:hover, footer ul button:hover { color: var(--ink); }
     .foot-bottom { margin-top: 48px; padding-top: 22px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 13.5px; color: var(--muted); }
 
-    /* ── Flutuantes, modais ── */
-    .wa-float {
-      position: fixed; right: 20px; bottom: 20px; z-index: 90;
-      width: 60px; height: 60px; border-radius: 50%; background: var(--wa); color: #fff;
-      display: grid; place-items: center; box-shadow: 0 10px 30px -6px rgba(37,211,102,.6);
-      transition: transform .25s var(--ease);
-    }
-    .wa-float:hover { transform: scale(1.08); }
-    .wa-float svg { width: 32px; height: 32px; fill: #fff; }
-    .wa-float::before { content: ''; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--wa); animation: ping 2.4s infinite; }
-    @keyframes ping { 80%, 100% { transform: scale(1.5); opacity: 0; } }
+    /* ── Flutuantes e janelas ── */
+    .wa-float { position: fixed; right: 20px; bottom: 20px; z-index: 90; width: 56px; height: 56px; border-radius: 50%; background: var(--wa); display: grid; place-items: center; box-shadow: 0 10px 28px -8px rgba(37,211,102,.7); transition: transform .25s var(--ease); }
+    .wa-float:hover { transform: scale(1.07); }
+    .wa-float svg { width: 30px; height: 30px; fill: #fff; }
 
-    .cookie {
-      position: fixed; left: 20px; bottom: 20px; z-index: 95; max-width: 420px;
-      background: var(--ink); color: var(--night-text); padding: 18px 20px; border-radius: 20px;
-      box-shadow: 0 20px 50px -15px rgba(0,0,0,.5); font-size: 14px;
-      display: none;
-    }
+    .cookie { position: fixed; left: 20px; bottom: 20px; z-index: 95; max-width: 400px; display: none; padding: 18px 20px; border-radius: 18px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-lg); font-size: 14px; color: var(--ink-2); }
     .cookie.show { display: block; animation: drop .3s var(--ease); }
-    .cookie a { color: #FF8A45; text-decoration: underline; cursor: pointer; }
+    .cookie a { color: var(--brand-text); text-decoration: underline; cursor: pointer; }
     .cookie-actions { display: flex; gap: 8px; margin-top: 14px; justify-content: flex-end; }
-    .cookie-actions button { height: 38px; padding: 0 16px; border-radius: 999px; font-size: 14px; font-weight: 600; }
-    .cookie-actions .dec { color: var(--night-muted); border: 1px solid var(--night-line); }
-    .cookie-actions .acc { background: var(--brand); color: #fff; }
+    .cookie-actions .btn { height: 38px; padding: 0 16px; font-size: 14px; border-radius: 10px; }
 
-    dialog.modal {
-      margin: auto; width: min(640px, calc(100% - 32px)); max-height: 85vh;
-      border: 0; border-radius: 26px; padding: 0; background: var(--surface); color: var(--ink);
-      box-shadow: 0 40px 80px -20px rgba(0,0,0,.5);
-    }
-    dialog::backdrop { background: rgba(11,12,16,.6); backdrop-filter: blur(4px); }
-    .modal-head { position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 24px; background: var(--surface); border-bottom: 1px solid var(--line); }
-    .modal-head h3 { font-size: 22px; }
-    .x { width: 40px; height: 40px; border-radius: 50%; background: var(--surface-2); display: grid; place-items: center; flex-shrink: 0; }
+    dialog.modal { margin: auto; width: min(640px, calc(100% - 32px)); max-height: 85vh; border: 0; border-radius: 22px; padding: 0; background: var(--surface); color: var(--ink); box-shadow: var(--shadow-lg); }
+    dialog::backdrop { background: rgba(12,12,14,.55); backdrop-filter: blur(4px); }
+    .modal-head { position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 22px; background: var(--surface); border-bottom: 1px solid var(--line); }
+    .modal-head h3 { font-size: 19px; letter-spacing: -0.02em; }
+    .x { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; background: var(--subtle); flex-shrink: 0; }
+    .x:hover { background: var(--line); }
     .x .i { width: 18px; height: 18px; }
-    .modal-body { padding: 20px 24px 28px; font-size: 14.5px; color: var(--muted); line-height: 1.7; }
-    .modal-body h4 { color: var(--ink); font-size: 15.5px; margin: 18px 0 6px; }
+    .modal-body { padding: 18px 22px 26px; font-size: 14.5px; color: var(--muted); line-height: 1.7; }
+    .modal-body h4 { color: var(--ink); font-size: 15px; margin: 18px 0 6px; }
     .modal-body p { margin-bottom: 10px; }
     .modal-body strong { color: var(--ink); }
     .modal-body ul { padding-left: 18px; margin-bottom: 10px; }
 
-    /* Demonstração ao vivo (sistema real dentro de um iframe) */
-    .demo-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
-    dialog.demo {
-      margin: auto; width: min(1280px, calc(100% - 32px)); height: min(860px, calc(100vh - 32px)); max-width: none; max-height: none;
-      border: 0; border-radius: 24px; padding: 0; overflow: hidden; background: var(--night); color: var(--night-text);
-      box-shadow: 0 40px 100px -20px rgba(0,0,0,.7);
-    }
-    dialog.demo[open] { display: flex; flex-direction: column; }
-    dialog.demo::backdrop { background: rgba(11,12,16,.75); backdrop-filter: blur(6px); }
-    .demo-head { display: flex; align-items: center; gap: 12px; padding: 12px 12px 12px 20px; border-bottom: 1px solid var(--night-line); flex-wrap: wrap; }
-    .demo-head h3 { font-size: 18px; margin-right: auto; display: flex; align-items: center; gap: 10px; }
-    .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--wa); box-shadow: 0 0 0 4px rgba(37,211,102,.2); }
-    .demo .seg { background: rgba(255,255,255,.06); }
-    .demo .seg button { color: var(--night-muted); padding: 0 14px; }
-    .demo .seg button[aria-pressed="true"] { background: #fff; color: var(--ink); }
-    .demo-ext { display: inline-flex; align-items: center; gap: 6px; height: 42px; padding: 0 14px; border-radius: 12px; font-size: 14px; font-weight: 600; color: var(--night-text); border: 1px solid var(--night-line); }
-    .demo-ext:hover { background: rgba(255,255,255,.06); }
-    .demo .x { background: rgba(255,255,255,.08); color: #fff; }
-    .demo-login { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; padding: 10px 20px; font-size: 13.5px; color: var(--night-muted); background: rgba(255,106,19,.08); border-bottom: 1px solid var(--night-line); }
-    .demo-login[hidden] { display: none; }
-    .demo-login button { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 10px; background: rgba(255,255,255,.07); border: 1px solid var(--night-line); font-size: 13px; color: var(--night-muted); }
-    .demo-login button b { color: #fff; font-weight: 600; }
-    .demo-login button:hover { background: rgba(255,255,255,.12); }
-    .demo-login button.copied { border-color: var(--wa); }
-    .demo-login small { font-size: 12px; }
-    .demo-body { flex: 1; min-height: 0; display: grid; place-items: center; padding: 16px; background: radial-gradient(600px 400px at 50% 0%, rgba(255,106,19,.14), transparent 70%); }
-    .demo-body iframe { width: 100%; height: 100%; border: 0; border-radius: 16px; background: #fff; }
-    .demo-body.phone iframe { width: min(420px, 100%); border-radius: 28px; box-shadow: 0 0 0 10px #000, 0 30px 60px -10px rgba(0,0,0,.7); }
-    @media (max-width: 640px) {
-      dialog.demo { width: 100%; height: 100%; border-radius: 0; }
-      .demo-head { padding: 10px; gap: 8px; }
-      .demo-head h3 { display: none; }
-      .demo .seg { flex: 1; }
-      .demo .seg button { padding: 0 6px; font-size: 13px; }
-      .demo-ext { height: 42px; padding: 0 10px; font-size: 13px; }
-      .demo-body { padding: 0; }
-      .demo-body iframe, .demo-body.phone iframe { width: 100%; border-radius: 0; box-shadow: none; }
-    }
-
     dialog.lightbox { margin: auto; max-width: 100vw; max-height: 100vh; width: 100%; height: 100%; background: transparent; border: 0; padding: 0; }
-    dialog.lightbox::backdrop { background: rgba(11,12,16,.92); }
+    dialog.lightbox::backdrop { background: rgba(12,12,14,.9); }
     .lb-inner { width: 100%; height: 100%; display: grid; place-items: center; padding: 56px 16px; }
     .lb-inner img { max-width: 100%; max-height: 100%; object-fit: contain; }
     .lightbox .x { position: fixed; top: 16px; right: 16px; background: rgba(255,255,255,.12); color: #fff; }
 
-    /* ── Reveal ── */
-    .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+    /* Demonstração ao vivo (sistema real num iframe) */
+    dialog.demo { margin: auto; width: min(1280px, calc(100% - 32px)); height: min(860px, calc(100vh - 32px)); max-width: none; max-height: none; border: 0; border-radius: 22px; padding: 0; overflow: hidden; background: var(--night); color: #fff; box-shadow: 0 40px 100px -20px rgba(0,0,0,.7); }
+    dialog.demo[open] { display: flex; flex-direction: column; }
+    dialog.demo::backdrop { background: rgba(12,12,14,.75); backdrop-filter: blur(6px); }
+    .demo-head { display: flex; align-items: center; gap: 10px; padding: 12px 12px 12px 20px; border-bottom: 1px solid var(--night-line); flex-wrap: wrap; }
+    .demo-head h3 { font-size: 16px; letter-spacing: -0.01em; margin-right: auto; display: flex; align-items: center; gap: 10px; }
+    .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--wa); box-shadow: 0 0 0 4px rgba(37,211,102,.2); }
+    .seg { display: grid; grid-template-columns: 1fr 1fr; padding: 4px; border-radius: 12px; background: rgba(255,255,255,.07); }
+    .seg button { height: 34px; padding: 0 14px; border-radius: 9px; font-size: 13.5px; font-weight: 600; color: var(--night-muted); }
+    .seg button[aria-pressed="true"] { background: #fff; color: var(--ink); }
+    .demo-ext { display: inline-flex; align-items: center; gap: 6px; height: 42px; padding: 0 14px; border-radius: 11px; font-size: 13.5px; font-weight: 600; border: 1px solid var(--night-line); }
+    .demo-ext:hover { background: rgba(255,255,255,.06); }
+    .demo .x { background: rgba(255,255,255,.08); color: #fff; }
+    .demo-login { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; padding: 10px 20px; font-size: 13.5px; color: var(--night-muted); background: rgba(255,85,0,.08); border-bottom: 1px solid var(--night-line); }
+    .demo-login[hidden] { display: none; }
+    .demo-login button { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 9px; background: rgba(255,255,255,.07); border: 1px solid var(--night-line); font-size: 13px; color: var(--night-muted); }
+    .demo-login button b { color: #fff; font-weight: 600; }
+    .demo-login button:hover { background: rgba(255,255,255,.12); }
+    .demo-login button.copied { border-color: var(--wa); }
+    .demo-login small { font-size: 12px; }
+    .demo-body { flex: 1; min-height: 0; display: grid; place-items: center; padding: 16px; background: radial-gradient(600px 400px at 50% 0%, rgba(255,85,0,.14), transparent 70%); }
+    .demo-body iframe { width: 100%; height: 100%; border: 0; border-radius: 14px; background: #fff; }
+    .demo-body.phone iframe { width: min(420px, 100%); border-radius: 28px; box-shadow: 0 0 0 10px #000, 0 30px 60px -10px rgba(0,0,0,.7); }
+
+    /* ── Entrada suave ── */
+    .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
     .js .reveal.in { opacity: 1; transform: none; }
 
     /* ── Responsivo ── */
-    @media (max-width: 1080px) {
-      .nav-links { display: none; }
+    @media (max-width: 1040px) {
+      .nav-links, .nav-actions .btn-ghost { display: none; }
       .burger { display: inline-flex; }
-      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-      .hero-stage { max-width: 680px; width: 100%; margin: 0 auto; }
-      .plan-grid { grid-template-columns: repeat(2, 1fr); }
-      .compare { grid-template-columns: 1fr; }
-      .steps { grid-template-columns: repeat(2, 1fr); }
-      .step:not(:last-child)::after { display: none; }
-      .cta-box { grid-template-columns: 1fr; padding: 56px 40px; }
+      .journey { grid-template-columns: 1fr; gap: 28px; }
+      .j-view { height: 480px; order: -1; }
+      .j-pane img { max-height: 440px; }
+      .grid6 { grid-template-columns: repeat(2, 1fr); }
+      .card, .card.s3 { grid-column: span 1; }
+      .card.s4 { grid-column: span 2; }
+      .all-in { grid-template-columns: 1fr; gap: 20px; }
+      .all-in .ticks { grid-template-columns: repeat(2, 1fr); }
+      .demo-band { grid-template-columns: 1fr; padding: 48px 40px; }
+      .plans { grid-template-columns: repeat(2, 1fr); gap: 24px 16px; }
+      .start { grid-template-columns: repeat(2, 1fr); }
       .faq-grid { grid-template-columns: 1fr; gap: 32px; }
       .faq-side { position: static; }
-      .foot-grid { grid-template-columns: 1fr 1fr 1fr; }
+      .foot { grid-template-columns: 1fr 1fr 1fr; }
       .foot-brand { grid-column: 1 / -1; }
     }
-    @media (max-width: 900px) {
-      .tour-shell { grid-template-columns: 1fr; }
-      .tour-side { border-right: 0; border-bottom: 1px solid var(--line); }
-      .tour-list { display: flex; overflow-x: auto; gap: 6px; padding-bottom: 4px; scrollbar-width: none; }
-      .tour-list::-webkit-scrollbar { display: none; }
-      .tour-tab { flex-shrink: 0; border-left: 0; border-bottom: 3px solid transparent; }
-      .tour-tab[aria-selected="true"] { border-bottom-color: var(--brand); }
-      .tour-tab span, .tour-tab[aria-selected="true"] span { display: none; }
-      .tour-stage { min-height: 0; padding: 24px 16px 44px; }
-      .tour-stage img { max-height: 460px; }
-      .bento { grid-template-columns: 1fr 1fr; }
-      .card.wide { grid-column: span 2; grid-template-columns: 1fr; }
-      .card.wide .media { order: 0; min-height: 0; height: auto; }
-      .card.wide .card-body { padding: 26px 28px 30px; }
-    }
-    @media (max-width: 640px) {
+    @media (max-width: 680px) {
       .container { padding: 0 16px; }
-      .nav-wrap { top: 10px; padding: 0 10px; }
-      .nav { height: 60px; padding: 0 6px 0 12px; border-radius: 18px; }
-      .brand-name { font-size: 17px; }
-      .nav-cta { display: none; }
-      .hero { padding-top: 116px; }
-      .hero-actions .btn { flex: 1 1 100%; }
-      .hero-proof { grid-template-columns: repeat(3, 1fr); gap: 12px; }
-      .hero-proof strong { font-size: 22px; }
-      .hero-stage { aspect-ratio: 1 / 1.12; }
-      .hero-desk { right: 0; width: 100%; }
-      .toast:nth-child(n+3) { display: none; }
-      .hero-phone { left: -2%; bottom: 0; width: 48%; }
-      .feed { width: 56%; right: 0; bottom: 6%; gap: 8px; }
-      .toast { padding: 9px 10px; gap: 9px; border-radius: 14px; }
-      .toast-ico { width: 30px; height: 30px; border-radius: 9px; }
-      .toast-ico .i { width: 16px; height: 16px; }
-      .toast b { font-size: 12.5px; }
-      .toast small { font-size: 11px; }
-      .toast time { display: none; }
-      .ticker { margin-top: 40px; }
-      .ticker-track span { font-size: 17px; }
-      .tour, .plans, .how { padding: 80px 0; }
-      .features { padding: 20px 0 80px; }
-      .section-head { margin-bottom: 36px; }
-      .bento { grid-template-columns: 1fr; }
-      .card.wide { grid-column: auto; }
-      .media { height: 280px; }
-      .card-body, .card.wide .card-body { padding: 22px 20px 26px; }
-      .plan-grid { grid-template-columns: 1fr; }
+      .section { padding: 80px 0; }
+      .head { margin-bottom: 36px; }
+      .nav-in { height: 64px; }
+      .nav-actions .btn-brand { display: none; }
+      .hero { padding-top: 48px; }
+      .hero-ctas .btn { width: 100%; }
+      .trust { flex-direction: column; align-items: center; gap: 8px; }
+      .stage { margin-top: 48px; padding-bottom: 64px; }
+      .stage .browser { width: 100%; }
+      .browser-bar { height: 26px; }
+      .browser-bar span { font-size: 10px; }
+      .stage-phone { width: 38%; right: -4%; bottom: 0; }
+      .live { left: 0; top: auto; bottom: 0; min-width: 0; max-width: 64%; padding: 9px 12px 9px 9px; gap: 9px; border-radius: 13px; }
+      .live-ico { width: 30px; height: 30px; border-radius: 9px; }
+      .live-ico .i { width: 15px; height: 15px; }
+      .live b { font-size: 12.5px; }
+      .live small { font-size: 11px; }
+      .integrations .container { justify-content: center; text-align: center; }
+      .int-list { justify-content: center; gap: 10px 20px; }
+      .int-list span { font-size: 14px; }
+      .j-view { height: 400px; border-radius: 22px; }
+      .j-pane img { max-height: 360px; }
+      .printer { transform: scale(.85); }
+      .j-step { padding: 16px 16px 16px 56px; }
+      .j-num { left: 16px; top: 16px; }
+      .grid6 { grid-template-columns: 1fr; }
+      .card, .card.s3, .card.s4 { grid-column: auto; }
+      .media { height: 240px; }
+      .all-in { padding: 24px 20px; }
+      .all-in .ticks { grid-template-columns: 1fr; }
+      .demo-band { padding: 40px 20px; border-radius: 24px; }
+      .plans { grid-template-columns: 1fr; }
       .plan-desc { min-height: 0; }
-      .trial-strip { border-radius: 18px; }
-      .steps { grid-template-columns: 1fr; }
-      .cta { padding-bottom: 80px; }
-      .cta-box { padding: 44px 22px; border-radius: 30px; }
-      .cta-box .btn { width: 100%; }
-      .faq { padding-bottom: 80px; }
-      summary { padding: 18px 18px; font-size: 15.5px; }
-      details p { padding: 0 18px 20px; }
-      .foot-grid { grid-template-columns: 1fr 1fr; }
+      .start { grid-template-columns: 1fr; gap: 10px; }
+      .start-step { display: grid; grid-template-columns: 36px 1fr; gap: 2px 16px; padding: 20px; }
+      .start-step .n-badge { grid-row: span 2; margin: 0; }
+      .final { padding: 56px 20px; border-radius: 24px; }
+      .contacts { flex-direction: column; align-items: stretch; }
+      footer { margin-top: 80px; }
+      .foot { grid-template-columns: 1fr 1fr; }
       .cookie { left: 10px; right: 10px; bottom: 10px; max-width: none; }
-      .wa-float { width: 54px; height: 54px; right: 14px; bottom: 14px; }
+      .wa-float { width: 52px; height: 52px; right: 14px; bottom: 14px; }
+      dialog.demo { width: 100%; height: 100%; border-radius: 0; }
+      .demo-head { padding: 10px; gap: 8px; }
+      .demo-head h3 { display: none; }
+      .seg { flex: 1; }
+      .seg button { padding: 0 6px; font-size: 13px; }
+      .demo-ext { padding: 0 10px; font-size: 13px; }
+      .demo-body { padding: 0; }
+      .demo-body iframe, .demo-body.phone iframe { width: 100%; border-radius: 0; box-shadow: none; }
     }
-
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
       .bot-show img:first-child { opacity: 1; }
@@ -615,271 +532,199 @@
   <symbol id="i-minus" viewBox="0 0 24 24"><line x1="6" y1="12" x2="18" y2="12"/></symbol>
   <symbol id="i-plus" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></symbol>
   <symbol id="i-menu" viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></symbol>
   <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></symbol>
   <symbol id="i-bot" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="3"/><path d="M12 8V4"/><circle cx="12" cy="3" r="1"/><circle cx="9" cy="14" r="1.2"/><circle cx="15" cy="14" r="1.2"/></symbol>
   <symbol id="i-bike" viewBox="0 0 24 24"><circle cx="5.5" cy="17.5" r="3"/><circle cx="18.5" cy="17.5" r="3"/><path d="M15 6h2l3 11.5M5.5 17.5 9 10h7l-3.5 7.5"/><path d="M9 10 8 7H6"/></symbol>
   <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 14h3v3h-3zM18 18h3v3M14 21h1"/></symbol>
-  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></symbol>
   <symbol id="i-board" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></symbol>
   <symbol id="i-card" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2.5"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></symbol>
   <symbol id="i-brush" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><circle cx="8.5" cy="7.5" r="1.5"/><circle cx="6.5" cy="12.5" r="1.5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.93 0 1.5-.75 1.5-1.5 0-.4-.15-.74-.4-1-.25-.26-.4-.6-.4-1 0-.83.67-1.5 1.5-1.5H16c3.31 0 6-2.69 6-6 0-4.96-4.48-9-10-9z"/></symbol>
-  <symbol id="i-menu-book" viewBox="0 0 24 24"><path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
   <symbol id="i-printer" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></symbol>
   <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></symbol>
   <symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2.5"/><path d="m22 6-10 7L2 6"/></symbol>
   <symbol id="i-insta" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></symbol>
   <symbol id="i-gift" viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></symbol>
-  <symbol id="i-zoom" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><line x1="11" y1="18" x2="13" y2="18"/></symbol>
+  <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></symbol>
+  <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4"/><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></symbol>
 </svg>
 
 <!-- Nav -->
-<div class="nav-wrap">
-  <nav class="nav" aria-label="Principal">
+<header class="nav" id="nav">
+  <div class="container nav-in">
     <a href="#" class="brand" aria-label="Central de Pedidos Online">
       <span class="brand-mark"><img src="imagens/icon/icon.png" alt=""></span>
-      <span class="brand-name"><span>Central de <span class="accent">Pedidos</span></span><small>Online</small></span>
+      <span class="brand-name"><span>Central de <span class="brand-c">Pedidos</span></span><small>Online</small></span>
     </a>
-    <ul class="nav-links">
-      <li><a href="#preview">Veja o sistema</a></li>
-      <li><a href="#funcionalidades">Funcionalidades</a></li>
-      <li><a href="#planos">Planos</a></li>
-      <li><a href="#como-funciona">Como funciona</a></li>
-      <li><a href="#faq">FAQ</a></li>
-      <li><a href="#contato">Contato</a></li>
-    </ul>
-    <div style="display:flex;gap:8px;align-items:center">
-      <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20sistema." target="_blank" class="btn btn-ink nav-cta">Falar com vendas</a>
+    <nav aria-label="Principal">
+      <ul class="nav-links">
+        <li><a href="#como-funciona">Como funciona</a></li>
+        <li><a href="#recursos">Recursos</a></li>
+        <li><a href="#demonstracao">Demonstração</a></li>
+        <li><a href="#planos">Planos</a></li>
+        <li><a href="#faq">Dúvidas</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <button type="button" class="btn btn-ghost" data-demo="cliente">Testar ao vivo</button>
+      <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20sistema." target="_blank" class="btn btn-brand">Falar com vendas</a>
       <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="sheet"><svg class="i"><use href="#i-menu"/></svg></button>
     </div>
-  </nav>
-  <div class="mobile-sheet" id="sheet">
-    <a href="#preview">Veja o sistema</a>
-    <a href="#funcionalidades">Funcionalidades</a>
-    <a href="#planos">Planos</a>
+  </div>
+  <div class="sheet" id="sheet">
     <a href="#como-funciona">Como funciona</a>
-    <a href="#faq">FAQ</a>
+    <a href="#recursos">Recursos</a>
+    <a href="#demonstracao">Demonstração</a>
+    <a href="#planos">Planos</a>
+    <a href="#faq">Dúvidas</a>
     <a href="#contato">Contato</a>
     <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20sistema." target="_blank" class="btn btn-brand">Falar com vendas</a>
   </div>
-</div>
+</header>
+
+<main>
 
 <!-- Hero -->
-<section class="hero on-night">
+<section class="hero">
   <div class="container">
-    <div class="hero-grid">
-      <div>
-        <span class="pill-trial"><b>7 DIAS GRÁTIS</b> Sem cartão, sem compromisso</span>
-        <h1>Seu negócio vendendo mais, com <span class="accent">tecnologia de verdade</span>.</h1>
-        <p class="lead">Plataforma completa para receber pedidos online com gestão de delivery, mesas com QR Code, controle de motoboys e notificações automáticas no WhatsApp.</p>
-        <div class="hero-actions">
-          <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20contratar%20o%20sistema." target="_blank" class="btn btn-brand">Quero contratar <svg class="i"><use href="#i-arrow"/></svg></a>
-          <button type="button" class="btn btn-ghost-night" data-demo="cliente">Ver o sistema</button>
-        </div>
-        <div class="hero-proof">
-          <div><strong>100%</strong><span>Online, sem instalar app</span></div>
-          <div><strong>PIX</strong><span>Pagamento integrado</span></div>
-          <div><strong>24h</strong><span>Suporte disponível</span></div>
-        </div>
-      </div>
-
-      <div class="hero-stage" aria-label="Prévia do sistema">
-        <div class="hero-desk browser night">
-          <div class="browser-bar"><i></i><i></i><i></i><span>centralpedidosonline.com.br</span></div>
-          <img src="imagens/admin/tela-admin-1.png" alt="Painel do lojista com pedidos em tempo real">
-        </div>
-        <div class="hero-phone" id="heroPhone">
-          <img class="on" src="imagens/cliente/temaclaro/telahome.png" alt="Cardápio no celular">
-          <img src="imagens/cliente/temaclaro/teladetalhes.png" alt="" loading="lazy">
-          <img src="imagens/cliente/temaclaro/telacarrinho.png" alt="" loading="lazy">
-          <img src="imagens/cliente/temaclaro/telafinalizar.png" alt="" loading="lazy">
-          <img src="imagens/cliente/temaclaro/telastatus1.png" alt="" loading="lazy">
-        </div>
-        <div class="feed" id="feed" aria-live="off"></div>
-      </div>
+    <span class="badge"><b>7 dias grátis</b> Sem cartão, sem compromisso</span>
+    <h1>Seu negócio vendendo mais, com <span class="brand-c">tecnologia de verdade</span>.</h1>
+    <p class="lead">Plataforma completa para receber pedidos online com gestão de delivery, mesas com QR Code, controle de motoboys e notificações automáticas no WhatsApp.</p>
+    <div class="hero-ctas">
+      <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20contratar%20o%20sistema." target="_blank" class="btn btn-brand btn-lg">Quero contratar <svg class="i"><use href="#i-arrow"/></svg></a>
+      <button type="button" class="btn btn-line btn-lg" data-demo="cliente"><svg class="i"><use href="#i-play"/></svg> Testar o sistema ao vivo</button>
     </div>
-  </div>
-
-  <div class="ticker" aria-hidden="true">
-    <div class="ticker-track">
-      <span>Delivery</span><span>Retirada no balcão</span><span>Mesas com QR Code</span><span>Garçom digital</span><span>PIX automático</span><span>Mercado Pago</span><span>Impressão automática</span><span>Bot no WhatsApp</span><span>Painel do motoboy</span><span>Cupons de desconto</span>
-      <span>Delivery</span><span>Retirada no balcão</span><span>Mesas com QR Code</span><span>Garçom digital</span><span>PIX automático</span><span>Mercado Pago</span><span>Impressão automática</span><span>Bot no WhatsApp</span><span>Painel do motoboy</span><span>Cupons de desconto</span>
-    </div>
-  </div>
-</section>
-
-<!-- Tour -->
-<section class="tour" id="preview">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow">Veja o sistema</span>
-      <h2 class="title">Por dentro da plataforma, <span class="serif-ital accent">tela por tela</span>.</h2>
-      <p class="lead">Navegue pelas telas reais do sistema — do cardápio que o seu cliente vê ao painel onde você gerencia tudo.</p>
-      <div class="demo-ctas">
-        <button type="button" class="btn btn-brand" data-demo="cliente">Testar o app do cliente <svg class="i"><use href="#i-arrow"/></svg></button>
-        <button type="button" class="btn btn-line" data-demo="lojista">Testar o painel do lojista</button>
-      </div>
+    <div class="trust">
+      <span><svg class="i"><use href="#i-check"/></svg>100% online, sem instalar app</span>
+      <span><svg class="i"><use href="#i-check"/></svg>PIX integrado</span>
+      <span><svg class="i"><use href="#i-check"/></svg>Suporte 24h pelo WhatsApp</span>
     </div>
 
-    <div class="tour-shell reveal">
-      <div class="tour-side">
-        <div class="seg" role="group" aria-label="Visão">
-          <button type="button" data-view="cliente" aria-pressed="true">App do cliente</button>
-          <button type="button" data-view="lojista" aria-pressed="false">Painel do lojista</button>
-        </div>
-
-        <div class="tour-list" data-list="cliente" role="tablist" aria-label="Telas do cliente">
-          <button class="tour-tab" role="tab" aria-selected="true" data-img="telahome"><b>Cardápio</b><span>Produtos por categoria, com fotos, preços e status de aberto/fechado.</span></button>
-          <button class="tour-tab" role="tab" aria-selected="false" data-img="teladetalhes"><b>Detalhes do produto</b><span>Complementos, variações e observações em cada item.</span></button>
-          <button class="tour-tab" role="tab" aria-selected="false" data-img="telacarrinho"><b>Carrinho</b><span>Resumo do pedido com ajuste de quantidades e cupons.</span></button>
-          <button class="tour-tab" role="tab" aria-selected="false" data-img="telafinalizar"><b>Finalizar pedido</b><span>Entrega, retirada ou mesa — PIX, cartão ou pagamento na entrega.</span></button>
-          <button class="tour-tab" role="tab" aria-selected="false" data-img="telastatus1"><b>Status do pedido</b><span>O cliente acompanha cada etapa em tempo real.</span></button>
-          <button class="tour-tab" role="tab" aria-selected="false" data-img="telastatus2"><b>Rastreamento</b><span>Saiu para entrega, motoboy a caminho e chegada no endereço.</span></button>
-          <button class="tour-tab" role="tab" aria-selected="false" data-img="telahistorico"><b>Histórico</b><span>Pedidos anteriores sempre à mão para pedir de novo.</span></button>
-          <button class="tour-tab" role="tab" aria-selected="false" data-img="telaperfil"><b>Perfil</b><span>Dados e endereços salvos para pedir em segundos.</span></button>
-        </div>
-
-        <div class="tour-list" data-list="lojista" role="tablist" aria-label="Telas do lojista" hidden>
-          <button class="tour-tab" role="tab" aria-selected="true" data-desk="imagens/admin/tela-admin-1.png" data-frame><b>Pedidos em tempo real</b><span>Quadro com novos pedidos, em preparo, prontos, em rota e finalizados — com totais do dia e status da loja.</span></button>
-          <button class="tour-tab" role="tab" aria-selected="false" data-desk="imagens/admin/tela-admin-2.png" data-frame><b>Resumo do dia</b><span>Faturamento do dia, tempos médios de preparo e entrega, pedidos por hora, entregas × retiradas e motoboys em rota.</span></button>
-          <button class="tour-tab" role="tab" aria-selected="false" data-desk="imagens/admin/admin-mesagarcom.png"><b>Mesas e garçom</b><span>Comandas por mesa e pedidos do salão acompanhados ao vivo.</span></button>
-          <button class="tour-tab" role="tab" aria-selected="false" data-desk="imagens/admin/admin-cardapio-digital.png"><b>Cardápio digital</b><span>Produtos, categorias, complementos e preços fáceis de editar.</span></button>
-          <button class="tour-tab" role="tab" aria-selected="false" data-desk="imagens/admin/personalizacao.png"><b>Personalização</b><span>Logo, banner, cores, horários e taxas de entrega da sua loja.</span></button>
-        </div>
+    <div class="stage" aria-label="Prévia do sistema">
+      <div class="browser">
+        <div class="browser-bar"><i></i><i></i><i></i><span>centralpedidosonline.com.br</span></div>
+        <img src="imagens/admin/tela-admin-1.png" alt="Painel do lojista com os pedidos em tempo real">
       </div>
-
-      <div class="tour-stage" id="stage">
-        <div id="stageFrame">
-          <div class="browser-bar"><i></i><i></i><i></i><span>centralpedidosonline.com.br</span></div>
-          <img id="stageImg" src="imagens/cliente/temaclaro/telahome.png" alt="Cardápio">
-        </div>
-        <span class="zoom-hint"><svg class="i"><use href="#i-zoom"/></svg> Clique para ampliar</span>
+      <div class="stage-phone" id="heroPhone">
+        <img class="on" src="imagens/cliente/temaclaro/telahome.png" alt="Cardápio no celular do cliente">
+        <img src="imagens/cliente/temaclaro/teladetalhes.png" alt="" loading="lazy">
+        <img src="imagens/cliente/temaclaro/telacarrinho.png" alt="" loading="lazy">
+        <img src="imagens/cliente/temaclaro/telafinalizar.png" alt="" loading="lazy">
+        <img src="imagens/cliente/temaclaro/telastatus1.png" alt="" loading="lazy">
+      </div>
+      <div class="live" aria-hidden="true">
+        <span class="pulse"></span>
+        <span class="live-ico" id="liveIco"><svg class="i"><use href="#i-bag"/></svg></span>
+        <span class="live-txt" id="liveTxt"><b>Novo pedido #319</b><small>Delivery · R$ 42,00</small></span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Funcionalidades -->
-<section class="features" id="funcionalidades">
+<!-- Integrações -->
+<div class="integrations">
   <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow">Funcionalidades</span>
-      <h2 class="title">Tudo que seu negócio precisa.<br><span class="accent">Nada que ele não precise.</span></h2>
-      <p class="lead">Uma plataforma completa para gerenciar pedidos, entregas e atendimento.</p>
+    <p>Tudo integrado ao que você já usa</p>
+    <div class="int-list">
+      <span><svg class="i"><use href="#i-zap"/></svg>PIX</span>
+      <span><svg class="i"><use href="#i-card"/></svg>Cartão de crédito</span>
+      <span><svg class="i"><use href="#i-wallet"/></svg>Mercado Pago</span>
+      <span><svg class="i"><use href="#i-chat"/></svg>WhatsApp</span>
+      <span><svg class="i"><use href="#i-qr"/></svg>QR Code</span>
+      <span><svg class="i"><use href="#i-printer"/></svg>Impressora térmica</span>
+    </div>
+  </div>
+</div>
+
+<!-- Jornada do pedido -->
+<section class="section" id="como-funciona">
+  <div class="container">
+    <div class="head reveal">
+      <span class="kicker">Como funciona</span>
+      <h2 class="h2">Do pedido à entrega,<br>tudo no automático.</h2>
+      <p class="lead">Veja o caminho de um pedido dentro do sistema — sem papel, sem ligação e sem pedido perdido.</p>
     </div>
 
-    <div class="bento">
-      <article class="card wide reveal">
-        <div class="media">
-          <div class="browser">
-            <div class="browser-bar"><i></i><i></i><i></i><span>centralpedidosonline.com.br</span></div>
-            <img src="imagens/admin/tela-admin-1.png" alt="Painel administrativo" loading="lazy" data-zoom>
+    <div class="journey reveal">
+      <div class="j-steps" id="jSteps" role="tablist" aria-label="Etapas do pedido">
+        <button class="j-step" role="tab" aria-selected="true" aria-controls="jView">
+          <span class="j-num">1</span>
+          <h3>O cliente faz o pedido</h3>
+          <div class="j-more">
+            <p>Cardápio digital pelo link da loja ou pelo QR Code da mesa, com fotos, preços e complementos.</p>
+            <ul class="ticks">
+              <li><svg class="i"><use href="#i-check"/></svg>Funciona no navegador, sem instalar app</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Delivery, retirada no balcão ou mesa</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Categorias, complementos e variações</li>
+            </ul>
           </div>
-        </div>
-        <div class="card-body">
-          <div class="ico"><svg class="i"><use href="#i-board"/></svg></div>
-          <h3>Gestão de Pedidos</h3>
-          <p>Painel administrativo completo para acompanhar todos os pedidos em tempo real.</p>
-          <ul class="ticks">
-            <li><svg class="i"><use href="#i-check"/></svg>Atualização de status com um clique</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Visualização por tipo: delivery, retirada, mesa</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Histórico completo de vendas</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Controle de cardápio e categorias</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Relatórios de desempenho</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card reveal">
-        <div class="media">
-          <div class="bot-show" data-zoom-group>
-            <img src="imagens/bot/1.png" alt="Bot WhatsApp - boas-vindas" loading="lazy" data-zoom>
-            <img src="imagens/bot/2.png" alt="Bot WhatsApp - menu de opções" loading="lazy" data-zoom>
-            <img src="imagens/bot/3.png" alt="Bot WhatsApp - cardápio" loading="lazy" data-zoom>
+          <span class="j-bar"></span>
+        </button>
+        <button class="j-step" role="tab" aria-selected="false" aria-controls="jView">
+          <span class="j-num">2</span>
+          <h3>Paga com PIX ou cartão</h3>
+          <div class="j-more">
+            <p>Aceite PIX e cartão de crédito diretamente na plataforma, com segurança e praticidade.</p>
+            <ul class="ticks">
+              <li><svg class="i"><use href="#i-check"/></svg>PIX com confirmação automática</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Cartão de crédito online e integração com Mercado Pago</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Pagamento na entrega (dinheiro/maquininha) com controle de troco</li>
+            </ul>
           </div>
-        </div>
-        <div class="card-body">
-          <div class="ico"><svg class="i"><use href="#i-bot"/></svg></div>
-          <h3>Bot Automático no WhatsApp</h3>
-          <p>Atenda seus clientes 24h por dia. O bot responde com menu interativo, cardápio completo e status do pedido.</p>
-          <ul class="ticks">
-            <li><svg class="i"><use href="#i-check"/></svg>Menu de opções interativo no WhatsApp</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Acesso ao cardápio completo pelo chat</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Consulta de status do pedido em tempo real</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Informa horário de funcionamento automaticamente</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Transferência para atendente humano quando necessário</li>
-          </ul>
-        </div>
-      </article>
+          <span class="j-bar"></span>
+        </button>
+        <button class="j-step" role="tab" aria-selected="false" aria-controls="jView">
+          <span class="j-num">3</span>
+          <h3>A cozinha recebe e imprime</h3>
+          <div class="j-more">
+            <p>Assim que o pedido chega, ele é impresso na cozinha ou no balcão — sem nenhuma ação manual.</p>
+            <ul class="ticks">
+              <li><svg class="i"><use href="#i-check"/></svg>Compatível com impressoras térmicas</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Sem risco de perder pedido por falta de atenção</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Configuração simples, sem instalar drivers</li>
+            </ul>
+          </div>
+          <span class="j-bar"></span>
+        </button>
+        <button class="j-step" role="tab" aria-selected="false" aria-controls="jView">
+          <span class="j-num">4</span>
+          <h3>O motoboy sai para entrega</h3>
+          <div class="j-more">
+            <p>Painel exclusivo para entregadores gerenciarem suas entregas em tempo real, direto do celular.</p>
+            <ul class="ticks">
+              <li><svg class="i"><use href="#i-check"/></svg>Aceite de pedidos com um clique, com endereço e dados do cliente</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Marca a chegada no endereço</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Histórico de entregas e ganhos por período</li>
+            </ul>
+          </div>
+          <span class="j-bar"></span>
+        </button>
+        <button class="j-step" role="tab" aria-selected="false" aria-controls="jView">
+          <span class="j-num">5</span>
+          <h3>O cliente acompanha pelo WhatsApp</h3>
+          <div class="j-more">
+            <p>Mensagem automática em cada etapa do pedido, sem precisar abrir o app — e sem custo extra.</p>
+            <ul class="ticks">
+              <li><svg class="i"><use href="#i-check"/></svg>Pedido em preparo, pronto ou saiu para entrega</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Aviso quando o entregador chega no endereço</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Confirmação de pedido concluído</li>
+            </ul>
+          </div>
+          <span class="j-bar"></span>
+        </button>
+      </div>
 
-      <article class="card reveal">
-        <div class="media"><img src="imagens/cliente/temaclaro/notificacoeswhats.png" alt="Notificações no WhatsApp" loading="lazy" data-zoom></div>
-        <div class="card-body">
-          <div class="ico"><svg class="i"><use href="#i-bell"/></svg></div>
-          <h3>Notificações no WhatsApp</h3>
-          <p>O cliente recebe uma mensagem automática em cada etapa do pedido, sem precisar abrir o app.</p>
-          <ul class="ticks">
-            <li><svg class="i"><use href="#i-check"/></svg>Pedido em preparo</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Pronto para retirada ou saiu para entrega</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Entregador chegou no endereço</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Pedido concluído com sucesso</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Sem custo extra para o lojista</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card reveal">
-        <div class="media night"><img src="imagens/cliente/temaclaro/motoboy.png" alt="Sistema para Motoboy" loading="lazy" data-zoom></div>
-        <div class="card-body">
-          <div class="ico"><svg class="i"><use href="#i-bike"/></svg></div>
-          <h3>Sistema para Motoboy</h3>
-          <p>Painel exclusivo para entregadores gerenciarem suas entregas em tempo real, direto do celular.</p>
-          <ul class="ticks">
-            <li><svg class="i"><use href="#i-check"/></svg>Aceite pedidos disponíveis com um clique</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Visualize endereço e dados do cliente</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Marque chegada no endereço</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Histórico de entregas e ganhos por período</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Acesso via navegador, sem instalar app</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card reveal">
-        <div class="media"><img src="imagens/cliente/temaclaro/telafinalizar.png" alt="Tela de pagamento" loading="lazy" data-zoom></div>
-        <div class="card-body">
-          <div class="ico"><svg class="i"><use href="#i-card"/></svg></div>
-          <h3>Pagamentos Integrados</h3>
-          <p>Aceite PIX e cartão de crédito diretamente na plataforma, com segurança e praticidade.</p>
-          <ul class="ticks">
-            <li><svg class="i"><use href="#i-check"/></svg>PIX com confirmação automática</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Cartão de crédito online</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Pagamento na entrega (dinheiro/maquininha)</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Integração com Mercado Pago</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Controle de troco</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card wide reveal">
-        <div class="media"><img class="desk" src="imagens/admin/admin-mesagarcom.png" alt="Tela de mesas e garçom" loading="lazy" data-zoom></div>
-        <div class="card-body">
-          <div class="ico"><svg class="i"><use href="#i-qr"/></svg></div>
-          <h3>Mesas e Garçom com QR Code</h3>
-          <p>Cada mesa tem seu próprio QR Code. O cliente escaneia e faz o pedido diretamente pelo celular.</p>
-          <ul class="ticks">
-            <li><svg class="i"><use href="#i-check"/></svg>QR Code exclusivo por mesa</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Pedido sem precisar chamar o garçom</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Garçom acompanha pedidos em tempo real</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Reduz erros e agiliza o atendimento</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Funciona em qualquer celular com câmera</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card reveal">
-        <div class="media night">
-          <div class="printer" aria-hidden="true">
+      <div class="j-view" id="jView" role="tabpanel" aria-live="polite">
+        <div class="j-pane on"><img src="imagens/cliente/temaclaro/telahome.png" alt="Cardápio digital no celular" data-zoom></div>
+        <div class="j-pane"><img src="imagens/cliente/temaclaro/telafinalizar.png" alt="Tela de pagamento" loading="lazy" data-zoom></div>
+        <div class="j-pane">
+          <div class="printer" aria-label="Pedido sendo impresso">
             <div class="printer-body"></div>
             <div class="receipt-clip">
               <div class="receipt">
@@ -896,260 +741,395 @@
             </div>
           </div>
         </div>
+        <div class="j-pane"><img src="imagens/cliente/temaclaro/motoboy.png" alt="Painel do motoboy" loading="lazy" data-zoom></div>
+        <div class="j-pane"><img src="imagens/cliente/temaclaro/notificacoeswhats.png" alt="Notificações no WhatsApp" loading="lazy" data-zoom></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Recursos -->
+<section class="section" id="recursos" style="padding-top:0">
+  <div class="container">
+    <div class="head reveal">
+      <span class="kicker">Recursos</span>
+      <h2 class="h2">Tudo que seu negócio precisa,<br>em um só lugar.</h2>
+      <p class="lead">Uma plataforma completa para gerenciar pedidos, entregas e atendimento.</p>
+    </div>
+
+    <div class="grid6">
+      <article class="card s4 reveal">
+        <div class="media">
+          <div class="browser">
+            <div class="browser-bar"><i></i><i></i><i></i><span>centralpedidosonline.com.br</span></div>
+            <img src="imagens/admin/tela-admin-1.png" alt="Painel administrativo" loading="lazy" data-zoom>
+          </div>
+        </div>
         <div class="card-body">
-          <div class="ico"><svg class="i"><use href="#i-printer"/></svg></div>
-          <h3>Impressão Automática</h3>
-          <p>Assim que um pedido é feito, ele é impresso na cozinha ou no balcão — sem nenhuma ação manual.</p>
-          <ul class="ticks">
-            <li><svg class="i"><use href="#i-check"/></svg>Impressão instantânea ao receber o pedido</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Compatível com impressoras térmicas</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Sem risco de perder pedido por falta de atenção</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Funciona com delivery, mesa e retirada</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Configuração simples, sem instalar drivers</li>
-          </ul>
+          <div class="card-title"><svg class="i"><use href="#i-board"/></svg><h3>Gestão de pedidos em tempo real</h3></div>
+          <p>Painel completo para acompanhar todos os pedidos — novos, em preparo, prontos, em rota e finalizados.</p>
+          <details class="more">
+            <summary>Ver recursos <svg class="i"><use href="#i-down"/></svg></summary>
+            <ul class="ticks">
+              <li><svg class="i"><use href="#i-check"/></svg>Atualização de status com um clique</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Visualização por tipo: delivery, retirada, mesa</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Histórico completo de vendas</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Controle de cardápio e categorias</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Relatórios de desempenho</li>
+            </ul>
+          </details>
         </div>
       </article>
 
       <article class="card reveal">
-        <div class="media"><img class="desk" src="imagens/admin/personalizacao.png" alt="Personalização da loja" loading="lazy" data-zoom></div>
+        <div class="media">
+          <div class="bot-show" data-zoom-group>
+            <img src="imagens/bot/1.png" alt="Bot WhatsApp - boas-vindas" loading="lazy">
+            <img src="imagens/bot/2.png" alt="Bot WhatsApp - menu de opções" loading="lazy">
+            <img src="imagens/bot/3.png" alt="Bot WhatsApp - cardápio" loading="lazy">
+          </div>
+        </div>
         <div class="card-body">
-          <div class="ico"><svg class="i"><use href="#i-brush"/></svg></div>
-          <h3>Personalização da Loja</h3>
-          <p>Cada loja tem sua própria identidade visual, com logo, banner e cores personalizadas.</p>
-          <ul class="ticks">
-            <li><svg class="i"><use href="#i-check"/></svg>Logo e banner próprios</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Link exclusivo da loja</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Horário de funcionamento configurável</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Área de cobertura para entrega</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Bairros e taxas personalizáveis</li>
-          </ul>
+          <div class="card-title"><svg class="i"><use href="#i-bot"/></svg><h3>Bot no WhatsApp 24h</h3></div>
+          <p>Atende seus clientes automaticamente com menu, cardápio e status do pedido.</p>
+          <details class="more">
+            <summary>Ver recursos <svg class="i"><use href="#i-down"/></svg></summary>
+            <ul class="ticks">
+              <li><svg class="i"><use href="#i-check"/></svg>Menu de opções interativo no WhatsApp</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Acesso ao cardápio completo pelo chat</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Consulta de status do pedido em tempo real</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Informa horário de funcionamento automaticamente</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Transferência para atendente humano quando necessário</li>
+            </ul>
+          </details>
         </div>
       </article>
 
-      <article class="card wide reveal">
-        <div class="media"><img class="desk" src="imagens/admin/admin-cardapio-digital.png" alt="Cardápio digital" loading="lazy" data-zoom></div>
+      <article class="card s3 reveal">
+        <div class="media">
+          <div class="browser">
+            <div class="browser-bar"><i></i><i></i><i></i><span>centralpedidosonline.com.br</span></div>
+            <img src="imagens/admin/tela-admin-2.png" alt="Resumo do dia no painel" loading="lazy" data-zoom>
+          </div>
+        </div>
         <div class="card-body">
-          <div class="ico"><svg class="i"><use href="#i-menu-book"/></svg></div>
-          <h3>Cardápio Digital Completo</h3>
-          <p>Cardápio online para clientes, garçons e balcão — tudo integrado em uma única plataforma.</p>
-          <ul class="ticks">
-            <li><svg class="i"><use href="#i-check"/></svg>Cliente faz o pedido pelo celular via QR Code</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Garçom registra pedidos direto da mesa</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Balcão visualiza e gerencia todos os pedidos</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Fotos, descrições e preços fáceis de editar</li>
-            <li><svg class="i"><use href="#i-check"/></svg>Categorias, complementos e variações configuráveis</li>
-          </ul>
+          <div class="card-title"><svg class="i"><use href="#i-chart"/></svg><h3>Resumo do dia</h3></div>
+          <p>Seus números de hoje sempre à vista, sem planilha e sem fazer conta.</p>
+          <details class="more">
+            <summary>Ver recursos <svg class="i"><use href="#i-down"/></svg></summary>
+            <ul class="ticks">
+              <li><svg class="i"><use href="#i-check"/></svg>Faturamento do dia e ticket médio</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Tempos médios de preparo e de entrega</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Pedidos por hora</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Entregas × retiradas</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Motoboys em rota</li>
+            </ul>
+          </details>
         </div>
       </article>
+
+      <article class="card s3 reveal">
+        <div class="media"><img class="desk" src="imagens/admin/admin-mesagarcom.png" alt="Tela de mesas e garçom" loading="lazy" data-zoom></div>
+        <div class="card-body">
+          <div class="card-title"><svg class="i"><use href="#i-qr"/></svg><h3>Mesas e garçom com QR Code</h3></div>
+          <p>Cada mesa tem seu próprio QR Code. O cliente escaneia e faz o pedido direto pelo celular.</p>
+          <details class="more">
+            <summary>Ver recursos <svg class="i"><use href="#i-down"/></svg></summary>
+            <ul class="ticks">
+              <li><svg class="i"><use href="#i-check"/></svg>QR Code exclusivo por mesa</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Pedido sem precisar chamar o garçom</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Garçom acompanha pedidos em tempo real</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Reduz erros e agiliza o atendimento</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Funciona em qualquer celular com câmera</li>
+            </ul>
+          </details>
+        </div>
+      </article>
+
+      <article class="card s3 reveal">
+        <div class="media"><img class="desk" src="imagens/admin/admin-cardapio-digital.png" alt="Cardápio digital" loading="lazy" data-zoom></div>
+        <div class="card-body">
+          <div class="card-title"><svg class="i"><use href="#i-book"/></svg><h3>Cardápio digital completo</h3></div>
+          <p>Cardápio online para clientes, garçons e balcão — tudo integrado em uma única plataforma.</p>
+          <details class="more">
+            <summary>Ver recursos <svg class="i"><use href="#i-down"/></svg></summary>
+            <ul class="ticks">
+              <li><svg class="i"><use href="#i-check"/></svg>Cliente faz o pedido pelo celular via QR Code</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Garçom registra pedidos direto da mesa</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Balcão visualiza e gerencia todos os pedidos</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Fotos, descrições e preços fáceis de editar</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Categorias, complementos e variações configuráveis</li>
+            </ul>
+          </details>
+        </div>
+      </article>
+
+      <article class="card s3 reveal">
+        <div class="media"><img class="desk" src="imagens/admin/personalizacao.png" alt="Personalização da loja" loading="lazy" data-zoom></div>
+        <div class="card-body">
+          <div class="card-title"><svg class="i"><use href="#i-brush"/></svg><h3>A cara da sua loja</h3></div>
+          <p>Logo, banner, cores, horários e taxas de entrega — cada loja com sua identidade e seu link.</p>
+          <details class="more">
+            <summary>Ver recursos <svg class="i"><use href="#i-down"/></svg></summary>
+            <ul class="ticks">
+              <li><svg class="i"><use href="#i-check"/></svg>Logo e banner próprios</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Link exclusivo da loja</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Horário de funcionamento configurável</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Área de cobertura para entrega</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Bairros e taxas personalizáveis</li>
+            </ul>
+          </details>
+        </div>
+      </article>
+    </div>
+
+    <div class="all-in reveal">
+      <div>
+        <h3>E ainda tem mais</h3>
+        <p>Recursos que já vêm em todos os planos.</p>
+      </div>
+      <ul class="ticks">
+        <li><svg class="i"><use href="#i-check"/></svg>Cupons de desconto</li>
+        <li><svg class="i"><use href="#i-check"/></svg>Controle de abertura e fechamento</li>
+        <li><svg class="i"><use href="#i-check"/></svg>Histórico em tempo real</li>
+        <li><svg class="i"><use href="#i-check"/></svg>Impressão automática de pedidos</li>
+        <li><svg class="i"><use href="#i-check"/></svg>Notificações no WhatsApp</li>
+        <li><svg class="i"><use href="#i-check"/></svg>Suporte prioritário</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Demonstração ao vivo -->
+<section id="demonstracao">
+  <div class="container">
+    <div class="demo-band reveal">
+      <div>
+        <span class="kicker">Demonstração ao vivo</span>
+        <h2 class="h2">Não acredite só nas imagens.<br>Teste agora.</h2>
+        <p class="lead">Navegue pela loja de demonstração como se fosse um cliente ou entre no painel do lojista — direto aqui na página, sem cadastro.</p>
+      </div>
+      <div class="demo-tiles">
+        <button type="button" class="tile" data-demo="cliente">
+          <span class="tile-ico"><svg class="i"><use href="#i-phone"/></svg></span>
+          <span><b>App do cliente</b><small>Monte um pedido como o seu cliente faria</small></span>
+          <svg class="i"><use href="#i-arrow"/></svg>
+        </button>
+        <button type="button" class="tile" data-demo="lojista">
+          <span class="tile-ico"><svg class="i"><use href="#i-monitor"/></svg></span>
+          <span><b>Painel do lojista</b><small>Veja os pedidos chegando e gerencie tudo</small></span>
+          <svg class="i"><use href="#i-arrow"/></svg>
+        </button>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- Planos -->
-<section class="plans" id="planos">
+<section class="section" id="planos">
   <div class="container">
-    <div class="section-head center reveal">
-      <span class="eyebrow">Planos</span>
-      <h2 class="title">Escolha o plano ideal para o seu negócio</h2>
-      <p class="lead">Comece com o essencial ou leve tudo. Você pode mudar de plano quando quiser.</p>
-      <div class="trial-strip"><svg class="i"><use href="#i-gift"/></svg><span><strong>Teste grátis por 7 dias</strong> em qualquer plano — sem cartão de crédito, sem compromisso.</span></div>
+    <div class="head center reveal">
+      <span class="kicker">Planos</span>
+      <h2 class="h2">Escolha o plano ideal para o seu negócio</h2>
+      <p class="lead">Comece com o essencial ou leve tudo. Todos incluem os recursos básicos.</p>
+      <div class="trial"><svg class="i"><use href="#i-gift"/></svg><span><strong>Teste grátis por 7 dias</strong> em qualquer plano — sem cartão de crédito, sem compromisso.</span></div>
     </div>
 
-    <div class="plan-grid reveal">
+    <div class="plans reveal">
       <div class="plan">
         <h3>Essencial</h3>
         <p class="plan-desc">Para quem quer começar a vender online com delivery e retirada.</p>
-        <div class="modules">
-          <div class="mod"><span class="dot"><svg class="i"><use href="#i-check"/></svg></span>Recursos básicos</div>
-          <div class="mod off"><span class="dot"><svg class="i"><use href="#i-minus"/></svg></span>Mesas e salão</div>
-          <div class="mod off"><span class="dot"><svg class="i"><use href="#i-minus"/></svg></span>Delivery e motoboys</div>
-        </div>
+        <ul class="mods">
+          <li><svg class="i"><use href="#i-check"/></svg>Recursos básicos</li>
+          <li class="off"><svg class="i"><use href="#i-minus"/></svg>Mesas e salão</li>
+          <li class="off"><svg class="i"><use href="#i-minus"/></svg>Delivery e motoboys</li>
+        </ul>
         <div class="plan-ctas">
           <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20plano%20Essencial" target="_blank" class="btn btn-line">Consultar preço</a>
-          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Essencial.%20Pode%20me%20ajudar%3F" target="_blank" class="btn btn-trial">Começar teste grátis →</a>
+          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Essencial.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial">Começar teste grátis</a>
         </div>
       </div>
 
       <div class="plan">
         <h3>Gourmet</h3>
         <p class="plan-desc">Para restaurantes com salão, mesas com QR Code e garçom digital.</p>
-        <div class="modules">
-          <div class="mod"><span class="dot"><svg class="i"><use href="#i-check"/></svg></span>Recursos básicos</div>
-          <div class="mod"><span class="dot"><svg class="i"><use href="#i-check"/></svg></span>Mesas e salão</div>
-          <div class="mod off"><span class="dot"><svg class="i"><use href="#i-minus"/></svg></span>Delivery e motoboys</div>
-        </div>
+        <ul class="mods">
+          <li><svg class="i"><use href="#i-check"/></svg>Recursos básicos</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Mesas e salão</li>
+          <li class="off"><svg class="i"><use href="#i-minus"/></svg>Delivery e motoboys</li>
+        </ul>
         <div class="plan-ctas">
           <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20plano%20Gourmet" target="_blank" class="btn btn-line">Consultar preço</a>
-          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Gourmet.%20Pode%20me%20ajudar%3F" target="_blank" class="btn btn-trial">Começar teste grátis →</a>
+          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Gourmet.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial">Começar teste grátis</a>
         </div>
       </div>
 
       <div class="plan">
         <h3>Express</h3>
         <p class="plan-desc">Para delivery com gestão de motoboys e controle de entregas.</p>
-        <div class="modules">
-          <div class="mod"><span class="dot"><svg class="i"><use href="#i-check"/></svg></span>Recursos básicos</div>
-          <div class="mod off"><span class="dot"><svg class="i"><use href="#i-minus"/></svg></span>Mesas e salão</div>
-          <div class="mod"><span class="dot"><svg class="i"><use href="#i-check"/></svg></span>Delivery e motoboys</div>
-        </div>
+        <ul class="mods">
+          <li><svg class="i"><use href="#i-check"/></svg>Recursos básicos</li>
+          <li class="off"><svg class="i"><use href="#i-minus"/></svg>Mesas e salão</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Delivery e motoboys</li>
+        </ul>
         <div class="plan-ctas">
           <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20plano%20Express" target="_blank" class="btn btn-line">Consultar preço</a>
-          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Express.%20Pode%20me%20ajudar%3F" target="_blank" class="btn btn-trial">Começar teste grátis →</a>
+          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Express.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial">Começar teste grátis</a>
         </div>
       </div>
 
-      <div class="plan featured">
-        <span class="plan-badge">Mais completo</span>
+      <div class="plan hl">
+        <span class="plan-tag">Mais completo</span>
         <h3>Master</h3>
         <p class="plan-desc">Solução completa com tudo incluso para gestão total do seu negócio.</p>
-        <div class="modules">
-          <div class="mod"><span class="dot"><svg class="i"><use href="#i-check"/></svg></span>Recursos básicos</div>
-          <div class="mod"><span class="dot"><svg class="i"><use href="#i-check"/></svg></span>Mesas e salão</div>
-          <div class="mod"><span class="dot"><svg class="i"><use href="#i-check"/></svg></span>Delivery e motoboys</div>
-        </div>
+        <ul class="mods">
+          <li><svg class="i"><use href="#i-check"/></svg>Recursos básicos</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Mesas e salão</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Delivery e motoboys</li>
+        </ul>
         <div class="plan-ctas">
           <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20plano%20Master" target="_blank" class="btn btn-brand">Consultar preço</a>
-          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Master.%20Pode%20me%20ajudar%3F" target="_blank" class="btn btn-trial">Começar teste grátis →</a>
+          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Master.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial">Começar teste grátis</a>
         </div>
       </div>
     </div>
 
-    <div class="compare reveal">
-      <div class="included">
-        <h3>Incluso em todos os planos</h3>
-        <p>Os recursos básicos vêm em qualquer plano, do Essencial ao Master.</p>
-        <div class="chips">
-          <span><svg class="i"><use href="#i-check"/></svg>Cardápio online por categorias</span>
-          <span><svg class="i"><use href="#i-check"/></svg>Pedidos para entrega e retirada</span>
-          <span><svg class="i"><use href="#i-check"/></svg>Pagamento online (Pix e cartão)</span>
-          <span><svg class="i"><use href="#i-check"/></svg>Controle de troco</span>
-          <span><svg class="i"><use href="#i-check"/></svg>Painel administrativo completo</span>
-          <span><svg class="i"><use href="#i-check"/></svg>Notificações no WhatsApp</span>
-          <span><svg class="i"><use href="#i-check"/></svg>Impressão automática de pedidos</span>
-          <span><svg class="i"><use href="#i-check"/></svg>Histórico em tempo real</span>
-          <span><svg class="i"><use href="#i-check"/></svg>Controle de abertura e fechamento</span>
-          <span><svg class="i"><use href="#i-check"/></svg>Cupons de desconto</span>
-          <span><svg class="i"><use href="#i-check"/></svg>Suporte prioritário</span>
-        </div>
-      </div>
-
+    <details class="compare reveal">
+      <summary>Comparar todos os recursos <svg class="i"><use href="#i-down"/></svg></summary>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th scope="col">Módulos</th><th scope="col">Essencial</th><th scope="col">Gourmet</th><th scope="col">Express</th><th scope="col" class="hl">Master</th></tr>
+            <tr><th scope="col">Recurso</th><th scope="col">Essencial</th><th scope="col">Gourmet</th><th scope="col">Express</th><th scope="col" class="hl">Master</th></tr>
           </thead>
           <tbody>
+            <tr><td class="grp" colspan="5">Recursos básicos</td></tr>
+            <tr><td>Cardápio online por categorias</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Pedidos para entrega e retirada</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Pagamento online (Pix e cartão)</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Controle de troco</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Painel administrativo completo</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Notificações no WhatsApp</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Impressão automática de pedidos</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Histórico em tempo real</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Controle de abertura e fechamento</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Cupons de desconto</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Suporte prioritário</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td class="grp" colspan="5">Mesas e salão</td></tr>
-            <tr><td>Mesas com QR Code individual</td><td class="no"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="yes"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="no"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="yes hl"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
-            <tr><td>Sistema de garçom digital</td><td class="no"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="yes"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="no"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="yes hl"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
-            <tr><td>Comanda eletrônica por mesa</td><td class="no"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="yes"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="no"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="yes hl"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Mesas com QR Code individual</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Sistema de garçom digital</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Comanda eletrônica por mesa</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td class="grp" colspan="5">Delivery e motoboys</td></tr>
-            <tr><td>Painel exclusivo para motoboys</td><td class="no"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="no"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="yes"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="yes hl"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
-            <tr><td>Controle de entregas em tempo real</td><td class="no"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="no"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="yes"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="yes hl"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
-            <tr><td>Notificação de chegada ao cliente</td><td class="no"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="no"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="yes"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="yes hl"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Painel exclusivo para motoboys</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Controle de entregas em tempo real</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Notificação de chegada ao cliente</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
           </tbody>
         </table>
       </div>
-    </div>
+    </details>
   </div>
 </section>
 
-<!-- Como funciona -->
-<section class="how" id="como-funciona">
+<!-- Como começar -->
+<section class="section" style="padding-top:0">
   <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow">Como funciona</span>
-      <h2 class="title">Simples de configurar,<br>fácil de usar.</h2>
+    <div class="head reveal">
+      <span class="kicker">Como começar</span>
+      <h2 class="h2">Sua loja online em 4 passos.</h2>
     </div>
-    <div class="steps">
-      <div class="step reveal"><div class="step-num">01</div><h3>Contrate o plano</h3><p>Entre em contato pelo WhatsApp e escolha o plano ideal para o seu negócio.</p></div>
-      <div class="step reveal"><div class="step-num">02</div><h3>Configure sua loja</h3><p>Adicione cardápio, logo, horários e formas de entrega em poucos minutos.</p></div>
-      <div class="step reveal"><div class="step-num">03</div><h3>Compartilhe o link</h3><p>Envie o link da sua loja pelo WhatsApp, Instagram ou onde quiser.</p></div>
-      <div class="step reveal"><div class="step-num">04</div><h3>Receba pedidos</h3><p>Gerencie tudo pelo painel e acompanhe cada pedido em tempo real.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA + Contato -->
-<section class="cta" id="contato">
-  <div class="container">
-    <div class="cta-box on-night reveal">
-      <div>
-        <span class="eyebrow">Fale com a gente</span>
-        <h2>Pronto para vender mais online?</h2>
-        <p class="lead">Tire suas dúvidas ou contrate o sistema diretamente pelo WhatsApp ou e-mail. Configuração rápida, suporte completo e plataforma pronta para o seu negócio crescer.</p>
-        <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20contratar%20o%20sistema%20de%20pedidos%20online." target="_blank" class="btn btn-brand">Falar no WhatsApp <svg class="i"><use href="#i-arrow"/></svg></a>
-      </div>
-      <div class="contact-cards">
-        <a href="https://wa.me/5545999723256" target="_blank" class="contact-card">
-          <span class="ico g"><svg class="i"><use href="#i-chat"/></svg></span>
-          <span><small>WhatsApp</small><b>(45) 99972-3256</b></span>
-          <svg class="i"><use href="#i-arrow"/></svg>
-        </a>
-        <a href="mailto:taynagon7302@gmail.com" class="contact-card">
-          <span class="ico"><svg class="i"><use href="#i-mail"/></svg></span>
-          <span><small>E-mail</small><b>taynagon7302@gmail.com</b></span>
-          <svg class="i"><use href="#i-arrow"/></svg>
-        </a>
-        <a href="https://instagram.com/taynagoncaalves" target="_blank" class="contact-card">
-          <span class="ico"><svg class="i"><use href="#i-insta"/></svg></span>
-          <span><small>Instagram</small><b>@taynagoncaalves</b></span>
-          <svg class="i"><use href="#i-arrow"/></svg>
-        </a>
-      </div>
+    <div class="start">
+      <div class="start-step reveal"><span class="n-badge">1</span><h3>Contrate o plano</h3><p>Entre em contato pelo WhatsApp e escolha o plano ideal para o seu negócio.</p></div>
+      <div class="start-step reveal"><span class="n-badge">2</span><h3>Configure sua loja</h3><p>Adicione cardápio, logo, horários e formas de entrega em poucos minutos.</p></div>
+      <div class="start-step reveal"><span class="n-badge">3</span><h3>Compartilhe o link</h3><p>Envie o link da sua loja pelo WhatsApp, Instagram ou onde quiser.</p></div>
+      <div class="start-step reveal"><span class="n-badge">4</span><h3>Receba pedidos</h3><p>Gerencie tudo pelo painel e acompanhe cada pedido em tempo real.</p></div>
     </div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section class="faq" id="faq">
+<section class="section" id="faq" style="padding-top:0">
   <div class="container faq-grid">
     <div class="faq-side reveal">
-      <span class="eyebrow">Dúvidas frequentes</span>
-      <h2 class="title">Perguntas frequentes</h2>
-      <p class="lead">Tudo que você precisa saber antes de começar. Não achou sua resposta? <a href="https://wa.me/5545999723256" target="_blank" class="accent" style="font-weight:600">Chama no WhatsApp.</a></p>
+      <span class="kicker">Dúvidas</span>
+      <h2 class="h2">Perguntas frequentes</h2>
+      <p class="lead">Tudo que você precisa saber antes de começar.</p>
+      <div class="help">
+        <b>Ainda com dúvidas?</b>
+        <p>Fale com a gente pelo WhatsApp. Respondemos rapidinho.</p>
+        <a href="https://wa.me/5545999723256" target="_blank" class="btn btn-line"><svg class="i"><use href="#i-chat"/></svg> Chamar no WhatsApp</a>
+      </div>
     </div>
     <div class="faq-list reveal">
       <details name="faq" open>
-        <summary>Preciso instalar algum aplicativo?<span class="pm"><svg class="i"><use href="#i-plus"/></svg></span></summary>
+        <summary>Preciso instalar algum aplicativo?<svg class="i"><use href="#i-plus"/></svg></summary>
         <p>Não. O sistema funciona 100% pelo navegador, tanto para o restaurante quanto para o cliente. Basta acessar o link e usar — sem download, sem instalação.</p>
       </details>
       <details name="faq">
-        <summary>Quanto tempo leva para o sistema estar funcionando?<span class="pm"><svg class="i"><use href="#i-plus"/></svg></span></summary>
+        <summary>Quanto tempo leva para o sistema estar funcionando?<svg class="i"><use href="#i-plus"/></svg></summary>
         <p>A configuração é rápida. Em poucos minutos seu cardápio digital já está online e pronto para receber pedidos. Nossa equipe te acompanha em todo o processo.</p>
       </details>
       <details name="faq">
-        <summary>O sistema funciona para delivery e mesas ao mesmo tempo?<span class="pm"><svg class="i"><use href="#i-plus"/></svg></span></summary>
+        <summary>O sistema funciona para delivery e mesas ao mesmo tempo?<svg class="i"><use href="#i-plus"/></svg></summary>
         <p>Sim! Você pode ativar delivery, mesas com QR Code e retirada no balcão — todos ao mesmo tempo, com painel único de gestão. Cada pedido chega separado por tipo.</p>
       </details>
       <details name="faq">
-        <summary>Como funciona o pagamento pelo sistema?<span class="pm"><svg class="i"><use href="#i-plus"/></svg></span></summary>
+        <summary>Como funciona o pagamento pelo sistema?<svg class="i"><use href="#i-plus"/></svg></summary>
         <p>O cliente pode pagar via PIX diretamente no pedido. O pagamento é confirmado automaticamente e o pedido avança para preparo sem precisar de nenhuma ação manual.</p>
       </details>
       <details name="faq">
-        <summary>Existe suporte disponível se eu tiver dúvidas?<span class="pm"><svg class="i"><use href="#i-plus"/></svg></span></summary>
+        <summary>Existe suporte disponível se eu tiver dúvidas?<svg class="i"><use href="#i-plus"/></svg></summary>
         <p>Sim, oferecemos suporte via WhatsApp 24 horas por dia. Nossa equipe está disponível para tirar dúvidas, ajudar nas configurações e resolver qualquer problema.</p>
       </details>
       <details name="faq">
-        <summary>O sistema imprime os pedidos automaticamente?<span class="pm"><svg class="i"><use href="#i-plus"/></svg></span></summary>
+        <summary>O sistema imprime os pedidos automaticamente?<svg class="i"><use href="#i-plus"/></svg></summary>
         <p>Sim! Assim que o cliente finaliza o pedido, ele é impresso automaticamente na sua impressora térmica — sem precisar clicar em nada. Funciona para delivery, mesa e retirada no balcão. A configuração é simples e não exige instalação de drivers.</p>
       </details>
       <details name="faq">
-        <summary>Posso testar antes de contratar?<span class="pm"><svg class="i"><use href="#i-plus"/></svg></span></summary>
-        <p>Claro! Entre em contato pelo WhatsApp e vamos te mostrar o sistema funcionando ao vivo. Você verá todas as funcionalidades antes de tomar qualquer decisão.</p>
+        <summary>Posso testar antes de contratar?<svg class="i"><use href="#i-plus"/></svg></summary>
+        <p>Claro! Você pode testar agora mesmo na demonstração ao vivo aqui da página, ou começar o teste grátis de 7 dias. Se preferir, entre em contato pelo WhatsApp e mostramos o sistema funcionando ao vivo.</p>
       </details>
     </div>
   </div>
 </section>
 
+<!-- CTA final + contato -->
+<section id="contato">
+  <div class="container">
+    <div class="final reveal">
+      <span class="kicker">Vamos começar?</span>
+      <h2 class="h2">Pronto para vender mais online?</h2>
+      <p class="lead" style="margin:0 auto">Configuração rápida, suporte completo e plataforma pronta para o seu negócio crescer.</p>
+      <div class="hero-ctas">
+        <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20contratar%20o%20sistema%20de%20pedidos%20online." target="_blank" class="btn btn-brand btn-lg">Falar no WhatsApp <svg class="i"><use href="#i-arrow"/></svg></a>
+        <button type="button" class="btn btn-line btn-lg" data-demo="cliente"><svg class="i"><use href="#i-play"/></svg> Testar ao vivo</button>
+      </div>
+      <div class="contacts">
+        <a href="https://wa.me/5545999723256" target="_blank" class="contact">
+          <span class="c-ico g"><svg class="i"><use href="#i-chat"/></svg></span>
+          <span><small>WhatsApp</small><b>(45) 99972-3256</b></span>
+        </a>
+        <a href="mailto:taynagon7302@gmail.com" class="contact">
+          <span class="c-ico"><svg class="i"><use href="#i-mail"/></svg></span>
+          <span><small>E-mail</small><b>taynagon7302@gmail.com</b></span>
+        </a>
+        <a href="https://instagram.com/taynagoncaalves" target="_blank" class="contact">
+          <span class="c-ico"><svg class="i"><use href="#i-insta"/></svg></span>
+          <span><small>Instagram</small><b>@taynagoncaalves</b></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
 <!-- Footer -->
 <footer>
   <div class="container">
-    <div class="foot-grid">
+    <div class="foot">
       <div class="foot-brand">
         <a href="#" class="brand" aria-label="Central de Pedidos Online">
           <span class="brand-mark"><img src="imagens/icon/icon.png" alt=""></span>
-          <span class="brand-name"><span>Central de <span class="accent">Pedidos</span></span><small>Online</small></span>
+          <span class="brand-name"><span>Central de <span class="brand-c">Pedidos</span></span><small>Online</small></span>
         </a>
         <p>Plataforma completa de pedidos online para restaurantes, lanchonetes e delivery com gestão de mesas, motoboys e WhatsApp.</p>
         <div class="social">
@@ -1161,9 +1141,9 @@
       <div>
         <h4>Sistema</h4>
         <ul>
-          <li><a href="#funcionalidades">Funcionalidades</a></li>
-          <li><a href="#preview">Ver o sistema</a></li>
           <li><a href="#como-funciona">Como funciona</a></li>
+          <li><a href="#recursos">Recursos</a></li>
+          <li><a href="#demonstracao">Demonstração</a></li>
           <li><a href="#planos">Planos</a></li>
         </ul>
       </div>
@@ -1185,7 +1165,7 @@
       </div>
     </div>
     <div class="foot-bottom">
-      <span>&copy; 2026 Central Pedidos Online. Todos os direitos reservados.</span>
+      <span>&copy; 2026 Central de Pedidos Online. Todos os direitos reservados.</span>
       <span>Feito para restaurantes que querem crescer.</span>
     </div>
   </div>
@@ -1200,8 +1180,8 @@
 <div class="cookie" id="cookie" role="region" aria-label="Aviso de cookies">
   Usamos cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa <a data-open="privacyModal">Política de Privacidade</a>.
   <div class="cookie-actions">
-    <button type="button" class="dec" id="cookieNo">Recusar</button>
-    <button type="button" class="acc" id="cookieYes">Aceitar</button>
+    <button type="button" class="btn btn-ghost" id="cookieNo">Recusar</button>
+    <button type="button" class="btn btn-ink" id="cookieYes">Aceitar</button>
   </div>
 </div>
 
@@ -1322,9 +1302,11 @@
 <script>
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ── Menu mobile ──
+  // ── Nav: borda ao rolar e menu mobile ──
+  const nav = document.getElementById('nav');
   const burger = document.getElementById('burger');
   const sheet = document.getElementById('sheet');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 8), { passive: true });
   function setSheet(open) {
     sheet.classList.toggle('open', open);
     burger.setAttribute('aria-expanded', open);
@@ -1332,87 +1314,63 @@
   burger.addEventListener('click', () => setSheet(!sheet.classList.contains('open')));
   sheet.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setSheet(false)));
 
-  // ── Celular do hero ──
+  // ── Hero: celular trocando de tela e notificação ao vivo ──
   const phoneImgs = document.querySelectorAll('#heroPhone img');
   let phoneIdx = 0;
+  const events = [
+    { ico: 'i-bag',     t: 'Novo pedido #319',      s: 'Delivery · R$ 42,00' },
+    { ico: 'i-zap',     t: 'PIX aprovado',          s: 'Pagamento confirmado na hora' },
+    { ico: 'i-printer', t: 'Pedido impresso',       s: 'Cozinha · 2 itens' },
+    { ico: 'i-bike',    t: 'Motoboy a caminho',     s: 'Entrega aceita pelo Dimitri' },
+    { ico: 'i-chat',    t: 'Cliente notificado',    s: '“Seu pedido saiu para entrega”', g: true },
+    { ico: 'i-qr',      t: 'Mesa 07 fez um pedido', s: 'Via QR Code · R$ 86,50' },
+  ];
+  let evIdx = 0;
+  const liveIco = document.getElementById('liveIco');
+  const liveTxt = document.getElementById('liveTxt');
+  function nextEvent() {
+    evIdx = (evIdx + 1) % events.length;
+    const e = events[evIdx];
+    liveTxt.classList.add('swap');
+    setTimeout(() => {
+      liveIco.className = 'live-ico' + (e.g ? ' g' : '');
+      liveIco.querySelector('use').setAttribute('href', '#' + e.ico);
+      liveTxt.innerHTML = `<b>${e.t}</b><small>${e.s}</small>`;
+      liveTxt.classList.remove('swap');
+    }, 280);
+  }
   if (!reduceMotion) {
     setInterval(() => {
       phoneImgs[phoneIdx].classList.remove('on');
       phoneIdx = (phoneIdx + 1) % phoneImgs.length;
       phoneImgs[phoneIdx].classList.add('on');
     }, 3000);
+    setInterval(nextEvent, 2800);
   }
 
-  // ── Feed de notificações ao vivo ──
-  const feed = document.getElementById('feed');
-  const events = [
-    { ico: 'i-bag',     t: 'Novo pedido #319',     s: 'Delivery · R$ 42,00' },
-    { ico: 'i-zap',     t: 'PIX aprovado',         s: 'Pagamento confirmado automaticamente' },
-    { ico: 'i-printer', t: 'Pedido impresso',      s: 'Cozinha · 2 itens' },
-    { ico: 'i-bike',    t: 'Motoboy a caminho',    s: 'Entrega aceita pelo Dimitri' },
-    { ico: 'i-chat',    t: 'Cliente notificado',   s: '“Seu pedido saiu para entrega”', g: true },
-    { ico: 'i-qr',      t: 'Mesa 07 fez um pedido', s: 'Via QR Code · R$ 86,50' },
-  ];
-  let evIdx = 0;
-  function pushEvent() {
-    const e = events[evIdx % events.length];
-    evIdx++;
-    const el = document.createElement('div');
-    el.className = 'toast';
-    el.innerHTML = `<span class="toast-ico${e.g ? ' g' : ''}"><svg class="i"><use href="#${e.ico}"/></svg></span><span><b>${e.t}</b><small>${e.s}</small></span><time>agora</time>`;
-    feed.prepend(el);
-    const toasts = feed.querySelectorAll('.toast:not(.out)');
-    if (toasts.length > 3) {
-      const old = toasts[toasts.length - 1];
-      old.classList.add('out');
-      old.addEventListener('animationend', () => old.remove(), { once: true });
-    }
+  // ── Jornada do pedido: avança sozinha enquanto está na tela ──
+  const jList = document.getElementById('jSteps');
+  const jSteps = [...jList.querySelectorAll('.j-step')];
+  const jPanes = [...document.querySelectorAll('.j-pane')];
+  let jIdx = 0, jTimer = null, jAuto = !reduceMotion, jVisible = false;
+  function jRun() {
+    clearTimeout(jTimer);
+    jList.classList.remove('run');
+    if (!jAuto || !jVisible) return;
+    void jList.offsetWidth; // reinicia a barra de progresso
+    jList.classList.add('run');
+    jTimer = setTimeout(() => jGo((jIdx + 1) % jSteps.length), 6000);
   }
-  pushEvent(); pushEvent(); pushEvent();
-  if (!reduceMotion) setInterval(pushEvent, 2600);
+  function jGo(i) {
+    jIdx = i;
+    jSteps.forEach((s, k) => s.setAttribute('aria-selected', k === i));
+    jPanes.forEach((p, k) => p.classList.toggle('on', k === i));
+    jRun();
+  }
+  jSteps.forEach((s, i) => s.addEventListener('click', () => { jAuto = false; jGo(i); }));
+  new IntersectionObserver(([entry]) => { jVisible = entry.isIntersecting; jRun(); }, { threshold: 0.35 }).observe(jList);
 
-  // ── Tour ──
-  const stage = document.getElementById('stage');
-  const stageImg = document.getElementById('stageImg');
-  const stageFrame = document.getElementById('stageFrame');
-  let view = 'cliente';
-
-  function currentTab() {
-    return document.querySelector(`[data-list="${view}"] [aria-selected="true"]`);
-  }
-  function renderStage() {
-    const tab = currentTab();
-    const isDesk = view === 'lojista';
-    const src = isDesk ? tab.dataset.desk : `imagens/cliente/temaclaro/${tab.dataset.img}.png`;
-    if (stageImg.getAttribute('src') === src) return;
-    stageFrame.classList.add('fading');
-    const next = new Image();
-    next.onload = next.onerror = () => {
-      stageImg.src = src;
-      stageImg.alt = tab.querySelector('b').textContent;
-      stageImg.classList.toggle('desk', isDesk);
-      stageFrame.classList.toggle('wide', isDesk);
-      // Prints sem moldura própria (data-frame) ganham a moldura de navegador
-      stageFrame.classList.toggle('browser', 'frame' in tab.dataset);
-      requestAnimationFrame(() => stageFrame.classList.remove('fading'));
-    };
-    next.src = src;
-  }
-  document.querySelectorAll('.seg button').forEach(b => {
-    b.addEventListener('click', () => {
-      view = b.dataset.view;
-      document.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed', x === b));
-      document.querySelectorAll('.tour-list').forEach(l => l.hidden = l.dataset.list !== view);
-      renderStage();
-    });
-  });
-  document.querySelectorAll('.tour-tab').forEach(t => {
-    t.addEventListener('click', () => {
-      t.parentElement.querySelectorAll('.tour-tab').forEach(x => x.setAttribute('aria-selected', x === t));
-      renderStage();
-    });
-  });
-  // ── Demonstração ao vivo ──
+  // ── Demonstração ao vivo (sistema real dentro da página) ──
   const DEMO_URLS = {
     cliente: 'https://teste.centralpedidosonline.com.br',
     lojista: 'https://teste.centralpedidosonline.com.br/admin',
@@ -1429,6 +1387,7 @@
     if (demoFrame.getAttribute('src') !== DEMO_URLS[v]) demoFrame.src = DEMO_URLS[v];
   }
   document.querySelectorAll('[data-demo]').forEach(b => b.addEventListener('click', () => {
+    setSheet(false);
     setDemoView(b.dataset.demo);
     demo.showModal();
   }));
@@ -1447,29 +1406,21 @@
     lbImg.alt = img.alt;
     lightbox.showModal();
   }
-  stageImg.addEventListener('click', () => zoom(stageImg));
-  document.querySelectorAll('img[data-zoom]').forEach(img => {
-    if (img.closest('[data-zoom-group]')) return;
-    img.addEventListener('click', () => zoom(img));
-  });
+  document.querySelectorAll('img[data-zoom]').forEach(img => img.addEventListener('click', () => zoom(img)));
   // No slideshow do bot as imagens ficam sobrepostas: amplia a que está visível
   document.querySelectorAll('[data-zoom-group]').forEach(group => {
-    group.style.cursor = 'zoom-in';
     group.addEventListener('click', () => {
       const imgs = [...group.querySelectorAll('img')];
-      const visible = imgs.reduce((a, b) => (+getComputedStyle(b).opacity > +getComputedStyle(a).opacity ? b : a));
-      zoom(visible);
+      zoom(imgs.reduce((a, b) => (+getComputedStyle(b).opacity > +getComputedStyle(a).opacity ? b : a)));
     });
   });
   lightbox.addEventListener('click', e => { if (e.target !== lbImg) lightbox.close(); });
 
-  // ── Modais legais ──
-  document.querySelectorAll('[data-open]').forEach(el => {
-    el.addEventListener('click', e => {
-      e.preventDefault();
-      document.getElementById(el.dataset.open).showModal();
-    });
-  });
+  // ── Janelas legais ──
+  document.querySelectorAll('[data-open]').forEach(el => el.addEventListener('click', e => {
+    e.preventDefault();
+    document.getElementById(el.dataset.open).showModal();
+  }));
   document.querySelectorAll('dialog').forEach(d => {
     d.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => d.close()));
     d.addEventListener('click', e => { if (e.target === d) d.close(); });
@@ -1487,18 +1438,15 @@
   document.getElementById('cookieYes').addEventListener('click', () => cookieDone('accepted'));
   document.getElementById('cookieNo').addEventListener('click', () => cookieDone('declined'));
 
-  // ── Animações de entrada ──
+  // ── Entrada suave das seções ──
   const revealObs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       entry.target.classList.add('in');
       revealObs.unobserve(entry.target);
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.reveal').forEach((el, i) => {
-    el.style.transitionDelay = (i % 3) * 80 + 'ms';
-    revealObs.observe(el);
-  });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
   // ── Link ativo no menu ──
   const navLinks = document.querySelectorAll('.nav-links a');
