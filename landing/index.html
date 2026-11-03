@@ -122,9 +122,12 @@
       box-shadow: 0 10px 40px -12px rgba(0,0,0,.35);
       transition: box-shadow .3s;
     }
-    /* logo.png é quadrado com muita margem transparente: recorta a área útil */
-    .nav-logo { display: block; height: 46px; width: 112px; overflow: hidden; }
-    .nav-logo img { height: 122px; width: 122px; max-width: none; margin: -35px 0 0 -6px; }
+    /* Marca: icon.png é quadrado com margem transparente, então recorta só o carrinho */
+    .brand { display: inline-flex; align-items: center; gap: 10px; }
+    .brand-mark { display: block; width: 50px; height: 34px; overflow: hidden; flex-shrink: 0; }
+    .brand-mark img { width: 70px; height: 70px; max-width: none; margin: -16px 0 0 -11px; }
+    .brand-name { display: flex; flex-direction: column; font-family: var(--display); font-size: 19px; font-weight: 800; line-height: 1; letter-spacing: -0.02em; color: var(--ink); white-space: nowrap; }
+    .brand-name small { margin-top: 4px; font-family: var(--body); font-size: 10px; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; color: var(--muted); }
     .nav-links { display: flex; gap: 4px; list-style: none; }
     .nav-links a { display: block; padding: 8px 14px; border-radius: 999px; font-size: 15px; font-weight: 500; color: var(--ink-2); transition: background .2s, color .2s; }
     .nav-links a:hover, .nav-links a.active { background: var(--surface-2); color: var(--ink); }
@@ -414,8 +417,10 @@
     /* ── Footer ── */
     footer { border-top: 1px solid var(--line); background: var(--surface); padding: 64px 0 28px; }
     .foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px; }
-    .foot-brand .logo-crop { display: block; height: 62px; width: 150px; overflow: hidden; margin-bottom: 14px; }
-    .foot-brand img { height: 164px; width: 164px; max-width: none; margin: -47px 0 0 -8px; }
+    .foot-brand .brand { margin-bottom: 16px; }
+    .foot-brand .brand-mark { width: 66px; height: 45px; }
+    .foot-brand .brand-mark img { width: 92px; height: 92px; margin: -21px 0 0 -14px; }
+    .foot-brand .brand-name { font-size: 24px; }
     .foot-brand p { font-size: 14.5px; color: var(--muted); max-width: 320px; }
     .social { display: flex; gap: 8px; margin-top: 18px; }
     .social a { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: var(--surface-2); transition: background .2s, color .2s; }
@@ -552,8 +557,7 @@
       .container { padding: 0 16px; }
       .nav-wrap { top: 10px; padding: 0 10px; }
       .nav { height: 60px; padding: 0 6px 0 12px; border-radius: 18px; }
-      .nav-logo { height: 40px; width: 98px; }
-      .nav-logo img { height: 106px; width: 106px; margin: -30px 0 0 -5px; }
+      .brand-name { font-size: 17px; }
       .nav-cta { display: none; }
       .hero { padding-top: 116px; }
       .hero-actions .btn { flex: 1 1 100%; }
@@ -633,7 +637,10 @@
 <!-- Nav -->
 <div class="nav-wrap">
   <nav class="nav" aria-label="Principal">
-    <a href="#" class="nav-logo"><img src="logo.png" alt="Central Pedidos Online"></a>
+    <a href="#" class="brand" aria-label="Central de Pedidos Online">
+      <span class="brand-mark"><img src="imagens/icon/icon.png" alt=""></span>
+      <span class="brand-name"><span>Central de <span class="accent">Pedidos</span></span><small>Online</small></span>
+    </a>
     <ul class="nav-links">
       <li><a href="#preview">Veja o sistema</a></li>
       <li><a href="#funcionalidades">Funcionalidades</a></li>
@@ -1140,7 +1147,10 @@
   <div class="container">
     <div class="foot-grid">
       <div class="foot-brand">
-        <span class="logo-crop"><img src="logo.png" alt="Central Pedidos Online"></span>
+        <a href="#" class="brand" aria-label="Central de Pedidos Online">
+          <span class="brand-mark"><img src="imagens/icon/icon.png" alt=""></span>
+          <span class="brand-name"><span>Central de <span class="accent">Pedidos</span></span><small>Online</small></span>
+        </a>
         <p>Plataforma completa de pedidos online para restaurantes, lanchonetes e delivery com gestão de mesas, motoboys e WhatsApp.</p>
         <div class="social">
           <a href="https://wa.me/5545999723256" target="_blank" aria-label="WhatsApp"><svg class="i"><use href="#i-chat"/></svg></a>
