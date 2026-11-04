@@ -155,8 +155,12 @@
     .browser-bar span { margin: 0 auto; padding: 2px 16px; border-radius: 6px; background: var(--surface); border: 1px solid var(--line); font-size: 11.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .browser img { width: 100%; height: auto; }
     .stage .browser { width: 86%; text-align: left; }
-    .stage-phone { position: absolute; right: -2%; bottom: 0; width: 27%; aspect-ratio: 1080 / 1350; filter: drop-shadow(0 30px 40px rgba(12,12,14,.25)); }
-    .stage-phone img { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity .7s var(--ease); }
+    /* Moldura de celular para prints puros da tela (738×1600) */
+    .phone { aspect-ratio: 738 / 1600; padding: 7px; border-radius: 34px; background: #111113; box-shadow: 0 0 0 1px #2A2A2E inset, 0 30px 50px -18px rgba(12,12,14,.4); }
+    .phone-screen { position: relative; width: 100%; height: 100%; border-radius: 27px; overflow: hidden; background: #fff; }
+    .phone-screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .stage-phone { position: absolute; right: 1%; bottom: 0; width: 19%; }
+    .stage-phone img { opacity: 0; transition: opacity .7s var(--ease); }
     .stage-phone img.on { opacity: 1; }
     .live {
       position: absolute; left: -3%; top: 26%; z-index: 2; min-width: 250px;
@@ -208,7 +212,9 @@
     }
     .j-pane { position: absolute; inset: 0; display: grid; place-items: center; padding: 28px; opacity: 0; transform: scale(.97); transition: opacity .45s var(--ease), transform .45s var(--ease); pointer-events: none; }
     .j-pane.on { opacity: 1; transform: none; pointer-events: auto; }
-    .j-pane img { height: 100%; width: auto; max-height: 560px; object-fit: contain; filter: drop-shadow(0 20px 30px rgba(12,12,14,.18)); cursor: zoom-in; }
+    .j-pane > img { height: 100%; width: auto; max-height: 560px; object-fit: contain; filter: drop-shadow(0 20px 30px rgba(12,12,14,.18)); cursor: zoom-in; }
+    .j-phone { height: 100%; max-height: 520px; }
+    .j-phone img { cursor: zoom-in; }
 
     .ticks { list-style: none; display: grid; gap: 8px; }
     .ticks li { display: flex; gap: 10px; font-size: 14.5px; color: var(--ink-2); line-height: 1.45; }
@@ -448,7 +454,8 @@
       .burger { display: inline-flex; }
       .journey { grid-template-columns: 1fr; gap: 28px; }
       .j-view { height: 480px; order: -1; }
-      .j-pane img { max-height: 440px; }
+      .j-pane > img { max-height: 440px; }
+      .j-phone { max-height: 420px; }
       .grid6 { grid-template-columns: repeat(2, 1fr); }
       .card, .card.s3 { grid-column: span 1; }
       .card.s4 { grid-column: span 2; }
@@ -475,7 +482,8 @@
       .stage .browser { width: 100%; }
       .browser-bar { height: 26px; }
       .browser-bar span { font-size: 10px; }
-      .stage-phone { width: 38%; right: -4%; bottom: 0; }
+      .stage-phone { width: 27%; right: 0; bottom: 0; padding: 5px; border-radius: 22px; }
+      .stage-phone .phone-screen { border-radius: 17px; }
       .live { left: 0; top: auto; bottom: 0; min-width: 0; max-width: 64%; padding: 9px 12px 9px 9px; gap: 9px; border-radius: 13px; }
       .live-ico { width: 30px; height: 30px; border-radius: 9px; }
       .live-ico .i { width: 15px; height: 15px; }
@@ -485,7 +493,8 @@
       .int-list { justify-content: center; gap: 10px 20px; }
       .int-list span { font-size: 14px; }
       .j-view { height: 400px; border-radius: 22px; }
-      .j-pane img { max-height: 360px; }
+      .j-pane > img { max-height: 360px; }
+      .j-phone { max-height: 340px; }
       .printer { transform: scale(.85); }
       .j-step { padding: 16px 16px 16px 56px; }
       .j-num { left: 16px; top: 16px; }
@@ -611,12 +620,12 @@
         <div class="browser-bar"><i></i><i></i><i></i><span>centralpedidosonline.com.br</span></div>
         <img src="imagens/admin/tela-admin-1.png" alt="Painel do lojista com os pedidos em tempo real">
       </div>
-      <div class="stage-phone" id="heroPhone">
-        <img class="on" src="imagens/cliente/temaclaro/telahome.png" alt="Cardápio no celular do cliente">
-        <img src="imagens/cliente/temaclaro/teladetalhes.png" alt="" loading="lazy">
-        <img src="imagens/cliente/temaclaro/telacarrinho.png" alt="" loading="lazy">
-        <img src="imagens/cliente/temaclaro/telafinalizar.png" alt="" loading="lazy">
-        <img src="imagens/cliente/temaclaro/telastatus1.png" alt="" loading="lazy">
+      <div class="phone stage-phone">
+        <div class="phone-screen" id="heroPhone">
+          <img class="on" src="imagens/cliente/temaclaro/telahome.jpeg" alt="Cardápio no celular do cliente">
+          <img src="imagens/cliente/temaclaro/teladetalhes.jpeg" alt="" loading="lazy">
+          <img src="imagens/cliente/temaclaro/telahistorico.jpeg" alt="" loading="lazy">
+        </div>
       </div>
       <div class="live" aria-hidden="true">
         <span class="pulse"></span>
@@ -721,7 +730,7 @@
       </div>
 
       <div class="j-view" id="jView" role="tabpanel" aria-live="polite">
-        <div class="j-pane on"><img src="imagens/cliente/temaclaro/telahome.png" alt="Cardápio digital no celular" data-zoom></div>
+        <div class="j-pane on"><div class="phone j-phone"><div class="phone-screen"><img src="imagens/cliente/temaclaro/telahome.jpeg" alt="Cardápio digital no celular" data-zoom></div></div></div>
         <div class="j-pane"><img src="imagens/cliente/temaclaro/telafinalizar.png" alt="Tela de pagamento" loading="lazy" data-zoom></div>
         <div class="j-pane">
           <div class="printer" aria-label="Pedido sendo impresso">
