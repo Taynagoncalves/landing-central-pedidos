@@ -160,8 +160,15 @@
     .phone-screen { position: relative; width: 100%; height: 100%; border-radius: 27px; overflow: hidden; background: #fff; }
     .phone-screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
     .stage-phone { position: absolute; right: 1%; bottom: 0; width: 19%; }
-    .stage-phone img { opacity: 0; transition: opacity .7s var(--ease); }
-    .stage-phone img.on { opacity: 1; }
+    [data-cycle] img { opacity: 0; transition: opacity .7s var(--ease); }
+    [data-cycle] img.on { opacity: 1; }
+    [data-cycle] img:not(.on) { pointer-events: none; }
+    /* Celular dentro dos cards: encosta no topo e "sai" pela base, como as janelas de navegador */
+    .media .phone { align-self: start; width: 150px; margin-top: 24px; padding: 6px; border-radius: 28px; box-shadow: 0 0 0 1px #2A2A2E inset, var(--shadow-md); }
+    .media .phone-screen { border-radius: 22px; }
+    .media .phone-screen img { cursor: zoom-in; }
+    .status-chip { position: absolute; left: 16px; bottom: 16px; z-index: 2; display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-sm); font-size: 12.5px; font-weight: 600; }
+    .status-chip::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); }
     .live {
       position: absolute; left: -3%; top: 26%; z-index: 2; min-width: 250px;
       display: flex; align-items: center; gap: 12px; padding: 12px 16px 12px 12px; text-align: left;
@@ -552,6 +559,9 @@
   <symbol id="i-card" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2.5"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></symbol>
   <symbol id="i-brush" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><circle cx="8.5" cy="7.5" r="1.5"/><circle cx="6.5" cy="12.5" r="1.5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.93 0 1.5-.75 1.5-1.5 0-.4-.15-.74-.4-1-.25-.26-.4-.6-.4-1 0-.83.67-1.5 1.5-1.5H16c3.31 0 6-2.69 6-6 0-4.96-4.48-9-10-9z"/></symbol>
   <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
   <symbol id="i-chart" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
   <symbol id="i-printer" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></symbol>
   <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></symbol>
@@ -621,10 +631,12 @@
         <img src="imagens/admin/tela-admin-1.png" alt="Painel do lojista com os pedidos em tempo real">
       </div>
       <div class="phone stage-phone">
-        <div class="phone-screen" id="heroPhone">
+        <div class="phone-screen" data-cycle="3000">
           <img class="on" src="imagens/cliente/temaclaro/telahome.jpeg" alt="Cardápio no celular do cliente">
           <img src="imagens/cliente/temaclaro/teladetalhes.jpeg" alt="" loading="lazy">
+          <img src="imagens/cliente/temaclaro/pedidoempreparo.jpeg" alt="" loading="lazy">
           <img src="imagens/cliente/temaclaro/telahistorico.jpeg" alt="" loading="lazy">
+          <img src="imagens/cliente/temaclaro/telaperfil.jpeg" alt="" loading="lazy">
         </div>
       </div>
       <div class="live" aria-hidden="true">
@@ -809,6 +821,78 @@
               <li><svg class="i"><use href="#i-check"/></svg>Consulta de status do pedido em tempo real</li>
               <li><svg class="i"><use href="#i-check"/></svg>Informa horário de funcionamento automaticamente</li>
               <li><svg class="i"><use href="#i-check"/></svg>Transferência para atendente humano quando necessário</li>
+            </ul>
+          </details>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="media">
+          <div class="phone">
+            <div class="phone-screen" data-cycle="2400" data-labels="Pedido recebido|Em preparo|Pronto para retirar|Saiu para entrega">
+              <img class="on" src="imagens/cliente/temaclaro/confirmacaodopedido.jpeg" alt="Pedido recebido, aguardando confirmação" loading="lazy" data-zoom>
+              <img src="imagens/cliente/temaclaro/pedidoempreparo.jpeg" alt="Pedido em preparo" loading="lazy" data-zoom>
+              <img src="imagens/cliente/temaclaro/pedidopronto.jpeg" alt="Pedido pronto para retirada" loading="lazy" data-zoom>
+              <img src="imagens/cliente/temaclaro/telasaiuparaentrega.png" alt="Pedido saiu para entrega" loading="lazy" data-zoom>
+            </div>
+          </div>
+          <span class="status-chip" aria-hidden="true">Pedido recebido</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title"><svg class="i"><use href="#i-clock"/></svg><h3>Acompanhamento ao vivo</h3></div>
+          <p>O cliente vê cada etapa do pedido na hora, sem precisar ligar para a loja.</p>
+          <details class="more">
+            <summary>Ver recursos <svg class="i"><use href="#i-down"/></svg></summary>
+            <ul class="ticks">
+              <li><svg class="i"><use href="#i-check"/></svg>Recebido, em preparo, pronto e saiu para entrega</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Tempo estimado de preparo ou entrega</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Itens, forma de pagamento e total do pedido</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Botões para falar com a loja no WhatsApp e ver a localização</li>
+            </ul>
+          </details>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="media">
+          <div class="phone">
+            <div class="phone-screen"><img src="imagens/cliente/temaclaro/programadefidelidade.png" alt="Programa de fidelidade com pontos e prêmios" loading="lazy" data-zoom></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-title"><svg class="i"><use href="#i-star"/></svg><h3>Programa de fidelidade</h3></div>
+          <p>Seu cliente junta pontos a cada pedido e troca por prêmios. Ele volta mais vezes.</p>
+          <details class="more">
+            <summary>Ver recursos <svg class="i"><use href="#i-down"/></svg></summary>
+            <ul class="ticks">
+              <li><svg class="i"><use href="#i-check"/></svg>Pontos por real gasto em pedidos</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Valor mínimo de pedido para somar pontos</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Prêmios definidos pela loja</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Cliente acompanha o saldo e quanto falta para o próximo prêmio</li>
+            </ul>
+          </details>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="media">
+          <div class="phone">
+            <div class="phone-screen" data-cycle="3200">
+              <img class="on" src="imagens/cliente/temaclaro/telaperfil.jpeg" alt="Perfil do cliente" loading="lazy" data-zoom>
+              <img src="imagens/cliente/temaclaro/telahistorico.jpeg" alt="Histórico de pedidos do cliente" loading="lazy" data-zoom>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-title"><svg class="i"><use href="#i-user"/></svg><h3>Área do cliente</h3></div>
+          <p>Perfil, histórico e "pedir de novo" com um toque. Comprar de novo fica muito mais fácil.</p>
+          <details class="more">
+            <summary>Ver recursos <svg class="i"><use href="#i-down"/></svg></summary>
+            <ul class="ticks">
+              <li><svg class="i"><use href="#i-check"/></svg>Histórico com total gasto e pedidos feitos</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Botão "Pedir de novo" em cada pedido</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Horários, WhatsApp e localização da loja</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Acesso rápido ao programa de fidelidade</li>
             </ul>
           </details>
         </div>
@@ -1323,9 +1407,23 @@
   burger.addEventListener('click', () => setSheet(!sheet.classList.contains('open')));
   sheet.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setSheet(false)));
 
-  // ── Hero: celular trocando de tela e notificação ao vivo ──
-  const phoneImgs = document.querySelectorAll('#heroPhone img');
-  let phoneIdx = 0;
+  // ── Celulares que trocam de tela sozinhos (data-cycle = intervalo em ms) ──
+  // data-labels opcional: atualiza o selo .status-chip do mesmo card a cada tela
+  document.querySelectorAll('[data-cycle]').forEach(screen => {
+    const imgs = [...screen.querySelectorAll('img')];
+    const labels = screen.dataset.labels ? screen.dataset.labels.split('|') : null;
+    const chip = screen.closest('.media')?.querySelector('.status-chip');
+    let idx = 0;
+    if (reduceMotion || imgs.length < 2) return;
+    setInterval(() => {
+      imgs[idx].classList.remove('on');
+      idx = (idx + 1) % imgs.length;
+      imgs[idx].classList.add('on');
+      if (labels && chip) chip.textContent = labels[idx];
+    }, +screen.dataset.cycle);
+  });
+
+  // ── Hero: notificação ao vivo ──
   const events = [
     { ico: 'i-bag',     t: 'Novo pedido #319',      s: 'Delivery · R$ 42,00' },
     { ico: 'i-zap',     t: 'PIX aprovado',          s: 'Pagamento confirmado na hora' },
@@ -1348,14 +1446,7 @@
       liveTxt.classList.remove('swap');
     }, 280);
   }
-  if (!reduceMotion) {
-    setInterval(() => {
-      phoneImgs[phoneIdx].classList.remove('on');
-      phoneIdx = (phoneIdx + 1) % phoneImgs.length;
-      phoneImgs[phoneIdx].classList.add('on');
-    }, 3000);
-    setInterval(nextEvent, 2800);
-  }
+  if (!reduceMotion) setInterval(nextEvent, 2800);
 
   // ── Jornada do pedido: avança sozinha enquanto está na tela ──
   const jList = document.getElementById('jSteps');
