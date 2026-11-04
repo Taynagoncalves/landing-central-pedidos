@@ -159,6 +159,9 @@
     .phone { aspect-ratio: 738 / 1600; padding: 7px; border-radius: 34px; background: #111113; box-shadow: 0 0 0 1px #2A2A2E inset, 0 30px 50px -18px rgba(12,12,14,.4); }
     .phone-screen { position: relative; width: 100%; height: 100%; border-radius: 27px; overflow: hidden; background: #fff; }
     .phone-screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    /* Prints mais largos que a tela do celular: mostra inteiro, alinhado ao topo, no mesmo cinza do app */
+    .phone-screen.fit { background: #F3F4F6; }
+    .phone-screen.fit img { object-fit: contain; object-position: top; }
     .stage-phone { position: absolute; right: 1%; bottom: 0; width: 19%; }
     [data-cycle] img { opacity: 0; transition: opacity .7s var(--ease); }
     [data-cycle] img.on { opacity: 1; }
@@ -722,6 +725,7 @@
             <p>Painel exclusivo para entregadores gerenciarem suas entregas em tempo real, direto do celular.</p>
             <ul class="ticks">
               <li><svg class="i"><use href="#i-check"/></svg>Aceite de pedidos com um clique, com endereço e dados do cliente</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Atalhos para mapa, WhatsApp e ligação com o cliente</li>
               <li><svg class="i"><use href="#i-check"/></svg>Marca a chegada no endereço</li>
               <li><svg class="i"><use href="#i-check"/></svg>Histórico de entregas e ganhos por período</li>
             </ul>
@@ -771,7 +775,7 @@
             </div>
           </div>
         </div>
-        <div class="j-pane"><img src="imagens/cliente/temaclaro/motoboy.png" alt="Painel do motoboy" loading="lazy" data-zoom></div>
+        <div class="j-pane"><div class="phone j-phone"><div class="phone-screen fit"><img src="imagens/cliente/temaclaro/motoboy.png" alt="Painel do motoboy com a entrega em rota" loading="lazy" data-zoom></div></div></div>
         <div class="j-pane"><img src="imagens/cliente/temaclaro/notificacoeswhats.png" alt="Notificações no WhatsApp" loading="lazy" data-zoom></div>
       </div>
     </div>
