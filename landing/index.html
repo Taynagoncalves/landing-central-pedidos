@@ -443,13 +443,6 @@
     .demo-ext { display: inline-flex; align-items: center; gap: 6px; height: 42px; padding: 0 14px; border-radius: 11px; font-size: 13.5px; font-weight: 600; border: 1px solid var(--night-line); }
     .demo-ext:hover { background: rgba(255,255,255,.06); }
     .demo .x { background: rgba(255,255,255,.08); color: #fff; }
-    .demo-login { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; padding: 10px 20px; font-size: 13.5px; color: var(--night-muted); background: rgba(255,85,0,.08); border-bottom: 1px solid var(--night-line); }
-    .demo-login[hidden] { display: none; }
-    .demo-login button { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 9px; background: rgba(255,255,255,.07); border: 1px solid var(--night-line); font-size: 13px; color: var(--night-muted); }
-    .demo-login button b { color: #fff; font-weight: 600; }
-    .demo-login button:hover { background: rgba(255,255,255,.12); }
-    .demo-login button.copied { border-color: var(--wa); }
-    .demo-login small { font-size: 12px; }
     .demo-body { flex: 1; min-height: 0; display: grid; place-items: center; padding: 16px; background: radial-gradient(600px 400px at 50% 0%, rgba(255,85,0,.14), transparent 70%); }
     .demo-body iframe { width: 100%; height: 100%; border: 0; border-radius: 14px; background: #fff; }
     .demo-body.phone iframe { width: min(420px, 100%); border-radius: 28px; box-shadow: 0 0 0 10px #000, 0 30px 60px -10px rgba(0,0,0,.7); }
@@ -1017,7 +1010,7 @@
         </button>
         <button type="button" class="tile" data-demo="lojista">
           <span class="tile-ico"><svg class="i"><use href="#i-monitor"/></svg></span>
-          <span><b>Painel do lojista</b><small>Veja os pedidos chegando e gerencie tudo</small></span>
+          <span><b>Painel do lojista</b><small>Entra direto, sem login: veja os pedidos e gerencie tudo</small></span>
           <svg class="i"><use href="#i-arrow"/></svg>
         </button>
       </div>
@@ -1042,7 +1035,7 @@
         <ul class="mods">
           <li><svg class="i"><use href="#i-check"/></svg>Recursos básicos</li>
           <li class="off"><svg class="i"><use href="#i-minus"/></svg>Mesas e salão</li>
-          <li class="off"><svg class="i"><use href="#i-minus"/></svg>Delivery e motoboys</li>
+          <li class="off"><svg class="i"><use href="#i-minus"/></svg>Sistema do entregador</li>
         </ul>
         <div class="plan-ctas">
           <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20plano%20Essencial" target="_blank" class="btn btn-line">Consultar preço</a>
@@ -1056,7 +1049,7 @@
         <ul class="mods">
           <li><svg class="i"><use href="#i-check"/></svg>Recursos básicos</li>
           <li><svg class="i"><use href="#i-check"/></svg>Mesas e salão</li>
-          <li class="off"><svg class="i"><use href="#i-minus"/></svg>Delivery e motoboys</li>
+          <li class="off"><svg class="i"><use href="#i-minus"/></svg>Sistema do entregador</li>
         </ul>
         <div class="plan-ctas">
           <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20plano%20Gourmet" target="_blank" class="btn btn-line">Consultar preço</a>
@@ -1070,7 +1063,7 @@
         <ul class="mods">
           <li><svg class="i"><use href="#i-check"/></svg>Recursos básicos</li>
           <li class="off"><svg class="i"><use href="#i-minus"/></svg>Mesas e salão</li>
-          <li><svg class="i"><use href="#i-check"/></svg>Delivery e motoboys</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Sistema do entregador</li>
         </ul>
         <div class="plan-ctas">
           <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20plano%20Express" target="_blank" class="btn btn-line">Consultar preço</a>
@@ -1085,7 +1078,7 @@
         <ul class="mods">
           <li><svg class="i"><use href="#i-check"/></svg>Recursos básicos</li>
           <li><svg class="i"><use href="#i-check"/></svg>Mesas e salão</li>
-          <li><svg class="i"><use href="#i-check"/></svg>Delivery e motoboys</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Sistema do entregador</li>
         </ul>
         <div class="plan-ctas">
           <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20plano%20Enterprise" target="_blank" class="btn btn-brand">Consultar preço</a>
@@ -1123,7 +1116,7 @@
             <tr><td>Mesas com QR Code individual</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td>Sistema de garçom digital</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td>Comanda eletrônica por mesa</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
-            <tr><td class="grp" colspan="5">Delivery e motoboys</td></tr>
+            <tr><td class="grp" colspan="5">Sistema do entregador</td></tr>
             <tr><td>Painel exclusivo para motoboys</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td>Controle de entregas em tempo real</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td>Notificação de chegada ao cliente</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
@@ -1300,12 +1293,6 @@
     </div>
     <a class="demo-ext" id="demoExt" href="https://teste.centralpedidosonline.com.br" target="_blank">Abrir em nova aba <svg class="i" style="width:16px;height:16px"><use href="#i-arrow"/></svg></a>
     <button type="button" class="x" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button>
-  </div>
-  <div class="demo-login" id="demoLogin" hidden>
-    <span>Login de teste:</span>
-    <button type="button" data-copy="taynagon7302@gmail.com">E-mail <b>taynagon7302@gmail.com</b></button>
-    <button type="button" data-copy="123456">Senha <b>123456</b></button>
-    <small>Clique para copiar</small>
   </div>
   <div class="demo-body phone" id="demoBody">
     <iframe id="demoFrame" title="Demonstração do sistema" loading="lazy"></iframe>
@@ -1494,7 +1481,6 @@
   function setDemoView(v) {
     document.querySelectorAll('[data-demo-view]').forEach(b => b.setAttribute('aria-pressed', b.dataset.demoView === v));
     demoBody.classList.toggle('phone', v === 'cliente');
-    document.getElementById('demoLogin').hidden = v !== 'lojista';
     demoExt.href = DEMO_URLS[v];
     if (demoFrame.getAttribute('src') !== DEMO_URLS[v]) demoFrame.src = DEMO_URLS[v];
   }
@@ -1504,11 +1490,6 @@
     demo.showModal();
   }));
   document.querySelectorAll('[data-demo-view]').forEach(b => b.addEventListener('click', () => setDemoView(b.dataset.demoView)));
-  document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', async () => {
-    try { await navigator.clipboard.writeText(b.dataset.copy); } catch (e) { return; }
-    b.classList.add('copied');
-    setTimeout(() => b.classList.remove('copied'), 1500);
-  }));
 
   // ── Lightbox ──
   const lightbox = document.getElementById('lightbox');
