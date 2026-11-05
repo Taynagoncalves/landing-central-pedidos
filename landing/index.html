@@ -321,6 +321,20 @@
     .plan.hl { border: 1.5px solid var(--brand); box-shadow: 0 24px 50px -24px rgba(255,85,0,.45); }
     .plan-tag { position: absolute; top: -12px; left: 22px; padding: 4px 10px; border-radius: 8px; background: var(--brand); color: #fff; font-size: 12px; font-weight: 600; }
     .plan h3 { font-size: 24px; letter-spacing: -0.03em; }
+    .billing { display: flex; width: fit-content; gap: 4px; margin: 22px auto 0; padding: 4px; border-radius: 14px; background: var(--subtle); border: 1px solid var(--line); }
+    .billing button { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 18px; border-radius: 10px; font-size: 14.5px; font-weight: 600; color: var(--muted); }
+    .billing button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: var(--shadow-sm); }
+    .billing .save { padding: 2px 8px; border-radius: 999px; background: #E9F9EF; color: #15803D; font-size: 12px; }
+    .price { margin-top: 18px; }
+    .price-line { display: flex; align-items: baseline; gap: 4px; }
+    .price .cur { font-size: 17px; font-weight: 600; color: var(--ink-2); }
+    .price .val { font-size: 42px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+    .price .per { font-size: 15px; color: var(--muted); }
+    .price-sub { margin-top: 6px; font-size: 13.5px; color: var(--muted); min-height: 20px; }
+    .plan-note b { font-weight: 700; }
+    td.add { font-size: 13px; font-weight: 600; color: var(--brand-text); white-space: nowrap; }
+    tr.price-row td { font-weight: 700; background: var(--subtle); }
+    tr.price-row td:first-child { font-weight: 600; color: var(--ink-2); }
     .plan-note { margin-top: 8px; padding: 8px 10px; border-radius: 10px; background: #FFF7ED; color: #9A3412; font-size: 13px; line-height: 1.4; }
     .plan-badge { display: inline-flex; align-self: flex-start; margin-top: 10px; padding: 4px 10px; border-radius: 999px; background: var(--brand-soft); color: var(--brand-text); font-size: 12.5px; font-weight: 600; }
     .plan-badge::before { content: "Planos\00a0"; font-weight: 500; }
@@ -993,7 +1007,7 @@
         <li><svg class="i"><use href="#i-check"/></svg>Histórico em tempo real</li>
         <li><svg class="i"><use href="#i-check"/></svg>Impressão automática de pedidos</li>
         <li><svg class="i"><use href="#i-check"/></svg>Programa de fidelidade</li>
-        <li><svg class="i"><use href="#i-check"/></svg>Suporte prioritário</li>
+        <li><svg class="i"><use href="#i-check"/></svg>Acompanhamento do pedido ao vivo</li>
       </ul>
     </div>
   </div>
@@ -1032,21 +1046,30 @@
       <h2 class="h2">Escolha o plano ideal para o seu negócio</h2>
       <p class="lead">Comece com o essencial ou leve tudo. Todos incluem os recursos básicos.</p>
       <div class="trial"><svg class="i"><use href="#i-gift"/></svg><span><strong>Teste grátis por 7 dias</strong> em qualquer plano — sem cartão de crédito, sem compromisso.</span></div>
+      <div class="billing" role="group" aria-label="Forma de cobrança">
+        <button type="button" data-bill="m" aria-pressed="true">Mensal</button>
+        <button type="button" data-bill="a" aria-pressed="false">Anual <span class="save">economize 15%</span></button>
+      </div>
     </div>
 
     <div class="plans reveal">
       <div class="plan">
         <h3>Essencial</h3>
         <p class="plan-desc">Para quem quer começar a vender online com delivery e retirada.</p>
-        <p class="plan-note">Não inclui mensagens automáticas no WhatsApp nem o bot.</p>
+        <div class="price" data-m="99,90" data-a="84,90" data-y="1.018,80">
+          <div class="price-line"><span class="cur">R$</span><b class="val">99,90</b><span class="per">/mês</span></div>
+          <p class="price-sub">ou R$ 84,90/mês no plano anual</p>
+        </div>
+        <p class="plan-note"><b>Sem WhatsApp automático.</b> Quer notificações + bot 24h? Adicione por <b>+ R$ 69,90/mês</b>.</p>
         <ul class="mods">
           <li><svg class="i"><use href="#i-check"/></svg>Recursos básicos</li>
           <li class="off"><svg class="i"><use href="#i-minus"/></svg>WhatsApp automático e bot</li>
           <li class="off"><svg class="i"><use href="#i-minus"/></svg>Mesas e salão</li>
           <li class="off"><svg class="i"><use href="#i-minus"/></svg>Sistema do entregador</li>
+          <li class="off"><svg class="i"><use href="#i-minus"/></svg>Suporte prioritário</li>
         </ul>
         <div class="plan-ctas">
-          <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20plano%20Essencial" target="_blank" class="btn btn-line">Consultar preço</a>
+          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20assinar%20o%20plano%20Essencial%20(mensal)." data-plan="Essencial" target="_blank" class="btn btn-line buy">Assinar o Essencial</a>
           <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Essencial.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial">Começar teste grátis</a>
         </div>
       </div>
@@ -1054,14 +1077,19 @@
       <div class="plan">
         <h3>Gourmet</h3>
         <p class="plan-desc">Para restaurantes com salão, mesas com QR Code e garçom digital.</p>
+        <div class="price" data-m="169,90" data-a="144,90" data-y="1.738,80">
+          <div class="price-line"><span class="cur">R$</span><b class="val">169,90</b><span class="per">/mês</span></div>
+          <p class="price-sub">ou R$ 144,90/mês no plano anual</p>
+        </div>
         <ul class="mods">
           <li><svg class="i"><use href="#i-check"/></svg>Recursos básicos</li>
           <li><svg class="i"><use href="#i-check"/></svg>WhatsApp automático e bot</li>
           <li><svg class="i"><use href="#i-check"/></svg>Mesas e salão</li>
           <li class="off"><svg class="i"><use href="#i-minus"/></svg>Sistema do entregador</li>
+          <li class="off"><svg class="i"><use href="#i-minus"/></svg>Suporte prioritário</li>
         </ul>
         <div class="plan-ctas">
-          <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20plano%20Gourmet" target="_blank" class="btn btn-line">Consultar preço</a>
+          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20assinar%20o%20plano%20Gourmet%20(mensal)." data-plan="Gourmet" target="_blank" class="btn btn-line buy">Assinar o Gourmet</a>
           <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Gourmet.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial">Começar teste grátis</a>
         </div>
       </div>
@@ -1069,14 +1097,19 @@
       <div class="plan">
         <h3>Express</h3>
         <p class="plan-desc">Para delivery com gestão de motoboys e controle de entregas.</p>
+        <div class="price" data-m="169,90" data-a="144,90" data-y="1.738,80">
+          <div class="price-line"><span class="cur">R$</span><b class="val">169,90</b><span class="per">/mês</span></div>
+          <p class="price-sub">ou R$ 144,90/mês no plano anual</p>
+        </div>
         <ul class="mods">
           <li><svg class="i"><use href="#i-check"/></svg>Recursos básicos</li>
           <li><svg class="i"><use href="#i-check"/></svg>WhatsApp automático e bot</li>
           <li class="off"><svg class="i"><use href="#i-minus"/></svg>Mesas e salão</li>
           <li><svg class="i"><use href="#i-check"/></svg>Sistema do entregador</li>
+          <li class="off"><svg class="i"><use href="#i-minus"/></svg>Suporte prioritário</li>
         </ul>
         <div class="plan-ctas">
-          <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20plano%20Express" target="_blank" class="btn btn-line">Consultar preço</a>
+          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20assinar%20o%20plano%20Express%20(mensal)." data-plan="Express" target="_blank" class="btn btn-line buy">Assinar o Express</a>
           <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Express.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial">Começar teste grátis</a>
         </div>
       </div>
@@ -1084,15 +1117,20 @@
       <div class="plan hl">
         <span class="plan-tag">Mais completo</span>
         <h3>Enterprise</h3>
-        <p class="plan-desc">Solução completa com tudo incluso para gestão total do seu negócio.</p>
+        <p class="plan-desc">Tudo incluso para a gestão completa do seu negócio.</p>
+        <div class="price" data-m="249,90" data-a="212,40" data-y="2.548,80">
+          <div class="price-line"><span class="cur">R$</span><b class="val">249,90</b><span class="per">/mês</span></div>
+          <p class="price-sub">ou R$ 212,40/mês no plano anual</p>
+        </div>
         <ul class="mods">
           <li><svg class="i"><use href="#i-check"/></svg>Recursos básicos</li>
           <li><svg class="i"><use href="#i-check"/></svg>WhatsApp automático e bot</li>
           <li><svg class="i"><use href="#i-check"/></svg>Mesas e salão</li>
           <li><svg class="i"><use href="#i-check"/></svg>Sistema do entregador</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Suporte prioritário</li>
         </ul>
         <div class="plan-ctas">
-          <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20plano%20Enterprise" target="_blank" class="btn btn-brand">Consultar preço</a>
+          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20assinar%20o%20plano%20Enterprise%20(mensal)." data-plan="Enterprise" target="_blank" class="btn btn-brand buy">Assinar o Enterprise</a>
           <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Enterprise.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial">Começar teste grátis</a>
         </div>
       </div>
@@ -1116,14 +1154,13 @@
             <tr><td>Histórico em tempo real</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td>Controle de abertura e fechamento</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td>Cupons de desconto</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
-            <tr><td>Suporte prioritário</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td>Programa de fidelidade</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td>Resumo do dia (faturamento, tempos médios e pedidos por hora)</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td>Acompanhamento do pedido ao vivo</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td>Área do cliente com histórico e “pedir de novo”</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
-            <tr><td class="grp" colspan="5">WhatsApp automático <span class="grp-note">· não incluso no Essencial</span></td></tr>
-            <tr><td>Mensagens automáticas ao cliente em cada etapa do pedido</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
-            <tr><td>Bot no WhatsApp 24h</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr><td class="grp" colspan="5">WhatsApp automático <span class="grp-note">· no Essencial, adicional de R$ 69,90/mês</span></td></tr>
+            <tr><td>Mensagens automáticas ao cliente em cada etapa do pedido</td><td class="add">+ R$ 69,90/mês</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Bot no WhatsApp 24h</td><td class="add">+ R$ 69,90/mês</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td class="grp" colspan="5">Mesas e salão</td></tr>
             <tr><td>Mesas com QR Code individual</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td>Sistema de garçom digital</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
@@ -1132,6 +1169,11 @@
             <tr><td>Painel exclusivo para motoboys</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td>Controle de entregas em tempo real</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td>Notificação de chegada ao cliente</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr><td class="grp" colspan="5">Atendimento</td></tr>
+            <tr><td>Suporte prioritário</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr class="price-row"><td>Mensal</td><td>R$ 99,90</td><td>R$ 169,90</td><td>R$ 169,90</td><td>R$ 249,90</td></tr>
+            <tr class="price-row"><td>Anual (por mês)</td><td>R$ 84,90</td><td>R$ 144,90</td><td>R$ 144,90</td><td>R$ 212,40</td></tr>
+            <tr class="price-row"><td>Anual (à vista)</td><td>R$ 1.018,80</td><td>R$ 1.738,80</td><td>R$ 1.738,80</td><td>R$ 2.548,80</td></tr>
           </tbody>
         </table>
       </div>
@@ -1502,6 +1544,22 @@
     demo.showModal();
   }));
   document.querySelectorAll('[data-demo-view]').forEach(b => b.addEventListener('click', () => setDemoView(b.dataset.demoView)));
+
+  // ── Planos: alterna preço mensal/anual e a mensagem do WhatsApp ──
+  function setBilling(b) {
+    document.querySelectorAll('[data-bill]').forEach(x => x.setAttribute('aria-pressed', x.dataset.bill === b));
+    document.querySelectorAll('.price').forEach(p => {
+      p.querySelector('.val').textContent = b === 'a' ? p.dataset.a : p.dataset.m;
+      p.querySelector('.price-sub').textContent = b === 'a'
+        ? 'R$ ' + p.dataset.y + ' por ano, à vista'
+        : 'ou R$ ' + p.dataset.a + '/mês no plano anual';
+    });
+    document.querySelectorAll('a.buy').forEach(a => {
+      const txt = 'Olá! Quero assinar o plano ' + a.dataset.plan + (b === 'a' ? ' (anual).' : ' (mensal).');
+      a.href = 'https://wa.me/5545999723256?text=' + encodeURIComponent(txt);
+    });
+  }
+  document.querySelectorAll('[data-bill]').forEach(x => x.addEventListener('click', () => setBilling(x.dataset.bill)));
 
   // ── Lightbox ──
   const lightbox = document.getElementById('lightbox');
