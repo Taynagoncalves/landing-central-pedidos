@@ -325,6 +325,8 @@
     .billing button { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 18px; border-radius: 10px; font-size: 14.5px; font-weight: 600; color: var(--muted); }
     .billing button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: var(--shadow-sm); }
     .billing .save { padding: 2px 8px; border-radius: 999px; background: #E9F9EF; color: #15803D; font-size: 12px; }
+    .pay-note { margin-top: 10px; font-size: 13.5px; color: var(--muted); }
+    .pay-note b { color: var(--ink-2); font-weight: 600; }
     .price { margin-top: 18px; }
     .price-line { display: flex; align-items: baseline; gap: 4px; }
     .price .cur { font-size: 17px; font-weight: 600; color: var(--ink-2); }
@@ -1052,6 +1054,7 @@
         <button type="button" data-bill="m" aria-pressed="true">Mensal</button>
         <button type="button" data-bill="a" aria-pressed="false">Anual <span class="save">economize 15%</span></button>
       </div>
+      <p class="pay-note">O plano anual é pago à vista no <b>cartão de crédito</b>, <b>PIX</b> ou <b>boleto</b>.</p>
     </div>
 
     <div class="plans reveal">
@@ -1067,7 +1070,7 @@
         <ul class="mods">
           <li><svg class="i"><use href="#i-check"/></svg>Recursos básicos</li>
           <li class="off"><svg class="i"><use href="#i-minus"/></svg>WhatsApp automático e bot</li>
-          <li class="off"><svg class="i"><use href="#i-minus"/></svg>Mesas e salão</li>
+          <li class="off"><svg class="i"><use href="#i-minus"/></svg>Sistema de QR Code de mesa e garçom</li>
           <li class="off"><svg class="i"><use href="#i-minus"/></svg>Sistema do entregador</li>
           <li class="off"><svg class="i"><use href="#i-minus"/></svg>Suporte prioritário</li>
         </ul>
@@ -1088,7 +1091,7 @@
         <ul class="mods">
           <li><svg class="i"><use href="#i-check"/></svg>Recursos básicos</li>
           <li><svg class="i"><use href="#i-check"/></svg>WhatsApp automático e bot</li>
-          <li><svg class="i"><use href="#i-check"/></svg>Mesas e salão</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Sistema de QR Code de mesa e garçom</li>
           <li class="off"><svg class="i"><use href="#i-minus"/></svg>Sistema do entregador</li>
           <li class="off"><svg class="i"><use href="#i-minus"/></svg>Suporte prioritário</li>
         </ul>
@@ -1109,7 +1112,7 @@
         <ul class="mods">
           <li><svg class="i"><use href="#i-check"/></svg>Recursos básicos</li>
           <li><svg class="i"><use href="#i-check"/></svg>WhatsApp automático e bot</li>
-          <li class="off"><svg class="i"><use href="#i-minus"/></svg>Mesas e salão</li>
+          <li class="off"><svg class="i"><use href="#i-minus"/></svg>Sistema de QR Code de mesa e garçom</li>
           <li><svg class="i"><use href="#i-check"/></svg>Sistema do entregador</li>
           <li class="off"><svg class="i"><use href="#i-minus"/></svg>Suporte prioritário</li>
         </ul>
@@ -1131,7 +1134,7 @@
         <ul class="mods">
           <li><svg class="i"><use href="#i-check"/></svg>Recursos básicos</li>
           <li><svg class="i"><use href="#i-check"/></svg>WhatsApp automático e bot</li>
-          <li><svg class="i"><use href="#i-check"/></svg>Mesas e salão</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Sistema de QR Code de mesa e garçom</li>
           <li><svg class="i"><use href="#i-check"/></svg>Sistema do entregador</li>
           <li><svg class="i"><use href="#i-check"/></svg>Suporte prioritário</li>
         </ul>
@@ -1167,7 +1170,7 @@
             <tr><td class="grp" colspan="5">WhatsApp automático <span class="grp-note">· no Essencial, adicional de R$ 69,90/mês</span></td></tr>
             <tr><td>Mensagens automáticas ao cliente em cada etapa do pedido</td><td class="add">+ R$ 69,90/mês</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td>Bot no WhatsApp 24h</td><td class="add">+ R$ 69,90/mês</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
-            <tr><td class="grp" colspan="5">Mesas e salão</td></tr>
+            <tr><td class="grp" colspan="5">Sistema de QR Code de mesa e garçom</td></tr>
             <tr><td>Mesas com QR Code individual</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td>Sistema de garçom digital</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td>Comanda eletrônica por mesa</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
@@ -1179,7 +1182,7 @@
             <tr><td>Suporte prioritário</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr class="price-row"><td>Mensal</td><td>R$ 99,90</td><td>R$ 169,90</td><td>R$ 169,90</td><td>R$ 249,90</td></tr>
             <tr class="price-row"><td>Anual (por mês)</td><td>R$ 84,90</td><td>R$ 144,90</td><td>R$ 144,90</td><td>R$ 212,40</td></tr>
-            <tr class="price-row"><td>Anual (à vista)</td><td>R$ 1.018,80</td><td>R$ 1.738,80</td><td>R$ 1.738,80</td><td>R$ 2.548,80</td></tr>
+            <tr class="price-row"><td>Anual (à vista no cartão de crédito, PIX ou boleto)</td><td>R$ 1.018,80</td><td>R$ 1.738,80</td><td>R$ 1.738,80</td><td>R$ 2.548,80</td></tr>
           </tbody>
         </table>
       </div>
@@ -1557,7 +1560,7 @@
     document.querySelectorAll('.price').forEach(p => {
       p.querySelector('.val').textContent = b === 'a' ? p.dataset.a : p.dataset.m;
       p.querySelector('.price-sub').innerHTML = b === 'a'
-        ? '<s>R$ ' + p.dataset.m + '/mês</s> no mensal<br><b>R$ ' + p.dataset.y + '</b> por ano, à vista'
+        ? '<s>R$ ' + p.dataset.m + '/mês</s> no mensal<br><b>R$ ' + p.dataset.y + '</b> por ano, à vista no cartão de crédito, PIX ou boleto'
         : 'ou <b>R$ ' + p.dataset.a + '/mês</b> no anual<br>R$ ' + p.dataset.y + ' por ano';
       p.querySelector('.save-chip').textContent = b === 'a'
         ? 'Você economiza R$ ' + p.dataset.s + ' por ano'
