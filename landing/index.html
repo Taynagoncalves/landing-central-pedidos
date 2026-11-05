@@ -454,6 +454,87 @@
     .lb-inner img { max-width: 100%; max-height: 100%; object-fit: contain; }
     .lightbox .x { position: fixed; top: 16px; right: 16px; background: rgba(255,255,255,.12); color: #fff; }
 
+    /* Tela de contratação */
+    dialog.sign { margin: 0; width: 100vw; height: 100dvh; max-width: none; max-height: none; border: 0; padding: 0; background: var(--surface); color: var(--ink); }
+    dialog.sign[open] { display: grid; grid-template-columns: minmax(0, 42fr) minmax(0, 58fr); }
+    dialog.sign::backdrop { background: var(--night); }
+    .sign-side { position: relative; overflow: hidden; isolation: isolate; background: var(--night); color: #fff; display: flex; flex-direction: column; justify-content: space-between; padding: 40px 48px; }
+    .sign-side::before { content: ''; position: absolute; inset: 0; z-index: -1; background: radial-gradient(520px 380px at 80% 10%, rgba(255,85,0,.32), transparent 62%), radial-gradient(480px 360px at 0% 100%, rgba(255,85,0,.18), transparent 60%); }
+    .sign-side::after { content: ''; position: absolute; inset: 0; z-index: -1; background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.07) 1px, transparent 0); background-size: 24px 24px; mask-image: linear-gradient(180deg, #000, transparent 60%); -webkit-mask-image: linear-gradient(180deg, #000, transparent 60%); }
+    .sign-side .brand-name { color: #fff; }
+    .sign-side .brand-name small { color: var(--night-muted); }
+    .slides { position: relative; flex: 1; display: grid; place-items: center; margin: 24px 0; }
+    .slide { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 28px; opacity: 0; transform: translateY(10px); transition: opacity .6s var(--ease), transform .6s var(--ease); pointer-events: none; }
+    .slide.on { opacity: 1; transform: none; }
+    .slide-art { display: grid; place-items: center; height: 300px; }
+    .slide-art .browser { width: 100%; max-width: 440px; box-shadow: 0 30px 60px -20px rgba(0,0,0,.8); }
+    .slide-art .phone { height: 300px; width: auto; }
+    .slide-art .chat-mini { width: 100%; max-width: 340px; border-radius: 18px; overflow: hidden; background: #EFEAE2; box-shadow: 0 30px 60px -20px rgba(0,0,0,.8); }
+    .chat-mini header { display: flex; align-items: center; gap: 10px; padding: 11px 14px; background: #008069; font-size: 14px; font-weight: 700; }
+    .chat-mini header small { display: block; font-weight: 500; opacity: .85; font-size: 11.5px; }
+    .chat-mini div { padding: 10px 12px 12px; display: grid; gap: 7px; }
+    .chat-mini p { justify-self: start; padding: 7px 10px; border-radius: 4px 12px 12px 12px; background: #fff; color: #111B21; font-size: 13.5px; line-height: 1.3; }
+    .slide h3 { font-size: 30px; letter-spacing: -0.03em; color: #FF8A4C; }
+    .slide p.t { margin-top: 10px; font-size: 16px; color: #D4D4D8; max-width: 440px; }
+    .sign-dots { display: flex; gap: 8px; }
+    .sign-dots button { width: 8px; height: 8px; border-radius: 999px; background: rgba(255,255,255,.25); transition: width .3s var(--ease), background .3s; }
+    .sign-dots button[aria-current="true"] { width: 24px; background: #fff; }
+    .sign-main { position: relative; overflow-y: auto; display: grid; place-items: center; padding: 64px 32px 40px; }
+    .sign-top { position: absolute; top: 18px; right: 22px; display: flex; align-items: center; gap: 14px; font-size: 14px; color: var(--muted); }
+    .sign-top a { color: var(--brand-text); font-weight: 600; text-decoration: underline; }
+    .sign-form { width: 100%; max-width: 520px; }
+    .sign-form h2 { font-size: clamp(30px, 3.2vw, 44px); line-height: 1.05; letter-spacing: -0.04em; margin: 4px 0 14px; }
+    .sign-form .lead { font-size: 16px; margin-bottom: 26px; }
+    .field { position: relative; margin-bottom: 12px; }
+    .field input { width: 100%; height: 56px; padding: 20px 16px 6px; border-radius: 12px; border: 1px solid var(--line-2); background: var(--surface); font: inherit; font-size: 16px; color: var(--ink); transition: border-color .2s, box-shadow .2s; }
+    .field label { position: absolute; left: 17px; top: 17px; font-size: 16px; color: var(--muted); pointer-events: none; transition: all .18s var(--ease); }
+    .field input:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 4px rgba(255,85,0,.12); }
+    .field input:focus + label, .field input:not(:placeholder-shown) + label { top: 8px; font-size: 12px; font-weight: 600; color: var(--brand-text); }
+    .field input[aria-invalid="true"] { border-color: #DC2626; }
+    .field .err { display: none; margin: 5px 2px 0; font-size: 12.5px; color: #DC2626; }
+    .field input[aria-invalid="true"] ~ .err { display: block; }
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .pick { margin: 18px 0 4px; border: 0; min-width: 0; }
+    .pick legend { font-size: 14px; font-weight: 600; color: var(--ink-2); margin-bottom: 8px; }
+    .chips-pick { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chips-pick label { cursor: pointer; }
+    .chips-pick input { position: absolute; opacity: 0; pointer-events: none; }
+    .chips-pick span { display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 14px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--surface); font-size: 14px; font-weight: 500; color: var(--ink-2); transition: all .15s; }
+    .chips-pick span small { font-size: 12px; color: var(--muted); font-weight: 500; }
+    .chips-pick input:checked + span { border-color: var(--brand); background: var(--brand-soft); color: var(--brand-text); font-weight: 600; box-shadow: 0 0 0 3px rgba(255,85,0,.1); }
+    .chips-pick input:checked + span small { color: var(--brand-text); }
+    .chips-pick input:focus-visible + span { outline: 2px solid var(--brand); outline-offset: 2px; }
+    .pick-err { display: none; margin-top: 6px; font-size: 12.5px; color: #DC2626; }
+    .pick.invalid .pick-err { display: block; }
+    .sign-total { margin-top: 18px; padding: 14px 16px; border-radius: 12px; background: var(--subtle); display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 14.5px; color: var(--ink-2); }
+    .sign-total b { font-size: 20px; color: var(--ink); letter-spacing: -0.02em; white-space: nowrap; }
+    .sign-total small { display: block; font-size: 12.5px; color: var(--muted); }
+    .sign-submit { width: 100%; height: 56px; margin-top: 18px; font-size: 16.5px; border-radius: 14px; }
+    .sign-fine { margin-top: 12px; font-size: 12.5px; color: var(--muted); text-align: center; }
+    .sign-done { display: none; text-align: center; max-width: 440px; }
+    .sign-done.on { display: block; }
+    .sign-done .ok-ico { width: 72px; height: 72px; margin: 0 auto 20px; border-radius: 50%; display: grid; place-items: center; background: #E9F9EF; color: #15A34A; }
+    .sign-done .ok-ico .i { width: 34px; height: 34px; stroke-width: 2.6; }
+    .sign-done h2 { font-size: 34px; letter-spacing: -0.03em; margin-bottom: 10px; }
+    .sign-done p { color: var(--muted); margin-bottom: 22px; }
+    .try-box { margin-top: 28px; padding: 24px; border-radius: 18px; background: var(--subtle); border: 1px solid var(--line); text-align: left; }
+    .try-box b { display: block; font-size: 18px; letter-spacing: -0.02em; }
+    .try-box p { margin: 6px 0 16px; font-size: 14.5px; }
+    .try-ctas { display: grid; gap: 8px; }
+    .try-ctas .btn { width: 100%; }
+    .sign-close { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; background: var(--subtle); color: var(--ink); }
+    .sign-close .i { width: 18px; height: 18px; }
+    @media (max-width: 900px) {
+      dialog.sign[open] { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+      .sign-side { padding: 18px 20px; }
+      .slides, .sign-dots, .sign-side .side-foot { display: none; }
+      .sign-main { padding: 28px 18px 32px; place-items: start center; }
+      .sign-top { position: static; justify-content: flex-end; margin-bottom: 6px; }
+      .sign-main { display: block; }
+      .sign-form, .sign-done { margin: 0 auto; }
+      .row2 { grid-template-columns: 1fr; gap: 0; }
+    }
+
     /* Demonstração ao vivo (sistema real num iframe) */
     dialog.demo { margin: auto; width: min(1280px, calc(100% - 32px)); height: min(860px, calc(100vh - 32px)); max-width: none; max-height: none; border: 0; border-radius: 22px; padding: 0; overflow: hidden; background: var(--night); color: #fff; box-shadow: 0 40px 100px -20px rgba(0,0,0,.7); }
     dialog.demo[open] { display: flex; flex-direction: column; }
@@ -636,7 +717,7 @@
     <h1>Seu negócio vendendo mais, com <span class="brand-c">tecnologia de verdade</span>.</h1>
     <p class="lead">Plataforma completa para receber pedidos online com gestão de delivery, mesas com QR Code, controle de motoboys e notificações automáticas no WhatsApp.</p>
     <div class="hero-ctas">
-      <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20contratar%20o%20sistema." target="_blank" class="btn btn-brand btn-lg">Quero contratar <svg class="i"><use href="#i-arrow"/></svg></a>
+      <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20contratar%20o%20sistema." target="_blank" class="btn btn-brand btn-lg" data-sign>Quero contratar <svg class="i"><use href="#i-arrow"/></svg></a>
       <button type="button" class="btn btn-line btn-lg" data-demo="cliente"><svg class="i"><use href="#i-play"/></svg> Testar o sistema ao vivo</button>
     </div>
     <div class="trust">
@@ -1080,7 +1161,7 @@
         </ul>
         <div class="plan-ctas">
           <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20assinar%20o%20plano%20Essencial%20(mensal)." data-plan="Essencial" target="_blank" class="btn btn-line buy">Assinar o Essencial</a>
-          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Essencial.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial">Começar teste grátis</a>
+          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Essencial.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial" data-trial="Essencial">Começar teste grátis</a>
         </div>
       </div>
 
@@ -1101,7 +1182,7 @@
         </ul>
         <div class="plan-ctas">
           <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20assinar%20o%20plano%20Gourmet%20(mensal)." data-plan="Gourmet" target="_blank" class="btn btn-line buy">Assinar o Gourmet</a>
-          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Gourmet.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial">Começar teste grátis</a>
+          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Gourmet.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial" data-trial="Gourmet">Começar teste grátis</a>
         </div>
       </div>
 
@@ -1122,7 +1203,7 @@
         </ul>
         <div class="plan-ctas">
           <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20assinar%20o%20plano%20Express%20(mensal)." data-plan="Express" target="_blank" class="btn btn-line buy">Assinar o Express</a>
-          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Express.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial">Começar teste grátis</a>
+          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Express.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial" data-trial="Express">Começar teste grátis</a>
         </div>
       </div>
 
@@ -1144,7 +1225,7 @@
         </ul>
         <div class="plan-ctas">
           <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20assinar%20o%20plano%20Enterprise%20(mensal)." data-plan="Enterprise" target="_blank" class="btn btn-brand buy">Assinar o Enterprise</a>
-          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Enterprise.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial">Começar teste grátis</a>
+          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Enterprise.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial" data-trial="Enterprise">Começar teste grátis</a>
         </div>
       </div>
     </div>
@@ -1366,6 +1447,117 @@
   </div>
 </dialog>
 
+<!-- Tela de contratação -->
+<dialog class="sign" id="sign" aria-labelledby="signTitle">
+  <aside class="sign-side">
+    <span class="brand">
+      <span class="brand-mark"><img src="imagens/icon/icon.png" alt=""></span>
+      <span class="brand-name"><span>Central de <span class="brand-c">Pedidos</span></span><small>ONLINE</small></span>
+    </span>
+    <div class="slides" aria-hidden="true">
+      <div class="slide on">
+        <div class="slide-art"><div class="browser"><div class="browser-bar"><i></i><i></i><i></i><span>centralpedidosonline.com.br</span></div><img src="imagens/admin/telaadmin.png" alt=""></div></div>
+        <div><h3>Todos os pedidos em um só lugar</h3><p class="t">Delivery, retirada e mesas chegando ao vivo no painel, com impressão automática na cozinha.</p></div>
+      </div>
+      <div class="slide">
+        <div class="slide-art"><div class="phone"><div class="phone-screen"><img class="on" src="imagens/cliente/temaclaro/telahome.jpeg" alt=""></div></div></div>
+        <div><h3>Seu cardápio no celular do cliente</h3><p class="t">Link próprio da sua loja, PIX e cartão com confirmação automática. Sem instalar nada.</p></div>
+      </div>
+      <div class="slide">
+        <div class="slide-art"><div class="chat-mini"><header><span>Sua Loja<small>mensagem automática</small></span></header><div><p>✅ Pedido #319 confirmado!</p><p>🍳 Já estamos preparando!</p><p>🛵 Seu pedido está a caminho!</p><p>📍 O entregador chegou!</p></div></div></div>
+        <div><h3>Implementação grátis</h3><p class="t">Nós configuramos tudo para você: cardápio, fotos, horários, taxas de entrega e pagamentos.</p></div>
+      </div>
+    </div>
+    <div class="sign-dots" role="group" aria-label="Destaques">
+      <button type="button" aria-current="true" aria-label="Destaque 1"></button>
+      <button type="button" aria-current="false" aria-label="Destaque 2"></button>
+      <button type="button" aria-current="false" aria-label="Destaque 3"></button>
+    </div>
+  </aside>
+
+  <div class="sign-main">
+    <div class="sign-top">
+      <span>Prefere conversar? <a href="https://wa.me/5545999723256" target="_blank">Chame no WhatsApp</a></span>
+      <button type="button" class="sign-close" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button>
+    </div>
+
+    <form class="sign-form" id="signForm" novalidate>
+      <span class="kicker" id="signKicker">Teste grátis por 7 dias · implementação grátis</span>
+      <h2 id="signTitle">Pronto para <span class="brand-c">vender mais</span> no automático?</h2>
+      <p class="lead" id="signLead">Preencha seus dados e nossa equipe entra em contato para ativar sua loja. A gente configura tudo para você.</p>
+
+      <div class="field"><input id="fNome" name="nome" placeholder=" " autocomplete="name" required><label for="fNome">Seu nome</label><p class="err">Informe seu nome.</p></div>
+      <div class="field"><input id="fLoja" name="loja" placeholder=" " autocomplete="organization" required><label for="fLoja">Nome do restaurante</label><p class="err">Informe o nome do restaurante.</p></div>
+      <div class="row2">
+        <div class="field"><input id="fZap" name="zap" placeholder=" " inputmode="tel" autocomplete="tel" required><label for="fZap">DDD + WhatsApp</label><p class="err">Informe um WhatsApp válido com DDD.</p></div>
+        <div class="field"><input id="fMail" name="email" type="email" placeholder=" " autocomplete="email"><label for="fMail">E-mail (opcional)</label><p class="err">E-mail inválido.</p></div>
+      </div>
+
+      <fieldset class="pick">
+        <legend>Como você quer começar?</legend>
+        <div class="chips-pick">
+          <label><input type="radio" name="inicio" value="teste"><span>Teste grátis de 7 dias <small>sem cartão</small></span></label>
+          <label><input type="radio" name="inicio" value="contratar" checked><span>Assinar agora</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="pick" id="pickPlano">
+        <legend>Plano</legend>
+        <div class="chips-pick">
+          <label><input type="radio" name="plano" value="Essencial"><span>Essencial <small>R$ 99,90</small></span></label>
+          <label><input type="radio" name="plano" value="Gourmet"><span>Gourmet <small>R$ 169,90</small></span></label>
+          <label><input type="radio" name="plano" value="Express"><span>Express <small>R$ 169,90</small></span></label>
+          <label><input type="radio" name="plano" value="Enterprise" checked><span>Enterprise <small>R$ 249,90</small></span></label>
+        </div>
+        <p class="pick-err">Escolha um plano.</p>
+      </fieldset>
+
+      <fieldset class="pick">
+        <legend>Forma de cobrança</legend>
+        <div class="chips-pick">
+          <label><input type="radio" name="cobranca" value="Mensal" checked><span>Mensal</span></label>
+          <label><input type="radio" name="cobranca" value="Anual"><span>Anual <small>economize 15%</small></span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="pick" id="pickPedidos">
+        <legend>Número de pedidos por dia</legend>
+        <div class="chips-pick">
+          <label><input type="radio" name="pedidos" value="Vai inaugurar"><span>Vai inaugurar</span></label>
+          <label><input type="radio" name="pedidos" value="1 a 15"><span>1 a 15</span></label>
+          <label><input type="radio" name="pedidos" value="16 a 30"><span>16 a 30</span></label>
+          <label><input type="radio" name="pedidos" value="31 a 50"><span>31 a 50</span></label>
+          <label><input type="radio" name="pedidos" value="+50"><span>+50</span></label>
+        </div>
+        <p class="pick-err">Escolha uma opção.</p>
+      </fieldset>
+
+      <div class="sign-total" aria-live="polite">
+        <span id="sumTxt">Plano Enterprise · mensal<small>7 dias grátis para testar</small></span>
+        <b id="sumVal">R$ 249,90/mês</b>
+      </div>
+
+      <button type="submit" class="btn btn-brand sign-submit"><span id="signBtn">Quero contratar</span> <svg class="i"><use href="#i-arrow"/></svg></button>
+      <p class="sign-fine">Ao enviar, abrimos o WhatsApp com seus dados para falar com nossa equipe. Sem cartão de crédito agora.</p>
+    </form>
+
+    <div class="sign-done" id="signDone" role="status">
+      <div class="ok-ico"><svg class="i"><use href="#i-check"/></svg></div>
+      <h2 id="doneTitle">Recebemos seus dados!</h2>
+      <p>Abrimos o WhatsApp com a sua mensagem pronta. É só tocar em <b>enviar</b> que nossa equipe já começa a configurar sua loja.</p>
+      <a class="btn btn-line" id="signWa" href="https://wa.me/5545999723256" target="_blank">Abrir o WhatsApp de novo</a>
+      <div class="try-box">
+        <b>Enquanto isso, que tal dar uma olhada no sistema?</b>
+        <p>Entre na nossa loja de demonstração e mexa à vontade: faça pedidos como cliente ou gerencie tudo pelo painel do lojista. Sem login e sem compromisso.</p>
+        <div class="try-ctas">
+          <button type="button" class="btn btn-brand" data-try="cliente"><svg class="i"><use href="#i-play"/></svg> Testar o app do cliente</button>
+          <button type="button" class="btn btn-ink" data-try="lojista"><svg class="i"><use href="#i-monitor"/></svg> Testar o painel do lojista</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
 <!-- Lightbox -->
 <dialog class="lightbox" id="lightbox" aria-label="Imagem ampliada">
   <button type="button" class="x" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button>
@@ -1576,6 +1768,128 @@
     });
   }
   document.querySelectorAll('[data-bill]').forEach(x => x.addEventListener('click', () => setBilling(x.dataset.bill)));
+
+  // ── Tela de contratação ──
+  // Sem servidor: o envio monta uma mensagem e abre o WhatsApp da equipe
+  const sign = document.getElementById('sign');
+  const signForm = document.getElementById('signForm');
+  const signDone = document.getElementById('signDone');
+  const PRICES = {
+    Essencial:  { m: '99,90',  a: '84,90',  y: '1.018,80' },
+    Gourmet:    { m: '169,90', a: '144,90', y: '1.738,80' },
+    Express:    { m: '169,90', a: '144,90', y: '1.738,80' },
+    Enterprise: { m: '249,90', a: '212,40', y: '2.548,80' },
+  };
+  const val = name => (signForm.querySelector('input[name="' + name + '"]:checked') || {}).value;
+  // "Como você quer começar?" muda o botão, o resumo e a mensagem do WhatsApp
+  const SIGN_TEXT = {
+    teste:     { btn: 'Começar teste grátis', done: 'Seu teste está a caminho!',
+                 msg: 'Olá! Quero começar o teste grátis por 7 dias da Central de Pedidos Online.' },
+    contratar: { btn: 'Assinar agora', done: 'Recebemos seus dados!',
+                 msg: 'Olá! Quero assinar a Central de Pedidos Online.' },
+  };
+  function updateSummary() {
+    const p = val('plano'), c = val('cobranca'), ini = val('inicio');
+    if (!p) return;
+    const pr = PRICES[p];
+    const preco = c === 'Anual' ? 'R$ ' + pr.y + ' por ano · cartão, PIX ou boleto' : 'R$ ' + pr.m + '/mês';
+    document.getElementById('sumTxt').innerHTML = (ini === 'teste' ? 'Teste grátis · ' : '') + 'Plano ' + p + ' · ' + c.toLowerCase() +
+      '<small>' + (ini === 'teste' ? '7 dias grátis, depois ' + preco : preco) + '</small>';
+    document.getElementById('sumVal').textContent = ini === 'teste' ? 'R$ 0 hoje' : 'R$ ' + (c === 'Anual' ? pr.a : pr.m) + '/mês';
+    document.getElementById('signBtn').textContent = SIGN_TEXT[ini].btn;
+    document.getElementById('doneTitle').textContent = SIGN_TEXT[ini].done;
+  }
+  signForm.addEventListener('change', updateSummary);
+
+  function openSign(plan, billing, inicio = 'contratar') {
+    setSheet(false);
+    signForm.hidden = false;
+    signDone.classList.remove('on');
+    if (plan) signForm.querySelector('input[name="plano"][value="' + plan + '"]').checked = true;
+    if (billing) signForm.querySelector('input[name="cobranca"][value="' + billing + '"]').checked = true;
+    signForm.querySelector('input[name="inicio"][value="' + inicio + '"]').checked = true;
+    updateSummary();
+    sign.showModal();
+    setTimeout(() => document.getElementById('fNome').focus(), 50);
+  }
+  document.querySelectorAll('a.buy, [data-sign]').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    const anual = document.querySelector('[data-bill="a"]')?.getAttribute('aria-pressed') === 'true';
+    openSign(a.dataset.plan, anual ? 'Anual' : 'Mensal');
+  }));
+  document.querySelectorAll('a[data-trial]').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    const anual = document.querySelector('[data-bill="a"]')?.getAttribute('aria-pressed') === 'true';
+    openSign(a.dataset.trial, anual ? 'Anual' : 'Mensal', 'teste');
+  }));
+
+  // máscara (45) 99999-9999
+  const zap = document.getElementById('fZap');
+  zap.addEventListener('input', () => {
+    const d = zap.value.replace(/\D/g, '').slice(0, 11);
+    zap.value = d.length > 6 ? '(' + d.slice(0, 2) + ') ' + d.slice(2, d.length - 4) + '-' + d.slice(-4)
+      : d.length > 2 ? '(' + d.slice(0, 2) + ') ' + d.slice(2) : d;
+  });
+
+  signForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const checks = [
+      ['fNome', v => v.trim().length > 1],
+      ['fLoja', v => v.trim().length > 1],
+      ['fZap', v => v.replace(/\D/g, '').length >= 10],
+      ['fMail', v => !v || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)],
+    ];
+    let first = null;
+    checks.forEach(([id, ok]) => {
+      const el = document.getElementById(id);
+      const bad = !ok(el.value);
+      el.setAttribute('aria-invalid', bad);
+      if (bad && !first) first = el;
+    });
+    [['pickPlano', 'plano'], ['pickPedidos', 'pedidos']].forEach(([box, name]) => {
+      const bad = !val(name);
+      document.getElementById(box).classList.toggle('invalid', bad);
+      if (bad && !first) first = document.querySelector('#' + box + ' input');
+    });
+    if (first) { first.focus(); return; }
+
+    const f = id => document.getElementById(id).value.trim();
+    const plano = val('plano'), cob = val('cobranca'), pr = PRICES[plano];
+    const linhas = [
+      SIGN_TEXT[val('inicio')].msg,
+      '',
+      '*Nome:* ' + f('fNome'),
+      '*Restaurante:* ' + f('fLoja'),
+      '*WhatsApp:* ' + f('fZap'),
+      f('fMail') ? '*E-mail:* ' + f('fMail') : null,
+      '*Plano:* ' + plano + ' (' + cob.toLowerCase() + ' · R$ ' + (cob === 'Anual' ? pr.y + '/ano' : pr.m + '/mês') + ')',
+      '*Pedidos por dia:* ' + val('pedidos'),
+    ].filter(l => l !== null);
+    const url = 'https://wa.me/5545999723256?text=' + encodeURIComponent(linhas.join('\n'));
+    document.getElementById('signWa').href = url;
+    window.open(url, '_blank');
+    signForm.hidden = true;
+    signDone.classList.add('on');
+  });
+  // da confirmação direto para a demonstração ao vivo
+  document.querySelectorAll('[data-try]').forEach(b => b.addEventListener('click', () => {
+    sign.close();
+    setDemoView(b.dataset.try);
+    demo.showModal();
+  }));
+  signForm.querySelectorAll('.field input').forEach(i => i.addEventListener('input', () => i.removeAttribute('aria-invalid')));
+
+  // destaques do lado esquerdo
+  const slides = [...document.querySelectorAll('.slide')];
+  const dots = [...document.querySelectorAll('.sign-dots button')];
+  let sIdx = 0;
+  function goSlide(i) {
+    sIdx = i;
+    slides.forEach((s, k) => s.classList.toggle('on', k === i));
+    dots.forEach((d, k) => d.setAttribute('aria-current', k === i));
+  }
+  dots.forEach((d, i) => d.addEventListener('click', () => goSlide(i)));
+  if (!reduceMotion) setInterval(() => { if (sign.open) goSlide((sIdx + 1) % slides.length); }, 4500);
 
   // ── Lightbox ──
   const lightbox = document.getElementById('lightbox');
