@@ -3,19 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <script>
-  /* Abertura Huga Huga: logo pulsando, uma vez por visita */
+  /* Abertura Huga Huga: logo pulsando toda vez que a pessoa entra (link, endereço ou F5) */
   (function () {
-    var area = "site";
     var escuro = false;
-    var chave = "hhAbertura:" + area;
-  
-    // só uma vez por visita (aba aberta) em cada área
+    // "voltar" do navegador não mostra; o resto (entrar ou F5) mostra
     try {
-      if (sessionStorage.getItem(chave)) return;
-      sessionStorage.setItem(chave, "1");
-    } catch (_) {
-      return; // sem sessionStorage (navegação privada restrita): não mostra
-    }
+      var nav = performance.getEntriesByType && performance.getEntriesByType("navigation")[0];
+      if (nav && nav.type === "back_forward") return;
+    } catch (_) {}
   
     var fundo = escuro ? "#0b0d16" : "#ffffff";
     var onda = escuro ? "rgba(255, 85, 0, .28)" : "rgba(255, 85, 0, .16)";
