@@ -338,6 +338,7 @@
     .price-sub b { color: var(--ink-2); font-weight: 600; }
     .save-chip { display: inline-flex; margin-top: 8px; padding: 4px 10px; border-radius: 999px; background: #E9F9EF; color: #15803D; font-size: 12.5px; font-weight: 700; white-space: nowrap; }
     .plan-note b { font-weight: 700; }
+    td.add small { display: block; margin-top: 2px; font-size: 11.5px; font-weight: 500; color: var(--muted); white-space: normal; }
     td.add { font-size: 13px; font-weight: 600; color: var(--brand-text); white-space: nowrap; }
     tr.price-row td { font-weight: 700; background: var(--subtle); }
     tr.price-row td:first-child { font-weight: 600; color: var(--ink-2); }
@@ -349,7 +350,8 @@
     .mods { list-style: none; display: grid; gap: 10px; margin: 20px 0 24px; padding-top: 20px; border-top: 1px solid var(--line); }
     .mods li { display: flex; align-items: center; gap: 10px; font-size: 14.5px; font-weight: 500; }
     .mods .i { width: 18px; height: 18px; stroke-width: 2.6; color: var(--ok); }
-    .mods li.off { color: #A1A1AA; }
+    .mods li.off { color: #A1A1AA; text-decoration: line-through; text-decoration-color: rgba(161,161,170,.6); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
     .mods li.off .i { color: #C4C4C8; }
     .plan-ctas { margin-top: auto; display: grid; gap: 6px; }
     .plan-ctas .btn { width: 100%; }
@@ -509,6 +511,11 @@
     .sign-total { margin-top: 18px; padding: 14px 16px; border-radius: 12px; background: var(--subtle); display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 14.5px; color: var(--ink-2); }
     .sign-total b { font-size: 20px; color: var(--ink); letter-spacing: -0.02em; white-space: nowrap; }
     .sign-total small { display: block; font-size: 12.5px; color: var(--muted); }
+    .consent { display: flex; gap: 10px; align-items: flex-start; margin-top: 18px; font-size: 13.5px; color: var(--ink-2); cursor: pointer; }
+    .consent input { width: 18px; height: 18px; margin-top: 1px; flex-shrink: 0; accent-color: var(--brand); }
+    .consent a { color: var(--brand-text); font-weight: 600; text-decoration: underline; }
+    .consent-err { display: none; margin-top: 6px; font-size: 12.5px; color: #DC2626; }
+    .consent.invalid + .consent-err { display: block; }
     .sign-submit { width: 100%; height: 56px; margin-top: 18px; font-size: 16.5px; border-radius: 14px; }
     .sign-fine { margin-top: 12px; font-size: 12.5px; color: var(--muted); text-align: center; }
     .sign-done { display: none; text-align: center; max-width: 440px; }
@@ -680,7 +687,7 @@
   <div class="container nav-in">
     <a href="#" class="brand" aria-label="Central de Pedidos Online">
       <span class="brand-mark"><img src="imagens/icon/icon.png" alt=""></span>
-      <span class="brand-name"><span>Central de <span class="brand-c">Pedidos</span></span><small>Online</small></span>
+      <span class="brand-name"><span>Central de <span class="brand-c">Pedidos</span></span> <small>Online</small></span>
     </a>
     <nav aria-label="Principal">
       <ul class="nav-links">
@@ -717,7 +724,7 @@
     <h1>Seu negócio vendendo mais, com <span class="brand-c">tecnologia de verdade</span>.</h1>
     <p class="lead">Plataforma completa para receber pedidos online com gestão de delivery, mesas com QR Code, controle de motoboys e notificações automáticas no WhatsApp.</p>
     <div class="hero-ctas">
-      <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20contratar%20o%20sistema." target="_blank" class="btn btn-brand btn-lg" data-sign>Quero contratar <svg class="i"><use href="#i-arrow"/></svg></a>
+      <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20contratar%20o%20sistema." target="_blank" class="btn btn-brand btn-lg" data-sign>Assinar agora <svg class="i"><use href="#i-arrow"/></svg></a>
       <button type="button" class="btn btn-line btn-lg" data-demo="cliente"><svg class="i"><use href="#i-play"/></svg> Testar o sistema ao vivo</button>
     </div>
     <div class="trust">
@@ -835,7 +842,7 @@
           <span class="j-num">5</span>
           <h3>O cliente acompanha pelo WhatsApp</h3>
           <div class="j-more">
-            <p>Mensagem automática em cada etapa do pedido, sem precisar abrir o app — e sem custo extra.</p>
+            <p>Mensagem automática em cada etapa do pedido, sem precisar abrir o app. Incluso nos planos Gourmet, Express e Enterprise; no Essencial, como adicional.</p>
             <span class="plan-badge">Gourmet, Express e Enterprise</span>
             <ul class="ticks">
               <li><svg class="i"><use href="#i-check"/></svg>Pedido em preparo, pronto ou saiu para entrega</li>
@@ -1132,14 +1139,14 @@
     <div class="head center reveal">
       <span class="kicker">Planos</span>
       <h2 class="h2">Escolha o plano ideal para o seu negócio</h2>
-      <p class="lead">Comece com o essencial ou leve tudo. Todos incluem os recursos básicos.</p>
+      <p class="lead">Comece pelo Essencial ou leve tudo no Enterprise. Todos incluem os recursos básicos.</p>
       <div class="trial"><svg class="i"><use href="#i-gift"/></svg><span><strong>Teste grátis por 7 dias</strong> em qualquer plano — sem cartão de crédito, sem compromisso.</span></div>
       <div class="trial setup"><svg class="i"><use href="#i-zap"/></svg><span><strong>Implementação grátis:</strong> nós configuramos tudo para você — cardápio, fotos, horários, taxas de entrega e pagamentos.</span></div>
       <div class="billing" role="group" aria-label="Forma de cobrança">
         <button type="button" data-bill="m" aria-pressed="true">Mensal</button>
         <button type="button" data-bill="a" aria-pressed="false">Anual <span class="save">economize 15%</span></button>
       </div>
-      <p class="pay-note">O plano anual é pago à vista no <b>cartão de crédito</b>, <b>PIX</b> ou <b>boleto</b>.</p>
+      <p class="pay-note">O plano anual é pago à vista no <b>cartão de crédito</b>, <b>PIX</b> ou <b>boleto</b>. Cancele quando quiser: devolvemos os meses não usados.</p>
     </div>
 
     <div class="plans reveal">
@@ -1154,10 +1161,10 @@
         <p class="plan-note"><b>Sem WhatsApp automático.</b> Quer notificações + bot 24h? Adicione por <b>+ R$ 69,90/mês</b>.</p>
         <ul class="mods">
           <li><svg class="i"><use href="#i-check"/></svg>Recursos básicos</li>
-          <li class="off"><svg class="i"><use href="#i-minus"/></svg>WhatsApp automático e bot</li>
-          <li class="off"><svg class="i"><use href="#i-minus"/></svg>Sistema de QR Code de mesa e garçom</li>
-          <li class="off"><svg class="i"><use href="#i-minus"/></svg>Sistema do entregador</li>
-          <li class="off"><svg class="i"><use href="#i-minus"/></svg>Suporte prioritário</li>
+          <li class="off"><svg class="i"><use href="#i-minus"/></svg><span class="sr-only">Não incluso: </span>WhatsApp automático e bot</li>
+          <li class="off"><svg class="i"><use href="#i-minus"/></svg><span class="sr-only">Não incluso: </span>Sistema de QR Code de mesa e garçom</li>
+          <li class="off"><svg class="i"><use href="#i-minus"/></svg><span class="sr-only">Não incluso: </span>Sistema do entregador</li>
+          <li class="off"><svg class="i"><use href="#i-minus"/></svg><span class="sr-only">Não incluso: </span>Suporte prioritário</li>
         </ul>
         <div class="plan-ctas">
           <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20assinar%20o%20plano%20Essencial%20(mensal)." data-plan="Essencial" target="_blank" class="btn btn-line buy">Assinar o Essencial</a>
@@ -1177,8 +1184,8 @@
           <li><svg class="i"><use href="#i-check"/></svg>Recursos básicos</li>
           <li><svg class="i"><use href="#i-check"/></svg>WhatsApp automático e bot</li>
           <li><svg class="i"><use href="#i-check"/></svg>Sistema de QR Code de mesa e garçom</li>
-          <li class="off"><svg class="i"><use href="#i-minus"/></svg>Sistema do entregador</li>
-          <li class="off"><svg class="i"><use href="#i-minus"/></svg>Suporte prioritário</li>
+          <li class="off"><svg class="i"><use href="#i-minus"/></svg><span class="sr-only">Não incluso: </span>Sistema do entregador</li>
+          <li class="off"><svg class="i"><use href="#i-minus"/></svg><span class="sr-only">Não incluso: </span>Suporte prioritário</li>
         </ul>
         <div class="plan-ctas">
           <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20assinar%20o%20plano%20Gourmet%20(mensal)." data-plan="Gourmet" target="_blank" class="btn btn-line buy">Assinar o Gourmet</a>
@@ -1197,9 +1204,9 @@
         <ul class="mods">
           <li><svg class="i"><use href="#i-check"/></svg>Recursos básicos</li>
           <li><svg class="i"><use href="#i-check"/></svg>WhatsApp automático e bot</li>
-          <li class="off"><svg class="i"><use href="#i-minus"/></svg>Sistema de QR Code de mesa e garçom</li>
+          <li class="off"><svg class="i"><use href="#i-minus"/></svg><span class="sr-only">Não incluso: </span>Sistema de QR Code de mesa e garçom</li>
           <li><svg class="i"><use href="#i-check"/></svg>Sistema do entregador</li>
-          <li class="off"><svg class="i"><use href="#i-minus"/></svg>Suporte prioritário</li>
+          <li class="off"><svg class="i"><use href="#i-minus"/></svg><span class="sr-only">Não incluso: </span>Suporte prioritário</li>
         </ul>
         <div class="plan-ctas">
           <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20assinar%20o%20plano%20Express%20(mensal)." data-plan="Express" target="_blank" class="btn btn-line buy">Assinar o Express</a>
@@ -1241,7 +1248,7 @@
             <tr><td class="grp" colspan="5">Recursos básicos</td></tr>
             <tr><td>Cardápio online por categorias</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td>Pedidos para entrega e retirada</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
-            <tr><td>Pagamento online (Pix e cartão)</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Pagamento online (PIX e cartão)</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td>Controle de troco</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td>Painel administrativo completo</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td>Impressão automática de pedidos</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
@@ -1252,9 +1259,9 @@
             <tr><td>Resumo do dia (faturamento, tempos médios e pedidos por hora)</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td>Acompanhamento do pedido ao vivo</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td>Área do cliente com histórico e “pedir de novo”</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
-            <tr><td class="grp" colspan="5">WhatsApp automático <span class="grp-note">· no Essencial, adicional de R$ 69,90/mês</span></td></tr>
-            <tr><td>Mensagens automáticas ao cliente em cada etapa do pedido</td><td class="add">+ R$ 69,90/mês</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
-            <tr><td>Bot no WhatsApp 24h</td><td class="add">+ R$ 69,90/mês</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr><td class="grp" colspan="5">WhatsApp automático <span class="grp-note">· no Essencial, adicional de R$ 69,90/mês (mensagens + bot)</span></td></tr>
+            <tr><td>Mensagens automáticas ao cliente em cada etapa do pedido</td><td class="add" rowspan="2">+ R$ 69,90/mês<small>adicional único: mensagens + bot</small></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Bot no WhatsApp 24h</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td class="grp" colspan="5">Sistema de QR Code de mesa e garçom</td></tr>
             <tr><td>Mesas com QR Code individual</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td>Sistema de garçom digital</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
@@ -1319,7 +1326,7 @@
       </details>
       <details name="faq">
         <summary>Como funciona o pagamento pelo sistema?<svg class="i"><use href="#i-plus"/></svg></summary>
-        <p>O cliente pode pagar via PIX diretamente no pedido. O pagamento é confirmado automaticamente e o pedido avança para preparo sem precisar de nenhuma ação manual.</p>
+        <p>O cliente pode pagar via PIX ou cartão de crédito diretamente no pedido. O pagamento é confirmado automaticamente e o pedido avança para preparo sem precisar de nenhuma ação manual.</p>
       </details>
       <details name="faq">
         <summary>Existe suporte disponível se eu tiver dúvidas?<svg class="i"><use href="#i-plus"/></svg></summary>
@@ -1375,7 +1382,7 @@
       <div class="foot-brand">
         <a href="#" class="brand" aria-label="Central de Pedidos Online">
           <span class="brand-mark"><img src="imagens/icon/icon.png" alt=""></span>
-          <span class="brand-name"><span>Central de <span class="brand-c">Pedidos</span></span><small>Online</small></span>
+          <span class="brand-name"><span>Central de <span class="brand-c">Pedidos</span></span> <small>Online</small></span>
         </a>
         <p>Plataforma completa de pedidos online para restaurantes, lanchonetes e delivery com gestão de mesas, motoboys e WhatsApp.</p>
         <div class="social">
@@ -1452,7 +1459,7 @@
   <aside class="sign-side">
     <span class="brand">
       <span class="brand-mark"><img src="imagens/icon/icon.png" alt=""></span>
-      <span class="brand-name"><span>Central de <span class="brand-c">Pedidos</span></span><small>ONLINE</small></span>
+      <span class="brand-name"><span>Central de <span class="brand-c">Pedidos</span></span> <small>Online</small></span>
     </span>
     <div class="slides" aria-hidden="true">
       <div class="slide on">
@@ -1537,7 +1544,13 @@
         <b id="sumVal">R$ 249,90/mês</b>
       </div>
 
-      <button type="submit" class="btn btn-brand sign-submit"><span id="signBtn">Quero contratar</span> <svg class="i"><use href="#i-arrow"/></svg></button>
+      <label class="consent" id="consentBox">
+        <input type="checkbox" id="fConsent" required>
+        <span>Li e aceito a <a href="#" data-open="privacyModal">Política de Privacidade</a> e autorizo o contato pelo WhatsApp para atendimento.</span>
+      </label>
+      <p class="consent-err">Para continuar, aceite a Política de Privacidade.</p>
+
+      <button type="submit" class="btn btn-brand sign-submit"><span id="signBtn">Assinar agora</span> <svg class="i"><use href="#i-arrow"/></svg></button>
       <p class="sign-fine">Ao enviar, abrimos o WhatsApp com seus dados para falar com nossa equipe. Sem cartão de crédito agora.</p>
     </form>
 
@@ -1572,13 +1585,14 @@
     <p>A <strong>Central Pedidos Online</strong> valoriza a privacidade dos seus usuários e está comprometida com a proteção dos dados pessoais, em conformidade com a Lei Geral de Proteção de Dados (LGPD – Lei nº 13.709/2018).</p>
     <h4>1. Dados que coletamos</h4>
     <ul>
-      <li>Nome, e-mail e telefone fornecidos em formulários de contato</li>
+      <li>Nome, nome do estabelecimento, telefone (WhatsApp), e-mail e informações do plano escolhido, fornecidos no formulário de contratação ou teste grátis</li>
       <li>Dados de navegação (páginas visitadas, tempo de sessão) via cookies</li>
       <li>Informações de dispositivo e navegador para fins de segurança</li>
     </ul>
     <h4>2. Como usamos seus dados</h4>
     <ul>
       <li>Para responder suas solicitações e prestar suporte</li>
+      <li>Os dados do formulário de contratação são enviados para o nosso WhatsApp de atendimento, onde damos continuidade à contratação ou ao teste grátis</li>
       <li>Para melhorar a experiência de navegação no site</li>
       <li>Para enviar informações sobre nossos serviços, com seu consentimento</li>
     </ul>
@@ -1605,9 +1619,10 @@
     <h4>3. Cadastro e Responsabilidades</h4>
     <p>O contratante é responsável pela veracidade das informações cadastradas e pelo uso correto da plataforma. É vedado utilizar o sistema para fins ilegais, fraudulentos ou que violem direitos de terceiros.</p>
     <h4>4. Período de Teste</h4>
-    <p>Oferecemos <strong>7 dias de teste grátis</strong> sem necessidade de cartão de crédito. Após o período de teste, a continuidade do serviço está condicionada à contratação de um plano.</p>
+    <p>Oferecemos <strong>7 dias de teste grátis</strong> sem necessidade de cartão de crédito. Ao final dos 7 dias, não há cobrança automática, pois nenhum cartão é solicitado. Para continuar usando a plataforma, basta contratar um plano; caso contrário, o acesso de teste é encerrado.</p>
     <h4>5. Pagamento e Cancelamento</h4>
-    <p>Os valores e condições de pagamento são definidos conforme o plano contratado. O cancelamento pode ser solicitado a qualquer momento pelo WhatsApp ou canal de atendimento, sem multa contratual.</p>
+    <p>Os valores e condições de pagamento são definidos conforme o plano contratado. <strong>Plano mensal:</strong> o cancelamento pode ser solicitado a qualquer momento pelo WhatsApp ou canal de atendimento, sem multa contratual, e o acesso segue até o fim do mês já pago.</p>
+    <p><strong>Plano anual:</strong> o pagamento é feito à vista, no cartão de crédito, PIX ou boleto. Você pode cancelar em até 7 dias após o pagamento e recebe o reembolso integral. Após esse prazo, o cancelamento pode ser feito a qualquer momento, e devolvemos o valor proporcional aos meses não utilizados, descontando os meses já usados pelo valor do plano mensal. O reembolso é feito em até 30 dias, pela mesma forma de pagamento.</p>
     <h4>6. Propriedade Intelectual</h4>
     <p>Todos os direitos sobre a plataforma, marca, design e código-fonte pertencem à Central Pedidos Online. É proibida a reprodução, cópia ou redistribuição sem autorização expressa.</p>
     <h4>7. Limitação de Responsabilidade</h4>
@@ -1846,6 +1861,9 @@
       el.setAttribute('aria-invalid', bad);
       if (bad && !first) first = el;
     });
+    const consent = document.getElementById('fConsent');
+    document.getElementById('consentBox').classList.toggle('invalid', !consent.checked);
+    if (!consent.checked && !first) first = consent;
     [['pickPlano', 'plano'], ['pickPedidos', 'pedidos']].forEach(([box, name]) => {
       const bad = !val(name);
       document.getElementById(box).classList.toggle('invalid', bad);
@@ -1877,6 +1895,7 @@
     setDemoView(b.dataset.try);
     demo.showModal();
   }));
+  document.getElementById('fConsent').addEventListener('change', e => document.getElementById('consentBox').classList.toggle('invalid', !e.target.checked));
   signForm.querySelectorAll('.field input').forEach(i => i.addEventListener('input', () => i.removeAttribute('aria-invalid')));
 
   // destaques do lado esquerdo
