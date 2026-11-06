@@ -517,6 +517,10 @@
     .consent-err { display: none; margin-top: 6px; font-size: 12.5px; color: #DC2626; }
     .consent.invalid + .consent-err { display: block; }
     .sign-submit { width: 100%; height: 56px; margin-top: 18px; font-size: 16.5px; border-radius: 14px; }
+    .send-err { margin-top: 18px; font-size: 13.5px; color: #DC2626; }
+    .send-err[hidden] { display: none; }
+    .send-err a { font-size: 12.5px; color: var(--muted); text-decoration: underline; }
+    .sign-submit:disabled { opacity: .7; cursor: wait; }
     .sign-fine { margin-top: 12px; font-size: 12.5px; color: var(--muted); text-align: center; }
     .sign-done { display: none; text-align: center; max-width: 440px; }
     .sign-done.on { display: block; }
@@ -1552,15 +1556,15 @@
       </label>
       <p class="consent-err">Para continuar, aceite a Política de Privacidade.</p>
 
+      <p class="send-err" id="sendErr" role="alert" hidden><span id="sendErrTxt"></span> <a href="https://wa.me/5545999723256" target="_blank">ou fale com a gente no WhatsApp</a></p>
       <button type="submit" class="btn btn-brand sign-submit"><span id="signBtn">Assinar agora</span> <svg class="i"><use href="#i-arrow"/></svg></button>
-      <p class="sign-fine">Ao enviar, abrimos o WhatsApp com seus dados para falar com nossa equipe. Sem cartão de crédito agora.</p>
+      <p class="sign-fine">Ao enviar, nossa equipe entra em contato pelo WhatsApp informado. Sem cartão de crédito agora.</p>
     </form>
 
     <div class="sign-done" id="signDone" role="status">
       <div class="ok-ico"><svg class="i"><use href="#i-check"/></svg></div>
       <h2 id="doneTitle">Recebemos seus dados!</h2>
-      <p>Abrimos o WhatsApp com a sua mensagem pronta. É só tocar em <b>enviar</b> que nossa equipe já começa a configurar sua loja.</p>
-      <a class="btn btn-line" id="signWa" href="https://wa.me/5545999723256" target="_blank">Abrir o WhatsApp de novo</a>
+      <p>Nossa equipe vai te chamar no WhatsApp que você informou em breve, em horário comercial, para ativar sua loja.</p>
       <div class="try-box">
         <b>Enquanto isso, que tal dar uma olhada no sistema?</b>
         <p>Entre na nossa loja de demonstração e mexa à vontade: faça pedidos como cliente ou gerencie tudo pelo painel do lojista. Sem login e sem compromisso.</p>
@@ -1798,12 +1802,10 @@
     Enterprise: { m: '249,90', a: '212,40', y: '2.548,80' },
   };
   const val = name => (signForm.querySelector('input[name="' + name + '"]:checked') || {}).value;
-  // "Como você quer começar?" muda o botão, o resumo e a mensagem do WhatsApp
+  // "Como você quer começar?" muda o botão, o resumo e o título da confirmação
   const SIGN_TEXT = {
-    teste:     { btn: 'Começar teste grátis', done: 'Seu teste está a caminho!',
-                 msg: 'Olá! Quero começar o teste grátis por 7 dias da Central de Pedidos Online.' },
-    contratar: { btn: 'Assinar agora', done: 'Recebemos seus dados!',
-                 msg: 'Olá! Quero assinar a Central de Pedidos Online.' },
+    teste:     { btn: 'Começar teste grátis', done: 'Seu teste está a caminho!' },
+    contratar: { btn: 'Assinar agora', done: 'Recebemos seus dados!' },
   };
   function updateSummary() {
     const p = val('plano'), c = val('cobranca'), ini = val('inicio');
@@ -1848,7 +1850,7 @@
       : d.length > 2 ? '(' + d.slice(0, 2) + ') ' + d.slice(2) : d;
   });
 
-  signForm.addEventListener('submit', e => {
+  signForm.addEventListener('submit', async e => {
     e.preventDefault();
     const checks = [
       ['fNome', v => v.trim().length > 1],
@@ -1874,22 +1876,18 @@
     if (first) { first.focus(); return; }
 
     const f = id => document.getElementById(id).value.trim();
-    const plano = val('plano'), cob = val('cobranca'), pr = PRICES[plano];
-    const linhas = [
-      SIGN_TEXT[val('inicio')].msg,
-      '',
-      '*Nome:* ' + f('fNome'),
-      '*Restaurante:* ' + f('fLoja'),
-      '*WhatsApp:* ' + f('fZap'),
-      f('fMail') ? '*E-mail:* ' + f('fMail') : null,
-      '*Plano:* ' + plano + ' (' + cob.toLowerCase() + ' · R$ ' + (cob === 'Anual' ? pr.y + '/ano' : pr.m + '/mês') + ')',
-      '*Pedidos por dia:* ' + val('pedidos'),
-    ].filter(l => l !== null);
-    // guarda o cadastro no Super Admin (não atrapalha o WhatsApp se falhar)
+    const submitBtn = signForm.querySelector('.sign-submit');
+    const btnTxt = document.getElementById('signBtn');
+    const sendErr = document.getElementById('sendErr');
+    sendErr.hidden = true;
+    submitBtn.disabled = true;
+    btnTxt.textContent = 'Enviando...';
+
+    // o cadastro fica guardado no Super Admin; a equipe chama o cliente depois
+    let erro = null;
     try {
-      fetch('https://superadmin.centralpedidosonline.com.br/api/cadastros-site', {
+      const res = await fetch('https://superadmin.centralpedidosonline.com.br/api/cadastros-site', {
         method: 'POST',
-        keepalive: true,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           nome: f('fNome'),
@@ -1897,16 +1895,27 @@
           whatsapp: f('fZap'),
           email: f('fMail'),
           inicio: val('inicio'),
-          plano: plano,
-          cobranca: cob,
+          plano: val('plano'),
+          cobranca: val('cobranca'),
           pedidos: val('pedidos'),
           site_url: document.getElementById('fSiteUrl').value
         })
-      }).catch(() => {});
-    } catch (_) {}
-    const url = 'https://wa.me/5545999723256?text=' + encodeURIComponent(linhas.join('\n'));
-    document.getElementById('signWa').href = url;
-    window.open(url, '_blank');
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        erro = (data && data.erro) || 'Não foi possível enviar agora. Tente novamente em instantes.';
+      }
+    } catch (_) {
+      erro = 'Não foi possível enviar agora. Tente novamente em instantes.';
+    }
+
+    submitBtn.disabled = false;
+    btnTxt.textContent = SIGN_TEXT[val('inicio')].btn;
+    if (erro) {
+      document.getElementById('sendErrTxt').textContent = erro;
+      sendErr.hidden = false;
+      return;
+    }
     signForm.hidden = true;
     signDone.classList.add('on');
   });
