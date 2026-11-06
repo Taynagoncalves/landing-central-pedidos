@@ -649,7 +649,69 @@
       .receipt { transform: none !important; opacity: 1 !important; }
       .js .reveal { opacity: 1; transform: none; }
     }
+
+    /* ── Calculadora de comissão ── */
+    .calc-sec { padding-top: 0; }
+    .calc { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 20px; max-width: 1040px; margin: 0 auto; }
+    .calc-campos, .calc-resultado { padding: 30px; border: 1px solid var(--line); border-radius: 24px; background: var(--surface); box-shadow: var(--shadow-md); }
+    .calc-campos { display: flex; flex-direction: column; justify-content: center; gap: 26px; }
+    .calc-campo { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; border: 0; font-size: 14px; font-weight: 600; color: var(--ink-2); }
+    .calc-campo > span, .calc-campo legend { display: flex; justify-content: space-between; align-items: baseline; padding: 0; }
+    .calc-campo > span b { color: var(--ink); font-size: 18px; font-weight: 700; }
+    .calc-campo input[type="range"] { width: 100%; accent-color: var(--brand); cursor: pointer; }
+    .calc-campo select { height: 48px; padding: 0 14px; border: 1px solid var(--line-2); border-radius: 12px; background: var(--surface); color: var(--ink); font: inherit; font-weight: 600; }
+    .calc-campo select:focus { outline: 2px solid var(--brand); outline-offset: 1px; }
+    .calc-taxa legend { margin-bottom: 10px; }
+    .calc-opcoes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+    .calc-opcoes label { cursor: pointer; }
+    .calc-opcoes input { position: absolute; opacity: 0; pointer-events: none; }
+    .calc-opcoes span { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 12px 6px; border: 1px solid var(--line-2); border-radius: 14px; color: var(--ink); font-size: 18px; font-weight: 700; text-align: center; transition: border-color .2s, background .2s; }
+    .calc-opcoes small { color: var(--muted); font-size: 11.5px; font-weight: 500; line-height: 1.3; }
+    .calc-opcoes input:checked + span { border-color: var(--brand); background: var(--brand-soft); box-shadow: 0 0 0 1px var(--brand) inset; }
+    .calc-opcoes input:focus-visible + span { outline: 2px solid var(--brand); outline-offset: 2px; }
+    .calc-resultado { display: flex; flex-direction: column; gap: 4px; background: var(--night); border-color: var(--night); color: #fff; }
+    .calc-linha { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--night-line); color: var(--night-muted); font-size: 14.5px; }
+    .calc-linha small { display: block; color: var(--night-muted); font-size: 12px; }
+    .calc-linha b { color: #fff; font-size: 18px; white-space: nowrap; }
+    .calc-linha.ruim b { color: #F87171; }
+    .calc-linha.bom b { color: #4ADE80; }
+    .calc-economia { margin: 18px 0 20px; padding: 20px; border-radius: 18px; background: rgba(255, 85, 0, .12); text-align: center; }
+    .calc-economia small { display: block; color: #FDBA8C; font-size: 13px; font-weight: 600; }
+    .calc-economia strong { display: block; margin: 4px 0; color: #fff; font-size: clamp(34px, 4vw, 46px); line-height: 1.1; letter-spacing: -0.03em; }
+    .calc-economia span { color: var(--night-muted); font-size: 14px; }
+    .calc-economia span b { color: #fff; }
+    .calc-cta { justify-content: center; width: 100%; }
+    .calc-obs { margin: 14px 0 0; color: #71717A; font-size: 12px; line-height: 1.5; text-align: center; }
+    @media (max-width: 860px) {
+      .calc { grid-template-columns: 1fr; }
+      .calc-campos, .calc-resultado { padding: 22px; }
+    }
   </style>
+  <script>
+    /* Medição de visitas e cadastros.
+       Para ligar, cole aqui o código do Google Analytics (ex.: G-XXXXXXX)
+       e/ou do Meta Pixel (só números). Vazio = desligado. */
+    window.MEDICAO = { googleAnalytics: '', metaPixel: '' };
+    (function (m) {
+      if (m.googleAnalytics) {
+        var g = document.createElement('script'); g.async = true;
+        g.src = 'https://www.googletagmanager.com/gtag/js?id=' + m.googleAnalytics;
+        document.head.appendChild(g);
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { dataLayer.push(arguments); };
+        gtag('js', new Date()); gtag('config', m.googleAnalytics);
+      }
+      if (m.metaPixel) {
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', m.metaPixel); fbq('track', 'PageView');
+      }
+    })(window.MEDICAO);
+    // chamado quando um cadastro é enviado com sucesso
+    window.registrarCadastro = function (plano, inicio) {
+      try { if (window.gtag) gtag('event', 'generate_lead', { plano: plano, inicio: inicio }); } catch (_) {}
+      try { if (window.fbq) fbq('track', 'Lead', { content_name: plano }); } catch (_) {}
+    };
+  </script>
 </head>
 <body>
 
@@ -1137,6 +1199,69 @@
   </div>
 </section>
 
+<!-- Calculadora: comissão dos aplicativos x plano fixo -->
+<section class="section calc-sec" id="economia">
+  <div class="container">
+    <div class="head center reveal">
+      <span class="kicker">Faça a conta</span>
+      <h2 class="h2">Quanto você paga de comissão<br>para os aplicativos?</h2>
+      <p class="lead">Nos aplicativos de delivery, cada pedido paga uma porcentagem. Aqui você paga um valor fixo por mês, sem comissão por pedido.</p>
+    </div>
+
+    <div class="calc reveal">
+      <div class="calc-campos">
+        <label class="calc-campo">
+          <span>Pedidos por mês <b id="cPedidosTxt">600</b></span>
+          <input type="range" id="cPedidos" min="50" max="3000" step="50" value="600">
+        </label>
+        <label class="calc-campo">
+          <span>Ticket médio <b id="cTicketTxt">R$ 45</b></span>
+          <input type="range" id="cTicket" min="15" max="200" step="5" value="45">
+        </label>
+        <fieldset class="calc-campo calc-taxa">
+          <legend>Comissão do aplicativo</legend>
+          <div class="calc-opcoes">
+            <label><input type="radio" name="cTaxa" value="12" checked><span>12%<small>entrega própria</small></span></label>
+            <label><input type="radio" name="cTaxa" value="23"><span>23%<small>com entregador do app</small></span></label>
+            <label><input type="radio" name="cTaxa" value="27"><span>27%<small>planos mais caros</small></span></label>
+          </div>
+        </fieldset>
+        <label class="calc-campo">
+          <span>Comparar com o plano</span>
+          <select id="cPlano">
+            <option value="Essencial" data-preco="99.90">Essencial · R$ 99,90/mês</option>
+            <option value="Gourmet" data-preco="169.90" selected>Gourmet · R$ 169,90/mês</option>
+            <option value="Express" data-preco="169.90">Express · R$ 169,90/mês</option>
+            <option value="Enterprise" data-preco="249.90">Enterprise · R$ 249,90/mês</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="calc-resultado" aria-live="polite">
+        <div class="calc-linha">
+          <span>Você vende por mês</span>
+          <b id="cVendas">R$ 27.000</b>
+        </div>
+        <div class="calc-linha ruim">
+          <span>Comissão para o aplicativo</span>
+          <b id="cComissao">R$ 3.240</b>
+        </div>
+        <div class="calc-linha bom">
+          <span>Central de Pedidos <small id="cPlanoNome">Gourmet</small></span>
+          <b id="cNosso">R$ 169,90</b>
+        </div>
+        <div class="calc-economia">
+          <small>Fica no seu bolso</small>
+          <strong id="cEconomia">R$ 3.070</strong>
+          <span>por mês · <b id="cEconomiaAno">R$ 36.840</b> por ano</span>
+        </div>
+        <button type="button" class="btn btn-brand calc-cta" id="cCta" data-sign data-plan="Gourmet">Quero parar de pagar comissão <svg class="i"><use href="#i-arrow"/></svg></button>
+        <p class="calc-obs">Valores aproximados das comissões cobradas pelos aplicativos de delivery. Pagamentos online, aqui e lá, têm a taxa da operadora de pagamento.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Planos -->
 <section class="section" id="planos">
   <div class="container">
@@ -1295,7 +1420,7 @@
       <h2 class="h2">Sua loja online em 4 passos.</h2>
     </div>
     <div class="start">
-      <div class="start-step reveal"><span class="n-badge">1</span><h3>Contrate o plano</h3><p>Entre em contato pelo WhatsApp e escolha o plano ideal para o seu negócio.</p></div>
+      <div class="start-step reveal"><span class="n-badge">1</span><h3>Faça seu cadastro</h3><p>Escolha o plano, preencha seus dados e nossa equipe te chama no WhatsApp.</p></div>
       <div class="start-step reveal"><span class="n-badge">2</span><h3>Nós configuramos tudo</h3><p>Implementação grátis: montamos seu cardápio, logo, horários e formas de entrega para você.</p></div>
       <div class="start-step reveal"><span class="n-badge">3</span><h3>Compartilhe o link</h3><p>Envie o link da sua loja pelo WhatsApp, Instagram ou onde quiser.</p></div>
       <div class="start-step reveal"><span class="n-badge">4</span><h3>Receba pedidos</h3><p>Gerencie tudo pelo painel e acompanhe cada pedido em tempo real.</p></div>
@@ -1319,7 +1444,7 @@
     <div class="faq-list reveal">
       <details name="faq" open>
         <summary>Preciso instalar algum aplicativo?<svg class="i"><use href="#i-plus"/></svg></summary>
-        <p>Não. O sistema funciona 100% pelo navegador, tanto para o restaurante quanto para o cliente. Basta acessar o link e usar — sem download, sem instalação.</p>
+        <p>Não. O sistema funciona 100% pelo navegador, tanto para o restaurante quanto para o cliente. Basta acessar o link e usar — sem download. A única instalação, opcional, é o programa de impressão automática no computador da loja.</p>
       </details>
       <details name="faq">
         <summary>Quanto tempo leva para o sistema estar funcionando?<svg class="i"><use href="#i-plus"/></svg></summary>
@@ -1339,7 +1464,23 @@
       </details>
       <details name="faq">
         <summary>O sistema imprime os pedidos automaticamente?<svg class="i"><use href="#i-plus"/></svg></summary>
-        <p>Sim! Assim que o cliente finaliza o pedido, ele é impresso automaticamente na sua impressora térmica — sem precisar clicar em nada. Funciona para delivery, mesa e retirada no balcão. A configuração é simples e não exige instalação de drivers.</p>
+        <p>Sim! Assim que o cliente finaliza o pedido, ele é impresso automaticamente na sua impressora térmica — sem precisar clicar em nada. Funciona para delivery, mesa e retirada no balcão. Para isso, basta instalar uma vez o programa da PrintNode no computador ligado à impressora — nossa equipe te ajuda a configurar.</p>
+      </details>
+      <details name="faq">
+        <summary>Vocês cobram comissão por pedido?<svg class="i"><use href="#i-plus"/></svg></summary>
+        <p>Não. Você paga só o valor fixo do plano, venda 10 ou 10 mil pedidos. Nos pagamentos online (PIX e cartão pelo sistema), existe apenas a taxa da operadora de pagamento, que cai direto na sua conta.</p>
+      </details>
+      <details name="faq">
+        <summary>Tem fidelidade ou multa para cancelar?<svg class="i"><use href="#i-plus"/></svg></summary>
+        <p>Não tem multa. No plano mensal, você cancela quando quiser pelo WhatsApp. No plano anual, você pode cancelar em até 7 dias após o pagamento com reembolso integral; depois disso, devolvemos os meses não usados, conforme os Termos de Uso.</p>
+      </details>
+      <details name="faq">
+        <summary>O que acontece depois dos 7 dias grátis?<svg class="i"><use href="#i-plus"/></svg></summary>
+        <p>Antes do fim do teste, a gente fala com você. Se gostar, é só escolher como pagar (PIX ou cartão) e sua loja continua funcionando normalmente, com tudo o que já foi configurado. Se não quiser continuar, não paga nada.</p>
+      </details>
+      <details name="faq">
+        <summary>Preciso ter CNPJ?<svg class="i"><use href="#i-plus"/></svg></summary>
+        <p>Não. Você pode usar o sistema como pessoa física (CPF) ou com CNPJ, incluindo MEI.</p>
       </details>
       <details name="faq">
         <summary>Posso testar antes de contratar?<svg class="i"><use href="#i-plus"/></svg></summary>
@@ -1918,6 +2059,7 @@
     }
     signForm.hidden = true;
     signDone.classList.add('on');
+    if (window.registrarCadastro) window.registrarCadastro(val('plano'), val('inicio'));
   });
   // da confirmação direto para a demonstração ao vivo
   document.querySelectorAll('[data-try]').forEach(b => b.addEventListener('click', () => {
@@ -1981,6 +2123,36 @@
   document.getElementById('cookieNo').addEventListener('click', () => cookieDone('declined'));
 
   // ── Entrada suave das seções ──
+
+  // ── Calculadora de comissão ──
+  (function () {
+    const $ = (id) => document.getElementById(id);
+    if (!$('cPedidos')) return;
+    const brl = (v, cent) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: cent ? 2 : 0, maximumFractionDigits: cent ? 2 : 0 });
+    function calcular() {
+      const pedidos = Number($('cPedidos').value);
+      const ticket = Number($('cTicket').value);
+      const taxa = Number((document.querySelector('input[name="cTaxa"]:checked') || {}).value || 12);
+      const opt = $('cPlano').selectedOptions[0];
+      const preco = Number(opt.dataset.preco);
+      const vendas = pedidos * ticket;
+      const comissao = vendas * taxa / 100;
+      const economia = Math.max(0, comissao - preco);
+      $('cPedidosTxt').textContent = pedidos.toLocaleString('pt-BR');
+      $('cTicketTxt').textContent = brl(ticket);
+      $('cVendas').textContent = brl(vendas);
+      $('cComissao').textContent = brl(comissao);
+      $('cNosso').textContent = brl(preco, true);
+      $('cPlanoNome').textContent = opt.value;
+      $('cEconomia').textContent = brl(economia);
+      $('cEconomiaAno').textContent = brl(economia * 12);
+      $('cCta').dataset.plan = opt.value;
+    }
+    ['cPedidos', 'cTicket', 'cPlano'].forEach((id) => $(id).addEventListener('input', calcular));
+    document.querySelectorAll('input[name="cTaxa"]').forEach((r) => r.addEventListener('change', calcular));
+    calcular();
+  })();
+
   const revealObs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
