@@ -1490,6 +1490,7 @@
     </div>
 
     <form class="sign-form" id="signForm" novalidate>
+      <input type="text" name="site_url" id="fSiteUrl" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
       <span class="kicker" id="signKicker">Teste grátis por 7 dias · implementação grátis</span>
       <h2 id="signTitle">Pronto para <span class="brand-c">vender mais</span> no automático?</h2>
       <p class="lead" id="signLead">Preencha seus dados e nossa equipe entra em contato para ativar sua loja. A gente configura tudo para você.</p>
@@ -1884,6 +1885,25 @@
       '*Plano:* ' + plano + ' (' + cob.toLowerCase() + ' · R$ ' + (cob === 'Anual' ? pr.y + '/ano' : pr.m + '/mês') + ')',
       '*Pedidos por dia:* ' + val('pedidos'),
     ].filter(l => l !== null);
+    // guarda o cadastro no Super Admin (não atrapalha o WhatsApp se falhar)
+    try {
+      fetch('https://superadmin.centralpedidosonline.com.br/api/cadastros-site', {
+        method: 'POST',
+        keepalive: true,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nome: f('fNome'),
+          restaurante: f('fLoja'),
+          whatsapp: f('fZap'),
+          email: f('fMail'),
+          inicio: val('inicio'),
+          plano: plano,
+          cobranca: cob,
+          pedidos: val('pedidos'),
+          site_url: document.getElementById('fSiteUrl').value
+        })
+      }).catch(() => {});
+    } catch (_) {}
     const url = 'https://wa.me/5545999723256?text=' + encodeURIComponent(linhas.join('\n'));
     document.getElementById('signWa').href = url;
     window.open(url, '_blank');
