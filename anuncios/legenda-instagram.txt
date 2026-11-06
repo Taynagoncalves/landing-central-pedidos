@@ -1,6 +1,6 @@
 🍔🍕🍣 Pare de perder pedidos. Venda no automático!
 
-A Central de Pedidos Online é o sistema completo para todo tipo de restaurante: hamburgueria, pizzaria, lanchonete, açaí, restaurante com salão ou só delivery.
+A Huga Huga é o sistema completo para todo tipo de restaurante: hamburgueria, pizzaria, lanchonete, açaí, restaurante com salão ou só delivery.
 
 ✅ O que você tem no sistema:
 
@@ -8,7 +8,7 @@ A Central de Pedidos Online é o sistema completo para todo tipo de restaurante:
 🛵 Pedidos para delivery, retirada e mesa, tudo num só lugar
 💸 PIX e cartão com confirmação automática (Mercado Pago) + pagamento na entrega com troco
 🖨️ Impressão automática do pedido na cozinha
-💬 WhatsApp automático: o cliente é avisado em cada etapa (recebido, em preparo, saiu para entrega e chegou)
+💬 WhatsApp automático: o cliente é avisado em cada etapa (recebido, em preparo, saiu para entrega e chegou) — nos planos Gourmet, Express e Enterprise
 🤖 Bot no WhatsApp 24h com cardápio e status do pedido
 📍 Acompanhamento do pedido ao vivo para o cliente
 🍽️ Mesas com QR Code, garçom digital e comanda eletrônica

@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Central de Pedidos Online – Sistema de Pedidos para Restaurantes</title>
+  <title>Huga Huga – Sistema de Pedidos para Restaurantes</title>
   <meta name="description" content="Sistema completo de pedidos online para restaurantes, lanchonetes e delivery. Motoboy, mesas com QR Code, notificações no WhatsApp e muito mais.">
-  <link rel="icon" type="image/png" href="imagens/icon/icon.png">
-  <link rel="apple-touch-icon" href="imagens/icon/icon.png">
+  <link rel="icon" type="image/png" href="imagens/logo/favicon.png">
+  <link rel="apple-touch-icon" href="imagens/logo/favicon.png">
   <meta name="theme-color" content="#FBFBFA">
   <!-- Open Graph / Social -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://centralpedidosonline.com.br/">
-  <meta property="og:title" content="Central de Pedidos Online – Sistema de Pedidos para Restaurantes">
+  <meta property="og:title" content="Huga Huga – Sistema de Pedidos para Restaurantes">
   <meta property="og:description" content="Plataforma completa para receber pedidos online com gestão de delivery, mesas com QR Code, controle de motoboys e notificações automáticas no WhatsApp.">
   <meta property="og:image" content="https://centralpedidosonline.com.br/imagens/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Central de Pedidos Online – Sistema de Pedidos para Restaurantes">
+  <meta name="twitter:title" content="Huga Huga – Sistema de Pedidos para Restaurantes">
   <meta name="twitter:description" content="Plataforma completa para receber pedidos online com gestão de delivery, mesas com QR Code e notificações no WhatsApp.">
   <meta name="twitter:image" content="https://centralpedidosonline.com.br/imagens/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -98,6 +98,9 @@
 
     /* ── Marca ── icon.png é quadrado com margem transparente, então recorta só o carrinho */
     .brand { display: inline-flex; align-items: center; gap: 10px; }
+    .brand-logo { display: block; height: 52px; width: auto; }
+    .foot-brand .brand-logo { height: 76px; }
+    .sign-side .brand-logo { height: 52px; }
     .brand-mark { display: block; width: 44px; height: 30px; overflow: hidden; flex-shrink: 0; }
     .brand-mark img { width: 62px; height: 62px; max-width: none; margin: -14px 0 0 -10px; }
     .brand-name { display: flex; flex-direction: column; font-size: 17px; font-weight: 700; line-height: 1; letter-spacing: -0.03em; white-space: nowrap; }
@@ -589,6 +592,7 @@
       .foot-brand { grid-column: 1 / -1; }
     }
     @media (max-width: 680px) {
+      .brand-logo { height: 44px; }
       .container { padding: 0 16px; }
       .section { padding: 80px 0; }
       .head { margin-bottom: 36px; }
@@ -751,9 +755,8 @@
 <!-- Nav -->
 <header class="nav" id="nav">
   <div class="container nav-in">
-    <a href="#" class="brand" aria-label="Central de Pedidos Online">
-      <span class="brand-mark"><img src="imagens/icon/icon.png" alt=""></span>
-      <span class="brand-name"><span>Central de <span class="brand-c">Pedidos</span></span> <small>Online</small></span>
+    <a href="#" class="brand" aria-label="Huga Huga – página inicial">
+      <img class="brand-logo" src="imagens/logo/hugahuga.png" alt="Huga Huga" width="480" height="392">
     </a>
     <nav aria-label="Principal">
       <ul class="nav-links">
@@ -1247,7 +1250,7 @@
           <b id="cComissao">R$ 3.240</b>
         </div>
         <div class="calc-linha bom">
-          <span>Central de Pedidos <small id="cPlanoNome">Gourmet</small></span>
+          <span>Huga Huga <small id="cPlanoNome">Gourmet</small></span>
           <b id="cNosso">R$ 169,90</b>
         </div>
         <div class="calc-economia">
@@ -1526,9 +1529,8 @@
   <div class="container">
     <div class="foot">
       <div class="foot-brand">
-        <a href="#" class="brand" aria-label="Central de Pedidos Online">
-          <span class="brand-mark"><img src="imagens/icon/icon.png" alt=""></span>
-          <span class="brand-name"><span>Central de <span class="brand-c">Pedidos</span></span> <small>Online</small></span>
+        <a href="#" class="brand" aria-label="Huga Huga – página inicial">
+          <img class="brand-logo" src="imagens/logo/hugahuga.png" alt="Huga Huga" width="480" height="392">
         </a>
         <p>Plataforma completa de pedidos online para restaurantes, lanchonetes e delivery com gestão de mesas, motoboys e WhatsApp.</p>
         <div class="social">
@@ -1564,7 +1566,7 @@
       </div>
     </div>
     <div class="foot-bottom">
-      <span>&copy; 2026 Central de Pedidos Online. Todos os direitos reservados.</span>
+      <span>&copy; 2026 Huga Huga. Todos os direitos reservados.</span>
       <span>Feito para restaurantes que querem crescer.</span>
     </div>
   </div>
@@ -1604,8 +1606,7 @@
 <dialog class="sign" id="sign" aria-labelledby="signTitle">
   <aside class="sign-side">
     <span class="brand">
-      <span class="brand-mark"><img src="imagens/icon/icon.png" alt=""></span>
-      <span class="brand-name"><span>Central de <span class="brand-c">Pedidos</span></span> <small>Online</small></span>
+      <img class="brand-logo" src="imagens/logo/hugahuga.png" alt="Huga Huga" width="480" height="392">
     </span>
     <div class="slides" aria-hidden="true">
       <div class="slide on">
@@ -1729,7 +1730,7 @@
   <div class="modal-head"><h3 id="privacyTitle">Política de Privacidade</h3><button type="button" class="x" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
   <div class="modal-body">
     <p>Última atualização: maio de 2026</p>
-    <p>A <strong>Central Pedidos Online</strong> valoriza a privacidade dos seus usuários e está comprometida com a proteção dos dados pessoais, em conformidade com a Lei Geral de Proteção de Dados (LGPD – Lei nº 13.709/2018).</p>
+    <p>A <strong>Huga Huga</strong> valoriza a privacidade dos seus usuários e está comprometida com a proteção dos dados pessoais, em conformidade com a Lei Geral de Proteção de Dados (LGPD – Lei nº 13.709/2018).</p>
     <h4>1. Dados que coletamos</h4>
     <ul>
       <li>Nome, nome do estabelecimento, telefone (WhatsApp), e-mail e informações do plano escolhido, fornecidos no formulário de contratação ou teste grátis</li>
@@ -1760,9 +1761,9 @@
   <div class="modal-body">
     <p>Última atualização: janeiro de 2026.</p>
     <h4>1. Aceitação dos Termos</h4>
-    <p>Ao contratar ou utilizar os serviços da <strong>Central Pedidos Online</strong>, você declara ter lido, compreendido e concordado com estes Termos de Uso. Caso não concorde, não utilize a plataforma.</p>
+    <p>Ao contratar ou utilizar os serviços da <strong>Huga Huga</strong>, você declara ter lido, compreendido e concordado com estes Termos de Uso. Caso não concorde, não utilize a plataforma.</p>
     <h4>2. Descrição do Serviço</h4>
-    <p>A Central Pedidos Online disponibiliza uma plataforma SaaS para gerenciamento de pedidos online, delivery, mesas com QR Code, controle de motoboys e notificações via WhatsApp, destinada a restaurantes, lanchonetes e estabelecimentos alimentícios.</p>
+    <p>A Huga Huga disponibiliza uma plataforma SaaS para gerenciamento de pedidos online, delivery, mesas com QR Code, controle de motoboys e notificações via WhatsApp, destinada a restaurantes, lanchonetes e estabelecimentos alimentícios.</p>
     <h4>3. Cadastro e Responsabilidades</h4>
     <p>O contratante é responsável pela veracidade das informações cadastradas e pelo uso correto da plataforma. É vedado utilizar o sistema para fins ilegais, fraudulentos ou que violem direitos de terceiros.</p>
     <h4>4. Período de Teste</h4>
@@ -1771,9 +1772,9 @@
     <p>Os valores e condições de pagamento são definidos conforme o plano contratado. <strong>Plano mensal:</strong> o cancelamento pode ser solicitado a qualquer momento pelo WhatsApp ou canal de atendimento, sem multa contratual, e o acesso segue até o fim do mês já pago.</p>
     <p><strong>Plano anual:</strong> o pagamento é feito à vista, no cartão de crédito, PIX ou boleto. Você pode cancelar em até 7 dias após o pagamento e recebe o reembolso integral. Após esse prazo, o cancelamento pode ser feito a qualquer momento, e devolvemos o valor proporcional aos meses não utilizados, descontando os meses já usados pelo valor do plano mensal. O reembolso é feito em até 30 dias, pela mesma forma de pagamento.</p>
     <h4>6. Propriedade Intelectual</h4>
-    <p>Todos os direitos sobre a plataforma, marca, design e código-fonte pertencem à Central Pedidos Online. É proibida a reprodução, cópia ou redistribuição sem autorização expressa.</p>
+    <p>Todos os direitos sobre a plataforma, marca, design e código-fonte pertencem à Huga Huga. É proibida a reprodução, cópia ou redistribuição sem autorização expressa.</p>
     <h4>7. Limitação de Responsabilidade</h4>
-    <p>A Central Pedidos Online não se responsabiliza por falhas de conexão à internet, interrupções por manutenção programada ou danos indiretos decorrentes do uso da plataforma.</p>
+    <p>A Huga Huga não se responsabiliza por falhas de conexão à internet, interrupções por manutenção programada ou danos indiretos decorrentes do uso da plataforma.</p>
     <h4>8. Alterações nos Termos</h4>
     <p>Reservamos o direito de alterar estes Termos a qualquer momento, mediante comunicação prévia via WhatsApp ou e-mail cadastrado.</p>
     <h4>9. Contato</h4>
@@ -1785,9 +1786,9 @@
 <dialog class="modal" id="lgpdModal" aria-labelledby="lgpdTitle">
   <div class="modal-head"><h3 id="lgpdTitle">LGPD – Lei Geral de Proteção de Dados</h3><button type="button" class="x" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button></div>
   <div class="modal-body">
-    <p>A Central Pedidos Online está comprometida com a privacidade e a proteção dos dados pessoais dos seus usuários, em conformidade com a <strong>Lei nº 13.709/2018 (LGPD)</strong>.</p>
+    <p>A Huga Huga está comprometida com a privacidade e a proteção dos dados pessoais dos seus usuários, em conformidade com a <strong>Lei nº 13.709/2018 (LGPD)</strong>.</p>
     <h4>1. Controlador dos Dados</h4>
-    <p><strong>Central Pedidos Online</strong> é a empresa responsável pelo tratamento dos dados pessoais coletados por meio da plataforma. Contato: WhatsApp <strong>(45) 99972-3256</strong>.</p>
+    <p><strong>Huga Huga</strong> é a empresa responsável pelo tratamento dos dados pessoais coletados por meio da plataforma. Contato: WhatsApp <strong>(45) 99972-3256</strong>.</p>
     <h4>2. Dados Coletados</h4>
     <p>Coletamos apenas os dados necessários para a prestação do serviço, como: nome do estabelecimento, dados de contato, dados dos pedidos realizados e informações de acesso à plataforma.</p>
     <h4>3. Finalidade do Tratamento</h4>
