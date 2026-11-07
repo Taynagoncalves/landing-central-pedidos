@@ -14,14 +14,14 @@
   <meta name="theme-color" content="#FBFBFA">
   <!-- Open Graph / Social -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://centralpedidosonline.com.br/">
+  <meta property="og:url" content="https://www.hugahuga.com.br/">
   <meta property="og:title" content="Huga Huga – Sistema de Pedidos para Restaurantes">
   <meta property="og:description" content="Plataforma completa para receber pedidos online com gestão de delivery, mesas com QR Code, controle de motoboys e notificações automáticas no WhatsApp.">
-  <meta property="og:image" content="https://centralpedidosonline.com.br/imagens/og-image.png">
+  <meta property="og:image" content="https://www.hugahuga.com.br/imagens/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Huga Huga – Sistema de Pedidos para Restaurantes">
   <meta name="twitter:description" content="Plataforma completa para receber pedidos online com gestão de delivery, mesas com QR Code e notificações no WhatsApp.">
-  <meta name="twitter:image" content="https://centralpedidosonline.com.br/imagens/og-image.png">
+  <meta name="twitter:image" content="https://www.hugahuga.com.br/imagens/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -809,7 +809,7 @@
 
     <div class="stage" aria-label="Prévia do sistema">
       <div class="browser">
-        <div class="browser-bar"><i></i><i></i><i></i><span>centralpedidosonline.com.br</span></div>
+        <div class="browser-bar"><i></i><i></i><i></i><span>hugahuga.com.br</span></div>
         <img src="imagens/admin/telaadmin.png" alt="Painel do lojista com os pedidos em tempo real">
       </div>
       <div class="phone stage-phone">
@@ -975,7 +975,7 @@
       <article class="card s4 reveal">
         <div class="media">
           <div class="browser">
-            <div class="browser-bar"><i></i><i></i><i></i><span>centralpedidosonline.com.br</span></div>
+            <div class="browser-bar"><i></i><i></i><i></i><span>hugahuga.com.br</span></div>
             <img src="imagens/admin/telaadmin.png" alt="Painel administrativo" loading="lazy" data-zoom>
           </div>
         </div>
@@ -1102,7 +1102,7 @@
       <article class="card reveal">
         <div class="media">
           <div class="browser">
-            <div class="browser-bar"><i></i><i></i><i></i><span>centralpedidosonline.com.br</span></div>
+            <div class="browser-bar"><i></i><i></i><i></i><span>hugahuga.com.br</span></div>
             <img src="imagens/admin/admin-mesa-garcom.png" alt="Tela de mesas e garçom" loading="lazy" data-zoom>
           </div>
         </div>
@@ -1125,7 +1125,7 @@
       <article class="card reveal">
         <div class="media">
           <div class="browser">
-            <div class="browser-bar"><i></i><i></i><i></i><span>centralpedidosonline.com.br</span></div>
+            <div class="browser-bar"><i></i><i></i><i></i><span>hugahuga.com.br</span></div>
             <img src="imagens/admin/admin-cardapio-digital.png" alt="Cardápio digital da mesa" loading="lazy" data-zoom>
           </div>
         </div>
@@ -1598,7 +1598,7 @@
       <button type="button" data-demo-view="cliente" aria-pressed="true">App do cliente</button>
       <button type="button" data-demo-view="lojista" aria-pressed="false">Painel do lojista</button>
     </div>
-    <a class="demo-ext" id="demoExt" href="https://teste.centralpedidosonline.com.br" target="_blank">Abrir em nova aba <svg class="i" style="width:16px;height:16px"><use href="#i-arrow"/></svg></a>
+    <a class="demo-ext" id="demoExt" href="https://teste.hugahuga.com.br" target="_blank">Abrir em nova aba <svg class="i" style="width:16px;height:16px"><use href="#i-arrow"/></svg></a>
     <button type="button" class="x" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button>
   </div>
   <div class="demo-body phone" id="demoBody">
@@ -1614,7 +1614,7 @@
     </span>
     <div class="slides" aria-hidden="true">
       <div class="slide on">
-        <div class="slide-art"><div class="browser"><div class="browser-bar"><i></i><i></i><i></i><span>centralpedidosonline.com.br</span></div><img src="imagens/admin/telaadmin.png" alt=""></div></div>
+        <div class="slide-art"><div class="browser"><div class="browser-bar"><i></i><i></i><i></i><span>hugahuga.com.br</span></div><img src="imagens/admin/telaadmin.png" alt=""></div></div>
         <div><h3>Todos os pedidos em um só lugar</h3><p class="t">Delivery, retirada e mesas chegando ao vivo no painel, com impressão automática na cozinha.</p></div>
       </div>
       <div class="slide">
@@ -1897,8 +1897,8 @@
 
   // ── Demonstração ao vivo (sistema real dentro da página) ──
   const DEMO_URLS = {
-    cliente: 'https://teste.centralpedidosonline.com.br',
-    lojista: 'https://teste.centralpedidosonline.com.br/admin',
+    cliente: 'https://teste.hugahuga.com.br',
+    lojista: 'https://teste.hugahuga.com.br/admin',
   };
   const demo = document.getElementById('demo');
   const demoFrame = document.getElementById('demoFrame');
@@ -2032,7 +2032,7 @@
     // o cadastro fica guardado no Super Admin; a equipe chama o cliente depois
     let erro = null;
     try {
-      const res = await fetch('https://superadmin.centralpedidosonline.com.br/api/cadastros-site', {
+      const res = await fetch('https://superadmin.hugahuga.com.br/api/cadastros-site', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
