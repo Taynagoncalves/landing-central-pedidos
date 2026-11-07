@@ -658,6 +658,79 @@
       .js .reveal { opacity: 1; transform: none; }
     }
 
+    /* ── Tablet na mesa e totem de autoatendimento ── */
+    .auto-sec { padding-top: 0; }
+    .auto-palco {
+      position: relative; overflow: hidden;
+      display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); align-items: end; gap: 40px;
+      padding: 56px 48px 0; border-radius: 32px;
+      background:
+        radial-gradient(60% 70% at 30% 20%, rgba(255,85,0,.10), transparent 70%),
+        radial-gradient(50% 60% at 85% 80%, rgba(255,85,0,.08), transparent 70%),
+        var(--subtle);
+      border: 1px solid var(--line);
+    }
+    .auto-palco { grid-template-rows: auto auto; row-gap: 0; align-items: stretch; }
+    .auto-item { display: grid; grid-row: span 2; grid-template-rows: subgrid; justify-items: center; row-gap: 32px; }
+    .auto-item > .dev-tablet, .auto-item > .dev-totem { align-self: end; }
+    .auto-legenda { align-self: stretch; padding: 0 4px 40px; }
+    .auto-legenda .card-title { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .auto-legenda .card-title .i { color: var(--brand); }
+    .auto-legenda h3 { font-size: 20px; }
+    .auto-legenda p { color: var(--muted); font-size: 15px; margin-bottom: 14px; max-width: 460px; }
+    .auto-legenda .ticks { gap: 6px; }
+
+    /* tablet */
+    .dev-tablet {
+      position: relative; width: 100%; padding: 14px;
+      border-radius: 30px; background: linear-gradient(145deg, #2A2A2E, #0C0C0E 60%);
+      box-shadow: 0 0 0 1px #3A3A3F inset, 0 2px 0 rgba(255,255,255,.06) inset, 0 40px 70px -30px rgba(12,12,14,.55);
+    }
+    .dev-tablet::before { content: ''; position: absolute; left: 6px; top: 50%; width: 4px; height: 4px; margin-top: -2px; border-radius: 50%; background: #3A3A3F; }
+    .dev-tablet .dev-tela { position: relative; aspect-ratio: 1600 / 1000; border-radius: 18px; overflow: hidden; background: #111; }
+    .dev-tela img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .dev-tablet::after { content: ""; position: absolute; left: 15%; right: 15%; bottom: -26px; height: 18px; border-radius: 50%; background: radial-gradient(closest-side, rgba(12,12,14,.22), transparent); }
+
+    /* totem */
+    .dev-totem { position: relative; display: flex; flex-direction: column; align-items: center; width: min(100%, 290px); }
+    .dev-totem-corpo {
+      width: 100%; padding: 22px 14px 18px; border-radius: 26px 26px 18px 18px;
+      background: linear-gradient(160deg, #2C2C31, #0C0C0E 70%);
+      box-shadow: 0 0 0 1px #3A3A3F inset, 0 2px 0 rgba(255,255,255,.06) inset, 0 40px 70px -30px rgba(12,12,14,.6);
+    }
+    .dev-totem-corpo::before { content: ''; display: block; width: 6px; height: 6px; margin: -12px auto 8px; border-radius: 50%; background: #3A3A3F; }
+    .dev-totem .dev-tela { position: relative; aspect-ratio: 600 / 1067; border-radius: 12px; overflow: hidden; background: #111; }
+    .dev-totem-leitor {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      margin-top: 14px; padding: 10px; border-radius: 12px;
+      background: #18181B; box-shadow: 0 0 0 1px #2A2A2E inset;
+      color: #A1A1AA; font-size: 11.5px; font-weight: 600; letter-spacing: .02em;
+    }
+    .dev-totem-leitor span { display: inline-flex; align-items: center; gap: 6px; }
+    .dev-totem-leitor b { width: 26px; height: 4px; border-radius: 4px; background: #0C0C0E; box-shadow: 0 0 0 1px #2A2A2E; }
+    .dev-totem-pescoco { width: 34%; height: 64px; background: linear-gradient(90deg, #1E1E22, #3A3A3F 45%, #1E1E22); }
+    .dev-totem-base { width: 78%; height: 16px; border-radius: 10px 10px 4px 4px; background: linear-gradient(180deg, #3A3A3F, #0C0C0E); box-shadow: 0 20px 30px -12px rgba(12,12,14,.5); }
+
+    .auto-selos { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 28px; }
+    .auto-selos span { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-sm); font-size: 13.5px; font-weight: 600; color: var(--ink-2); }
+    .auto-selos .i { width: 16px; height: 16px; color: var(--brand); }
+
+    @media (max-width: 900px) {
+      .auto-palco { grid-template-columns: 1fr; row-gap: 0; padding: 36px 22px 0; border-radius: 24px; }
+      .auto-item { row-gap: 28px; }
+      .auto-item.tablet { margin-bottom: 40px; }
+      .dev-totem { width: min(100%, 250px); }
+      .auto-legenda { padding-bottom: 8px; }
+      .auto-item.totem .auto-legenda { padding-bottom: 36px; }
+    }
+    @media (max-width: 560px) {
+      .auto-palco { padding: 28px 14px 0; }
+      .dev-tablet { padding: 8px; border-radius: 18px; }
+      .dev-tablet .dev-tela { border-radius: 11px; }
+      .dev-tablet::before { display: none; }
+      .dev-totem { width: min(100%, 220px); }
+    }
+
     /* ── Calculadora de comissão ── */
     .calc-sec { padding-top: 0; }
     .calc { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 20px; max-width: 1040px; margin: 0 auto; }
@@ -1183,6 +1256,67 @@
         <li><svg class="i"><use href="#i-check"/></svg>Programa de fidelidade</li>
         <li><svg class="i"><use href="#i-check"/></svg>Acompanhamento do pedido ao vivo</li>
       </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Tablet na mesa e totem de autoatendimento -->
+<section class="section auto-sec" id="tablet-totem">
+  <div class="container">
+    <div class="head center reveal">
+      <span class="kicker">Autoatendimento</span>
+      <h2 class="h2">Tablet na mesa e totem no balcão.</h2>
+      <p class="lead">O cliente escolhe, personaliza e pede sozinho — e o pedido cai direto na cozinha. Sua equipe atende mais gente sem fila e sem erro de anotação.</p>
+    </div>
+
+    <div class="auto-palco reveal">
+      <div class="auto-item tablet">
+        <div class="dev-tablet">
+          <div class="dev-tela" data-cycle="3400">
+            <img class="on" src="imagens/autoatendimento/tablet-cardapio.jpg" alt="Cardápio da mesa no tablet, com categorias e fotos dos pratos" loading="lazy" data-zoom>
+            <img src="imagens/autoatendimento/tablet-produto.jpg" alt="Tablet: escolhendo adicionais do lanche" loading="lazy" data-zoom>
+          </div>
+        </div>
+        <div class="auto-legenda">
+          <div class="card-title"><svg class="i"><use href="#i-monitor"/></svg><h3>Tablet na mesa</h3></div>
+          <p>Cardápio em tela cheia em cada mesa. O cliente pede, chama o garçom e pede a conta pelo tablet.</p>
+          <ul class="ticks">
+              <li><svg class="i"><use href="#i-check"/></svg>Pedido vai direto para a cozinha e para a impressora</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Botões de chamar o garçom e pedir a conta</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Tela de descanso com as fotos dos seus pratos</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="auto-item totem">
+        <div class="dev-totem">
+          <div class="dev-totem-corpo">
+            <div class="dev-tela" data-cycle="3000">
+              <img class="on" src="imagens/autoatendimento/totem-inicio.jpg" alt="Totem: tela de boas-vindas com as fotos dos pratos" loading="lazy" data-zoom>
+              <img src="imagens/autoatendimento/totem-cardapio.jpg" alt="Totem: cardápio com categorias e produtos" loading="lazy" data-zoom>
+              <img src="imagens/autoatendimento/totem-pagamento.jpg" alt="Totem: escolha da forma de pagamento" loading="lazy" data-zoom>
+            </div>
+            <div class="dev-totem-leitor" aria-hidden="true"><span><svg class="i" style="width:14px;height:14px"><use href="#i-qr"/></svg>Pix</span><b></b><span><svg class="i" style="width:14px;height:14px"><use href="#i-card"/></svg>Cartão</span></div>
+          </div>
+          <div class="dev-totem-pescoco" aria-hidden="true"></div>
+          <div class="dev-totem-base" aria-hidden="true"></div>
+        </div>
+        <div class="auto-legenda">
+          <div class="card-title"><svg class="i"><use href="#i-zap"/></svg><h3>Totem de autoatendimento</h3></div>
+          <p>Pedido e pagamento na mesma tela, sem fila no caixa.</p>
+          <ul class="ticks">
+              <li><svg class="i"><use href="#i-check"/></svg>Pix com QR Code na tela e confirmação automática</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Crédito, débito ou dinheiro no balcão</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Senha na tela e no cupom impresso</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="auto-selos reveal">
+      <span><svg class="i"><use href="#i-book"/></svg>Usa o mesmo cardápio da sua loja</span>
+      <span><svg class="i"><use href="#i-zap"/></svg>Funciona em qualquer tablet, sem instalar nada</span>
+      <span><svg class="i"><use href="#i-printer"/></svg>Imprime sozinho na cozinha</span>
     </div>
   </div>
 </section>
