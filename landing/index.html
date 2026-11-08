@@ -343,6 +343,25 @@
     .price .per { font-size: 15px; color: var(--muted); }
     .price-sub { margin-top: 6px; font-size: 13.5px; color: var(--muted); line-height: 1.45; }
     .price-sub b { color: var(--ink-2); font-weight: 600; }
+    .plans-auto { margin-top: 72px; }
+    .plans-auto-head { max-width: 640px; margin: 0 auto 32px; text-align: center; }
+    .plans-auto-head h3 { margin: 12px 0 10px; font-size: clamp(24px, 2.6vw, 32px); letter-spacing: -0.03em; }
+    .plans-auto-head p { color: var(--muted); font-size: 16px; }
+    .plans.plans-3 { grid-template-columns: repeat(3, 1fr); max-width: 980px; margin: 0 auto; }
+    .addons { max-width: 980px; margin: 28px auto 0; padding: 26px 26px 18px; border-radius: 22px; background: var(--subtle); border: 1px solid var(--line); }
+    .addons-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 6px 20px; margin-bottom: 14px; }
+    .addons-head h4 { font-size: 18px; letter-spacing: -0.02em; }
+    .addons-head p { color: var(--muted); font-size: 14px; }
+    .addons-list { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .addons-list li { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); }
+    .addon-ico { display: grid; place-items: center; width: 36px; height: 36px; flex-shrink: 0; border-radius: 10px; background: var(--brand-soft); color: var(--brand); }
+    .addon-ico .i { width: 18px; height: 18px; }
+    .addon-txt { flex: 1; min-width: 0; }
+    .addon-txt b { display: block; font-size: 14.5px; }
+    .addon-txt small { display: block; color: var(--muted); font-size: 12.5px; }
+    .addon-val { white-space: nowrap; font-size: 13.5px; color: var(--ink-2); }
+    .addon-val b { font-size: 16px; color: var(--ink); }
+    @media (max-width: 900px) { .plans.plans-3 { grid-template-columns: 1fr; max-width: 460px; } .addons-list { grid-template-columns: 1fr; } }
     .save-chip { display: inline-flex; margin-top: 8px; padding: 4px 10px; border-radius: 999px; background: #E9F9EF; color: #15803D; font-size: 12.5px; font-weight: 700; white-space: nowrap; }
     .plan-note b { font-weight: 700; }
     td.add small { display: block; margin-top: 2px; font-size: 11.5px; font-weight: 500; color: var(--muted); white-space: normal; }
@@ -672,7 +691,7 @@
     }
     .auto-palco { grid-template-rows: auto auto; row-gap: 0; align-items: stretch; }
     .auto-item { display: grid; grid-row: span 2; grid-template-rows: subgrid; justify-items: center; row-gap: 32px; }
-    .auto-item > .dev-tablet, .auto-item > .dev-totem { align-self: end; }
+    .auto-item > .dev-tablet-cena, .auto-item > .dev-totem { align-self: end; }
     .auto-legenda { align-self: stretch; padding: 0 4px 40px; }
     .auto-legenda .card-title { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
     .auto-legenda .card-title .i { color: var(--brand); }
@@ -680,36 +699,79 @@
     .auto-legenda p { color: var(--muted); font-size: 15px; margin-bottom: 14px; max-width: 460px; }
     .auto-legenda .ticks { gap: 6px; }
 
-    /* tablet */
+    /* tablet num suporte de mesa */
+    .dev-tablet-cena { position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; }
     .dev-tablet {
-      position: relative; width: 100%; padding: 14px;
-      border-radius: 30px; background: linear-gradient(145deg, #2A2A2E, #0C0C0E 60%);
-      box-shadow: 0 0 0 1px #3A3A3F inset, 0 2px 0 rgba(255,255,255,.06) inset, 0 40px 70px -30px rgba(12,12,14,.55);
+      position: relative; z-index: 2; width: 92%; padding: 13px;
+      border-radius: 28px; background: linear-gradient(150deg, #34343A, #121214 55%, #0C0C0E);
+      box-shadow: 0 0 0 1px #45454C inset, 0 1px 0 rgba(255,255,255,.12) inset, 0 30px 50px -28px rgba(12,12,14,.6);
     }
-    .dev-tablet::before { content: ''; position: absolute; left: 6px; top: 50%; width: 4px; height: 4px; margin-top: -2px; border-radius: 50%; background: #3A3A3F; }
-    .dev-tablet .dev-tela { position: relative; aspect-ratio: 1600 / 1000; border-radius: 18px; overflow: hidden; background: #111; }
+    .dev-tablet::before { content: ''; position: absolute; left: 50%; top: 5px; width: 4px; height: 4px; margin-left: -2px; border-radius: 50%; background: #45454C; }
+    .dev-tablet .dev-tela { position: relative; aspect-ratio: 1600 / 1000; border-radius: 16px; overflow: hidden; background: #111; }
     .dev-tela img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
-    .dev-tablet::after { content: ""; position: absolute; left: 15%; right: 15%; bottom: -26px; height: 18px; border-radius: 50%; background: radial-gradient(closest-side, rgba(12,12,14,.22), transparent); }
+    .dev-tela::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 32%); }
+    .dev-tablet-suporte { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: -6px; }
+    .dev-tablet-suporte .haste {
+      width: 13%; height: 54px;
+      background: linear-gradient(90deg, #9A9AA2, #E6E6EA 38%, #C9C9CF 60%, #8E8E96);
+      clip-path: polygon(22% 0, 78% 0, 100% 100%, 0 100%);
+    }
+    .dev-tablet-suporte .pe {
+      width: 42%; height: 14px; margin-top: -1px; border-radius: 50% / 100% 100% 40% 40%;
+      background: linear-gradient(180deg, #F1F1F3, #B9B9C0 70%, #8E8E96);
+      box-shadow: 0 10px 18px -8px rgba(12,12,14,.45);
+    }
+    .dev-mesa {
+      position: relative; width: 112%; height: 16px; margin-top: 2px; border-radius: 6px 6px 3px 3px;
+      background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,.05) 0 2px, transparent 2px 9px),
+        linear-gradient(180deg, #D4A574, #B07D4F 55%, #8C5F38);
+      box-shadow: 0 1px 0 rgba(255,255,255,.35) inset, 0 22px 30px -18px rgba(70,40,15,.55);
+    }
+    .dev-mesa::after { content: ''; position: absolute; left: 4%; right: 4%; top: 100%; height: 26px; background: radial-gradient(closest-side, rgba(12,12,14,.16), transparent); }
 
-    /* totem */
+    /* totem de autoatendimento (quiosque de chão) */
     .dev-totem { position: relative; display: flex; flex-direction: column; align-items: center; width: min(100%, 290px); }
     .dev-totem-corpo {
-      width: 100%; padding: 22px 14px 18px; border-radius: 26px 26px 18px 18px;
-      background: linear-gradient(160deg, #2C2C31, #0C0C0E 70%);
-      box-shadow: 0 0 0 1px #3A3A3F inset, 0 2px 0 rgba(255,255,255,.06) inset, 0 40px 70px -30px rgba(12,12,14,.6);
+      position: relative; width: 100%; padding: 0 12px 14px; border-radius: 30px 30px 20px 20px; overflow: hidden;
+      background: linear-gradient(100deg, #DCDBD8, #FAFAF9 28%, #F1F0EE 70%, #CFCDC9);
+      box-shadow: 0 0 0 1px #C9C6C1 inset, 0 1px 0 #fff inset, 0 44px 70px -34px rgba(12,12,14,.55);
     }
-    .dev-totem-corpo::before { content: ''; display: block; width: 6px; height: 6px; margin: -12px auto 8px; border-radius: 50%; background: #3A3A3F; }
-    .dev-totem .dev-tela { position: relative; aspect-ratio: 600 / 1067; border-radius: 12px; overflow: hidden; background: #111; }
-    .dev-totem-leitor {
-      display: flex; align-items: center; justify-content: center; gap: 10px;
-      margin-top: 14px; padding: 10px; border-radius: 12px;
-      background: #18181B; box-shadow: 0 0 0 1px #2A2A2E inset;
-      color: #A1A1AA; font-size: 11.5px; font-weight: 600; letter-spacing: .02em;
+    .dev-totem-corpo::before { content: ''; position: absolute; top: 60px; bottom: 90px; left: 0; width: 3px; border-radius: 0 3px 3px 0; background: var(--brand); box-shadow: 0 0 12px var(--brand); }
+    .dev-totem-corpo::after { content: ''; position: absolute; top: 60px; bottom: 90px; right: 0; width: 3px; border-radius: 3px 0 0 3px; background: var(--brand); box-shadow: 0 0 12px var(--brand); }
+    .dev-totem-topo {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      height: 42px; margin: 0 -12px 12px; background: linear-gradient(180deg, #FF6A1A, var(--brand));
+      color: #fff; font-size: 13px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+      box-shadow: 0 -1px 0 rgba(0,0,0,.08) inset;
     }
-    .dev-totem-leitor span { display: inline-flex; align-items: center; gap: 6px; }
-    .dev-totem-leitor b { width: 26px; height: 4px; border-radius: 4px; background: #0C0C0E; box-shadow: 0 0 0 1px #2A2A2E; }
-    .dev-totem-pescoco { width: 34%; height: 64px; background: linear-gradient(90deg, #1E1E22, #3A3A3F 45%, #1E1E22); }
-    .dev-totem-base { width: 78%; height: 16px; border-radius: 10px 10px 4px 4px; background: linear-gradient(180deg, #3A3A3F, #0C0C0E); box-shadow: 0 20px 30px -12px rgba(12,12,14,.5); }
+    .dev-totem-topo::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 3px rgba(255,255,255,.3); }
+    .dev-totem-moldura { padding: 8px; border-radius: 14px; background: #0C0C0E; box-shadow: 0 0 0 1px #2A2A2E inset; }
+    .dev-totem .dev-tela { position: relative; aspect-ratio: 600 / 1067; border-radius: 8px; overflow: hidden; background: #111; }
+    .dev-totem-modulo {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; padding: 10px;
+      border-radius: 14px; background: #18181B; box-shadow: 0 0 0 1px #2A2A2E inset;
+    }
+    .dev-totem-leitor { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; height: 52px; border-radius: 10px; background: #0C0C0E; box-shadow: 0 0 0 1px #2E2E33 inset; color: #A1A1AA; font-size: 10.5px; font-weight: 600; }
+    .dev-totem-leitor .i { width: 17px; height: 17px; color: #E4E4E7; }
+    .dev-totem-impressora { position: relative; display: flex; flex-direction: column; align-items: center; height: 52px; border-radius: 10px; background: #0C0C0E; box-shadow: 0 0 0 1px #2E2E33 inset; overflow: visible; }
+    .dev-totem-impressora .fenda { width: 70%; height: 4px; margin-top: 10px; border-radius: 4px; background: #000; box-shadow: 0 1px 0 #2E2E33; }
+    .dev-totem-impressora .papel {
+      position: absolute; top: 12px; left: 50%; width: 62%; padding: 6px 4px 7px; transform: translateX(-50%);
+      background: #fff; border-radius: 0 0 3px 3px; text-align: center; color: #3F3F46; font-size: 7.5px; font-weight: 700; letter-spacing: .12em; line-height: 1.2;
+      box-shadow: 0 6px 10px -4px rgba(0,0,0,.6);
+      -webkit-mask: linear-gradient(#000 calc(100% - 3px), transparent 0), conic-gradient(from -45deg at bottom, #0000, #000 1deg 90deg, #0000 91deg) bottom / 6px 3px repeat-x;
+    }
+    .dev-totem-impressora .papel b { display: block; font-size: 13px; letter-spacing: 0; color: #0C0C0E; }
+    .dev-totem-pescoco {
+      width: 30%; height: 66px;
+      background: linear-gradient(90deg, #A8A6A2, #F4F3F1 40%, #DAD8D4 62%, #9C9A96);
+    }
+    .dev-totem-base {
+      width: 92%; height: 26px; border-radius: 50% / 90% 90% 45% 45%;
+      background: linear-gradient(180deg, #F6F5F3, #C3C1BC 65%, #96938E);
+      box-shadow: 0 0 0 1px #BDBAB5 inset, 0 24px 30px -14px rgba(12,12,14,.5);
+    }
 
     .auto-selos { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 28px; }
     .auto-selos span { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-sm); font-size: 13.5px; font-weight: 600; color: var(--ink-2); }
@@ -728,6 +790,8 @@
       .dev-tablet { padding: 8px; border-radius: 18px; }
       .dev-tablet .dev-tela { border-radius: 11px; }
       .dev-tablet::before { display: none; }
+      .dev-tablet-suporte .haste { height: 36px; }
+      .dev-mesa { width: 104%; height: 12px; }
       .dev-totem { width: min(100%, 220px); }
     }
 
@@ -1271,11 +1335,15 @@
 
     <div class="auto-palco reveal">
       <div class="auto-item tablet">
+        <div class="dev-tablet-cena">
         <div class="dev-tablet">
           <div class="dev-tela" data-cycle="3400">
             <img class="on" src="imagens/autoatendimento/tablet-cardapio.jpg" alt="Cardápio da mesa no tablet, com categorias e fotos dos pratos" loading="lazy" data-zoom>
             <img src="imagens/autoatendimento/tablet-produto.jpg" alt="Tablet: escolhendo adicionais do lanche" loading="lazy" data-zoom>
           </div>
+        </div>
+        <div class="dev-tablet-suporte" aria-hidden="true"><span class="haste"></span><span class="pe"></span></div>
+        <div class="dev-mesa" aria-hidden="true"></div>
         </div>
         <div class="auto-legenda">
           <div class="card-title"><svg class="i"><use href="#i-monitor"/></svg><h3>Tablet na mesa</h3></div>
@@ -1291,12 +1359,18 @@
       <div class="auto-item totem">
         <div class="dev-totem">
           <div class="dev-totem-corpo">
+            <div class="dev-totem-topo" aria-hidden="true">Peça aqui</div>
+            <div class="dev-totem-moldura">
             <div class="dev-tela" data-cycle="3000">
               <img class="on" src="imagens/autoatendimento/totem-inicio.jpg" alt="Totem: tela de boas-vindas com as fotos dos pratos" loading="lazy" data-zoom>
               <img src="imagens/autoatendimento/totem-cardapio.jpg" alt="Totem: cardápio com categorias e produtos" loading="lazy" data-zoom>
               <img src="imagens/autoatendimento/totem-pagamento.jpg" alt="Totem: escolha da forma de pagamento" loading="lazy" data-zoom>
             </div>
-            <div class="dev-totem-leitor" aria-hidden="true"><span><svg class="i" style="width:14px;height:14px"><use href="#i-qr"/></svg>Pix</span><b></b><span><svg class="i" style="width:14px;height:14px"><use href="#i-card"/></svg>Cartão</span></div>
+            </div>
+            <div class="dev-totem-modulo" aria-hidden="true">
+              <div class="dev-totem-leitor"><svg class="i"><use href="#i-card"/></svg>Cartão · Pix</div>
+              <div class="dev-totem-impressora"><span class="fenda"></span><span class="papel">SENHA<b>1291</b></span></div>
+            </div>
           </div>
           <div class="dev-totem-pescoco" aria-hidden="true"></div>
           <div class="dev-totem-base" aria-hidden="true"></div>
@@ -1420,19 +1494,20 @@
       <div class="trial setup"><svg class="i"><use href="#i-zap"/></svg><span><strong>Implementação grátis:</strong> nós configuramos tudo para você — cardápio, fotos, horários, taxas de entrega e pagamentos.</span></div>
       <div class="billing" role="group" aria-label="Forma de cobrança">
         <button type="button" data-bill="m" aria-pressed="true">Mensal</button>
-        <button type="button" data-bill="a" aria-pressed="false">Anual <span class="save">economize 15%</span></button>
+        <button type="button" data-bill="s" aria-pressed="false">Semestral <span class="save">−10%</span></button>
+        <button type="button" data-bill="a" aria-pressed="false">Anual <span class="save">−15%</span></button>
       </div>
-      <p class="pay-note">O plano anual é pago à vista no <b>cartão de crédito</b>, <b>PIX</b> ou <b>boleto</b>. Cancele quando quiser: devolvemos os meses não usados.</p>
+      <p class="pay-note">Os planos semestral e anual são pagos à vista no <b>cartão de crédito</b>, <b>PIX</b> ou <b>boleto</b>. Cancele quando quiser: devolvemos os meses não usados.</p>
     </div>
 
     <div class="plans reveal">
       <div class="plan">
         <h3>Essencial</h3>
         <p class="plan-desc">Para quem quer começar a vender online com delivery e retirada.</p>
-        <div class="price" data-m="99,90" data-a="84,90" data-y="1.018,80" data-s="180">
+        <div class="price" data-m="99,90" data-a="84,90" data-y="1.018,80" data-s="180" data-sm="89,90" data-st="539,40" data-ss="60">
           <div class="price-line"><span class="cur">R$</span><b class="val">99,90</b><span class="per">/mês</span></div>
           <p class="price-sub">ou <b>R$ 84,90/mês</b> no anual<br>R$ 1.018,80 por ano</p>
-          <span class="save-chip">Economize R$ 180 por ano</span>
+          <span class="save-chip">Economize até R$ 180 por ano</span>
         </div>
         <p class="plan-note"><b>Sem WhatsApp automático.</b> Quer notificações + bot 24h? Adicione por <b>+ R$ 69,90/mês</b>.</p>
         <ul class="mods">
@@ -1451,10 +1526,10 @@
       <div class="plan">
         <h3>Gourmet</h3>
         <p class="plan-desc">Para restaurantes com salão, mesas com QR Code e garçom digital.</p>
-        <div class="price" data-m="169,90" data-a="144,90" data-y="1.738,80" data-s="300">
+        <div class="price" data-m="169,90" data-a="144,90" data-y="1.738,80" data-s="300" data-sm="152,90" data-st="917,40" data-ss="102">
           <div class="price-line"><span class="cur">R$</span><b class="val">169,90</b><span class="per">/mês</span></div>
           <p class="price-sub">ou <b>R$ 144,90/mês</b> no anual<br>R$ 1.738,80 por ano</p>
-          <span class="save-chip">Economize R$ 300 por ano</span>
+          <span class="save-chip">Economize até R$ 300 por ano</span>
         </div>
         <ul class="mods">
           <li><svg class="i"><use href="#i-check"/></svg>Recursos básicos</li>
@@ -1472,10 +1547,10 @@
       <div class="plan">
         <h3>Express</h3>
         <p class="plan-desc">Para delivery com gestão de motoboys e controle de entregas.</p>
-        <div class="price" data-m="169,90" data-a="144,90" data-y="1.738,80" data-s="300">
+        <div class="price" data-m="169,90" data-a="144,90" data-y="1.738,80" data-s="300" data-sm="152,90" data-st="917,40" data-ss="102">
           <div class="price-line"><span class="cur">R$</span><b class="val">169,90</b><span class="per">/mês</span></div>
           <p class="price-sub">ou <b>R$ 144,90/mês</b> no anual<br>R$ 1.738,80 por ano</p>
-          <span class="save-chip">Economize R$ 300 por ano</span>
+          <span class="save-chip">Economize até R$ 300 por ano</span>
         </div>
         <ul class="mods">
           <li><svg class="i"><use href="#i-check"/></svg>Recursos básicos</li>
@@ -1494,10 +1569,10 @@
         <span class="plan-tag">Mais completo</span>
         <h3>Enterprise</h3>
         <p class="plan-desc">Tudo incluso para a gestão completa do seu negócio.</p>
-        <div class="price" data-m="249,90" data-a="212,40" data-y="2.548,80" data-s="450">
+        <div class="price" data-m="249,90" data-a="212,40" data-y="2.548,80" data-s="450" data-sm="224,90" data-st="1.349,40" data-ss="150">
           <div class="price-line"><span class="cur">R$</span><b class="val">249,90</b><span class="per">/mês</span></div>
           <p class="price-sub">ou <b>R$ 212,40/mês</b> no anual<br>R$ 2.548,80 por ano</p>
-          <span class="save-chip">Economize R$ 450 por ano</span>
+          <span class="save-chip">Economize até R$ 450 por ano</span>
         </div>
         <ul class="mods">
           <li><svg class="i"><use href="#i-check"/></svg>Recursos básicos</li>
@@ -1510,6 +1585,112 @@
           <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20assinar%20o%20plano%20Enterprise%20(mensal)." data-plan="Enterprise" target="_blank" class="btn btn-brand buy">Assinar o Enterprise</a>
           <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Enterprise.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial" data-trial="Enterprise">Começar teste grátis</a>
         </div>
+      </div>
+    </div>
+
+
+    <div class="plans-auto reveal" id="planos-autoatendimento">
+      <div class="plans-auto-head">
+        <span class="kicker">Só autoatendimento</span>
+        <h3>Para salão e balcão, sem app de delivery</h3>
+        <p>Painel administrativo completo, cardápio, pedidos e impressão. O cliente pede sozinho pelo tablet da mesa ou pelo totem.</p>
+      </div>
+      <div class="plans plans-3">
+      <div class="plan">
+        <h3>Tablet</h3>
+        <p class="plan-desc">Cardápio em tablet em cada mesa, com garçom digital.</p>
+        <div class="price" data-m="129,90" data-a="110,40" data-y="1.324,80" data-s="234" data-sm="116,90" data-st="701,40" data-ss="78">
+          <div class="price-line"><span class="cur">R$</span><b class="val">129,90</b><span class="per">/mês</span></div>
+          <p class="price-sub">ou <b>R$ 110,40/mês</b> no anual<br>R$ 1.324,80 por ano</p>
+          <span class="save-chip">Economize até R$ 234 por ano</span>
+        </div>
+        <ul class="mods">
+          <li><svg class="i"><use href="#i-check"/></svg>Painel admin, cardápio e pedidos</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Mesas e garçom digital</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Tablets ilimitados nas mesas</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Chamar garçom e pedir a conta</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Impressão automática na cozinha</li>
+          <li class="off"><svg class="i"><use href="#i-minus"/></svg><span class="sr-only">Não incluso: </span>App de delivery do cliente</li>
+        </ul>
+        <div class="plan-ctas">
+          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20assinar%20o%20plano%20Tablet%20(mensal)." data-plan="Tablet" target="_blank" class="btn btn-line buy">Assinar o Tablet</a>
+          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Tablet.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial" data-trial="Tablet">Começar teste grátis</a>
+        </div>
+      </div>
+
+      <div class="plan">
+        <h3>Totem</h3>
+        <p class="plan-desc">Autoatendimento no balcão, com pagamento na tela.</p>
+        <div class="price" data-m="149,90" data-a="127,40" data-y="1.528,80" data-s="270" data-sm="134,90" data-st="809,40" data-ss="90">
+          <div class="price-line"><span class="cur">R$</span><b class="val">149,90</b><span class="per">/mês</span></div>
+          <p class="price-sub">ou <b>R$ 127,40/mês</b> no anual<br>R$ 1.528,80 por ano</p>
+          <span class="save-chip">Economize até R$ 270 por ano</span>
+        </div>
+        <ul class="mods">
+          <li><svg class="i"><use href="#i-check"/></svg>Painel admin, cardápio e pedidos</li>
+          <li><svg class="i"><use href="#i-check"/></svg>1 totem de autoatendimento</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Pix com QR Code na tela</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Crédito, débito ou dinheiro no balcão</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Senha na tela e no cupom impresso</li>
+          <li class="off"><svg class="i"><use href="#i-minus"/></svg><span class="sr-only">Não incluso: </span>App de delivery do cliente</li>
+        </ul>
+        <div class="plan-ctas">
+          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20assinar%20o%20plano%20Totem%20(mensal)." data-plan="Totem" target="_blank" class="btn btn-line buy">Assinar o Totem</a>
+          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Totem.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial" data-trial="Totem">Começar teste grátis</a>
+        </div>
+      </div>
+
+      <div class="plan hl">
+        <span class="plan-tag">Mais completo</span>
+        <h3>Tablet + Totem</h3>
+        <p class="plan-desc">Mesas com tablet e totem no balcão, tudo no mesmo painel.</p>
+        <div class="price" data-m="219,90" data-a="186,90" data-y="2.242,80" data-s="396" data-sm="197,90" data-st="1.187,40" data-ss="132">
+          <div class="price-line"><span class="cur">R$</span><b class="val">219,90</b><span class="per">/mês</span></div>
+          <p class="price-sub">ou <b>R$ 186,90/mês</b> no anual<br>R$ 2.242,80 por ano</p>
+          <span class="save-chip">Economize até R$ 396 por ano</span>
+        </div>
+        <ul class="mods">
+          <li><svg class="i"><use href="#i-check"/></svg>Tudo do plano Tablet</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Tudo do plano Totem</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Um painel só para mesas e balcão</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Impressão automática na cozinha</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Suporte prioritário</li>
+          <li class="off"><svg class="i"><use href="#i-minus"/></svg><span class="sr-only">Não incluso: </span>App de delivery do cliente</li>
+        </ul>
+        <div class="plan-ctas">
+          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20assinar%20o%20plano%20Tablet%20%2B%20Totem%20(mensal)." data-plan="Tablet + Totem" target="_blank" class="btn btn-brand buy">Assinar o Tablet + Totem</a>
+          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Tablet%20%2B%20Totem.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial" data-trial="Tablet + Totem">Começar teste grátis</a>
+        </div>
+      </div>
+      </div>
+
+      <div class="addons">
+        <div class="addons-head">
+          <h4>Adicionais</h4>
+          <p>Junte ao seu plano quando quiser. Os valores acompanham a forma de cobrança escolhida acima.</p>
+        </div>
+        <ul class="addons-list">
+        <li>
+          <span class="addon-ico"><svg class="i"><use href="#i-chat"/></svg></span>
+          <span class="addon-txt"><b>WhatsApp automático e bot 24h</b><small>No plano Essencial</small></span>
+          <span class="addon-val" data-m="69,90" data-sm="62,90" data-a="59,40">+ R$ <b>69,90</b>/mês</span>
+        </li>
+        <li>
+          <span class="addon-ico"><svg class="i"><use href="#i-monitor"/></svg></span>
+          <span class="addon-txt"><b>Tablet na mesa</b><small>Nos planos Gourmet e Enterprise · tablets ilimitados</small></span>
+          <span class="addon-val" data-m="59,90" data-sm="53,90" data-a="50,90">+ R$ <b>59,90</b>/mês</span>
+        </li>
+        <li>
+          <span class="addon-ico"><svg class="i"><use href="#i-zap"/></svg></span>
+          <span class="addon-txt"><b>Totem de autoatendimento</b><small>Em qualquer plano · 1º totem</small></span>
+          <span class="addon-val" data-m="99,90" data-sm="89,90" data-a="84,90">+ R$ <b>99,90</b>/mês</span>
+        </li>
+        <li>
+          <span class="addon-ico"><svg class="i"><use href="#i-plus"/></svg></span>
+          <span class="addon-txt"><b>Totem extra</b><small>Cada totem a mais</small></span>
+          <span class="addon-val" data-m="49,90" data-sm="44,90" data-a="42,40">+ R$ <b>49,90</b>/mês</span>
+        </li>
+        </ul>
       </div>
     </div>
 
@@ -1807,6 +1988,9 @@
           <label><input type="radio" name="plano" value="Gourmet"><span>Gourmet <small>R$ 169,90</small></span></label>
           <label><input type="radio" name="plano" value="Express"><span>Express <small>R$ 169,90</small></span></label>
           <label><input type="radio" name="plano" value="Enterprise" checked><span>Enterprise <small>R$ 249,90</small></span></label>
+          <label><input type="radio" name="plano" value="Tablet"><span>Tablet <small>R$ 129,90</small></span></label>
+          <label><input type="radio" name="plano" value="Totem"><span>Totem <small>R$ 149,90</small></span></label>
+          <label><input type="radio" name="plano" value="Tablet + Totem"><span>Tablet + Totem <small>R$ 219,90</small></span></label>
         </div>
         <p class="pick-err">Escolha um plano.</p>
       </fieldset>
@@ -1815,6 +1999,7 @@
         <legend>Forma de cobrança</legend>
         <div class="chips-pick">
           <label><input type="radio" name="cobranca" value="Mensal" checked><span>Mensal</span></label>
+          <label><input type="radio" name="cobranca" value="Semestral"><span>Semestral <small>economize 10%</small></span></label>
           <label><input type="radio" name="cobranca" value="Anual"><span>Anual <small>economize 15%</small></span></label>
         </div>
       </fieldset>
@@ -2058,23 +2243,33 @@
   document.querySelectorAll('[data-demo-view]').forEach(b => b.addEventListener('click', () => setDemoView(b.dataset.demoView)));
 
   // ── Planos: alterna preço mensal/anual e a mensagem do WhatsApp ──
+  const NOME_COBRANCA = { m: 'Mensal', s: 'Semestral', a: 'Anual' };
+  const cobrancaAtual = () => NOME_COBRANCA[document.querySelector('[data-bill][aria-pressed="true"]')?.dataset.bill || 'm'];
   function setBilling(b) {
     document.querySelectorAll('[data-bill]').forEach(x => x.setAttribute('aria-pressed', x.dataset.bill === b));
     document.querySelectorAll('.price').forEach(p => {
-      p.querySelector('.val').textContent = b === 'a' ? p.dataset.a : p.dataset.m;
+      p.querySelector('.val').textContent = b === 'a' ? p.dataset.a : b === 's' ? p.dataset.sm : p.dataset.m;
       p.querySelector('.price-sub').innerHTML = b === 'a'
         ? '<s>R$ ' + p.dataset.m + '/mês</s> no mensal<br><b>R$ ' + p.dataset.y + '</b> por ano, à vista no cartão de crédito, PIX ou boleto'
-        : 'ou <b>R$ ' + p.dataset.a + '/mês</b> no anual<br>R$ ' + p.dataset.y + ' por ano';
+        : b === 's'
+        ? '<s>R$ ' + p.dataset.m + '/mês</s> no mensal<br><b>R$ ' + p.dataset.st + '</b> a cada 6 meses, à vista no cartão de crédito, PIX ou boleto'
+        : 'ou <b>R$ ' + p.dataset.sm + '/mês</b> no semestral<br>ou <b>R$ ' + p.dataset.a + '/mês</b> no anual';
       p.querySelector('.save-chip').textContent = b === 'a'
         ? 'Você economiza R$ ' + p.dataset.s + ' por ano'
-        : 'Economize R$ ' + p.dataset.s + ' por ano';
+        : b === 's'
+        ? 'Você economiza R$ ' + p.dataset.ss + ' por semestre'
+        : 'Economize até R$ ' + p.dataset.s + ' por ano';
+    });
+    document.querySelectorAll('.addon-val').forEach(v => {
+      v.querySelector('b').textContent = b === 'a' ? v.dataset.a : b === 's' ? v.dataset.sm : v.dataset.m;
     });
     document.querySelectorAll('a.buy').forEach(a => {
-      const txt = 'Olá! Quero assinar o plano ' + a.dataset.plan + (b === 'a' ? ' (anual).' : ' (mensal).');
+      const txt = 'Olá! Quero assinar o plano ' + a.dataset.plan + ' (' + NOME_COBRANCA[b].toLowerCase() + ').';
       a.href = 'https://wa.me/5545999723256?text=' + encodeURIComponent(txt);
     });
   }
   document.querySelectorAll('[data-bill]').forEach(x => x.addEventListener('click', () => setBilling(x.dataset.bill)));
+  setBilling('m'); // textos dos preços já com mensal, semestral e anual
 
   // ── Tela de contratação ──
   // Sem servidor: o envio monta uma mensagem e abre o WhatsApp da equipe
@@ -2082,10 +2277,13 @@
   const signForm = document.getElementById('signForm');
   const signDone = document.getElementById('signDone');
   const PRICES = {
-    Essencial:  { m: '99,90',  a: '84,90',  y: '1.018,80' },
-    Gourmet:    { m: '169,90', a: '144,90', y: '1.738,80' },
-    Express:    { m: '169,90', a: '144,90', y: '1.738,80' },
-    Enterprise: { m: '249,90', a: '212,40', y: '2.548,80' },
+    Essencial:  { m: '99,90',  sm: '89,90',  st: '539,40',   a: '84,90',  y: '1.018,80' },
+    Gourmet:    { m: '169,90', sm: '152,90', st: '917,40',   a: '144,90', y: '1.738,80' },
+    Express:    { m: '169,90', sm: '152,90', st: '917,40',   a: '144,90', y: '1.738,80' },
+    Enterprise: { m: '249,90', sm: '224,90', st: '1.349,40', a: '212,40', y: '2.548,80' },
+    'Tablet':         { m: '129,90', sm: '116,90', st: '701,40',   a: '110,40', y: '1.324,80' },
+    'Totem':          { m: '149,90', sm: '134,90', st: '809,40',   a: '127,40', y: '1.528,80' },
+    'Tablet + Totem': { m: '219,90', sm: '197,90', st: '1.187,40', a: '186,90', y: '2.242,80' },
   };
   const val = name => (signForm.querySelector('input[name="' + name + '"]:checked') || {}).value;
   // "Como você quer começar?" muda o botão, o resumo e o título da confirmação
@@ -2097,10 +2295,11 @@
     const p = val('plano'), c = val('cobranca'), ini = val('inicio');
     if (!p) return;
     const pr = PRICES[p];
-    const preco = c === 'Anual' ? 'R$ ' + pr.y + ' por ano · cartão, PIX ou boleto' : 'R$ ' + pr.m + '/mês';
+    const preco = c === 'Anual' ? 'R$ ' + pr.y + ' por ano · cartão, PIX ou boleto'
+      : c === 'Semestral' ? 'R$ ' + pr.st + ' a cada 6 meses · cartão, PIX ou boleto' : 'R$ ' + pr.m + '/mês';
     document.getElementById('sumTxt').innerHTML = (ini === 'teste' ? 'Teste grátis · ' : '') + 'Plano ' + p + ' · ' + c.toLowerCase() +
       '<small>' + (ini === 'teste' ? '7 dias grátis, depois ' + preco : preco) + '</small>';
-    document.getElementById('sumVal').textContent = ini === 'teste' ? 'R$ 0 hoje' : 'R$ ' + (c === 'Anual' ? pr.a : pr.m) + '/mês';
+    document.getElementById('sumVal').textContent = ini === 'teste' ? 'R$ 0 hoje' : 'R$ ' + (c === 'Anual' ? pr.a : c === 'Semestral' ? pr.sm : pr.m) + '/mês';
     document.getElementById('signBtn').textContent = SIGN_TEXT[ini].btn;
     document.getElementById('doneTitle').textContent = SIGN_TEXT[ini].done;
   }
@@ -2119,13 +2318,11 @@
   }
   document.querySelectorAll('a.buy, [data-sign]').forEach(a => a.addEventListener('click', e => {
     e.preventDefault();
-    const anual = document.querySelector('[data-bill="a"]')?.getAttribute('aria-pressed') === 'true';
-    openSign(a.dataset.plan, anual ? 'Anual' : 'Mensal');
+    openSign(a.dataset.plan, cobrancaAtual());
   }));
   document.querySelectorAll('a[data-trial]').forEach(a => a.addEventListener('click', e => {
     e.preventDefault();
-    const anual = document.querySelector('[data-bill="a"]')?.getAttribute('aria-pressed') === 'true';
-    openSign(a.dataset.trial, anual ? 'Anual' : 'Mensal', 'teste');
+    openSign(a.dataset.trial, cobrancaAtual(), 'teste');
   }));
 
   // máscara (45) 99999-9999
