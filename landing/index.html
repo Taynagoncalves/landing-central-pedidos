@@ -877,6 +877,73 @@
     @media (max-width: 900px) { .start { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 560px) { .start { grid-template-columns: 1fr; } }
 
+    /* ── Cena do topo: balcão com os aparelhos ── */
+    .cena { max-width: 1120px; margin: 56px auto 0; }
+    .cena-palco { position: relative; aspect-ratio: 2.55 / 1; container-type: inline-size; }
+    .cena-palco::before { content: ""; position: absolute; left: 8%; right: 8%; top: 4%; height: 70%; background: radial-gradient(closest-side, rgba(255,85,0,.16), transparent); filter: blur(30px); }
+    .cn { position: absolute; z-index: 2; display: flex; flex-direction: column; align-items: center; }
+    .cn img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .cena-balcao { position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; height: 13%; border-radius: 1.2cqw 1.2cqw 0.6cqw 0.6cqw;
+      background: linear-gradient(180deg, #F4F2EE 0, #E7E3DC 22%, #DCD7CF 100%); box-shadow: 0 1px 0 #fff inset, 0 2.2cqw 3cqw -1.6cqw rgba(12,12,14,.35); }
+    .cena-balcao::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 26%; border-radius: inherit; background: linear-gradient(180deg, #FFFFFF, #EDEAE4); }
+
+    /* totem de chão (fica na frente do balcão) */
+    .cn-totem { left: 1.5%; bottom: 0; width: 13%; z-index: 3; }
+    .cn-totem-corpo { position: relative; width: 100%; padding: 1.6cqw 0.6cqw 0.8cqw; border-radius: 1.2cqw 1.2cqw 0.8cqw 0.8cqw; background: linear-gradient(100deg, #DCDBD8, #FAFAF9 30%, #EFEEEC 70%, #CFCDC9); box-shadow: 0 0 0 1px #C9C6C1 inset, 0 2cqw 3cqw -1.6cqw rgba(12,12,14,.5); overflow: hidden; }
+    .cn-totem-topo { position: absolute; left: 0; right: 0; top: 0; height: 1.1cqw; background: var(--brand); color: #fff; font-size: 0.55cqw; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; display: grid; place-items: center; }
+    .cn-totem-corpo img { aspect-ratio: 600 / 1067; height: auto; border-radius: 0.4cqw; box-shadow: 0 0 0 0.3cqw #0C0C0E; }
+    .cn-totem-pe { width: 24%; height: 7cqw; background: linear-gradient(90deg, #A8A6A2, #F4F3F1 40%, #DAD8D4 62%, #9C9A96); }
+    .cn-totem-base { width: 82%; height: 1.2cqw; border-radius: 50%; background: radial-gradient(ellipse at 45% 30%, #FFFFFF, #D6D4CF 55%, #A29F99); box-shadow: 0 0.8cqw 1.2cqw -0.6cqw rgba(12,12,14,.5); }
+
+    /* monitor */
+    .cn-monitor { left: 17%; bottom: 11%; width: 42%; }
+    .cn-monitor-tela { width: 100%; aspect-ratio: 1600 / 860; padding: 0.7cqw; border-radius: 1cqw; background: #111114; box-shadow: 0 0 0 1px #2A2A2E inset, 0 2.4cqw 3.4cqw -2cqw rgba(12,12,14,.55); }
+    .cn-monitor-tela img { border-radius: 0.4cqw; }
+    .cn-monitor-pe { width: 9%; height: 4.2cqw; background: linear-gradient(90deg, #8E8E96, #E6E6EA 40%, #C9C9CF 62%, #7C7C84); }
+    .cn-monitor-base { width: 30%; height: 0.9cqw; border-radius: 0.5cqw 0.5cqw 0.2cqw 0.2cqw; background: linear-gradient(180deg, #E6E6EA, #9A9AA2); }
+
+    /* impressora térmica + papel saindo */
+    .cn-impressora { left: 60.5%; bottom: 11%; width: 9.5%; }
+    .cn-papel { position: relative; width: 74%; height: 13cqw; display: flex; align-items: flex-end; overflow: hidden; margin-bottom: -0.3cqw; }
+    .cn-papel-conteudo { width: 100%; padding: 0.8cqw 0.6cqw 1.2cqw; background: #fff; box-shadow: 0 0 0 1px #E4E2DE; display: flex; flex-direction: column; gap: 0.25cqw; font-family: ui-monospace, Menlo, Consolas, monospace; color: #3F3F46; font-size: 0.62cqw; line-height: 1.25;
+      -webkit-mask: linear-gradient(#000 calc(100% - 0.4cqw), transparent 0), conic-gradient(from -45deg at top, #0000, #000 1deg 90deg, #0000 91deg) top / 0.8cqw 0.4cqw repeat-x; animation: cnImprime 5s ease-in-out infinite; }
+    .cn-papel-conteudo b { color: #0C0C0E; font-size: 0.7cqw; }
+    .cn-papel-conteudo i { display: block; border-top: 1px dashed #A1A1AA; margin: 0.2cqw 0; }
+    .cn-papel-conteudo small { color: #16A34A; font-weight: 700; font-size: 0.6cqw; }
+    @keyframes cnImprime { 0% { transform: translateY(100%); } 40%, 94% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(0); opacity: 0; } }
+    .cn-impressora-corpo { position: relative; width: 100%; height: 5.2cqw; border-radius: 0.9cqw 0.9cqw 0.5cqw 0.5cqw; background: linear-gradient(180deg, #2A2A2E, #121214); box-shadow: 0 0 0 1px #3A3A3F inset, 0 1.4cqw 2cqw -1.2cqw rgba(12,12,14,.6); }
+    .cn-impressora-corpo::before { content: ""; position: absolute; left: 12%; right: 12%; top: 0.7cqw; height: 0.25cqw; border-radius: 1cqw; background: #000; }
+    .cn-luz { position: absolute; right: 12%; bottom: 0.9cqw; width: 0.55cqw; height: 0.55cqw; border-radius: 50%; background: #22C55E; box-shadow: 0 0 0.6cqw #22C55E; animation: cnLuz 1.2s ease-in-out infinite; }
+    @keyframes cnLuz { 50% { opacity: .35; } }
+
+    /* tablet no suporte */
+    .cn-tablet { left: 72%; bottom: 11%; width: 18.5%; }
+    .cn-tablet-tela { width: 100%; aspect-ratio: 1600 / 1000; padding: 0.55cqw; border-radius: 1cqw; background: linear-gradient(150deg, #34343A, #121214 55%); box-shadow: 0 0 0 1px #45454C inset, 0 1.8cqw 2.6cqw -1.6cqw rgba(12,12,14,.55); transform: perspective(60cqw) rotateY(-10deg); }
+    .cn-tablet-tela img { border-radius: 0.45cqw; }
+    .cn-tablet-haste { width: 5%; height: 4.6cqw; border-radius: 1cqw; background: linear-gradient(90deg, #8E8E96, #F4F4F6 45%, #B8B8C0 70%, #7C7C84); }
+    .cn-tablet-base { width: 34%; height: 0.9cqw; border-radius: 50%; background: radial-gradient(ellipse at 45% 30%, #FFFFFF, #D4D4D9 55%, #9A9AA2); }
+
+    /* plaquinha de QR Code da mesa (na frente do balcão) */
+    .cn-qr { left: 47%; bottom: 2.5%; width: 7.6%; z-index: 4; }
+    .cn-qr-placa { width: 100%; padding: 0.6cqw 0.6cqw 0.7cqw; border-radius: 0.7cqw; background: #fff; box-shadow: 0 0 0 1px #E4E2DE, 0 1.4cqw 1.8cqw -1.2cqw rgba(12,12,14,.45); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 0.35cqw; }
+    .cn-qr-placa small { font-size: 0.62cqw; font-weight: 800; color: var(--brand); letter-spacing: .06em; text-transform: uppercase; }
+    .cn-qr-placa img { width: 82%; height: auto; aspect-ratio: 1; object-fit: contain; }
+    .cn-qr-placa span { font-size: 0.55cqw; font-weight: 700; color: #3F3F46; line-height: 1.2; }
+
+    /* celular */
+    .cn-celular { left: 91.6%; bottom: 11%; width: 7.4%; }
+    .cn-celular-tela { width: 100%; aspect-ratio: 738 / 1600; padding: 0.35cqw; border-radius: 1.2cqw; background: #111113; box-shadow: 0 0 0 1px #2A2A2E inset, 0 1.6cqw 2.2cqw -1.4cqw rgba(12,12,14,.55); transform: rotate(4deg); transform-origin: bottom center; }
+    .cn-celular-tela img { border-radius: 0.9cqw; }
+
+    .cena-legenda { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; margin-top: 22px; color: var(--muted); font-size: 13.5px; font-weight: 600; }
+    .cena-legenda li { display: inline-flex; align-items: center; gap: 7px; }
+    .cena-legenda .i { width: 16px; height: 16px; color: var(--brand); }
+    @media (max-width: 640px) {
+      .cena { margin-top: 36px; margin-left: -8px; margin-right: -8px; }
+      .cena-legenda { gap: 6px 14px; font-size: 12.5px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .cn-papel-conteudo { animation: none; } }
+
     /* ── Vitrine do topo: um sistema por vez, com abas ── */
     .vitrine { max-width: 1100px; margin: 64px auto 0; text-align: left; }
     .vit-abas { display: flex; justify-content: center; gap: 6px; width: fit-content; max-width: 100%; margin: 0 auto 22px; padding: 5px; border-radius: 16px; background: var(--subtle); border: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
@@ -1126,71 +1193,60 @@
       <span><svg class="i"><use href="#i-check"/></svg>Suporte dedicado</span>
     </div>
 
-    <div class="vitrine" id="vitrine" aria-label="Os sistemas do Huga Huga">
-      <div class="vit-abas" role="tablist">
-        <button type="button" role="tab" id="vitAba-painel" aria-controls="vit-painel" aria-selected="true" data-vit="painel"><svg class="i"><use href="#i-monitor"/></svg>Painel</button>
-        <button type="button" role="tab" id="vitAba-cliente" aria-controls="vit-cliente" aria-selected="false" data-vit="cliente"><svg class="i"><use href="#i-phone"/></svg>App do cliente</button>
-        <button type="button" role="tab" id="vitAba-garcom" aria-controls="vit-garcom" aria-selected="false" data-vit="garcom"><svg class="i"><use href="#i-user"/></svg>Garçom</button>
-        <button type="button" role="tab" id="vitAba-motoboy" aria-controls="vit-motoboy" aria-selected="false" data-vit="motoboy"><svg class="i"><use href="#i-bike"/></svg>Motoboy</button>
-        <button type="button" role="tab" id="vitAba-tablet" aria-controls="vit-tablet" aria-selected="false" data-vit="tablet"><svg class="i"><use href="#i-book"/></svg>Tablet</button>
-        <button type="button" role="tab" id="vitAba-totem" aria-controls="vit-totem" aria-selected="false" data-vit="totem"><svg class="i"><use href="#i-zap"/></svg>Totem</button>
+    <div class="cena" role="img" aria-label="Painel no monitor, totem, tablet na mesa, impressora imprimindo o pedido, QR Code da mesa e o app do cliente no celular">
+      <div class="cena-palco">
+        <!-- totem de chão -->
+        <div class="cn cn-totem">
+          <div class="cn-totem-corpo"><span class="cn-totem-topo">Peça aqui</span><img src="imagens/autoatendimento/totem-inicio.jpg" alt="" loading="lazy"></div>
+          <span class="cn-totem-pe"></span><span class="cn-totem-base"></span>
+        </div>
+
+        <!-- monitor com o painel -->
+        <div class="cn cn-monitor">
+          <div class="cn-monitor-tela"><img src="imagens/admin/telaadmin.png" alt=""></div>
+          <span class="cn-monitor-pe"></span><span class="cn-monitor-base"></span>
+        </div>
+
+        <!-- impressora térmica imprimindo -->
+        <div class="cn cn-impressora">
+          <div class="cn-papel">
+            <div class="cn-papel-conteudo">
+              <b>PEDIDO #1291</b>
+              <span>1x X-Burguer</span><span>1x Batata frita</span><span>1x Refrigerante</span>
+              <i></i>
+              <b>TOTAL R$ 48,00</b>
+              <small>Pago no Pix</small>
+            </div>
+          </div>
+          <div class="cn-impressora-corpo"><span class="cn-luz"></span></div>
+        </div>
+
+        <!-- tablet no suporte de mesa -->
+        <div class="cn cn-tablet">
+          <div class="cn-tablet-tela"><img src="imagens/autoatendimento/tablet-cardapio.jpg" alt="" loading="lazy"></div>
+          <span class="cn-tablet-haste"></span><span class="cn-tablet-base"></span>
+        </div>
+
+        <!-- QR Code da mesa -->
+        <div class="cn cn-qr">
+          <div class="cn-qr-placa"><small>Mesa 05</small><img src="imagens/qr-mesa.svg" alt=""><span>Peça pelo celular</span></div>
+        </div>
+
+        <!-- celular com o app do cliente -->
+        <div class="cn cn-celular">
+          <div class="cn-celular-tela"><img src="imagens/cliente/temaclaro/telahome.jpeg" alt="" loading="lazy"></div>
+        </div>
+
+        <div class="cena-balcao"></div>
       </div>
-      <div class="vit-palco">
-        <div class="vit-painel larga" id="vit-painel" role="tabpanel" aria-labelledby="vitAba-painel">
-          <div class="vit-texto">
-            <span class="vit-icone"><svg class="i"><use href="#i-monitor"/></svg></span>
-            <h3>Painel do lojista</h3>
-            <p>Todos os pedidos num só lugar, em tempo real.</p>
-            <ul class="ticks"><li><svg class="i"><use href="#i-check"/></svg>Delivery, retirada, mesas e totem juntos</li><li><svg class="i"><use href="#i-check"/></svg>Impressão automática na cozinha</li><li><svg class="i"><use href="#i-check"/></svg>Resumo do dia e histórico de vendas</li></ul>
-          </div>
-          <div class="vit-aparelho"><div class="browser vit-browser"><div class="browser-bar"><i></i><i></i><i></i><span>hugahuga.com.br</span></div><img src="imagens/admin/telaadmin.png" alt="Painel do lojista com os pedidos em tempo real"></div></div>
-        </div>
-        <div class="vit-painel" id="vit-cliente" role="tabpanel" aria-labelledby="vitAba-cliente" hidden>
-          <div class="vit-texto">
-            <span class="vit-icone"><svg class="i"><use href="#i-phone"/></svg></span>
-            <h3>App do cliente</h3>
-            <p>Seu cardápio com a sua marca, direto no celular do cliente.</p>
-            <ul class="ticks"><li><svg class="i"><use href="#i-check"/></svg>Pedido com adicionais, pizza e açaí</li><li><svg class="i"><use href="#i-check"/></svg>Pix e cartão com confirmação na hora</li><li><svg class="i"><use href="#i-check"/></svg>Acompanha o pedido ao vivo</li></ul>
-          </div>
-          <div class="vit-aparelho"><div class="phone vit-celular"><div class="phone-screen"><img src="imagens/cliente/temaclaro/telahome.jpeg" alt="Cardápio no celular do cliente" loading="lazy"></div></div></div>
-        </div>
-        <div class="vit-painel" id="vit-garcom" role="tabpanel" aria-labelledby="vitAba-garcom" hidden>
-          <div class="vit-texto">
-            <span class="vit-icone"><svg class="i"><use href="#i-user"/></svg></span>
-            <h3>App do garçom</h3>
-            <p>Comanda eletrônica no celular do garçom.</p>
-            <ul class="ticks"><li><svg class="i"><use href="#i-check"/></svg>Mesas livres, ocupadas e fechando</li><li><svg class="i"><use href="#i-check"/></svg>Lança pedido e fecha a conta</li><li><svg class="i"><use href="#i-check"/></svg>Recebe os chamados das mesas</li></ul>
-          </div>
-          <div class="vit-aparelho"><div class="phone vit-celular"><div class="phone-screen"><img src="imagens/autoatendimento/garcom.jpg" alt="App do garçom com as mesas" loading="lazy"></div></div></div>
-        </div>
-        <div class="vit-painel" id="vit-motoboy" role="tabpanel" aria-labelledby="vitAba-motoboy" hidden>
-          <div class="vit-texto">
-            <span class="vit-icone"><svg class="i"><use href="#i-bike"/></svg></span>
-            <h3>App do motoboy</h3>
-            <p>O entregador recebe as entregas e avisa cada etapa.</p>
-            <ul class="ticks"><li><svg class="i"><use href="#i-check"/></svg>Rota com mapa e endereço</li><li><svg class="i"><use href="#i-check"/></svg>Aceita, sai e finaliza a entrega</li><li><svg class="i"><use href="#i-check"/></svg>O cliente é avisado sozinho</li></ul>
-          </div>
-          <div class="vit-aparelho"><div class="phone vit-celular"><div class="phone-screen fit"><img src="imagens/cliente/temaclaro/motoboy.png" alt="App do motoboy com a entrega" loading="lazy"></div></div></div>
-        </div>
-        <div class="vit-painel larga" id="vit-tablet" role="tabpanel" aria-labelledby="vitAba-tablet" hidden>
-          <div class="vit-texto">
-            <span class="vit-icone"><svg class="i"><use href="#i-book"/></svg></span>
-            <h3>Tablet na mesa</h3>
-            <p>Cardápio em tela cheia em cada mesa.</p>
-            <ul class="ticks"><li><svg class="i"><use href="#i-check"/></svg>O cliente pede sozinho</li><li><svg class="i"><use href="#i-check"/></svg>Chama o garçom e pede a conta</li><li><svg class="i"><use href="#i-check"/></svg>Tablets ilimitados</li></ul>
-          </div>
-          <div class="vit-aparelho"><div class="vit-tablet"><img src="imagens/autoatendimento/tablet-cardapio.jpg" alt="Tablet na mesa com o cardápio" loading="lazy"></div></div>
-        </div>
-        <div class="vit-painel" id="vit-totem" role="tabpanel" aria-labelledby="vitAba-totem" hidden>
-          <div class="vit-texto">
-            <span class="vit-icone"><svg class="i"><use href="#i-zap"/></svg></span>
-            <h3>Totem de autoatendimento</h3>
-            <p>Pedido e pagamento no balcão, sem fila.</p>
-            <ul class="ticks"><li><svg class="i"><use href="#i-check"/></svg>Pix com QR Code na tela</li><li><svg class="i"><use href="#i-check"/></svg>Crédito, débito ou dinheiro no balcão</li><li><svg class="i"><use href="#i-check"/></svg>Senha na tela e no cupom</li></ul>
-          </div>
-          <div class="vit-aparelho"><div class="vit-totem"><div class="vit-totem-corpo"><img src="imagens/autoatendimento/totem-inicio.jpg" alt="Totem de autoatendimento" loading="lazy"></div><span class="vit-totem-pe"></span><span class="vit-totem-base"></span></div></div>
-        </div>
-      </div>
+      <ul class="cena-legenda">
+        <li><svg class="i"><use href="#i-zap"/></svg>Totem</li>
+        <li><svg class="i"><use href="#i-monitor"/></svg>Painel</li>
+        <li><svg class="i"><use href="#i-printer"/></svg>Impressão automática</li>
+        <li><svg class="i"><use href="#i-book"/></svg>Tablet na mesa</li>
+        <li><svg class="i"><use href="#i-qr"/></svg>QR Code da mesa</li>
+        <li><svg class="i"><use href="#i-phone"/></svg>App do cliente</li>
+      </ul>
     </div>
   </div>
 </section>
