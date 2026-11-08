@@ -560,6 +560,23 @@
     .field input[aria-invalid="true"] ~ .err { display: block; }
     .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .pick { margin: 18px 0 4px; border: 0; min-width: 0; }
+    .plano-grupo + .plano-grupo { margin-top: 12px; }
+    .plano-grupo > small { display: block; margin-bottom: 6px; font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+    .pick-opc { margin-left: 6px; font-size: 12px; font-weight: 500; color: var(--muted); }
+    .adic-pick { display: grid; gap: 8px; }
+    .adic-pick label { position: relative; display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 12px; border: 1px solid var(--line-2); background: var(--surface); cursor: pointer; transition: border-color .15s, background .15s; }
+    .adic-pick label[hidden] { display: none; }
+    .adic-pick input { position: absolute; opacity: 0; pointer-events: none; }
+    .adic-box { flex-shrink: 0; width: 20px; height: 20px; border-radius: 6px; border: 1.5px solid var(--line-2); display: grid; place-items: center; transition: all .15s; }
+    .adic-pick input:checked ~ .adic-box { background: var(--brand); border-color: var(--brand); }
+    .adic-pick input:checked ~ .adic-box::after { content: ""; width: 9px; height: 5px; border: 2px solid #fff; border-top: 0; border-right: 0; transform: rotate(-45deg) translate(1px, -1px); }
+    .adic-pick label:has(input:checked) { border-color: var(--brand); background: var(--brand-soft); }
+    .adic-pick input:focus-visible ~ .adic-box { outline: 2px solid var(--brand); outline-offset: 2px; }
+    .adic-txt { flex: 1; min-width: 0; }
+    .adic-txt b { display: block; font-size: 14px; font-weight: 600; color: var(--ink); }
+    .adic-txt small { display: block; font-size: 12.5px; color: var(--muted); }
+    .adic-pick em { font-style: normal; font-size: 13.5px; font-weight: 700; color: var(--ink-2); white-space: nowrap; }
+    .adic-vazio { font-size: 13.5px; color: var(--muted); }
     .pick legend { font-size: 14px; font-weight: 600; color: var(--ink-2); margin-bottom: 8px; }
     .chips-pick { display: flex; flex-wrap: wrap; gap: 8px; }
     .chips-pick label { cursor: pointer; }
@@ -1986,16 +2003,34 @@
 
       <fieldset class="pick" id="pickPlano">
         <legend>Plano</legend>
-        <div class="chips-pick">
-          <label><input type="radio" name="plano" value="Essencial"><span>Essencial <small>R$ 99,90</small></span></label>
-          <label><input type="radio" name="plano" value="Gourmet"><span>Gourmet <small>R$ 169,90</small></span></label>
-          <label><input type="radio" name="plano" value="Express"><span>Express <small>R$ 169,90</small></span></label>
-          <label><input type="radio" name="plano" value="Enterprise" checked><span>Enterprise <small>R$ 189,90</small></span></label>
-          <label><input type="radio" name="plano" value="Tablet"><span>Tablet <small>R$ 109,90</small></span></label>
-          <label><input type="radio" name="plano" value="Totem"><span>Totem <small>R$ 129,90</small></span></label>
-          <label><input type="radio" name="plano" value="Tablet + Totem"><span>Tablet + Totem <small>R$ 189,90</small></span></label>
+        <div class="plano-grupo">
+          <small>Delivery e salão</small>
+          <div class="chips-pick">
+            <label><input type="radio" name="plano" value="Enterprise" checked><span>Enterprise <small>R$ 189,90</small></span></label>
+            <label><input type="radio" name="plano" value="Gourmet"><span>Gourmet <small>R$ 169,90</small></span></label>
+            <label><input type="radio" name="plano" value="Express"><span>Express <small>R$ 169,90</small></span></label>
+            <label><input type="radio" name="plano" value="Essencial"><span>Essencial <small>R$ 99,90</small></span></label>
+          </div>
+        </div>
+        <div class="plano-grupo">
+          <small>Só autoatendimento</small>
+          <div class="chips-pick">
+            <label><input type="radio" name="plano" value="Tablet + Totem"><span>Tablet + Totem <small>R$ 189,90</small></span></label>
+            <label><input type="radio" name="plano" value="Totem"><span>Totem <small>R$ 129,90</small></span></label>
+            <label><input type="radio" name="plano" value="Tablet"><span>Tablet <small>R$ 109,90</small></span></label>
+          </div>
         </div>
         <p class="pick-err">Escolha um plano.</p>
+      </fieldset>
+
+      <fieldset class="pick" id="pickAdicionais">
+        <legend>Adicionais <span class="pick-opc">opcional</span></legend>
+        <div class="adic-pick">
+          <label data-adic="whatsapp"><input type="checkbox" name="adicional" value="whatsapp"><span class="adic-box"></span><span class="adic-txt"><b>WhatsApp automático e bot 24h</b><small>Mensagens em cada etapa do pedido</small></span><em data-preco>+ R$ 69,90</em></label>
+          <label data-adic="tablet"><input type="checkbox" name="adicional" value="tablet"><span class="adic-box"></span><span class="adic-txt"><b>Tablet na mesa</b><small>Tablets ilimitados</small></span><em data-preco>+ R$ 59,90</em></label>
+          <label data-adic="totem"><input type="checkbox" name="adicional" value="totem"><span class="adic-box"></span><span class="adic-txt"><b>Totem de autoatendimento</b><small>Totens ilimitados, Pix na tela</small></span><em data-preco>+ R$ 99,90</em></label>
+        </div>
+        <p class="adic-vazio" id="adicVazio" hidden>Este plano já vem com tudo. Não há adicionais.</p>
       </fieldset>
 
       <fieldset class="pick">
@@ -2393,15 +2428,41 @@
     teste:     { btn: 'Começar teste grátis', done: 'Seu teste está a caminho!' },
     contratar: { btn: 'Assinar agora', done: 'Recebemos seus dados!' },
   };
+  // adicionais: preço por mês em cada cobrança e em quais planos aparecem
+  const ADIC = {
+    whatsapp: { nome: 'WhatsApp', m: 69.90, s: 62.90, a: 59.40, planos: ['Essencial'] },
+    tablet:   { nome: 'Tablet',   m: 59.90, s: 53.90, a: 50.90, planos: ['Gourmet', 'Enterprise'] },
+    totem:    { nome: 'Totem',    m: 99.90, s: 89.90, a: 84.90, planos: ['Essencial', 'Gourmet', 'Express', 'Enterprise', 'Tablet'] }
+  };
+  const num = (v) => Number(String(v).replace(/\./g, '').replace(',', '.'));
+  const brl = (v) => v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const adicionaisMarcados = () => [...signForm.querySelectorAll('input[name="adicional"]:checked')].map((i) => i.value);
+
   function updateSummary() {
     const p = val('plano'), c = val('cobranca'), ini = val('inicio');
     if (!p) return;
     const pr = PRICES[p];
-    const preco = c === 'Anual' ? 'R$ ' + pr.y + ' por ano · cartão, PIX ou boleto'
-      : c === 'Semestral' ? 'R$ ' + pr.st + ' a cada 6 meses · cartão, PIX ou boleto' : 'R$ ' + pr.m + '/mês';
-    document.getElementById('sumTxt').innerHTML = (ini === 'teste' ? 'Teste grátis · ' : '') + 'Plano ' + p + ' · ' + c.toLowerCase() +
+    const k = c === 'Anual' ? 'a' : c === 'Semestral' ? 's' : 'm';
+
+    // mostra só os adicionais que valem para o plano (os outros saem marcados)
+    let algum = false;
+    signForm.querySelectorAll('[data-adic]').forEach((l) => {
+      const a = ADIC[l.dataset.adic];
+      const ok = a.planos.includes(p);
+      l.hidden = !ok;
+      if (!ok) l.querySelector('input').checked = false;
+      algum = algum || ok;
+      l.querySelector('[data-preco]').textContent = '+ R$ ' + brl(a[k]);
+    });
+    document.getElementById('adicVazio').hidden = algum;
+    const marcados = adicionaisMarcados();
+    const porMes = num(k === 'a' ? pr.a : k === 's' ? pr.sm : pr.m) + marcados.reduce((t, a) => t + ADIC[a][k], 0);
+    const nomes = 'Plano ' + p + marcados.map((a) => ' + ' + ADIC[a].nome).join('');
+    const preco = k === 'a' ? 'R$ ' + brl(porMes * 12) + ' por ano · cartão, PIX ou boleto'
+      : k === 's' ? 'R$ ' + brl(porMes * 6) + ' a cada 6 meses · cartão, PIX ou boleto' : 'R$ ' + brl(porMes) + '/mês';
+    document.getElementById('sumTxt').innerHTML = (ini === 'teste' ? 'Teste grátis · ' : '') + nomes + ' · ' + c.toLowerCase() +
       '<small>' + (ini === 'teste' ? '7 dias grátis, depois ' + preco : preco) + '</small>';
-    document.getElementById('sumVal').textContent = ini === 'teste' ? 'R$ 0 hoje' : 'R$ ' + (c === 'Anual' ? pr.a : c === 'Semestral' ? pr.sm : pr.m) + '/mês';
+    document.getElementById('sumVal').textContent = ini === 'teste' ? 'R$ 0 hoje' : 'R$ ' + brl(porMes) + '/mês';
     document.getElementById('signBtn').textContent = SIGN_TEXT[ini].btn;
     document.getElementById('doneTitle').textContent = SIGN_TEXT[ini].done;
   }
@@ -2484,6 +2545,9 @@
           plano: val('plano'),
           cobranca: val('cobranca'),
           pedidos: val('pedidos'),
+          adicional_whatsapp: adicionaisMarcados().includes('whatsapp'),
+          adicional_tablet: adicionaisMarcados().includes('tablet'),
+          adicional_totem: adicionaisMarcados().includes('totem'),
           site_url: document.getElementById('fSiteUrl').value
         })
       });
