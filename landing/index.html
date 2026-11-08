@@ -1021,6 +1021,9 @@
     .aval-mel { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
     .aval-erro { color: #DC2626; font-size: 14px; font-weight: 600; }
     .aval-ok { align-items: center; text-align: center; }
+    .aval-vazio { align-items: center; text-align: center; gap: 12px; padding: 34px 26px; border-style: dashed; }
+    .aval-vazio p { color: var(--muted); font-size: 16px; max-width: 420px; }
+    .aval-topo:has(+ .aval-grade #avalVazio) #avalAbrir { display: none; }
     .aval-dialog form[hidden], .aval-ok[hidden] { display: none; }
     .aval-ok-ico { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: #E9F9EF; color: #16A34A; }
     .aval-ok p { color: var(--muted); }
@@ -1388,14 +1391,11 @@
     </div>
 
     <div class="aval-grade reveal" id="avalGrade">
-      <figure class="aval-card">
-        <span class="aval-estrelas" aria-label="5 de 5 estrelas">★★★★★</span>
-        <blockquote>“Aqui é correria, principalmente no fim de semana. Antes a gente anotava no papel e no WhatsApp e sempre se perdia algum pedido. Agora cai tudo no painel, a cozinha já recebe impresso e o Pix confirma sozinho. Parece pouco, mas mudou o nosso dia a dia.”</blockquote>
-        <figcaption>
-          <img id="provaLogo" src="https://res.cloudinary.com/dbr6ytslw/image/upload/v1779553024/lojas/5/logos/logo_home.png" alt="" loading="lazy">
-          <span><b>Avenidão Container</b><small>Hamburgueria<span id="provaDesde"></span></small></span>
-        </figcaption>
-      </figure>
+      <div class="aval-card aval-vazio" id="avalVazio">
+        <span class="aval-estrelas" aria-hidden="true">★★★★★</span>
+        <p>Usa o Huga Huga na sua loja? Seja o primeiro a contar como está sendo.</p>
+        <button type="button" class="btn btn-brand" data-avaliar>Deixar minha avaliação</button>
+      </div>
     </div>
   </div>
 </section>
@@ -2247,8 +2247,6 @@
       .then((d) => {
         const l = d && d.loja;
         if (!l || !l.pedidos_total) throw new Error('sem dados');
-        if (l.logo) document.getElementById('provaLogo').src = l.logo;
-        if (l.desde) document.getElementById('provaDesde').textContent = ' · cliente desde ' + new Date(l.desde).toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
         const el = resumo.querySelector('[data-contar]');
         el.textContent = fmt(l.pedidos_total); // já mostra o número; a animação roda quando aparecer na tela
         const ver = new IntersectionObserver((ents) => {
@@ -2264,6 +2262,7 @@
     fetch('https://superadmin.hugahuga.com.br/api/publico/avaliacoes', { cache: 'no-store' })
       .then((r) => (r.ok ? r.json() : Promise.reject()))
       .then((d) => {
+        if ((d.avaliacoes || []).length) document.getElementById('avalVazio')?.remove();
         (d.avaliacoes || []).slice(0, 8).forEach((a) => {
           const fig = document.createElement('figure');
           fig.className = 'aval-card';
@@ -2280,11 +2279,13 @@
     const form = document.getElementById('avalForm');
     const ok = document.getElementById('avalOk');
     const erro = document.getElementById('avalErro');
-    document.getElementById('avalAbrir').addEventListener('click', () => {
+    const abrirAval = () => {
       form.hidden = false; ok.hidden = true; erro.hidden = true;
       dlg.showModal();
       hhEvento('abriu_avaliacao');
-    });
+    };
+    document.getElementById('avalAbrir').addEventListener('click', abrirAval);
+    document.querySelectorAll('[data-avaliar]').forEach((b) => b.addEventListener('click', abrirAval));
     dlg.addEventListener('click', (e) => { if (e.target === dlg || e.target.closest('[data-close]')) dlg.close(); });
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
