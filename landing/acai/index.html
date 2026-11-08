@@ -1679,12 +1679,12 @@
       <li>
         <span class="addon-ico"><svg class="i"><use href="#i-monitor"/></svg></span>
         <span class="addon-txt"><b>Tablet na mesa</b><small>Qualquer plano · tablets ilimitados</small></span>
-        <span class="addon-val" data-m="59,90" data-sm="53,90" data-a="50,90">+ R$ <b>59,90</b>/mês</span>
+        <span class="addon-val" data-m="39,90" data-sm="35,90" data-a="33,90">+ R$ <b>39,90</b>/mês</span>
       </li>
       <li>
         <span class="addon-ico"><svg class="i"><use href="#i-zap"/></svg></span>
         <span class="addon-txt"><b>Totem de autoatendimento</b><small>Qualquer plano · totens ilimitados</small></span>
-        <span class="addon-val" data-m="99,90" data-sm="89,90" data-a="84,90">+ R$ <b>99,90</b>/mês</span>
+        <span class="addon-val" data-m="59,90" data-sm="53,90" data-a="50,90">+ R$ <b>59,90</b>/mês</span>
       </li>
       </ul>
     </div>
@@ -2029,10 +2029,10 @@
         <legend>Adicionais <span class="pick-opc">opcional</span></legend>
         <div class="adic-pick">
           <label data-adic="whatsapp"><input type="checkbox" name="adicional" value="whatsapp"><span class="adic-box"></span><span class="adic-txt"><b>WhatsApp automático e bot 24h</b><small>Mensagens em cada etapa do pedido</small></span><em data-preco>+ R$ 69,90</em></label>
-          <label data-adic="tablet"><input type="checkbox" name="adicional" value="tablet"><span class="adic-box"></span><span class="adic-txt"><b>Tablet na mesa</b><small>Tablets ilimitados</small></span><em data-preco>+ R$ 59,90</em></label>
-          <label data-adic="totem"><input type="checkbox" name="adicional" value="totem"><span class="adic-box"></span><span class="adic-txt"><b>Totem de autoatendimento</b><small>Totens ilimitados, Pix na tela</small></span><em data-preco>+ R$ 99,90</em></label>
+          <label data-adic="tablet"><input type="checkbox" name="adicional" value="tablet"><span class="adic-box"></span><span class="adic-txt"><b>Tablet na mesa</b><small>Tablets ilimitados</small></span><em data-preco>+ R$ 39,90</em></label>
+          <label data-adic="totem"><input type="checkbox" name="adicional" value="totem"><span class="adic-box"></span><span class="adic-txt"><b>Totem de autoatendimento</b><small>Totens ilimitados, Pix na tela</small></span><em data-preco>+ R$ 59,90</em></label>
         </div>
-        <p class="adic-vazio" id="adicVazio" hidden>Este plano já vem com tudo. Não há adicionais.</p>
+        <p class="adic-vazio" id="adicVazio" hidden>Para ter tablet e totem juntos, escolha o plano Tablet + Totem.</p>
       </fieldset>
 
       <fieldset class="pick">
@@ -2433,8 +2433,8 @@
   // adicionais: preço por mês em cada cobrança e em quais planos aparecem
   const ADIC = {
     whatsapp: { nome: 'WhatsApp', m: 69.90, s: 62.90, a: 59.40, planos: ['Essencial'] },
-    tablet:   { nome: 'Tablet',   m: 59.90, s: 53.90, a: 50.90, planos: ['Essencial', 'Gourmet', 'Express', 'Enterprise', 'Totem'] },
-    totem:    { nome: 'Totem',    m: 99.90, s: 89.90, a: 84.90, planos: ['Essencial', 'Gourmet', 'Express', 'Enterprise', 'Tablet'] }
+    tablet:   { nome: 'Tablet',   m: 39.90, s: 35.90, a: 33.90, planos: ['Essencial', 'Gourmet', 'Express', 'Enterprise'] },
+    totem:    { nome: 'Totem',    m: 59.90, s: 53.90, a: 50.90, planos: ['Essencial', 'Gourmet', 'Express', 'Enterprise'] }
   };
   const num = (v) => Number(String(v).replace(/\./g, '').replace(',', '.'));
   const brl = (v) => v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -2457,6 +2457,7 @@
       l.querySelector('[data-preco]').textContent = '+ R$ ' + brl(a[k]);
     });
     document.getElementById('adicVazio').hidden = algum;
+    document.getElementById('adicVazio').textContent = p === 'Tablet + Totem' ? 'Este plano já vem com tablet e totem.' : 'Para ter tablet e totem juntos, escolha o plano Tablet + Totem.';
     const marcados = adicionaisMarcados();
     const porMes = num(k === 'a' ? pr.a : k === 's' ? pr.sm : pr.m) + marcados.reduce((t, a) => t + ADIC[a][k], 0);
     const nomes = 'Plano ' + p + marcados.map((a) => ' + ' + ADIC[a].nome).join('');
