@@ -143,9 +143,14 @@
     .nav.scrolled { border-bottom-color: var(--line); }
     .nav-in { height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
     .nav-links { display: flex; gap: 2px; list-style: none; }
-    .nav-links a { display: block; padding: 8px 14px; border-radius: 10px; font-size: 14.5px; font-weight: 500; color: var(--ink-2); transition: background .2s, color .2s; }
+    .nav-links a { position: relative; display: block; padding: 8px 12px; border-radius: 10px; font-size: 14px; font-weight: 500; color: var(--ink-2); white-space: nowrap; transition: background .25s, color .25s, transform .25s var(--ease), box-shadow .25s; }
+    .nav-links a::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 3px; height: 2px; border-radius: 2px; background: var(--brand); transform: scaleX(0); transition: transform .3s var(--ease); }
     .nav-links a:hover { background: var(--subtle); color: var(--ink); }
-    .nav-links a.active { color: var(--ink); }
+    .nav-links a.active { color: var(--ink); font-weight: 600; background: var(--surface); transform: translateY(-2px); box-shadow: 0 6px 14px -8px rgba(12,12,14,.35); }
+    .nav-links a.active::after { transform: scaleX(1); }
+    .sheet a.active { color: var(--brand); }
+    @media (max-width: 1180px) { .nav-links a { padding: 8px 9px; font-size: 13.5px; } }
+    @media (max-width: 1040px) { .nav-actions .btn-ghost { display: none; } }
     .nav-actions { display: flex; align-items: center; gap: 8px; }
     .nav-actions .btn { height: 42px; padding: 0 16px; font-size: 14.5px; border-radius: 11px; }
     .burger { display: none; width: 42px; height: 42px; border-radius: 11px; border: 1px solid var(--line-2); background: var(--surface); align-items: center; justify-content: center; }
@@ -1185,8 +1190,10 @@
       <ul class="nav-links">
         <li><a href="#sistemas">Sistemas</a></li>
         <li><a href="#como-funciona">Como funciona</a></li>
-        <li><a href="#planos">Planos</a></li>
+        <li><a href="#tablet-totem">Tablet e Totem</a></li>
         <li><a href="#avaliacoes">Avaliações</a></li>
+        <li><a href="#demonstracao">Demonstração</a></li>
+        <li><a href="#planos">Planos</a></li>
         <li><a href="#faq">Dúvidas</a></li>
       </ul>
     </nav>
@@ -1199,8 +1206,10 @@
   <div class="sheet" id="sheet">
     <a href="#sistemas">Sistemas</a>
     <a href="#como-funciona">Como funciona</a>
-    <a href="#planos">Planos</a>
+    <a href="#tablet-totem">Tablet e Totem</a>
     <a href="#avaliacoes">Avaliações</a>
+    <a href="#demonstracao">Demonstração</a>
+    <a href="#planos">Planos</a>
     <a href="#faq">Dúvidas</a>
     <a href="#contato">Contato</a>
     <a href="#contato" class="btn btn-brand" data-sign>Falar com vendas</a>
@@ -2674,14 +2683,20 @@
   document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
   // ── Link ativo no menu ──
-  const navLinks = document.querySelectorAll('.nav-links a');
-  const spy = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id));
-    });
-  }, { rootMargin: '-45% 0px -50% 0px' });
-  navLinks.forEach(a => { const s = document.querySelector(a.getAttribute('href')); if (s) spy.observe(s); });
+  const navLinks = document.querySelectorAll('.nav-links a, .sheet a[href^="#"]:not(.btn)');
+  const marcar = (id) => navLinks.forEach(a => a.classList.toggle('active', id !== null && a.getAttribute('href') === '#' + id));
+  // a seção ativa é a última cujo topo já passou de 40% da altura da tela
+  const secoes = [...document.querySelectorAll('section[id]')];
+  let ativo;
+  function conferirMenu() {
+    const linha = window.innerHeight * 0.4;
+    let atual = null;
+    for (const sec of secoes) { if (sec.getBoundingClientRect().top <= linha) atual = sec.id; }
+    if (atual !== ativo) { ativo = atual; marcar(atual); }
+  }
+  window.addEventListener('scroll', conferirMenu, { passive: true });
+  window.addEventListener('resize', conferirMenu);
+  conferirMenu();
 </script>
 
 </body>
