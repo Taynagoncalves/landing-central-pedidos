@@ -13,22 +13,22 @@ const SEGMENTOS = [
     pasta: "hamburgueria",
     titulo: "Sistema para Hamburgueria – Cardápio online, delivery, mesas e totem | Huga Huga",
     descricao: "Sistema para hamburgueria: cardápio online com adicionais, delivery e retirada, Pix e cartão, mesas com QR Code, tablet na mesa, totem de autoatendimento e impressão automática. Sem comissão por pedido.",
-    h1: `Sua hamburgueria vendendo mais, com <span class="brand-c">tecnologia de verdade</span>.`,
-    lead: "Cardápio online com adicionais e combos, delivery e retirada, Pix e cartão, mesas com QR Code, tablet na mesa, totem no balcão e impressão automática na cozinha — sem comissão por pedido."
+    h1: `O sistema completo para a sua <span class="brand-c">hamburgueria</span>.`,
+    lead: "Cardápio online com adicionais e combos, delivery, mesas, tablet, totem e impressão na cozinha num só painel — sem comissão por pedido."
   },
   {
     pasta: "pizzaria",
     titulo: "Sistema para Pizzaria – Pizza meio a meio, delivery e motoboys | Huga Huga",
     descricao: "Sistema para pizzaria: pizza com vários sabores e bordas, delivery com gestão de motoboys, Pix e cartão, mesas com QR Code, tablet, totem e impressão automática. Sem comissão por pedido.",
-    h1: `Sua pizzaria vendendo mais, com <span class="brand-c">tecnologia de verdade</span>.`,
-    lead: "Pizza com vários sabores e bordas recheadas, delivery com gestão de motoboys, Pix e cartão, mesas com QR Code, tablet na mesa, totem no balcão e impressão automática — sem comissão por pedido."
+    h1: `O sistema completo para a sua <span class="brand-c">pizzaria</span>.`,
+    lead: "Pizza com vários sabores e bordas, delivery com motoboys, mesas, tablet, totem e impressão na cozinha num só painel — sem comissão por pedido."
   },
   {
     pasta: "acai",
     titulo: "Sistema para Açaiteria – Monte seu açaí, delivery e totem | Huga Huga",
     descricao: "Sistema para açaiteria: monte o açaí com complementos grátis e pagos, delivery e retirada, Pix e cartão, totem de autoatendimento e WhatsApp automático. Sem comissão por pedido.",
-    h1: `Sua açaiteria vendendo mais, com <span class="brand-c">tecnologia de verdade</span>.`,
-    lead: "O cliente monta o açaí com complementos grátis e pagos, pede por delivery ou retirada, paga com Pix ou cartão e ainda pode usar o totem no balcão — sem comissão por pedido."
+    h1: `O sistema completo para a sua <span class="brand-c">açaiteria</span>.`,
+    lead: "Açaí montado com complementos grátis e pagos, delivery, Pix e cartão, totem no balcão e WhatsApp automático num só painel — sem comissão por pedido."
   }
 ];
 
@@ -37,8 +37,8 @@ function trocar(html, de, para, nome) {
   return html.split(de).join(para);
 }
 
-const H1_ORIGINAL = `<h1>Seu negócio vendendo mais, com <span class="brand-c">tecnologia de verdade</span>.</h1>`;
-const LEAD_ORIGINAL = base.match(/<p class="lead">Cardápio online com delivery e retirada[^<]*<\/p>/)[0];
+const H1_ORIGINAL = `<h1>O sistema completo para o seu <span class="brand-c">restaurante</span>.</h1>`;
+const LEAD_ORIGINAL = base.match(/<p class="lead">Cardápio online, delivery, mesas[^<]*<\/p>/)[0];
 const TITULO_ORIGINAL = base.match(/<title>[^<]*<\/title>/)[0];
 const DESC_ORIGINAL = base.match(/<meta name="description" content="[^"]*">/)[0];
 

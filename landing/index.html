@@ -865,6 +865,18 @@
       .dev-totem { width: min(100%, 220px); }
     }
 
+    /* ── O que vem no Huga Huga ── */
+    .tudo-grade { list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+    .tudo-grade li { display: flex; flex-direction: column; gap: 6px; padding: 22px 20px; border-radius: 20px; background: var(--surface); border: 1px solid var(--line); transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease; }
+    .tudo-grade li:hover { border-color: rgba(255,85,0,.35); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .tudo-ico { display: grid; place-items: center; width: 42px; height: 42px; margin-bottom: 8px; border-radius: 12px; background: var(--brand-soft); color: var(--brand); }
+    .tudo-grade b { font-size: 16px; letter-spacing: -0.01em; }
+    .tudo-grade small { color: var(--muted); font-size: 13.5px; line-height: 1.5; }
+    @media (max-width: 1100px) { .tudo-grade { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    @media (max-width: 640px) { .tudo-grade { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .tudo-grade li { padding: 16px 14px; } .tudo-grade small { font-size: 12.5px; } }
+    @media (max-width: 900px) { .start { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .start { grid-template-columns: 1fr; } }
+
     /* ── Vitrine do topo: um sistema por vez, com abas ── */
     .vitrine { max-width: 1100px; margin: 64px auto 0; text-align: left; }
     .vit-abas { display: flex; justify-content: center; gap: 6px; width: fit-content; max-width: 100%; margin: 0 auto 22px; padding: 5px; border-radius: 16px; background: var(--subtle); border: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
@@ -913,6 +925,10 @@
     .aval-grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; max-width: 1040px; margin: 0 auto; }
     .aval-card { display: flex; flex-direction: column; gap: 14px; padding: 26px; border-radius: 22px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
     .aval-estrelas { color: #F59E0B; font-size: 17px; letter-spacing: 3px; }
+    .aval-card:only-child { grid-column: 1 / -1; width: 100%; max-width: 760px; margin: 0 auto; text-align: center; align-items: center; }
+    .aval-card:only-child figcaption { justify-content: center; text-align: left; }
+    .aval-card:only-child blockquote { font-size: clamp(18px, 1.8vw, 21px); }
+    .aval-resumo.sem-numero + .btn { margin: 0 auto; }
     .aval-card blockquote { flex: 1; color: var(--ink-2); font-size: 16px; line-height: 1.65; }
     .aval-card:first-child blockquote { font-size: clamp(17px, 1.6vw, 19px); }
     .aval-card figcaption { display: flex; align-items: center; gap: 12px; padding-top: 14px; border-top: 1px solid var(--line); }
@@ -1067,10 +1083,10 @@
     </a>
     <nav aria-label="Principal">
       <ul class="nav-links">
+        <li><a href="#sistemas">Sistemas</a></li>
         <li><a href="#como-funciona">Como funciona</a></li>
-        <li><a href="#tablet-totem">Tablet e Totem</a></li>
-        <li><a href="#demonstracao">Demonstração</a></li>
         <li><a href="#planos">Planos</a></li>
+        <li><a href="#avaliacoes">Avaliações</a></li>
         <li><a href="#faq">Dúvidas</a></li>
       </ul>
     </nav>
@@ -1081,10 +1097,10 @@
     </div>
   </div>
   <div class="sheet" id="sheet">
+    <a href="#sistemas">Sistemas</a>
     <a href="#como-funciona">Como funciona</a>
-    <a href="#tablet-totem">Tablet e Totem</a>
-    <a href="#demonstracao">Demonstração</a>
     <a href="#planos">Planos</a>
+    <a href="#avaliacoes">Avaliações</a>
     <a href="#faq">Dúvidas</a>
     <a href="#contato">Contato</a>
     <a href="#contato" class="btn btn-brand" data-sign>Falar com vendas</a>
@@ -1097,8 +1113,8 @@
 <section class="hero">
   <div class="container">
     <span class="badge"><b>7 dias grátis</b> Sem cartão, sem compromisso</span>
-    <h1>Seu negócio vendendo mais, com <span class="brand-c">tecnologia de verdade</span>.</h1>
-    <p class="lead">Cardápio online com delivery e retirada, Pix e cartão, mesas com QR Code e garçom digital, tablet na mesa, totem de autoatendimento, gestão de motoboys, impressão automática, fidelidade e WhatsApp com bot 24h — tudo num só painel.</p>
+    <h1>O sistema completo para o seu <span class="brand-c">restaurante</span>.</h1>
+    <p class="lead">Cardápio online, delivery, mesas, tablet, totem, motoboy e WhatsApp num só painel — sem comissão por pedido.</p>
     <div class="hero-ctas">
       <a href="#planos" class="btn btn-brand btn-lg" data-sign>Assinar agora <svg class="i"><use href="#i-arrow"/></svg></a>
       <button type="button" class="btn btn-line btn-lg" data-demo="cliente"><svg class="i"><use href="#i-play"/></svg> Testar o sistema ao vivo</button>
@@ -1194,117 +1210,40 @@
   </div>
 </div>
 
-<!-- Jornada do pedido -->
-<section class="section" id="como-funciona">
+<!-- O que vem no sistema: tudo de uma olhada -->
+<section class="section" id="sistemas">
   <div class="container">
-    <div class="head reveal">
-      <span class="kicker">Como funciona</span>
-      <h2 class="h2">Do pedido à entrega,<br>tudo no automático.</h2>
-      <p class="lead">Veja o caminho de um pedido dentro do sistema — sem papel, sem ligação e sem pedido perdido.</p>
+    <div class="head center reveal">
+      <span class="kicker">O que vem no Huga Huga</span>
+      <h2 class="h2">Tudo o que o seu restaurante precisa, num só lugar.</h2>
     </div>
+    <ul class="tudo-grade reveal">
+      <li><span class="tudo-ico"><svg class="i"><use href="#i-monitor"/></svg></span><b>Painel de pedidos</b><small>Delivery, retirada, mesas e totem chegando no mesmo lugar.</small></li>
+      <li><span class="tudo-ico"><svg class="i"><use href="#i-phone"/></svg></span><b>Cardápio online</b><small>Seu link com a sua marca, fotos, adicionais, pizza e açaí.</small></li>
+      <li><span class="tudo-ico"><svg class="i"><use href="#i-card"/></svg></span><b>Pix e cartão</b><small>Pagamento online com confirmação na hora.</small></li>
+      <li><span class="tudo-ico"><svg class="i"><use href="#i-qr"/></svg></span><b>Mesas e garçom</b><small>QR Code em cada mesa e comanda no celular do garçom.</small></li>
+      <li><span class="tudo-ico"><svg class="i"><use href="#i-book"/></svg></span><b>Tablet na mesa</b><small>O cliente pede, chama o garçom e pede a conta.</small></li>
+      <li><span class="tudo-ico"><svg class="i"><use href="#i-zap"/></svg></span><b>Totem</b><small>Autoatendimento no balcão, com Pix na tela.</small></li>
+      <li><span class="tudo-ico"><svg class="i"><use href="#i-bike"/></svg></span><b>Motoboy</b><small>Entregas com rota e cliente avisado sozinho.</small></li>
+      <li><span class="tudo-ico"><svg class="i"><use href="#i-chat"/></svg></span><b>WhatsApp e bot 24h</b><small>Mensagens automáticas e atendimento sem parar.</small></li>
+      <li><span class="tudo-ico"><svg class="i"><use href="#i-printer"/></svg></span><b>Impressão automática</b><small>O pedido sai impresso direto na cozinha.</small></li>
+      <li><span class="tudo-ico"><svg class="i"><use href="#i-gift"/></svg></span><b>Fidelidade e cupons</b><small>Pontos, prêmios e descontos para o cliente voltar.</small></li>
+    </ul>
+  </div>
+</section>
 
-    <div class="journey reveal">
-      <div class="j-steps" id="jSteps" role="tablist" aria-label="Etapas do pedido">
-        <button class="j-step" role="tab" aria-selected="true" aria-controls="jView">
-          <span class="j-num">1</span>
-          <h3>O cliente faz o pedido</h3>
-          <div class="j-more">
-            <p>Cardápio digital pelo link da loja ou pelo QR Code da mesa, com fotos, preços e complementos.</p>
-            <ul class="ticks">
-              <li><svg class="i"><use href="#i-check"/></svg>Funciona no navegador, sem instalar app</li>
-              <li><svg class="i"><use href="#i-check"/></svg>Delivery, retirada no balcão ou mesa</li>
-              <li><svg class="i"><use href="#i-check"/></svg>Categorias, complementos e variações</li>
-            </ul>
-          </div>
-          <span class="j-bar"></span>
-        </button>
-        <button class="j-step" role="tab" aria-selected="false" aria-controls="jView">
-          <span class="j-num">2</span>
-          <h3>Paga com PIX ou cartão</h3>
-          <div class="j-more">
-            <p>Aceite PIX e cartão de crédito diretamente na plataforma, com segurança e praticidade.</p>
-            <ul class="ticks">
-              <li><svg class="i"><use href="#i-check"/></svg>PIX com confirmação automática</li>
-              <li><svg class="i"><use href="#i-check"/></svg>Cartão de crédito online e integração com Mercado Pago</li>
-              <li><svg class="i"><use href="#i-check"/></svg>Pagamento na entrega (dinheiro/maquininha) com controle de troco</li>
-            </ul>
-          </div>
-          <span class="j-bar"></span>
-        </button>
-        <button class="j-step" role="tab" aria-selected="false" aria-controls="jView">
-          <span class="j-num">3</span>
-          <h3>A cozinha recebe e imprime</h3>
-          <div class="j-more">
-            <p>Assim que o pedido chega, ele é impresso na cozinha ou no balcão — sem nenhuma ação manual.</p>
-            <ul class="ticks">
-              <li><svg class="i"><use href="#i-check"/></svg>Compatível com impressoras térmicas</li>
-              <li><svg class="i"><use href="#i-check"/></svg>Sem risco de perder pedido por falta de atenção</li>
-              <li><svg class="i"><use href="#i-check"/></svg>Configuração simples, sem instalar drivers</li>
-            </ul>
-          </div>
-          <span class="j-bar"></span>
-        </button>
-        <button class="j-step" role="tab" aria-selected="false" aria-controls="jView">
-          <span class="j-num">4</span>
-          <h3>O motoboy sai para entrega</h3>
-          <div class="j-more">
-            <p>Painel exclusivo para entregadores gerenciarem suas entregas em tempo real, direto do celular.</p>
-            <ul class="ticks">
-              <li><svg class="i"><use href="#i-check"/></svg>Aceite de pedidos com um clique, com endereço e dados do cliente</li>
-              <li><svg class="i"><use href="#i-check"/></svg>Atalhos para mapa, WhatsApp e ligação com o cliente</li>
-              <li><svg class="i"><use href="#i-check"/></svg>Marca a chegada no endereço</li>
-              <li><svg class="i"><use href="#i-check"/></svg>Histórico de entregas e ganhos por período</li>
-            </ul>
-          </div>
-          <span class="j-bar"></span>
-        </button>
-        <button class="j-step" role="tab" aria-selected="false" aria-controls="jView">
-          <span class="j-num">5</span>
-          <h3>O cliente acompanha pelo WhatsApp</h3>
-          <div class="j-more">
-            <p>Mensagem automática em cada etapa do pedido, sem precisar abrir o app. Incluso nos planos Gourmet, Express e Enterprise; no Essencial, como adicional.</p>
-            <span class="plan-badge">Gourmet, Express e Enterprise</span>
-            <ul class="ticks">
-              <li><svg class="i"><use href="#i-check"/></svg>Pedido em preparo, pronto ou saiu para entrega</li>
-              <li><svg class="i"><use href="#i-check"/></svg>Aviso quando o entregador chega no endereço</li>
-              <li><svg class="i"><use href="#i-check"/></svg>Confirmação de pedido concluído</li>
-            </ul>
-          </div>
-          <span class="j-bar"></span>
-        </button>
-      </div>
-
-      <div class="j-view" id="jView" role="tabpanel" aria-live="polite">
-        <div class="j-pane on"><div class="phone j-phone"><div class="phone-screen"><img src="imagens/cliente/temaclaro/telahome.jpeg" alt="Cardápio digital no celular" data-zoom></div></div></div>
-        <div class="j-pane">
-          <div class="phone j-phone">
-            <div class="phone-screen" data-cycle="2600">
-              <img class="on" src="imagens/cliente/temaclaro/telacarrinho.jpeg" alt="Carrinho do cliente" loading="lazy" data-zoom>
-              <img src="imagens/cliente/temaclaro/telafinalizar.jpeg" alt="Finalizar pedido e escolher como pagar" loading="lazy" data-zoom>
-            </div>
-          </div>
-        </div>
-        <div class="j-pane">
-          <div class="printer" aria-label="Pedido sendo impresso">
-            <div class="printer-body"></div>
-            <div class="receipt-clip">
-              <div class="receipt">
-                <div class="c">PEDIDO #319</div>
-                <div class="c" style="font-weight:400">DELIVERY · 22:41</div>
-                <hr>
-                <div class="r"><span>1x Bacon e Ovo</span><span>28,00</span></div>
-                <div class="r"><span>1x Batata G</span><span>9,00</span></div>
-                <div class="r"><span>Taxa entrega</span><span>5,00</span></div>
-                <hr>
-                <div class="r" style="font-weight:700"><span>TOTAL</span><span>R$ 42,00</span></div>
-                <div class="paid">✓ PIX PAGO</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="j-pane"><div class="phone j-phone"><div class="phone-screen fit"><img src="imagens/cliente/temaclaro/motoboy.png" alt="Painel do motoboy com a entrega em rota" loading="lazy" data-zoom></div></div></div>
-        <div class="j-pane"><img src="imagens/cliente/temaclaro/notificacoeswhats.png" alt="Notificações no WhatsApp" loading="lazy" data-zoom></div>
-      </div>
+<!-- Como funciona: 4 passos -->
+<section class="section" id="como-funciona" style="padding-top:0">
+  <div class="container">
+    <div class="head center reveal">
+      <span class="kicker">Como funciona</span>
+      <h2 class="h2">Do pedido à entrega, no automático.</h2>
+    </div>
+    <div class="start">
+      <div class="start-step reveal"><span class="n-badge">1</span><h3>O cliente pede</h3><p>Pelo link, pelo QR Code da mesa, no tablet ou no totem.</p></div>
+      <div class="start-step reveal"><span class="n-badge">2</span><h3>Paga na hora</h3><p>Pix ou cartão, com confirmação automática.</p></div>
+      <div class="start-step reveal"><span class="n-badge">3</span><h3>A cozinha recebe</h3><p>O pedido aparece no painel e sai impresso.</p></div>
+      <div class="start-step reveal"><span class="n-badge">4</span><h3>Entrega ou retira</h3><p>O motoboy leva e o cliente é avisado no WhatsApp.</p></div>
     </div>
   </div>
 </section>
@@ -1741,22 +1680,6 @@
   </div>
 </section>
 
-<!-- Como começar -->
-<section class="section" style="padding-top:0">
-  <div class="container">
-    <div class="head reveal">
-      <span class="kicker">Como começar</span>
-      <h2 class="h2">Sua loja online em 4 passos.</h2>
-    </div>
-    <div class="start">
-      <div class="start-step reveal"><span class="n-badge">1</span><h3>Faça seu cadastro</h3><p>Escolha o plano, preencha seus dados e nossa equipe entra em contato.</p></div>
-      <div class="start-step reveal"><span class="n-badge">2</span><h3>Nós configuramos tudo</h3><p>Implementação grátis: montamos seu cardápio, logo, horários e formas de entrega para você.</p></div>
-      <div class="start-step reveal"><span class="n-badge">3</span><h3>Compartilhe o link</h3><p>Envie o link da sua loja pelo WhatsApp, Instagram ou onde quiser.</p></div>
-      <div class="start-step reveal"><span class="n-badge">4</span><h3>Receba pedidos</h3><p>Gerencie tudo pelo painel e acompanhe cada pedido em tempo real.</p></div>
-    </div>
-  </div>
-</section>
-
 <!-- FAQ -->
 <section class="section" id="faq" style="padding-top:0">
   <div class="container faq-grid">
@@ -1863,6 +1786,7 @@
       <div>
         <h4>Sistema</h4>
         <ul>
+          <li><a href="#sistemas">Sistemas</a></li>
           <li><a href="#como-funciona">Como funciona</a></li>
           <li><a href="#tablet-totem">Tablet e Totem</a></li>
           <li><a href="#demonstracao">Demonstração</a></li>
@@ -2201,28 +2125,6 @@
     }, 280);
   }
   if (!reduceMotion && liveTxt && liveIco) setInterval(nextEvent, 2800);
-
-  // ── Jornada do pedido: avança sozinha enquanto está na tela ──
-  const jList = document.getElementById('jSteps');
-  const jSteps = [...jList.querySelectorAll('.j-step')];
-  const jPanes = [...document.querySelectorAll('.j-pane')];
-  let jIdx = 0, jTimer = null, jAuto = !reduceMotion, jVisible = false;
-  function jRun() {
-    clearTimeout(jTimer);
-    jList.classList.remove('run');
-    if (!jAuto || !jVisible) return;
-    void jList.offsetWidth; // reinicia a barra de progresso
-    jList.classList.add('run');
-    jTimer = setTimeout(() => jGo((jIdx + 1) % jSteps.length), 6000);
-  }
-  function jGo(i) {
-    jIdx = i;
-    jSteps.forEach((s, k) => s.setAttribute('aria-selected', k === i));
-    jPanes.forEach((p, k) => p.classList.toggle('on', k === i));
-    jRun();
-  }
-  jSteps.forEach((s, i) => s.addEventListener('click', () => { jAuto = false; jGo(i); }));
-  new IntersectionObserver(([entry]) => { jVisible = entry.isIntersecting; jRun(); }, { threshold: 0.35 }).observe(jList);
 
   // ── Demonstração ao vivo (sistema real dentro da página) ──
   const DEMO_URLS = {
