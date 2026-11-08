@@ -1155,6 +1155,7 @@
         <li><a href="#sistemas">Sistemas</a></li>
         <li><a href="#como-funciona">Como funciona</a></li>
         <li><a href="#planos">Planos</a></li>
+        <li><a href="#avaliacoes">Avaliações</a></li>
         <li><a href="#faq">Dúvidas</a></li>
       </ul>
     </nav>
@@ -1168,6 +1169,7 @@
     <a href="#sistemas">Sistemas</a>
     <a href="#como-funciona">Como funciona</a>
     <a href="#planos">Planos</a>
+    <a href="#avaliacoes">Avaliações</a>
     <a href="#faq">Dúvidas</a>
     <a href="#contato">Contato</a>
     <a href="#contato" class="btn btn-brand" data-sign>Falar com vendas</a>
@@ -1369,6 +1371,61 @@
 
   </div>
 </section>
+
+<!-- Avaliações: depoimento do Avenidão, pedidos ao vivo e avaliações aprovadas no Super Admin -->
+<section class="section" id="avaliacoes" style="padding-top:0">
+  <div class="container">
+    <div class="head center reveal">
+      <span class="kicker">Avaliações</span>
+      <h2 class="h2">Quem usa, recomenda.</h2>
+      <p class="lead" style="margin:0 auto">Restaurantes de verdade usando o Huga Huga todos os dias.</p>
+    </div>
+
+    <div class="aval-topo reveal">
+      <div class="aval-resumo" id="avalResumo">
+        <strong data-contar="pedidos_total">—</strong>
+        <span>pedidos feitos pelo Avenidão Container no Huga Huga</span>
+      </div>
+      <button type="button" class="btn btn-line" id="avalAbrir"><svg class="i"><use href="#i-star"/></svg> Avaliar o Huga Huga</button>
+    </div>
+
+    <div class="aval-grade reveal" id="avalGrade">
+      <figure class="aval-card">
+        <span class="aval-estrelas" aria-label="5 de 5 estrelas">★★★★★</span>
+        <blockquote>“Aqui é correria, principalmente no fim de semana. Antes a gente anotava no papel e no WhatsApp e sempre se perdia algum pedido. Agora cai tudo no painel, a cozinha já recebe impresso e o Pix confirma sozinho. Parece pouco, mas mudou o nosso dia a dia.”</blockquote>
+        <figcaption>
+          <img id="provaLogo" src="https://res.cloudinary.com/dbr6ytslw/image/upload/v1779553024/lojas/5/logos/logo_home.png" alt="" loading="lazy">
+          <span><b>Avenidão Container</b><small>Hamburgueria<span id="provaDesde"></span></small></span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- Deixar uma avaliação -->
+<dialog class="aval-dialog" id="avalDialog" aria-labelledby="avalTitulo">
+  <form id="avalForm" novalidate>
+    <button type="button" class="x" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button>
+    <h3 id="avalTitulo">Avalie o Huga Huga</h3>
+    <p class="aval-dica">Usa o sistema na sua loja? Conte como está sendo. A avaliação aparece aqui depois de revisada.</p>
+    <fieldset class="aval-notas" aria-label="Nota">
+      <input type="radio" name="nota" id="avalNota5" value="5" checked><label for="avalNota5" title="5 estrelas">★</label><input type="radio" name="nota" id="avalNota4" value="4"><label for="avalNota4" title="4 estrelas">★</label><input type="radio" name="nota" id="avalNota3" value="3"><label for="avalNota3" title="3 estrelas">★</label><input type="radio" name="nota" id="avalNota2" value="2"><label for="avalNota2" title="2 estrelas">★</label><input type="radio" name="nota" id="avalNota1" value="1"><label for="avalNota1" title="1 estrela">★</label>
+    </fieldset>
+    <label class="aval-campo"><span>Seu nome</span><input name="nome" maxlength="80" required autocomplete="name"></label>
+    <label class="aval-campo"><span>Nome da loja</span><input name="loja" maxlength="120" required></label>
+    <label class="aval-campo"><span>Cidade <small>(opcional)</small></span><input name="cidade" maxlength="80"></label>
+    <label class="aval-campo"><span>Sua avaliação</span><textarea name="comentario" rows="4" maxlength="600" required placeholder="O que mudou na sua loja?"></textarea></label>
+    <input type="text" name="site_url" class="aval-mel" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <p class="aval-erro" id="avalErro" hidden></p>
+    <button type="submit" class="btn btn-brand" id="avalEnviar">Enviar avaliação</button>
+  </form>
+  <div class="aval-ok" id="avalOk" hidden>
+    <span class="aval-ok-ico"><svg class="i"><use href="#i-check"/></svg></span>
+    <h3>Obrigado pela avaliação!</h3>
+    <p>Ela vai aparecer aqui no site assim que for revisada.</p>
+    <button type="button" class="btn btn-line" data-close>Fechar</button>
+  </div>
+</dialog>
 
 <!-- Demonstração ao vivo -->
 <section id="demonstracao">
@@ -1800,6 +1857,7 @@
           <li><a href="/hamburgueria/">Hamburgueria</a></li>
           <li><a href="/pizzaria/">Pizzaria</a></li>
           <li><a href="/acai/">Açaiteria</a></li>
+          <li><a href="#avaliacoes">Avaliações</a></li>
         </ul>
       </div>
       <div>
