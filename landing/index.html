@@ -26,6 +26,30 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script>document.documentElement.classList.add('js');</script>
+  <script>
+    // ── Medição (Google Analytics 4 e Pixel da Meta) ──
+    // Para ligar: preencha os IDs abaixo. Só carrega depois que o visitante aceitar os cookies.
+    window.HH_GA_ID = '';      // ex.: 'G-XXXXXXXXXX'
+    window.HH_PIXEL_ID = '';   // ex.: '123456789012345'
+    window.hhMedicao = function () {
+      if (window.hhMedicaoOn) return; window.hhMedicaoOn = true;
+      if (window.HH_GA_ID) {
+        var g = document.createElement('script'); g.async = true; g.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.HH_GA_ID; document.head.appendChild(g);
+        window.dataLayer = window.dataLayer || []; window.gtag = function () { dataLayer.push(arguments); };
+        gtag('js', new Date()); gtag('config', window.HH_GA_ID);
+      }
+      if (window.HH_PIXEL_ID) {
+        !function (f, b, e, v, n, t, s) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); }; if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = []; t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s); }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', window.HH_PIXEL_ID); fbq('track', 'PageView');
+      }
+    };
+    window.hhEvento = function (nome, dados) {
+      try {
+        if (window.gtag && window.HH_GA_ID) gtag('event', nome, dados || {});
+        if (window.fbq && window.HH_PIXEL_ID) fbq('trackCustom', nome, dados || {});
+      } catch (e) {}
+    };
+  </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -440,7 +464,7 @@
 
     /* ── Footer ── */
     footer { margin-top: 112px; border-top: 1px solid var(--line); background: var(--surface); padding: 56px 0 28px; }
-    .foot { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px; }
+    .foot { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr; gap: 36px; }
     .foot-brand p { font-size: 14.5px; color: var(--muted); max-width: 300px; margin-top: 16px; }
     .social { display: flex; gap: 8px; margin-top: 18px; }
     .social a { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; border: 1px solid var(--line); color: var(--ink-2); transition: background .2s, color .2s, border-color .2s; }
@@ -611,7 +635,7 @@
       .start { grid-template-columns: repeat(2, 1fr); }
       .faq-grid { grid-template-columns: 1fr; gap: 32px; }
       .faq-side { position: static; }
-      .foot { grid-template-columns: 1fr 1fr 1fr; }
+      .foot { grid-template-columns: 1fr 1fr 1fr 1fr; }
       .foot-brand { grid-column: 1 / -1; }
     }
     @media (max-width: 680px) {
@@ -841,6 +865,45 @@
       .dev-totem { width: min(100%, 220px); }
     }
 
+    /* ── Quem usa: depoimento + números ao vivo ── */
+    .prova { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 20px; align-items: stretch; }
+    .prova-card { position: relative; display: flex; flex-direction: column; gap: 22px; padding: 36px; border-radius: 26px; background: var(--night); color: #fff; overflow: hidden; }
+    .prova-card::before { content: "\201C"; position: absolute; right: 28px; top: -18px; font-size: 180px; line-height: 1; font-weight: 800; color: rgba(255,85,0,.22); }
+    .prova-topo { display: flex; align-items: center; gap: 14px; }
+    .prova-topo img { width: 64px; height: 64px; object-fit: contain; filter: drop-shadow(0 6px 12px rgba(0,0,0,.4)); }
+    .prova-topo b { display: block; font-size: 18px; }
+    .prova-topo small { display: block; color: var(--night-muted); font-size: 13.5px; }
+    .prova-estrelas { display: flex; gap: 3px; color: #FBBF24; }
+    .prova-estrelas .i { width: 18px; height: 18px; fill: currentColor; stroke: none; }
+    .prova-card blockquote { position: relative; font-size: clamp(17px, 1.6vw, 20px); line-height: 1.6; color: #E4E4E7; }
+    .prova-card blockquote b { color: #fff; }
+    .prova-assina { margin-top: auto; color: var(--night-muted); font-size: 13.5px; }
+    .prova-numeros { display: grid; grid-template-rows: repeat(3, 1fr) auto; gap: 12px; }
+    .prova-num { display: flex; align-items: center; gap: 16px; padding: 20px 22px; border-radius: 20px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
+    .prova-num-ico { display: grid; place-items: center; width: 46px; height: 46px; flex-shrink: 0; border-radius: 14px; background: var(--brand-soft); color: var(--brand); }
+    .prova-num strong { display: block; font-size: clamp(28px, 3vw, 36px); font-weight: 800; letter-spacing: -0.04em; line-height: 1.05; font-variant-numeric: tabular-nums; }
+    .prova-num small { display: block; color: var(--muted); font-size: 13.5px; }
+    .prova-vivo { display: inline-flex; align-items: center; gap: 8px; justify-self: start; padding: 6px 12px; border-radius: 999px; background: #E9F9EF; color: #15803D; font-size: 12.5px; font-weight: 700; }
+    .prova-vivo::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #16A34A; animation: provaPulso 1.8s ease-out infinite; }
+    @keyframes provaPulso { 0% { box-shadow: 0 0 0 0 rgba(22,163,74,.5); } 100% { box-shadow: 0 0 0 8px rgba(22,163,74,0); } }
+    .prova.sem-numeros { grid-template-columns: 1fr; max-width: 760px; margin: 0 auto; }
+    .prova.sem-numeros .prova-numeros { display: none; }
+    @media (max-width: 900px) { .prova { grid-template-columns: 1fr; } .prova-card { padding: 28px 22px; } }
+
+    /* ── Totem x atendente de caixa ── */
+    .calc-totem { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 20px; align-items: center; max-width: 1040px; margin: 20px auto 0; padding: 28px 30px; border-radius: 24px; background: var(--subtle); border: 1px solid var(--line); }
+    .calc-totem h3 { font-size: 22px; letter-spacing: -0.02em; margin-bottom: 6px; }
+    .calc-totem p { color: var(--muted); font-size: 14.5px; margin-bottom: 18px; }
+    .calc-totem .calc-campo + .calc-campo { margin-top: 18px; }
+    .calc-totem-res { padding: 24px; border-radius: 18px; background: var(--night); color: #fff; box-shadow: var(--shadow-md); }
+    .calc-totem-res .calc-economia { margin-bottom: 0; }
+    .calc-totem-res .calc-linha + .calc-linha { margin-top: 10px; }
+    @media (max-width: 900px) { .calc-totem { grid-template-columns: 1fr; padding: 24px 20px; } }
+
+    /* ── Demonstração: totem em pé e tablet deitado ── */
+    .demo-body.totem iframe { width: auto; height: 100%; aspect-ratio: 9 / 16; max-width: 100%; border-radius: 22px; box-shadow: 0 0 0 10px #18181B, 0 30px 60px -10px rgba(0,0,0,.7); }
+    .demo-body.tablet iframe { width: min(1180px, 100%); height: auto; max-height: 100%; aspect-ratio: 16 / 10; border-radius: 22px; box-shadow: 0 0 0 12px #18181B, 0 30px 60px -10px rgba(0,0,0,.7); }
+
     /* ── Calculadora de comissão ── */
     .calc-sec { padding-top: 0; }
     .calc { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 20px; max-width: 1040px; margin: 0 auto; }
@@ -949,6 +1012,7 @@
       <ul class="nav-links">
         <li><a href="#como-funciona">Como funciona</a></li>
         <li><a href="#recursos">Recursos</a></li>
+        <li><a href="#tablet-totem">Tablet e Totem</a></li>
         <li><a href="#demonstracao">Demonstração</a></li>
         <li><a href="#planos">Planos</a></li>
         <li><a href="#faq">Dúvidas</a></li>
@@ -963,6 +1027,7 @@
   <div class="sheet" id="sheet">
     <a href="#como-funciona">Como funciona</a>
     <a href="#recursos">Recursos</a>
+    <a href="#tablet-totem">Tablet e Totem</a>
     <a href="#demonstracao">Demonstração</a>
     <a href="#planos">Planos</a>
     <a href="#faq">Dúvidas</a>
@@ -1441,6 +1506,45 @@
   </div>
 </section>
 
+<!-- Quem usa: depoimento e números reais (atualizam sozinhos) -->
+<section class="section" id="clientes" style="padding-top:0">
+  <div class="container">
+    <div class="head center reveal">
+      <span class="kicker">Quem usa</span>
+      <h2 class="h2">Feito junto com quem vive o balcão.</h2>
+      <p class="lead" style="margin:0 auto">O Avenidão Container usa o Huga Huga todos os dias. Os números abaixo são reais e se atualizam sozinhos.</p>
+    </div>
+
+    <div class="prova reveal" id="prova">
+      <figure class="prova-card">
+        <div class="prova-topo">
+          <img id="provaLogo" src="https://res.cloudinary.com/dbr6ytslw/image/upload/v1779553024/lojas/5/logos/logo_home.png" alt="Avenidão Container" loading="lazy">
+          <div><b>Avenidão Container</b><small>Hamburgueria · delivery, mesas e balcão</small></div>
+        </div>
+        <div class="prova-estrelas" aria-label="5 estrelas"><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg></div>
+        <blockquote>“Antes a gente anotava pedido no papel e no WhatsApp, e sempre escapava alguma coisa. Hoje <b>delivery, mesas e balcão chegam no mesmo painel</b>, a impressora solta o pedido sozinha na cozinha e o Pix confirma na hora, sem conferir comprovante. <b>Ficou tudo mais rápido e organizado.</b>”</blockquote>
+        <figcaption class="prova-assina">Equipe do Avenidão Container<span id="provaDesde"></span></figcaption>
+      </figure>
+
+      <div class="prova-numeros" aria-live="polite">
+        <div class="prova-num">
+          <span class="prova-num-ico"><svg class="i"><use href="#i-bag"/></svg></span>
+          <div><strong data-contar="pedidos_total">—</strong><small>pedidos feitos pelo sistema</small></div>
+        </div>
+        <div class="prova-num">
+          <span class="prova-num-ico"><svg class="i"><use href="#i-chart"/></svg></span>
+          <div><strong data-contar="pedidos_30d">—</strong><small>pedidos nos últimos 30 dias</small></div>
+        </div>
+        <div class="prova-num">
+          <span class="prova-num-ico"><svg class="i"><use href="#i-clock"/></svg></span>
+          <div><strong data-contar="media_dia">—</strong><small>pedidos por dia, em média</small></div>
+        </div>
+        <span class="prova-vivo" id="provaVivo">Números ao vivo do Avenidão Container</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Demonstração ao vivo -->
 <section id="demonstracao">
   <div class="container">
@@ -1448,7 +1552,7 @@
       <div>
         <span class="kicker">Demonstração ao vivo</span>
         <h2 class="h2">Não acredite só nas imagens.<br>Teste agora.</h2>
-        <p class="lead">Navegue pela loja de demonstração como se fosse um cliente ou entre no painel do lojista — direto aqui na página, sem cadastro.</p>
+        <p class="lead">Navegue pela loja de demonstração como cliente, entre no painel do lojista ou faça um pedido no totem e no tablet — direto aqui na página, sem cadastro.</p>
       </div>
       <div class="demo-tiles">
         <button type="button" class="tile" data-demo="cliente">
@@ -1459,6 +1563,16 @@
         <button type="button" class="tile" data-demo="lojista">
           <span class="tile-ico"><svg class="i"><use href="#i-monitor"/></svg></span>
           <span><b>Painel do lojista</b><small>Entra direto, sem login: veja os pedidos e gerencie tudo</small></span>
+          <svg class="i"><use href="#i-arrow"/></svg>
+        </button>
+        <button type="button" class="tile" data-demo="totem">
+          <span class="tile-ico"><svg class="i"><use href="#i-zap"/></svg></span>
+          <span><b>Totem de autoatendimento</b><small>Faça um pedido como no balcão, até a tela do Pix</small></span>
+          <svg class="i"><use href="#i-arrow"/></svg>
+        </button>
+        <button type="button" class="tile" data-demo="tablet">
+          <span class="tile-ico"><svg class="i"><use href="#i-book"/></svg></span>
+          <span><b>Tablet na mesa</b><small>Escolha uma mesa e veja o cardápio em tela cheia</small></span>
           <svg class="i"><use href="#i-arrow"/></svg>
         </button>
       </div>
@@ -1524,6 +1638,30 @@
         </div>
         <button type="button" class="btn btn-brand calc-cta" id="cCta" data-sign data-plan="Gourmet">Quero parar de pagar comissão <svg class="i"><use href="#i-arrow"/></svg></button>
         <p class="calc-obs">Valores aproximados das comissões cobradas pelos aplicativos de delivery. Pagamentos online, aqui e lá, têm a taxa da operadora de pagamento.</p>
+      </div>
+    </div>
+
+    <div class="calc-totem reveal">
+      <div>
+        <h3>E o totem no balcão?</h3>
+        <p>Compare o custo de um atendente só para anotar e cobrar pedidos com o plano Totem (totens ilimitados).</p>
+        <label class="calc-campo">
+          <span>Custo de um atendente por mês <b id="tSalarioTxt">R$ 2.800</b></span>
+          <input type="range" id="tSalario" min="1500" max="5000" step="100" value="2800">
+        </label>
+        <label class="calc-campo">
+          <span>Atendentes que o totem libera <b id="tQtdTxt">1</b></span>
+          <input type="range" id="tQtd" min="1" max="4" step="1" value="1">
+        </label>
+      </div>
+      <div class="calc-totem-res" aria-live="polite">
+        <div class="calc-linha ruim"><span>Atendentes no caixa</span><b id="tCusto">R$ 2.800</b></div>
+        <div class="calc-linha bom"><span>Huga Huga <small>Totem</small></span><b>R$ 149,90</b></div>
+        <div class="calc-economia">
+          <small>Sobra por mês</small>
+          <strong id="tEconomia">R$ 2.650</strong>
+          <span>e o atendente pode ajudar na cozinha ou no salão</span>
+        </div>
       </div>
     </div>
   </div>
@@ -1779,6 +1917,14 @@
             <tr class="price-row"><td>Mensal</td><td>R$ 99,90</td><td>R$ 169,90</td><td>R$ 169,90</td><td>R$ 249,90</td></tr>
             <tr class="price-row"><td>Anual (por mês)</td><td>R$ 84,90</td><td>R$ 144,90</td><td>R$ 144,90</td><td>R$ 212,40</td></tr>
             <tr class="price-row"><td>Anual (à vista no cartão de crédito, PIX ou boleto)</td><td>R$ 1.018,80</td><td>R$ 1.738,80</td><td>R$ 1.738,80</td><td>R$ 2.548,80</td></tr>
+            <tr><td class="grp" colspan="5">Autoatendimento</td></tr>
+            <tr><td>Tablet na mesa (tablets ilimitados)</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y" style="font-size:13px;font-weight:600;color:var(--ink-2)">+ R$ 59,90</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y" style="font-size:13px;font-weight:600;color:var(--ink-2)">+ R$ 59,90</td></tr>
+            <tr><td>Totem de autoatendimento (totens ilimitados)</td><td class="y" style="font-size:13px;font-weight:600;color:var(--ink-2)">+ R$ 99,90</td><td class="y" style="font-size:13px;font-weight:600;color:var(--ink-2)">+ R$ 99,90</td><td class="y" style="font-size:13px;font-weight:600;color:var(--ink-2)">+ R$ 99,90</td><td class="y" style="font-size:13px;font-weight:600;color:var(--ink-2)">+ R$ 99,90</td></tr>
+            <tr><td>Pix com QR Code na tela do totem</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr><td>CPF na nota no totem (opcional)</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr><td class="grp" colspan="5">Cobrança</td></tr>
+            <tr><td>Mensal, semestral (−10%) ou anual (−15%)</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Teste grátis de 7 dias e implementação grátis</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
           </tbody>
         </table>
       </div>
@@ -1827,6 +1973,34 @@
       <details name="faq">
         <summary>O sistema funciona para delivery e mesas ao mesmo tempo?<svg class="i"><use href="#i-plus"/></svg></summary>
         <p>Sim! Você pode ativar delivery, mesas com QR Code e retirada no balcão — todos ao mesmo tempo, com painel único de gestão. Cada pedido chega separado por tipo.</p>
+      </details>
+      <details name="faq">
+        <summary>Como funcionam o tablet na mesa e o totem?<svg class="i"><use href="#i-plus"/></svg></summary>
+        <p>O tablet fica em cada mesa com o cardápio em tela cheia: o cliente pede, chama o garçom e pede a conta. O totem fica no balcão: o cliente monta o pedido, paga com Pix na tela (ou escolhe crédito, débito ou dinheiro no balcão) e recebe uma senha. Os dois usam o mesmo cardápio do seu painel e o pedido cai direto na cozinha e na impressora.</p>
+      </details>
+      <details name="faq">
+        <summary>Preciso comprar o tablet ou o totem com vocês?<svg class="i"><use href="#i-plus"/></svg></summary>
+        <p>Não. Funciona em qualquer tablet ou tela touch com navegador, sem instalar nada. Você pode usar um tablet Android comum na mesa e, no balcão, um totem ou um suporte de chão com tablet grande. Se precisar, indicamos fornecedores.</p>
+      </details>
+      <details name="faq">
+        <summary>Quantos tablets e totens posso usar?<svg class="i"><use href="#i-plus"/></svg></summary>
+        <p>Quantos quiser. Os planos e adicionais de Tablet e Totem são ilimitados: o valor é o mesmo para 1 ou 10 aparelhos.</p>
+      </details>
+      <details name="faq">
+        <summary>Tenho só salão ou só balcão. Preciso do delivery?<svg class="i"><use href="#i-plus"/></svg></summary>
+        <p>Não. Os planos Tablet, Totem e Tablet + Totem vêm com o painel administrativo completo, cardápio, pedidos e impressão, sem o app de delivery e sem área de entrega — você paga só pelo que usa.</p>
+      </details>
+      <details name="faq">
+        <summary>Como funcionam os planos semestral e anual?<svg class="i"><use href="#i-plus"/></svg></summary>
+        <p>No semestral você paga 6 meses de uma vez, com 10% de desconto; no anual, 12 meses com 15% de desconto. O pagamento é à vista no cartão de crédito, PIX ou boleto.</p>
+      </details>
+      <details name="faq">
+        <summary>O cliente pode colocar CPF na nota?<svg class="i"><use href="#i-plus"/></svg></summary>
+        <p>Sim. No totem, o CPF é opcional: o cliente digita se quiser e ele sai no cupom do pedido. O sistema não emite nota fiscal (NFC-e) — se você já usa um emissor, o CPF fica registrado no pedido para facilitar.</p>
+      </details>
+      <details name="faq">
+        <summary>Posso cancelar quando quiser?<svg class="i"><use href="#i-plus"/></svg></summary>
+        <p>Pode. Não tem fidelidade nem multa. Nos planos semestral e anual, devolvemos os meses que não foram usados.</p>
       </details>
       <details name="faq">
         <summary>Como funciona o pagamento pelo sistema?<svg class="i"><use href="#i-plus"/></svg></summary>
@@ -1903,7 +2077,7 @@
         <a href="#" class="brand" aria-label="Huga Huga – página inicial">
           <img class="brand-logo" src="imagens/logo/hugahuga.png" alt="Huga Huga" width="480" height="392">
         </a>
-        <p>Plataforma completa de pedidos online para restaurantes, lanchonetes e delivery com gestão de mesas, motoboys e WhatsApp.</p>
+        <p>Sistema completo para restaurantes, lanchonetes e delivery: cardápio online, mesas, tablet, totem, motoboys e WhatsApp num só painel.</p>
         <div class="social">
           <a href="https://wa.me/5545999723256" target="_blank" aria-label="WhatsApp"><svg class="i"><use href="#i-chat"/></svg></a>
           <a href="https://instagram.com/hugahuga.app" target="_blank" aria-label="Instagram"><svg class="i"><use href="#i-insta"/></svg></a>
@@ -1915,8 +2089,18 @@
         <ul>
           <li><a href="#como-funciona">Como funciona</a></li>
           <li><a href="#recursos">Recursos</a></li>
+          <li><a href="#tablet-totem">Tablet e Totem</a></li>
           <li><a href="#demonstracao">Demonstração</a></li>
           <li><a href="#planos">Planos</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Para seu negócio</h4>
+        <ul>
+          <li><a href="/hamburgueria/">Hamburgueria</a></li>
+          <li><a href="/pizzaria/">Pizzaria</a></li>
+          <li><a href="/acai/">Açaiteria</a></li>
+          <li><a href="#clientes">Quem usa</a></li>
         </ul>
       </div>
       <div>
@@ -1964,6 +2148,8 @@
     <div class="seg" role="group" aria-label="Parte do sistema">
       <button type="button" data-demo-view="cliente" aria-pressed="true">App do cliente</button>
       <button type="button" data-demo-view="lojista" aria-pressed="false">Painel do lojista</button>
+      <button type="button" data-demo-view="totem" aria-pressed="false">Totem</button>
+      <button type="button" data-demo-view="tablet" aria-pressed="false">Tablet</button>
     </div>
     <a class="demo-ext" id="demoExt" href="https://teste.hugahuga.com.br" target="_blank">Abrir em nova aba <svg class="i" style="width:16px;height:16px"><use href="#i-arrow"/></svg></a>
     <button type="button" class="x" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button>
@@ -2270,6 +2456,8 @@
   const DEMO_URLS = {
     cliente: 'https://teste.hugahuga.com.br',
     lojista: 'https://teste.hugahuga.com.br/admin',
+    totem: 'https://teste.hugahuga.com.br/totem',
+    tablet: 'https://teste.hugahuga.com.br/tablet',
   };
   const demo = document.getElementById('demo');
   const demoFrame = document.getElementById('demoFrame');
@@ -2278,6 +2466,9 @@
   function setDemoView(v) {
     document.querySelectorAll('[data-demo-view]').forEach(b => b.setAttribute('aria-pressed', b.dataset.demoView === v));
     demoBody.classList.toggle('phone', v === 'cliente');
+    demoBody.classList.toggle('totem', v === 'totem');
+    demoBody.classList.toggle('tablet', v === 'tablet');
+    hhEvento('demo_' + v);
     demoExt.href = DEMO_URLS[v];
     if (demoFrame.getAttribute('src') !== DEMO_URLS[v]) demoFrame.src = DEMO_URLS[v];
   }
@@ -2287,6 +2478,52 @@
     demo.showModal();
   }));
   document.querySelectorAll('[data-demo-view]').forEach(b => b.addEventListener('click', () => setDemoView(b.dataset.demoView)));
+
+  // ── Quem usa: números reais do Avenidão Container (cache de 10 min no servidor) ──
+  (function numerosAoVivo() {
+    const prova = document.getElementById('prova');
+    if (!prova) return;
+    const fmt = (n) => Number(n || 0).toLocaleString('pt-BR');
+    function contar(el, alvo) {
+      if (reduceMotion) { el.textContent = fmt(alvo); return; }
+      const ini = performance.now(), dur = 1400;
+      (function passo(agora) {
+        const p = Math.min(1, Math.max(0, (agora - ini) / dur));
+        el.textContent = fmt(Math.round(alvo * (1 - Math.pow(1 - p, 3))));
+        if (p < 1) requestAnimationFrame(passo);
+      })(ini);
+    }
+    fetch('https://avenidaocontainer.hugahuga.com.br/api/publico/numeros?loja=avenidaocontainer', { cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((d) => {
+        const l = d && d.loja;
+        if (!l || !l.pedidos_total) throw new Error('sem dados');
+        if (l.logo) document.getElementById('provaLogo').src = l.logo;
+        if (l.desde) document.getElementById('provaDesde').textContent = ' · cliente desde ' + new Date(l.desde).toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
+        const ver = new IntersectionObserver((ents) => {
+          if (!ents.some((e) => e.isIntersecting)) return;
+          ver.disconnect();
+          prova.querySelectorAll('[data-contar]').forEach((el) => contar(el, l[el.dataset.contar]));
+        }, { threshold: 0.3 });
+        ver.observe(prova);
+      })
+      .catch(() => prova.classList.add('sem-numeros'));
+  })();
+
+  // ── Calculadora do totem ──
+  (function calcTotem() {
+    const sal = document.getElementById('tSalario'), qtd = document.getElementById('tQtd');
+    if (!sal || !qtd) return;
+    const brl = (v) => 'R$ ' + Math.round(v).toLocaleString('pt-BR');
+    function atualizar() {
+      const custo = Number(sal.value) * Number(qtd.value);
+      document.getElementById('tSalarioTxt').textContent = brl(Number(sal.value));
+      document.getElementById('tQtdTxt').textContent = qtd.value;
+      document.getElementById('tCusto').textContent = brl(custo);
+      document.getElementById('tEconomia').textContent = brl(Math.max(0, custo - 149.9));
+    }
+    sal.addEventListener('input', atualizar); qtd.addEventListener('input', atualizar); atualizar();
+  })();
 
   // ── Planos: alterna preço mensal/anual e a mensagem do WhatsApp ──
   const NOME_COBRANCA = { m: 'Mensal', s: 'Semestral', a: 'Anual' };
@@ -2352,6 +2589,7 @@
   signForm.addEventListener('change', updateSummary);
 
   function openSign(plan, billing, inicio = 'contratar') {
+    hhEvento(inicio === 'teste' ? 'abriu_teste_gratis' : 'abriu_assinatura', { plano: plan || '', cobranca: billing || '' });
     setSheet(false);
     signForm.hidden = false;
     signDone.classList.remove('on');
@@ -2502,12 +2740,13 @@
   const cookie = document.getElementById('cookie');
   let cookieChoice = null;
   try { cookieChoice = localStorage.getItem('lgpd_ok'); } catch (e) {}
+  if (cookieChoice === 'accepted') hhMedicao();
   if (!cookieChoice) setTimeout(() => cookie.classList.add('show'), 1200);
   function cookieDone(value) {
     try { localStorage.setItem('lgpd_ok', value); } catch (e) {}
     cookie.remove();
   }
-  document.getElementById('cookieYes').addEventListener('click', () => cookieDone('accepted'));
+  document.getElementById('cookieYes').addEventListener('click', () => { cookieDone('accepted'); hhMedicao(); });
   document.getElementById('cookieNo').addEventListener('click', () => cookieDone('declined'));
 
   // ── Entrada suave das seções ──
