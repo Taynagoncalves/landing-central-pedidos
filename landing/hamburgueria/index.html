@@ -392,6 +392,14 @@
     @media (max-width: 1000px) { .addons { grid-template-columns: 1fr; gap: 18px; } }
     @media (max-width: 640px) { .addons { padding: 22px 16px; } .addons-list { grid-template-columns: 1fr; } }
     @media (max-width: 900px) { .plans.plans-3 { grid-template-columns: 1fr; max-width: 460px; } }
+    .ancora { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+    .ancora-de { font-size: 13.5px; color: var(--muted); }
+    .ancora-de s { color: var(--muted); }
+    .ancora-de b { font-weight: 700; }
+    .ancora-ganho { display: inline-block; width: fit-content; white-space: nowrap; padding: 7px 12px; border-radius: 10px; background: var(--brand); color: #fff; font-size: 13.5px; font-weight: 600; box-shadow: 0 8px 18px -10px var(--brand); }
+    .ancora-ganho b { font-weight: 800; }
+    .ancora-ganho .i { width: 16px; height: 16px; vertical-align: -3px; }
+    .ancora + .price { margin-top: 10px; }
     .save-chip { display: inline-flex; margin-top: 8px; padding: 4px 10px; border-radius: 999px; background: #E9F9EF; color: #15803D; font-size: 12.5px; font-weight: 700; white-space: nowrap; }
     .plan-note b { font-weight: 700; }
     td.add small { display: block; margin-top: 2px; font-size: 11.5px; font-weight: 500; color: var(--muted); white-space: normal; }
@@ -1550,7 +1558,11 @@
         <span class="plan-tag">Mais completo</span>
         <h3>Enterprise</h3>
         <p class="plan-desc">Tudo incluso para a gestão completa do seu negócio.</p>
-        <div class="price" data-m="249,90" data-a="212,40" data-y="2.548,80" data-s="450" data-sm="224,90" data-st="1.349,40" data-ss="150">
+        <div class="ancora" data-m="339,80" data-sm="305,80" data-a="289,80" data-em="89,90" data-esm="80,90" data-ea="77,40">
+            <span class="ancora-de">Separado (Gourmet + Express): <s>R$ <b>339,80</b>/mês</s></span>
+            <span class="ancora-ganho"><svg class="i"><use href="#i-gift"/></svg> Economize <b>R$ 89,90</b>/mês</span>
+          </div>
+          <div class="price" data-m="249,90" data-a="212,40" data-y="2.548,80" data-s="450" data-sm="224,90" data-st="1.349,40" data-ss="150">
           <div class="price-line"><span class="cur">R$</span><b class="val">249,90</b><span class="per">/mês</span></div>
           <p class="price-sub">ou <b>R$ 212,40/mês</b> no anual<br>R$ 2.548,80 por ano</p>
           <span class="save-chip">Economize até R$ 450 por ano</span>
@@ -1675,7 +1687,11 @@
         <span class="plan-tag">Mais completo</span>
         <h3>Tablet + Totem</h3>
         <p class="plan-desc">Mesas com tablet e totem no balcão, tudo no mesmo painel.</p>
-        <div class="price" data-m="189,90" data-a="161,40" data-y="1.936,80" data-s="342" data-sm="170,90" data-st="1.025,40" data-ss="114">
+        <div class="ancora" data-m="239,80" data-sm="215,80" data-a="203,80" data-em="49,90" data-esm="44,90" data-ea="42,40">
+            <span class="ancora-de">Separado (Tablet + Totem): <s>R$ <b>239,80</b>/mês</s></span>
+            <span class="ancora-ganho"><svg class="i"><use href="#i-gift"/></svg> Economize <b>R$ 49,90</b>/mês</span>
+          </div>
+          <div class="price" data-m="189,90" data-a="161,40" data-y="1.936,80" data-s="342" data-sm="170,90" data-st="1.025,40" data-ss="114">
           <div class="price-line"><span class="cur">R$</span><b class="val">189,90</b><span class="per">/mês</span></div>
           <p class="price-sub">ou <b>R$ 161,40/mês</b> no anual<br>R$ 1.936,80 por ano</p>
           <span class="save-chip">Economize até R$ 342 por ano</span>
@@ -2349,6 +2365,10 @@
         : b === 's'
         ? 'Você economiza R$ ' + p.dataset.ss + ' por semestre'
         : 'Economize até R$ ' + p.dataset.s + ' por ano';
+    });
+    document.querySelectorAll('.ancora').forEach(a => {
+      a.querySelector('.ancora-de b').textContent = b === 'a' ? a.dataset.a : b === 's' ? a.dataset.sm : a.dataset.m;
+      a.querySelector('.ancora-ganho b').textContent = 'R$ ' + (b === 'a' ? a.dataset.ea : b === 's' ? a.dataset.esm : a.dataset.em);
     });
     document.querySelectorAll('.addon-val').forEach(v => {
       v.querySelector('b').textContent = b === 'a' ? v.dataset.a : b === 's' ? v.dataset.sm : v.dataset.m;
