@@ -867,6 +867,48 @@
       .dev-totem { width: min(100%, 220px); }
     }
 
+    /* ── Vitrine do topo: todos os sistemas juntos ── */
+    .stage.stage-tudo { max-width: 1180px; padding-bottom: 130px; }
+    .stage-tudo .browser { width: 66%; margin-left: 17%; }
+    .stage-tudo .stage-phone { right: 0; bottom: 20px; width: 15%; z-index: 4; }
+    .vt { position: absolute; z-index: 3; }
+    .vt-tag {
+      position: absolute; left: 50%; top: calc(100% + 10px); transform: translateX(-50%);
+      display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 999px; white-space: nowrap;
+      background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-sm);
+      font-size: 12.5px; font-weight: 700; color: var(--ink-2);
+    }
+    .vt-tag .i { width: 14px; height: 14px; color: var(--brand); }
+    .vt-tag.cima { top: auto; bottom: calc(100% + 10px); }
+    .stage-tudo .stage-phone .vt-tag { top: calc(100% + 10px); }
+    .vt-celular { width: 10.5%; padding: 5px; border-radius: 20px; }
+    .vt-celular .phone-screen { border-radius: 16px; }
+    .vt-garcom { left: 41%; bottom: 8px; }
+    .vt-motoboy { right: 16.5%; bottom: 36px; }
+    .vt-tablet { left: 8%; bottom: 14px; width: 31%; padding: 7px; border-radius: 16px; background: linear-gradient(150deg, #34343A, #121214 55%, #0C0C0E); box-shadow: 0 0 0 1px #45454C inset, 0 30px 46px -24px rgba(12,12,14,.6); transform: perspective(1200px) rotateY(9deg) rotateX(4deg); }
+    .vt-tablet .vt-tela { aspect-ratio: 1600 / 1000; border-radius: 10px; overflow: hidden; }
+    .vt-tela img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .vt-totem { left: 0; bottom: 6px; width: 12.5%; display: flex; flex-direction: column; align-items: center; }
+    .vt-totem-corpo { width: 100%; padding: 0 6px 8px; border-radius: 16px 16px 10px 10px; overflow: hidden; background: linear-gradient(100deg, #DCDBD8, #FAFAF9 30%, #EFEEEC 70%, #CFCDC9); box-shadow: 0 0 0 1px #C9C6C1 inset, 0 26px 40px -22px rgba(12,12,14,.55); }
+    .vt-totem-corpo::before { content: ""; display: block; height: 12px; margin: 0 -6px 6px; background: linear-gradient(180deg, #FF6A1A, var(--brand)); }
+    .vt-totem .vt-tela { aspect-ratio: 600 / 1067; border-radius: 6px; overflow: hidden; box-shadow: 0 0 0 4px #0C0C0E; }
+    .vt-totem-pe { width: 26%; height: 34px; background: linear-gradient(90deg, #A8A6A2, #F4F3F1 40%, #DAD8D4 62%, #9C9A96); }
+    .vt-totem-base { width: 80%; height: 12px; border-radius: 50%; background: radial-gradient(ellipse at 45% 30%, #FFFFFF, #D6D4CF 55%, #A29F99); box-shadow: 0 10px 16px -8px rgba(12,12,14,.5); }
+    .stage-tudo .live { left: 13%; top: 14%; }
+    .sistemas { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; max-width: 980px; margin: 64px auto 0; }
+    @media (max-width: 900px) { .sistemas { margin-top: 28px; } }
+    .sistemas a { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-sm); font-size: 14px; font-weight: 600; color: var(--ink-2); transition: border-color .2s ease, transform .2s ease; }
+    .sistemas a:hover { border-color: var(--brand); transform: translateY(-1px); }
+    .sistemas .i { width: 17px; height: 17px; color: var(--brand); }
+    @media (max-width: 900px) {
+      .stage.stage-tudo { padding-bottom: 70px; }
+      .stage-tudo .browser { width: 100%; margin-left: 0; }
+      .stage-tudo .stage-phone { width: 25%; bottom: 0; }
+      .vt-garcom, .vt-motoboy, .vt-totem, .vt-tag { display: none; }
+      .vt-tablet { left: 0; bottom: 0; width: 46%; padding: 5px; border-radius: 11px; }
+      .stage-tudo .live { display: none; }
+    }
+
     /* ── Quem usa: depoimento + números ao vivo ── */
     .prova { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 20px; align-items: stretch; }
     .prova-card { position: relative; display: flex; flex-direction: column; gap: 22px; padding: 36px; border-radius: 26px; background: var(--night); color: #fff; overflow: hidden; }
@@ -1022,7 +1064,7 @@
     </nav>
     <div class="nav-actions">
       <button type="button" class="btn btn-ghost" data-demo="cliente">Testar ao vivo</button>
-      <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20sistema." target="_blank" class="btn btn-brand">Falar com vendas</a>
+      <a href="#contato" class="btn btn-brand" data-sign>Falar com vendas</a>
       <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="sheet"><svg class="i"><use href="#i-menu"/></svg></button>
     </div>
   </div>
@@ -1034,7 +1076,7 @@
     <a href="#planos">Planos</a>
     <a href="#faq">Dúvidas</a>
     <a href="#contato">Contato</a>
-    <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20sistema." target="_blank" class="btn btn-brand">Falar com vendas</a>
+    <a href="#contato" class="btn btn-brand" data-sign>Falar com vendas</a>
   </div>
 </header>
 
@@ -1047,21 +1089,44 @@
     <h1>Sua hamburgueria vendendo mais, com <span class="brand-c">tecnologia de verdade</span>.</h1>
     <p class="lead">Cardápio online com adicionais e combos, delivery e retirada, Pix e cartão, mesas com QR Code, tablet na mesa, totem no balcão e impressão automática na cozinha — sem comissão por pedido.</p>
     <div class="hero-ctas">
-      <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20contratar%20o%20sistema." target="_blank" class="btn btn-brand btn-lg" data-sign>Assinar agora <svg class="i"><use href="#i-arrow"/></svg></a>
+      <a href="#planos" class="btn btn-brand btn-lg" data-sign>Assinar agora <svg class="i"><use href="#i-arrow"/></svg></a>
       <button type="button" class="btn btn-line btn-lg" data-demo="cliente"><svg class="i"><use href="#i-play"/></svg> Testar o sistema ao vivo</button>
     </div>
     <div class="trust">
       <span><svg class="i"><use href="#i-check"/></svg>100% online, sem instalar app</span>
       <span><svg class="i"><use href="#i-check"/></svg>PIX integrado</span>
       <span><svg class="i"><use href="#i-check"/></svg>Implementação grátis</span>
-      <span><svg class="i"><use href="#i-check"/></svg>Suporte 24h pelo WhatsApp</span>
+      <span><svg class="i"><use href="#i-check"/></svg>Suporte dedicado</span>
     </div>
 
-    <div class="stage" aria-label="Prévia do sistema">
-      <div class="browser">
-        <div class="browser-bar"><i></i><i></i><i></i><span>hugahuga.com.br</span></div>
+    <div class="stage stage-tudo" aria-label="Todos os sistemas do Huga Huga">
+      <div class="browser" style="position:relative">
+        <div class="browser-bar"><i></i><i></i><i></i><span>Painel do lojista · hugahuga.com.br</span></div>
         <img src="../imagens/admin/telaadmin.png" alt="Painel do lojista com os pedidos em tempo real">
       </div>
+
+      <div class="vt vt-totem">
+        <div class="vt-totem-corpo"><div class="vt-tela"><img src="../imagens/autoatendimento/totem-inicio.jpg" alt="Totem de autoatendimento" loading="lazy"></div></div>
+        <div class="vt-totem-pe"></div>
+        <div class="vt-totem-base"></div>
+        <span class="vt-tag"><svg class="i"><use href="#i-zap"/></svg>Totem</span>
+      </div>
+
+      <div class="vt vt-tablet">
+        <div class="vt-tela"><img src="../imagens/autoatendimento/tablet-cardapio.jpg" alt="Tablet na mesa com o cardápio" loading="lazy"></div>
+        <span class="vt-tag"><svg class="i"><use href="#i-book"/></svg>Tablet na mesa</span>
+      </div>
+
+      <div class="vt phone vt-celular vt-garcom">
+        <div class="phone-screen"><img src="../imagens/autoatendimento/garcom.jpg" alt="App do garçom com as mesas" loading="lazy"></div>
+        <span class="vt-tag"><svg class="i"><use href="#i-user"/></svg>Garçom</span>
+      </div>
+
+      <div class="vt phone vt-celular vt-motoboy">
+        <div class="phone-screen fit"><img src="../imagens/cliente/temaclaro/motoboy.png" alt="App do motoboy com a entrega" loading="lazy"></div>
+        <span class="vt-tag"><svg class="i"><use href="#i-bike"/></svg>Motoboy</span>
+      </div>
+
       <div class="phone stage-phone">
         <div class="phone-screen" data-cycle="3000">
           <img class="on" src="../imagens/cliente/temaclaro/telahome.jpeg" alt="Cardápio no celular do cliente">
@@ -1072,6 +1137,7 @@
           <img src="../imagens/cliente/temaclaro/telahistorico.jpeg" alt="" loading="lazy">
           <img src="../imagens/cliente/temaclaro/telaperfil.jpeg" alt="" loading="lazy">
         </div>
+        <span class="vt-tag"><svg class="i"><use href="#i-phone"/></svg>App do cliente</span>
       </div>
       <div class="live" aria-hidden="true">
         <span class="pulse"></span>
@@ -1079,6 +1145,18 @@
         <span class="live-txt" id="liveTxt"><b>Novo pedido #319</b><small>Delivery · R$ 42,00</small></span>
       </div>
     </div>
+
+    <nav class="sistemas" aria-label="Sistemas incluídos">
+      <a href="#como-funciona"><svg class="i"><use href="#i-monitor"/></svg>Painel do lojista</a>
+      <a href="#como-funciona"><svg class="i"><use href="#i-phone"/></svg>App do cliente</a>
+      <a href="#recursos"><svg class="i"><use href="#i-qr"/></svg>Mesas e garçom</a>
+      <a href="#recursos"><svg class="i"><use href="#i-bike"/></svg>Motoboy</a>
+      <a href="#tablet-totem"><svg class="i"><use href="#i-book"/></svg>Tablet na mesa</a>
+      <a href="#tablet-totem"><svg class="i"><use href="#i-zap"/></svg>Totem</a>
+      <a href="#recursos"><svg class="i"><use href="#i-chat"/></svg>WhatsApp e bot 24h</a>
+      <a href="#recursos"><svg class="i"><use href="#i-printer"/></svg>Impressão automática</a>
+      <a href="#recursos"><svg class="i"><use href="#i-gift"/></svg>Fidelidade e cupons</a>
+    </nav>
   </div>
 </section>
 
@@ -1701,11 +1779,11 @@
           <li class="off"><svg class="i"><use href="#i-minus"/></svg><span class="sr-only">Não incluso: </span>WhatsApp automático e bot</li>
           <li class="off"><svg class="i"><use href="#i-minus"/></svg><span class="sr-only">Não incluso: </span>Sistema de QR Code de mesa e garçom</li>
           <li class="off"><svg class="i"><use href="#i-minus"/></svg><span class="sr-only">Não incluso: </span>Sistema do entregador</li>
-          <li><svg class="i"><use href="#i-check"/></svg>Suporte pelo WhatsApp</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Suporte dedicado</li>
         </ul>
         <div class="plan-ctas">
-          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20assinar%20o%20plano%20Essencial%20(mensal)." data-plan="Essencial" target="_blank" class="btn btn-line buy">Assinar o Essencial</a>
-          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Essencial.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial" data-trial="Essencial">Começar teste grátis</a>
+          <a href="#planos" data-plan="Essencial" class="btn btn-line buy">Assinar o Essencial</a>
+          <a href="#planos" class="link-trial" data-trial="Essencial">Começar teste grátis</a>
         </div>
       </div>
 
@@ -1722,11 +1800,11 @@
           <li><svg class="i"><use href="#i-check"/></svg>WhatsApp automático e bot</li>
           <li><svg class="i"><use href="#i-check"/></svg>Sistema de QR Code de mesa e garçom</li>
           <li class="off"><svg class="i"><use href="#i-minus"/></svg><span class="sr-only">Não incluso: </span>Sistema do entregador</li>
-          <li><svg class="i"><use href="#i-check"/></svg>Suporte pelo WhatsApp</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Suporte dedicado</li>
         </ul>
         <div class="plan-ctas">
-          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20assinar%20o%20plano%20Gourmet%20(mensal)." data-plan="Gourmet" target="_blank" class="btn btn-line buy">Assinar o Gourmet</a>
-          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Gourmet.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial" data-trial="Gourmet">Começar teste grátis</a>
+          <a href="#planos" data-plan="Gourmet" class="btn btn-line buy">Assinar o Gourmet</a>
+          <a href="#planos" class="link-trial" data-trial="Gourmet">Começar teste grátis</a>
         </div>
       </div>
 
@@ -1743,11 +1821,11 @@
           <li><svg class="i"><use href="#i-check"/></svg>WhatsApp automático e bot</li>
           <li class="off"><svg class="i"><use href="#i-minus"/></svg><span class="sr-only">Não incluso: </span>Sistema de QR Code de mesa e garçom</li>
           <li><svg class="i"><use href="#i-check"/></svg>Sistema do entregador</li>
-          <li><svg class="i"><use href="#i-check"/></svg>Suporte pelo WhatsApp</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Suporte dedicado</li>
         </ul>
         <div class="plan-ctas">
-          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20assinar%20o%20plano%20Express%20(mensal)." data-plan="Express" target="_blank" class="btn btn-line buy">Assinar o Express</a>
-          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Express.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial" data-trial="Express">Começar teste grátis</a>
+          <a href="#planos" data-plan="Express" class="btn btn-line buy">Assinar o Express</a>
+          <a href="#planos" class="link-trial" data-trial="Express">Começar teste grátis</a>
         </div>
       </div>
 
@@ -1768,8 +1846,8 @@
           <li><svg class="i"><use href="#i-check"/></svg>Suporte prioritário</li>
         </ul>
         <div class="plan-ctas">
-          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20assinar%20o%20plano%20Enterprise%20(mensal)." data-plan="Enterprise" target="_blank" class="btn btn-brand buy">Assinar o Enterprise</a>
-          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Enterprise.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial" data-trial="Enterprise">Começar teste grátis</a>
+          <a href="#planos" data-plan="Enterprise" class="btn btn-brand buy">Assinar o Enterprise</a>
+          <a href="#planos" class="link-trial" data-trial="Enterprise">Começar teste grátis</a>
         </div>
       </div>
     </div>
@@ -1804,8 +1882,8 @@
           <li class="off"><svg class="i"><use href="#i-minus"/></svg><span class="sr-only">Não incluso: </span>App de delivery do cliente</li>
         </ul>
         <div class="plan-ctas">
-          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20assinar%20o%20plano%20Tablet%20(mensal)." data-plan="Tablet" target="_blank" class="btn btn-line buy">Assinar o Tablet</a>
-          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Tablet.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial" data-trial="Tablet">Começar teste grátis</a>
+          <a href="#planos" data-plan="Tablet" class="btn btn-line buy">Assinar o Tablet</a>
+          <a href="#planos" class="link-trial" data-trial="Tablet">Começar teste grátis</a>
         </div>
       </div>
 
@@ -1826,8 +1904,8 @@
           <li class="off"><svg class="i"><use href="#i-minus"/></svg><span class="sr-only">Não incluso: </span>App de delivery do cliente</li>
         </ul>
         <div class="plan-ctas">
-          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20assinar%20o%20plano%20Totem%20(mensal)." data-plan="Totem" target="_blank" class="btn btn-line buy">Assinar o Totem</a>
-          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Totem.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial" data-trial="Totem">Começar teste grátis</a>
+          <a href="#planos" data-plan="Totem" class="btn btn-line buy">Assinar o Totem</a>
+          <a href="#planos" class="link-trial" data-trial="Totem">Começar teste grátis</a>
         </div>
       </div>
 
@@ -1849,8 +1927,8 @@
           <li class="off"><svg class="i"><use href="#i-minus"/></svg><span class="sr-only">Não incluso: </span>App de delivery do cliente</li>
         </ul>
         <div class="plan-ctas">
-          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20assinar%20o%20plano%20Tablet%20%2B%20Totem%20(mensal)." data-plan="Tablet + Totem" target="_blank" class="btn btn-brand buy">Assinar o Tablet + Totem</a>
-          <a href="https://wa.me/5545999723256?text=Ol%C3%A1!%20Quero%20come%C3%A7ar%20o%20teste%20gr%C3%A1tis%20por%207%20dias%20do%20plano%20Tablet%20%2B%20Totem.%20Pode%20me%20ajudar%3F" target="_blank" class="link-trial" data-trial="Tablet + Totem">Começar teste grátis</a>
+          <a href="#planos" data-plan="Tablet + Totem" class="btn btn-brand buy">Assinar o Tablet + Totem</a>
+          <a href="#planos" class="link-trial" data-trial="Tablet + Totem">Começar teste grátis</a>
         </div>
       </div>
       </div>
@@ -1914,7 +1992,7 @@
             <tr><td>Controle de entregas em tempo real</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td>Notificação de chegada ao cliente</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td class="grp" colspan="5">Atendimento</td></tr>
-            <tr><td>Suporte pelo WhatsApp</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Suporte dedicado</td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr><td>Suporte prioritário</td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="n"><svg class="i" aria-label="Não"><use href="#i-minus"/></svg></td><td class="y"><svg class="i" aria-label="Sim"><use href="#i-check"/></svg></td></tr>
             <tr class="price-row"><td>Mensal</td><td>R$ 99,90</td><td>R$ 169,90</td><td>R$ 169,90</td><td>R$ 249,90</td></tr>
             <tr class="price-row"><td>Anual (por mês)</td><td>R$ 84,90</td><td>R$ 144,90</td><td>R$ 144,90</td><td>R$ 212,40</td></tr>
@@ -1942,7 +2020,7 @@
       <h2 class="h2">Sua loja online em 4 passos.</h2>
     </div>
     <div class="start">
-      <div class="start-step reveal"><span class="n-badge">1</span><h3>Faça seu cadastro</h3><p>Escolha o plano, preencha seus dados e nossa equipe te chama no WhatsApp.</p></div>
+      <div class="start-step reveal"><span class="n-badge">1</span><h3>Faça seu cadastro</h3><p>Escolha o plano, preencha seus dados e nossa equipe entra em contato.</p></div>
       <div class="start-step reveal"><span class="n-badge">2</span><h3>Nós configuramos tudo</h3><p>Implementação grátis: montamos seu cardápio, logo, horários e formas de entrega para você.</p></div>
       <div class="start-step reveal"><span class="n-badge">3</span><h3>Compartilhe o link</h3><p>Envie o link da sua loja pelo WhatsApp, Instagram ou onde quiser.</p></div>
       <div class="start-step reveal"><span class="n-badge">4</span><h3>Receba pedidos</h3><p>Gerencie tudo pelo painel e acompanhe cada pedido em tempo real.</p></div>
@@ -1959,8 +2037,8 @@
       <p class="lead">Tudo que você precisa saber antes de começar.</p>
       <div class="help">
         <b>Ainda com dúvidas?</b>
-        <p>Fale com a gente pelo WhatsApp. Respondemos rapidinho.</p>
-        <a href="https://wa.me/5545999723256" target="_blank" class="btn btn-line"><svg class="i"><use href="#i-chat"/></svg> Chamar no WhatsApp</a>
+        <p>Mande um e-mail ou deixe seus dados que a nossa equipe te responde rapidinho.</p>
+        <a href="mailto:contato.hugahuga@gmail.com" class="btn btn-line"><svg class="i"><use href="#i-mail"/></svg> Enviar e-mail</a>
       </div>
     </div>
     <div class="faq-list reveal">
@@ -2010,7 +2088,7 @@
       </details>
       <details name="faq">
         <summary>Existe suporte disponível se eu tiver dúvidas?<svg class="i"><use href="#i-plus"/></svg></summary>
-        <p>Sim, oferecemos suporte via WhatsApp 24 horas por dia. Nossa equipe está disponível para tirar dúvidas, ajudar nas configurações e resolver qualquer problema.</p>
+        <p>Sim, oferecemos suporte 24 horas por dia. Nossa equipe está disponível para tirar dúvidas, ajudar nas configurações e resolver qualquer problema.</p>
       </details>
       <details name="faq">
         <summary>O sistema imprime os pedidos automaticamente?<svg class="i"><use href="#i-plus"/></svg></summary>
@@ -2022,7 +2100,7 @@
       </details>
       <details name="faq">
         <summary>Tem fidelidade ou multa para cancelar?<svg class="i"><use href="#i-plus"/></svg></summary>
-        <p>Não tem multa. No plano mensal, você cancela quando quiser pelo WhatsApp. No plano anual, você pode cancelar em até 7 dias após o pagamento com reembolso integral; depois disso, devolvemos os meses não usados, conforme os Termos de Uso.</p>
+        <p>Não tem multa. No plano mensal, você cancela quando quiser pelo e-mail. No plano anual, você pode cancelar em até 7 dias após o pagamento com reembolso integral; depois disso, devolvemos os meses não usados, conforme os Termos de Uso.</p>
       </details>
       <details name="faq">
         <summary>O que acontece depois dos 7 dias grátis?<svg class="i"><use href="#i-plus"/></svg></summary>
@@ -2034,7 +2112,7 @@
       </details>
       <details name="faq">
         <summary>Posso testar antes de contratar?<svg class="i"><use href="#i-plus"/></svg></summary>
-        <p>Claro! Você pode testar agora mesmo na demonstração ao vivo aqui da página, ou começar o teste grátis de 7 dias. Se preferir, entre em contato pelo WhatsApp e mostramos o sistema funcionando ao vivo.</p>
+        <p>Claro! Você pode testar agora mesmo na demonstração ao vivo aqui da página, ou começar o teste grátis de 7 dias. Se preferir, entre em contato pelo e-mail contato.hugahuga@gmail.com e mostramos o sistema funcionando ao vivo.</p>
       </details>
     </div>
   </div>
@@ -2048,14 +2126,10 @@
       <h2 class="h2">Pronto para vender mais online?</h2>
       <p class="lead" style="margin:0 auto">Implementação grátis — nós configuramos tudo para você. Suporte completo e plataforma pronta para o seu negócio crescer.</p>
       <div class="hero-ctas">
-        <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20contratar%20o%20sistema%20de%20pedidos%20online." target="_blank" class="btn btn-brand btn-lg">Falar no WhatsApp <svg class="i"><use href="#i-arrow"/></svg></a>
+        <a href="#planos" class="btn btn-brand btn-lg" data-sign>Quero contratar <svg class="i"><use href="#i-arrow"/></svg></a>
         <button type="button" class="btn btn-line btn-lg" data-demo="cliente"><svg class="i"><use href="#i-play"/></svg> Testar ao vivo</button>
       </div>
       <div class="contacts">
-        <a href="https://wa.me/5545999723256" target="_blank" class="contact">
-          <span class="c-ico g"><svg class="i"><use href="#i-chat"/></svg></span>
-          <span><small>WhatsApp</small><b>(45) 99972-3256</b></span>
-        </a>
         <a href="mailto:contato.hugahuga@gmail.com" class="contact">
           <span class="c-ico"><svg class="i"><use href="#i-mail"/></svg></span>
           <span><small>E-mail</small><b>contato.hugahuga@gmail.com</b></span>
@@ -2081,7 +2155,6 @@
         </a>
         <p>Sistema completo para restaurantes, lanchonetes e delivery: cardápio online, mesas, tablet, totem, motoboys e WhatsApp num só painel.</p>
         <div class="social">
-          <a href="https://wa.me/5545999723256" target="_blank" aria-label="WhatsApp"><svg class="i"><use href="#i-chat"/></svg></a>
           <a href="https://instagram.com/hugahuga.app" target="_blank" aria-label="Instagram"><svg class="i"><use href="#i-insta"/></svg></a>
           <a href="mailto:contato.hugahuga@gmail.com" aria-label="E-mail"><svg class="i"><use href="#i-mail"/></svg></a>
         </div>
@@ -2109,7 +2182,7 @@
         <h4>Suporte</h4>
         <ul>
           <li><a href="#faq">Perguntas frequentes</a></li>
-          <li><a href="https://wa.me/5545999723256" target="_blank">Falar com suporte</a></li>
+          <li><a href="mailto:contato.hugahuga@gmail.com">Falar com suporte</a></li>
           <li><a href="#contato">Contato</a></li>
         </ul>
       </div>
@@ -2129,10 +2202,7 @@
   </div>
 </footer>
 
-<!-- WhatsApp flutuante -->
-<a href="https://wa.me/5545999723256?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20sistema." target="_blank" class="wa-float" aria-label="Falar no WhatsApp">
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-</a>
+
 
 <!-- Cookies -->
 <div class="cookie" id="cookie" role="region" aria-label="Aviso de cookies">
@@ -2190,7 +2260,7 @@
 
   <div class="sign-main">
     <div class="sign-top">
-      <span>Prefere conversar? <a href="https://wa.me/5545999723256" target="_blank">Chame no WhatsApp</a></span>
+      <span>Prefere e-mail? <a href="mailto:contato.hugahuga@gmail.com">contato.hugahuga@gmail.com</a></span>
       <button type="button" class="sign-close" data-close aria-label="Fechar"><svg class="i"><use href="#i-x"/></svg></button>
     </div>
 
@@ -2203,7 +2273,7 @@
       <div class="field"><input id="fNome" name="nome" placeholder=" " autocomplete="name" required><label for="fNome">Seu nome</label><p class="err">Informe seu nome.</p></div>
       <div class="field"><input id="fLoja" name="loja" placeholder=" " autocomplete="organization" required><label for="fLoja">Nome do restaurante</label><p class="err">Informe o nome do restaurante.</p></div>
       <div class="row2">
-        <div class="field"><input id="fZap" name="zap" placeholder=" " inputmode="tel" autocomplete="tel" required><label for="fZap">DDD + WhatsApp</label><p class="err">Informe um WhatsApp válido com DDD.</p></div>
+        <div class="field"><input id="fZap" name="zap" placeholder=" " inputmode="tel" autocomplete="tel" required><label for="fZap">DDD + telefone</label><p class="err">Informe um WhatsApp válido com DDD.</p></div>
         <div class="field"><input id="fMail" name="email" type="email" placeholder=" " autocomplete="email"><label for="fMail">E-mail (opcional)</label><p class="err">E-mail inválido.</p></div>
       </div>
 
@@ -2257,19 +2327,19 @@
 
       <label class="consent" id="consentBox">
         <input type="checkbox" id="fConsent" required>
-        <span>Li e aceito a <a href="#" data-open="privacyModal">Política de Privacidade</a> e autorizo o contato pelo WhatsApp para atendimento.</span>
+        <span>Li e aceito a <a href="#" data-open="privacyModal">Política de Privacidade</a> e autorizo o contato pelo telefone e e-mail informados para atendimento.</span>
       </label>
       <p class="consent-err">Para continuar, aceite a Política de Privacidade.</p>
 
-      <p class="send-err" id="sendErr" role="alert" hidden><span id="sendErrTxt"></span> <a href="https://wa.me/5545999723256" target="_blank">ou fale com a gente no WhatsApp</a></p>
+      <p class="send-err" id="sendErr" role="alert" hidden><span id="sendErrTxt"></span> <a href="mailto:contato.hugahuga@gmail.com">ou mande um e-mail para contato.hugahuga@gmail.com</a></p>
       <button type="submit" class="btn btn-brand sign-submit"><span id="signBtn">Assinar agora</span> <svg class="i"><use href="#i-arrow"/></svg></button>
-      <p class="sign-fine">Ao enviar, nossa equipe entra em contato pelo WhatsApp informado. Sem cartão de crédito agora.</p>
+      <p class="sign-fine">Ao enviar, nossa equipe entra em contato pelo telefone ou e-mail informado. Sem cartão de crédito agora.</p>
     </form>
 
     <div class="sign-done" id="signDone" role="status">
       <div class="ok-ico"><svg class="i"><use href="#i-check"/></svg></div>
       <h2 id="doneTitle">Recebemos seus dados!</h2>
-      <p>Nossa equipe vai te chamar no WhatsApp que você informou em breve, em horário comercial, para ativar sua loja.</p>
+      <p>Nossa equipe vai entrar em contato pelo telefone que você informou em breve, em horário comercial, para ativar sua loja.</p>
       <div class="try-box">
         <b>Enquanto isso, que tal dar uma olhada no sistema?</b>
         <p>Entre na nossa loja de demonstração e mexa à vontade: faça pedidos como cliente ou gerencie tudo pelo painel do lojista. Sem login e sem compromisso.</p>
@@ -2303,7 +2373,7 @@
     <h4>2. Como usamos seus dados</h4>
     <ul>
       <li>Para responder suas solicitações e prestar suporte</li>
-      <li>Os dados do formulário de contratação são enviados para o nosso WhatsApp de atendimento, onde damos continuidade à contratação ou ao teste grátis</li>
+      <li>Os dados do formulário de contratação são enviados para a nossa equipe de atendimento, onde damos continuidade à contratação ou ao teste grátis</li>
       <li>Para melhorar a experiência de navegação no site</li>
       <li>Para enviar informações sobre nossos serviços, com seu consentimento</li>
     </ul>
@@ -2312,9 +2382,9 @@
     <h4>4. Compartilhamento de dados</h4>
     <p>Não vendemos nem compartilhamos seus dados pessoais com terceiros, exceto quando exigido por lei ou para prestação de serviços essenciais (ex.: envio de notificações via WhatsApp).</p>
     <h4>5. Seus direitos</h4>
-    <p>Conforme a LGPD, você tem direito a acessar, corrigir, excluir ou portar seus dados. Para exercer esses direitos, entre em contato pelo WhatsApp ou e-mail disponíveis no site.</p>
+    <p>Conforme a LGPD, você tem direito a acessar, corrigir, excluir ou portar seus dados. Para exercer esses direitos, entre em contato pelo e-mail disponíveis no site.</p>
     <h4>6. Contato</h4>
-    <p>Dúvidas sobre esta política? Fale conosco pelo WhatsApp <strong>(45) 99972-3256</strong> ou acesse a seção de contato no site.</p>
+    <p>Dúvidas sobre esta política? Fale conosco pelo e-mail <strong>contato.hugahuga@gmail.com</strong>.</p>
   </div>
 </dialog>
 
@@ -2332,16 +2402,16 @@
     <h4>4. Período de Teste</h4>
     <p>Oferecemos <strong>7 dias de teste grátis</strong> sem necessidade de cartão de crédito. Ao final dos 7 dias, não há cobrança automática, pois nenhum cartão é solicitado. Para continuar usando a plataforma, basta contratar um plano; caso contrário, o acesso de teste é encerrado.</p>
     <h4>5. Pagamento e Cancelamento</h4>
-    <p>Os valores e condições de pagamento são definidos conforme o plano contratado. <strong>Plano mensal:</strong> o cancelamento pode ser solicitado a qualquer momento pelo WhatsApp ou canal de atendimento, sem multa contratual, e o acesso segue até o fim do mês já pago.</p>
+    <p>Os valores e condições de pagamento são definidos conforme o plano contratado. <strong>Plano mensal:</strong> o cancelamento pode ser solicitado a qualquer momento pelo e-mail ou outro canal de atendimento, sem multa contratual, e o acesso segue até o fim do mês já pago.</p>
     <p><strong>Plano anual:</strong> o pagamento é feito à vista, no cartão de crédito, PIX ou boleto. Você pode cancelar em até 7 dias após o pagamento e recebe o reembolso integral. Após esse prazo, o cancelamento pode ser feito a qualquer momento, e devolvemos o valor proporcional aos meses não utilizados, descontando os meses já usados pelo valor do plano mensal. O reembolso é feito em até 30 dias, pela mesma forma de pagamento.</p>
     <h4>6. Propriedade Intelectual</h4>
     <p>Todos os direitos sobre a plataforma, marca, design e código-fonte pertencem à Huga Huga. É proibida a reprodução, cópia ou redistribuição sem autorização expressa.</p>
     <h4>7. Limitação de Responsabilidade</h4>
     <p>A Huga Huga não se responsabiliza por falhas de conexão à internet, interrupções por manutenção programada ou danos indiretos decorrentes do uso da plataforma.</p>
     <h4>8. Alterações nos Termos</h4>
-    <p>Reservamos o direito de alterar estes Termos a qualquer momento, mediante comunicação prévia via WhatsApp ou e-mail cadastrado.</p>
+    <p>Reservamos o direito de alterar estes Termos a qualquer momento, mediante comunicação prévia por e-mail ou telefone cadastrado.</p>
     <h4>9. Contato</h4>
-    <p>Dúvidas? Fale conosco pelo WhatsApp <strong>(45) 99972-3256</strong>.</p>
+    <p>Dúvidas? Fale conosco pelo e-mail <strong>contato.hugahuga@gmail.com</strong>.</p>
   </div>
 </dialog>
 
@@ -2351,7 +2421,7 @@
   <div class="modal-body">
     <p>A Huga Huga está comprometida com a privacidade e a proteção dos dados pessoais dos seus usuários, em conformidade com a <strong>Lei nº 13.709/2018 (LGPD)</strong>.</p>
     <h4>1. Controlador dos Dados</h4>
-    <p><strong>Huga Huga</strong> é a empresa responsável pelo tratamento dos dados pessoais coletados por meio da plataforma. Contato: WhatsApp <strong>(45) 99972-3256</strong>.</p>
+    <p><strong>Huga Huga</strong> é a empresa responsável pelo tratamento dos dados pessoais coletados por meio da plataforma. Contato: e-mail <strong>contato.hugahuga@gmail.com</strong>.</p>
     <h4>2. Dados Coletados</h4>
     <p>Coletamos apenas os dados necessários para a prestação do serviço, como: nome do estabelecimento, dados de contato, dados dos pedidos realizados e informações de acesso à plataforma.</p>
     <h4>3. Finalidade do Tratamento</h4>
@@ -2372,7 +2442,7 @@
     <h4>7. Segurança</h4>
     <p>Adotamos medidas técnicas e organizacionais para proteger os dados contra acessos não autorizados, alteração, divulgação ou destruição.</p>
     <h4>8. Contato do Encarregado (DPO)</h4>
-    <p>Para exercer seus direitos ou esclarecer dúvidas sobre o tratamento de dados, entre em contato pelo WhatsApp <strong>(45) 99972-3256</strong>.</p>
+    <p>Para exercer seus direitos ou esclarecer dúvidas sobre o tratamento de dados, entre em contato pelo e-mail <strong>contato.hugahuga@gmail.com</strong>.</p>
   </div>
 </dialog>
 
@@ -2547,10 +2617,6 @@
     });
     document.querySelectorAll('.addon-val').forEach(v => {
       v.querySelector('b').textContent = b === 'a' ? v.dataset.a : b === 's' ? v.dataset.sm : v.dataset.m;
-    });
-    document.querySelectorAll('a.buy').forEach(a => {
-      const txt = 'Olá! Quero assinar o plano ' + a.dataset.plan + ' (' + NOME_COBRANCA[b].toLowerCase() + ').';
-      a.href = 'https://wa.me/5545999723256?text=' + encodeURIComponent(txt);
     });
   }
   document.querySelectorAll('[data-bill]').forEach(x => x.addEventListener('click', () => setBilling(x.dataset.bill)));
