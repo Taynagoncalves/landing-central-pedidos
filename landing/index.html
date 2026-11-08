@@ -8,7 +8,7 @@
   <!-- abertura:fim -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Huga Huga – Sistema de Pedidos para Restaurantes</title>
-  <meta name="description" content="Sistema completo de pedidos online para restaurantes, lanchonetes e delivery. Motoboy, mesas com QR Code, notificações no WhatsApp e muito mais.">
+  <meta name="description" content="Sistema completo para restaurantes, lanchonetes e delivery: cardápio online, Pix e cartão, mesas com QR Code, tablet na mesa, totem de autoatendimento, motoboys, impressão automática e WhatsApp com bot.">
   <link rel="icon" type="image/png" href="imagens/logo/favicon.png">
   <link rel="apple-touch-icon" href="imagens/logo/favicon.png">
   <meta name="theme-color" content="#FBFBFA">
@@ -16,11 +16,11 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.hugahuga.com.br/">
   <meta property="og:title" content="Huga Huga – Sistema de Pedidos para Restaurantes">
-  <meta property="og:description" content="Plataforma completa para receber pedidos online com gestão de delivery, mesas com QR Code, controle de motoboys e notificações automáticas no WhatsApp.">
+  <meta property="og:description" content="Sistema completo para restaurantes: cardápio online com delivery, Pix e cartão, mesas com QR Code, tablet na mesa, totem de autoatendimento, motoboys, impressão automática e WhatsApp com bot.">
   <meta property="og:image" content="https://www.hugahuga.com.br/imagens/og-image.png?v=2">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Huga Huga – Sistema de Pedidos para Restaurantes">
-  <meta name="twitter:description" content="Plataforma completa para receber pedidos online com gestão de delivery, mesas com QR Code e notificações no WhatsApp.">
+  <meta name="twitter:description" content="Cardápio online, delivery, mesas com QR Code, tablet, totem de autoatendimento e WhatsApp automático num só painel.">
   <meta name="twitter:image" content="https://www.hugahuga.com.br/imagens/og-image.png?v=2">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -773,6 +773,52 @@
       box-shadow: 0 0 0 1px #BDBAB5 inset, 0 24px 30px -14px rgba(12,12,14,.5);
     }
 
+    /* ── refinamento: aparelhos em perspectiva, como foto de produto ── */
+    .dev-tablet {
+      transform: perspective(1600px) rotateY(-11deg) rotateX(3deg);
+      box-shadow: 0 0 0 1px #45454C inset, 0 1px 0 rgba(255,255,255,.12) inset,
+                  9px 0 0 -1px #1E1E22, 9px 0 0 0 #2E2E33, 0 34px 50px -26px rgba(12,12,14,.65);
+    }
+    .dev-tablet-suporte { margin-top: -4px; }
+    .dev-tablet-suporte .haste {
+      width: 12px; height: 70px; clip-path: none; border-radius: 6px 6px 3px 3px;
+      background: linear-gradient(90deg, #8E8E96, #F4F4F6 45%, #B8B8C0 70%, #7C7C84);
+      box-shadow: 0 0 0 1px rgba(0,0,0,.08);
+    }
+    .dev-tablet-suporte .pe {
+      position: relative; z-index: 1; width: 34%; height: 22px; margin-top: -8px; border-radius: 50%;
+      background: radial-gradient(ellipse at 45% 30%, #FFFFFF, #D4D4D9 55%, #9A9AA2);
+      box-shadow: 0 0 0 1px #A6A6AE inset, 0 8px 14px -6px rgba(12,12,14,.5);
+    }
+    .dev-mesa {
+      width: 112%; height: 64px; margin-top: -14px; border-radius: 0;
+      clip-path: polygon(9% 0, 91% 0, 100% 100%, 0 100%);
+      background:
+        radial-gradient(40% 70% at 50% 20%, rgba(12,12,14,.22), transparent 70%),
+        repeating-linear-gradient(97deg, rgba(255,255,255,.07) 0 3px, transparent 3px 16px),
+        repeating-linear-gradient(83deg, rgba(80,45,15,.10) 0 1px, transparent 1px 41px),
+        linear-gradient(180deg, #CF9F6F, #B98654 55%, #A06E43);
+    }
+    .dev-mesa::after { display: block; content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 9px; background: linear-gradient(180deg, #7D522D, #6A4524); clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+
+    .dev-totem-corpo {
+      transform: perspective(1600px) rotateY(11deg) rotateX(2deg);
+      box-shadow: 0 0 0 1px #C9C6C1 inset, 0 1px 0 #fff inset,
+                  -11px 0 0 -1px #C3C0BA, -11px 0 0 0 #B3B0AA, 0 44px 70px -34px rgba(12,12,14,.55);
+    }
+    .dev-totem-corpo::before, .dev-totem-corpo::after { display: none; }
+    .dev-totem-topo { border-radius: 30px 30px 0 0; height: 38px; font-size: 12px; }
+    .dev-totem-pescoco { width: 24%; height: 72px; margin-top: -2px; }
+    .dev-totem-base {
+      position: relative; width: 82%; height: 30px; margin-top: -10px; border-radius: 50%;
+      background: radial-gradient(ellipse at 45% 30%, #FFFFFF, #D6D4CF 55%, #A29F99);
+      box-shadow: 0 0 0 1px #AFACA6 inset, 0 18px 26px -12px rgba(12,12,14,.5);
+    }
+    @media (max-width: 900px) {
+      .dev-tablet { transform: perspective(1400px) rotateY(-8deg) rotateX(3deg); }
+      .dev-totem-corpo { transform: perspective(1400px) rotateY(8deg) rotateX(2deg); }
+    }
+
     .auto-selos { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 28px; }
     .auto-selos span { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-sm); font-size: 13.5px; font-weight: 600; color: var(--ink-2); }
     .auto-selos .i { width: 16px; height: 16px; color: var(--brand); }
@@ -932,7 +978,7 @@
   <div class="container">
     <span class="badge"><b>7 dias grátis</b> Sem cartão, sem compromisso</span>
     <h1>Seu negócio vendendo mais, com <span class="brand-c">tecnologia de verdade</span>.</h1>
-    <p class="lead">Plataforma completa para receber pedidos online com gestão de delivery, mesas com QR Code, controle de motoboys e notificações automáticas no WhatsApp.</p>
+    <p class="lead">Cardápio online com delivery e retirada, Pix e cartão, mesas com QR Code e garçom digital, tablet na mesa, totem de autoatendimento, gestão de motoboys, impressão automática, fidelidade e WhatsApp com bot 24h — tudo num só painel.</p>
     <div class="hero-ctas">
       <a href="https://wa.me/5545999723256?text=Olá!%20Quero%20contratar%20o%20sistema." target="_blank" class="btn btn-brand btn-lg" data-sign>Assinar agora <svg class="i"><use href="#i-arrow"/></svg></a>
       <button type="button" class="btn btn-line btn-lg" data-demo="cliente"><svg class="i"><use href="#i-play"/></svg> Testar o sistema ao vivo</button>
