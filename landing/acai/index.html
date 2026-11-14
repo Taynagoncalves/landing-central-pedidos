@@ -13,7 +13,7 @@
   <meta name="description" content="Sistema para açaiteria: monte o açaí com complementos grátis e pagos, delivery e retirada, Pix e cartão, totem de autoatendimento e WhatsApp automático. Sem comissão por pedido.">
   <link rel="icon" type="image/png" href="../imagens/logo/favicon.png">
   <link rel="apple-touch-icon" href="../imagens/logo/favicon.png">
-  <meta name="theme-color" content="#FBFBFA">
+  <meta name="theme-color" content="#0B0B0C">
   <!-- Open Graph / Social -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.hugahuga.com.br/acai/">
@@ -915,72 +915,6 @@
     @media (max-width: 900px) { .start { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 560px) { .start { grid-template-columns: 1fr; } }
 
-    /* ── Cena do topo: balcão com os aparelhos ── */
-    .cena { max-width: 1120px; margin: 56px auto 0; }
-    .cena-palco { position: relative; aspect-ratio: 2.55 / 1; container-type: inline-size; }
-    .cena-palco::before { content: ""; position: absolute; left: 8%; right: 8%; top: 4%; height: 70%; background: radial-gradient(closest-side, rgba(255,85,0,.16), transparent); filter: blur(30px); }
-    .cn { position: absolute; z-index: 2; display: flex; flex-direction: column; align-items: center; }
-    .cn img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
-    .cena-balcao { position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; height: 13%; border-radius: 1.2cqw 1.2cqw 0.6cqw 0.6cqw;
-      background: linear-gradient(180deg, #F4F2EE 0, #E7E3DC 22%, #DCD7CF 100%); box-shadow: 0 1px 0 #fff inset, 0 2.2cqw 3cqw -1.6cqw rgba(12,12,14,.35); }
-    .cena-balcao::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 26%; border-radius: inherit; background: linear-gradient(180deg, #FFFFFF, #EDEAE4); }
-
-    /* totem de chão (fica na frente do balcão) */
-    .cn-totem { left: 1.5%; bottom: 0; width: 13%; z-index: 3; }
-    .cn-totem-corpo { position: relative; width: 100%; padding: 1.6cqw 0.6cqw 0.8cqw; border-radius: 1.2cqw 1.2cqw 0.8cqw 0.8cqw; background: linear-gradient(100deg, #DCDBD8, #FAFAF9 30%, #EFEEEC 70%, #CFCDC9); box-shadow: 0 0 0 1px #C9C6C1 inset, 0 2cqw 3cqw -1.6cqw rgba(12,12,14,.5); overflow: hidden; }
-    .cn-totem-topo { position: absolute; left: 0; right: 0; top: 0; height: 1.1cqw; background: var(--brand); color: #fff; font-size: 0.55cqw; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; display: grid; place-items: center; }
-    .cn-totem-corpo img { aspect-ratio: 600 / 1067; height: auto; border-radius: 0.4cqw; box-shadow: 0 0 0 0.3cqw #0C0C0E; }
-    .cn-totem-pe { width: 24%; height: 7cqw; background: linear-gradient(90deg, #A8A6A2, #F4F3F1 40%, #DAD8D4 62%, #9C9A96); }
-    .cn-totem-base { width: 82%; height: 1.2cqw; border-radius: 50%; background: radial-gradient(ellipse at 45% 30%, #FFFFFF, #D6D4CF 55%, #A29F99); box-shadow: 0 0.8cqw 1.2cqw -0.6cqw rgba(12,12,14,.5); }
-
-    /* monitor */
-    .cn-monitor { left: 17%; bottom: 11%; width: 42%; }
-    .cn-monitor-tela { width: 100%; aspect-ratio: 1600 / 860; padding: 0.7cqw; border-radius: 1cqw; background: #111114; box-shadow: 0 0 0 1px #2A2A2E inset, 0 2.4cqw 3.4cqw -2cqw rgba(12,12,14,.55); }
-    .cn-monitor-tela img { border-radius: 0.4cqw; }
-    .cn-monitor-pe { width: 9%; height: 4.2cqw; background: linear-gradient(90deg, #8E8E96, #E6E6EA 40%, #C9C9CF 62%, #7C7C84); }
-    .cn-monitor-base { width: 30%; height: 0.9cqw; border-radius: 0.5cqw 0.5cqw 0.2cqw 0.2cqw; background: linear-gradient(180deg, #E6E6EA, #9A9AA2); }
-
-    /* impressora térmica + papel saindo */
-    .cn-impressora { left: 60.5%; bottom: 11%; width: 9.5%; }
-    .cn-papel { position: relative; width: 74%; height: 13cqw; display: flex; align-items: flex-end; overflow: hidden; margin-bottom: -0.3cqw; }
-    .cn-papel-conteudo { width: 100%; padding: 0.8cqw 0.6cqw 1.2cqw; background: #fff; box-shadow: 0 0 0 1px #E4E2DE; display: flex; flex-direction: column; gap: 0.25cqw; font-family: ui-monospace, Menlo, Consolas, monospace; color: #3F3F46; font-size: 0.62cqw; line-height: 1.25;
-      -webkit-mask: linear-gradient(#000 calc(100% - 0.4cqw), transparent 0), conic-gradient(from -45deg at top, #0000, #000 1deg 90deg, #0000 91deg) top / 0.8cqw 0.4cqw repeat-x; animation: cnImprime 5s ease-in-out infinite; }
-    .cn-papel-conteudo b { color: #0C0C0E; font-size: 0.7cqw; }
-    .cn-papel-conteudo i { display: block; border-top: 1px dashed #A1A1AA; margin: 0.2cqw 0; }
-    .cn-papel-conteudo small { color: #16A34A; font-weight: 700; font-size: 0.6cqw; }
-    @keyframes cnImprime { 0% { transform: translateY(100%); } 40%, 94% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(0); opacity: 0; } }
-    .cn-impressora-corpo { position: relative; width: 100%; height: 5.2cqw; border-radius: 0.9cqw 0.9cqw 0.5cqw 0.5cqw; background: linear-gradient(180deg, #2A2A2E, #121214); box-shadow: 0 0 0 1px #3A3A3F inset, 0 1.4cqw 2cqw -1.2cqw rgba(12,12,14,.6); }
-    .cn-impressora-corpo::before { content: ""; position: absolute; left: 12%; right: 12%; top: 0.7cqw; height: 0.25cqw; border-radius: 1cqw; background: #000; }
-    .cn-luz { position: absolute; right: 12%; bottom: 0.9cqw; width: 0.55cqw; height: 0.55cqw; border-radius: 50%; background: #22C55E; box-shadow: 0 0 0.6cqw #22C55E; animation: cnLuz 1.2s ease-in-out infinite; }
-    @keyframes cnLuz { 50% { opacity: .35; } }
-
-    /* tablet no suporte */
-    .cn-tablet { left: 72%; bottom: 11%; width: 18.5%; }
-    .cn-tablet-tela { width: 100%; aspect-ratio: 1600 / 1000; padding: 0.55cqw; border-radius: 1cqw; background: linear-gradient(150deg, #34343A, #121214 55%); box-shadow: 0 0 0 1px #45454C inset, 0 1.8cqw 2.6cqw -1.6cqw rgba(12,12,14,.55); transform: perspective(60cqw) rotateY(-10deg); }
-    .cn-tablet-tela img { border-radius: 0.45cqw; }
-    .cn-tablet-haste { width: 5%; height: 4.6cqw; border-radius: 1cqw; background: linear-gradient(90deg, #8E8E96, #F4F4F6 45%, #B8B8C0 70%, #7C7C84); }
-    .cn-tablet-base { width: 34%; height: 0.9cqw; border-radius: 50%; background: radial-gradient(ellipse at 45% 30%, #FFFFFF, #D4D4D9 55%, #9A9AA2); }
-
-    /* plaquinha de QR Code da mesa (na frente do balcão) */
-    .cn-qr { left: 47%; bottom: 2.5%; width: 7.6%; z-index: 4; }
-    .cn-qr-placa { width: 100%; padding: 0.6cqw 0.6cqw 0.7cqw; border-radius: 0.7cqw; background: #fff; box-shadow: 0 0 0 1px #E4E2DE, 0 1.4cqw 1.8cqw -1.2cqw rgba(12,12,14,.45); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 0.35cqw; }
-    .cn-qr-placa small { font-size: 0.62cqw; font-weight: 800; color: var(--brand); letter-spacing: .06em; text-transform: uppercase; }
-    .cn-qr-placa img { width: 82%; height: auto; aspect-ratio: 1; object-fit: contain; }
-    .cn-qr-placa span { font-size: 0.55cqw; font-weight: 700; color: #3F3F46; line-height: 1.2; }
-
-    /* celular */
-    .cn-celular { left: 91.6%; bottom: 11%; width: 7.4%; }
-    .cn-celular-tela { width: 100%; aspect-ratio: 738 / 1600; padding: 0.35cqw; border-radius: 1.2cqw; background: #111113; box-shadow: 0 0 0 1px #2A2A2E inset, 0 1.6cqw 2.2cqw -1.4cqw rgba(12,12,14,.55); transform: rotate(4deg); transform-origin: bottom center; }
-    .cn-celular-tela img { border-radius: 0.9cqw; }
-
-    .cena-legenda { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; margin-top: 22px; color: var(--muted); font-size: 13.5px; font-weight: 600; }
-    .cena-legenda li { display: inline-flex; align-items: center; gap: 7px; }
-    .cena-legenda .i { width: 16px; height: 16px; color: var(--brand); }
-    @media (max-width: 640px) {
-      .cena { margin-top: 36px; margin-left: -8px; margin-right: -8px; }
-      .cena-legenda { gap: 6px 14px; font-size: 12.5px; }
-    }
-    @media (prefers-reduced-motion: reduce) { .cn-papel-conteudo { animation: none; } }
 
     /* ── Vitrine do topo: um sistema por vez, com abas ── */
     .vitrine { max-width: 1100px; margin: 64px auto 0; text-align: left; }
@@ -1319,6 +1253,141 @@
       .cine-texto { top: calc(64px + 2.6vh); padding: 0 16px; }
     }
     /* cinema:fim */
+
+    /* cinema-site:inicio ── O site inteiro no mesmo clima do hero: escuro, laranja da marca, títulos grandes.
+       Troca as cores pelas variáveis (o resto do CSS já usa var(--...)) e ajusta o que tinha cor fixa clara.
+       Para desfazer: apague este bloco e o bloco cinema-site do script no fim da página. */
+    :root {
+      color-scheme: dark;
+      --bg: #0B0B0C; --surface: #141416; --subtle: #1B1B1E; --line: rgba(255,255,255,.08); --line-2: rgba(255,255,255,.15);
+      --ink: #F4F4F5; --ink-2: #D4D4D8; --muted: #A1A1AA;
+      --brand-text: #FF8A4C; --brand-soft: rgba(255,85,0,.14);
+      --ok: #22C55E; --night: #101012; --night-2: #18181B;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.4); --shadow-md: 0 1px 2px rgba(0,0,0,.3), 0 14px 34px -12px rgba(0,0,0,.7); --shadow-lg: 0 2px 4px rgba(0,0,0,.3), 0 30px 70px -24px rgba(0,0,0,.85);
+    }
+    ::selection { background: rgba(255,85,0,.35); color: #fff; }
+    body::after { content: ""; position: fixed; inset: 0; z-index: 2000; pointer-events: none; opacity: .045;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>"); }
+
+    /* menu sempre escuro */
+    .nav, .nav.scrolled { background: rgba(11,11,12,.72); }
+    .nav.scrolled { border-bottom-color: rgba(255,255,255,.07); }
+    .nav-links a { color: rgba(255,255,255,.72); }
+    .nav-links a:hover { background: rgba(255,255,255,.07); color: #fff; }
+    .nav-links a.active { background: rgba(255,255,255,.08); color: #fff; box-shadow: none; }
+    .burger { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.16); color: #fff; }
+    .sheet { background: #111113; }
+
+    /* cores que eram fixas e claras */
+    .btn-ink { background: #fff; color: #0B0B0C; }
+    .btn-ink:hover { background: #E4E4E7; }
+    .btn-line { box-shadow: none; }
+    .btn-line:hover { border-color: rgba(255,255,255,.3); background: #1B1B1E; }
+    .billing .save, .save-chip, .trial.setup { background: rgba(34,197,94,.14); color: #4ADE80; }
+    .contact .c-ico.g, .sign-done .ok-ico, .aval-ok-ico, .live-ico.g { background: rgba(34,197,94,.14); color: #4ADE80; }
+    .plan-note { background: rgba(255,85,0,.1); color: #FDBA74; }
+    .mods li.off { color: #5C5C64; }
+    .mods li.off .i, .n { color: #46464D; }
+    .link-trial { color: #4ADE80; }
+    .link-trial:hover { background: rgba(34,197,94,.1); }
+    .social a:hover { background: #fff; border-color: #fff; color: #0B0B0C; }
+    .seg button[aria-pressed="true"] { color: #0B0B0C; }
+    .calc-linha.bom b { color: #4ADE80; }
+
+    /* tipografia das seções: títulos maiores, palavras entrando por máscara */
+    .h2 { font-size: clamp(36px, 5.2vw, 72px); font-weight: 800; line-height: 1; letter-spacing: -0.055em; }
+    .head { margin-bottom: 64px; }
+    .kicker { letter-spacing: .02em; }
+    .h2 .m { display: inline-block; overflow: hidden; vertical-align: top; padding: .02em .05em .12em; margin: -.02em -.05em -.12em; }
+    .h2 .m > span { display: inline-block; }
+    .section { padding: 128px 0; }
+
+    /* integrações: faixa que desliza sozinha */
+    .integrations { background: #0E0E10; border-color: rgba(255,255,255,.06); }
+    .int-list .i { color: var(--brand); }
+    .int-list span { color: #E4E4E7; }
+    .mq-on .int-list { flex-wrap: nowrap; gap: 0; overflow: hidden; max-width: 100%; flex: 1; min-width: 0;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+    .mq-trilho { display: flex; flex-shrink: 0; animation: mqAnda 34s linear infinite; }
+    .mq-trilho > span { margin-right: 44px; }
+    .mq-on .int-list:hover .mq-trilho { animation-play-state: paused; }
+    .mq-trilho span { white-space: nowrap; font-size: 16px; }
+    @keyframes mqAnda { to { transform: translateX(-50%); } }
+
+    /* cartões com brilho que segue o mouse */
+    .tudo-grade li, .plan, .addons-list li, .aval-card, .start-step { position: relative; isolation: isolate; }
+    .tudo-grade li::before, .plan::before, .addons-list li::before, .start-step::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; opacity: 0; transition: opacity .35s ease; pointer-events: none;
+      background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgba(255,85,0,.16), transparent 70%); }
+    .tudo-grade li:hover::before, .plan:hover::before, .addons-list li:hover::before, .start-step:hover::before { opacity: 1; }
+    .tudo-grade li { background: linear-gradient(180deg, #161618, #121214); }
+    .tudo-grade li:hover { border-color: rgba(255,85,0,.35); box-shadow: 0 20px 40px -24px rgba(255,85,0,.45); }
+    .tudo-ico { background: rgba(255,85,0,.12); box-shadow: inset 0 0 0 1px rgba(255,85,0,.2); }
+
+    /* como funciona: linha laranja ligando os passos */
+    .start { position: relative; }
+    .start-step { background: linear-gradient(180deg, #161618, #121214); transition: border-color .4s ease, box-shadow .4s ease; }
+    .start-step .n-badge { position: relative; z-index: 2; background: #232327; color: #A1A1AA; box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); transition: background .4s ease, color .4s ease, box-shadow .4s ease; }
+    .start-step.aceso { border-color: rgba(255,85,0,.45); box-shadow: 0 24px 50px -28px rgba(255,85,0,.6); }
+    .start-step.aceso .n-badge { background: var(--brand); color: #fff; box-shadow: 0 0 0 6px rgba(255,85,0,.16), 0 0 24px rgba(255,85,0,.6); }
+    .start-linha { position: absolute; left: 42px; top: 43px; z-index: 1; width: calc(75% + 12px); height: 2px; border-radius: 2px; background: rgba(255,255,255,.08); overflow: hidden; pointer-events: none; }
+    .start-linha i { position: absolute; inset: 0; background: linear-gradient(90deg, #FF5500, #FF8A3D); box-shadow: 0 0 12px rgba(255,85,0,.8); transform: scaleX(0); transform-origin: left; }
+    @media (max-width: 900px) { .start-linha { display: none; } }
+
+    /* tablet e totem num palco escuro */
+    .auto-palco { background: radial-gradient(60% 70% at 30% 20%, rgba(255,85,0,.14), transparent 70%), radial-gradient(50% 60% at 85% 80%, rgba(255,85,0,.10), transparent 70%), #111113; border-color: rgba(255,255,255,.07); }
+
+    /* demonstração: cena do salão (do vídeo) ao fundo */
+    .demo-band { background: linear-gradient(90deg, rgba(11,11,12,.96) 0%, rgba(11,11,12,.86) 46%, rgba(11,11,12,.55) 100%), url("../imagens/cinema/salao.webp") center / cover no-repeat, #101012;
+      box-shadow: 0 0 0 1px rgba(255,255,255,.07), 0 40px 90px -40px rgba(255,85,0,.45); }
+    .demo-band .h2 { font-size: clamp(34px, 3.9vw, 56px); }
+    .tile { background: rgba(14,14,16,.72); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+
+    /* avaliações */
+    .aval-resumo strong { font-size: clamp(56px, 7vw, 96px); line-height: .9; letter-spacing: -0.06em; text-shadow: 0 0 40px rgba(255,85,0,.35); }
+    .aval-card { background: linear-gradient(180deg, #161618, #121214); }
+    .aval-card:only-child { padding: 40px 44px; }
+    .aval-card:only-child blockquote { font-size: clamp(19px, 2vw, 26px); line-height: 1.5; color: #E4E4E7; letter-spacing: -0.01em; }
+
+    /* calculadora */
+    .calc-resultado { background: radial-gradient(90% 60% at 50% 0%, rgba(255,85,0,.16), transparent 70%), #101012; border-color: rgba(255,85,0,.28); }
+    .calc-economia { background: rgba(255,85,0,.14); box-shadow: inset 0 0 0 1px rgba(255,85,0,.3); }
+    .calc-economia strong { text-shadow: 0 0 34px rgba(255,85,0,.45); }
+    .calc-economia.brilha { animation: calcBrilha 1.6s ease-out 1; }
+    @keyframes calcBrilha { 0% { box-shadow: inset 0 0 0 1px rgba(255,85,0,.3), 0 0 0 0 rgba(255,85,0,.55); } 100% { box-shadow: inset 0 0 0 1px rgba(255,85,0,.3), 0 0 0 26px rgba(255,85,0,0); } }
+
+    /* planos */
+    .plan { background: linear-gradient(180deg, #161618, #111113); }
+    .plan.hl { background: radial-gradient(120% 60% at 50% 0%, rgba(255,85,0,.16), transparent 60%), linear-gradient(180deg, #19191c, #111113); box-shadow: 0 0 0 1px rgba(255,85,0,.25), 0 40px 80px -36px rgba(255,85,0,.65); }
+    .addons { background: #111113; border-color: rgba(255,255,255,.07); }
+    .addons-list li { background: #161618; }
+    .billing { background: #141416; }
+    .billing button[aria-pressed="true"] { background: #26262A; color: #fff; }
+
+    /* chamada final com a cozinha (do vídeo) ao fundo */
+    .final { border: 0; color: #fff; padding: 120px 32px;
+      background: radial-gradient(60% 70% at 50% 100%, rgba(255,85,0,.28), transparent 70%), linear-gradient(180deg, rgba(11,11,12,.72), rgba(11,11,12,.9)), url("../imagens/cinema/cozinha.webp") center / cover no-repeat, #101012;
+      box-shadow: 0 0 0 1px rgba(255,255,255,.07), 0 50px 100px -40px rgba(255,85,0,.5); }
+    .final::before { display: none; }
+    .final .h2 { font-size: clamp(40px, 6.4vw, 92px); max-width: 900px; }
+    .final .lead { color: #D4D4D8; }
+    .contacts { border-top-color: rgba(255,255,255,.1); }
+    .contact { background: rgba(14,14,16,.7); }
+
+    /* rodapé com a marca gigante */
+    footer { background: #0E0E10; border-top-color: rgba(255,255,255,.06); overflow: hidden; }
+    .foot-marca { margin: 56px 0 -0.16em; text-align: center; font-size: 17vw; font-weight: 800; line-height: .8; letter-spacing: -0.07em; white-space: nowrap; pointer-events: none; user-select: none;
+      background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,85,0,.22) 55%, rgba(255,85,0,0) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+    @media (max-width: 680px) {
+      .section { padding: 88px 0; }
+      .head { margin-bottom: 40px; }
+      .final { padding: 72px 20px; }
+      .aval-card:only-child { padding: 28px 22px; }
+      .mq-trilho > span { margin-right: 28px; }
+      .mq-on .int-list { flex: 0 0 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) { .mq-trilho { animation: none; } }
+    /* cinema-site:fim */
   </style>
   <script>
     /* Medição de visitas e cadastros.
@@ -1392,8 +1461,8 @@
         <li><a href="#sistemas">Sistemas</a></li>
         <li><a href="#como-funciona">Como funciona</a></li>
         <li><a href="#tablet-totem">Tablet e Totem</a></li>
-        <li><a href="#avaliacoes">Avaliações</a></li>
         <li><a href="#demonstracao">Demonstração</a></li>
+        <li><a href="#avaliacoes">Avaliações</a></li>
         <li><a href="#planos">Planos</a></li>
         <li><a href="#faq">Dúvidas</a></li>
       </ul>
@@ -1408,8 +1477,8 @@
     <a href="#sistemas">Sistemas</a>
     <a href="#como-funciona">Como funciona</a>
     <a href="#tablet-totem">Tablet e Totem</a>
-    <a href="#avaliacoes">Avaliações</a>
     <a href="#demonstracao">Demonstração</a>
+    <a href="#avaliacoes">Avaliações</a>
     <a href="#planos">Planos</a>
     <a href="#faq">Dúvidas</a>
     <a href="#contato">Contato</a>
@@ -1598,8 +1667,8 @@
         <div class="dev-tablet-cena">
         <div class="dev-tablet">
           <div class="dev-tela" data-cycle="3400">
-            <img class="on" src="../imagens/autoatendimento/tablet-cardapio.jpg" alt="Cardápio da mesa no tablet, com categorias e fotos dos pratos" loading="lazy" data-zoom>
-            <img src="../imagens/autoatendimento/tablet-produto.jpg" alt="Tablet: escolhendo adicionais do lanche" loading="lazy" data-zoom>
+            <img class="on" src="../imagens/autoatendimento/tablet-mesa-cardapio.webp" alt="Cardápio da mesa no tablet, com categorias e fotos dos pratos" loading="lazy" data-zoom>
+            <img src="../imagens/autoatendimento/tablet-mesa-produto.webp" alt="Tablet: escolhendo adicionais do lanche" loading="lazy" data-zoom>
           </div>
         </div>
         <div class="dev-tablet-suporte" aria-hidden="true"><span class="haste"></span><span class="pe"></span></div>
@@ -1622,9 +1691,9 @@
             <div class="dev-totem-topo" aria-hidden="true">Peça aqui</div>
             <div class="dev-totem-moldura">
             <div class="dev-tela" data-cycle="3000">
-              <img class="on" src="../imagens/autoatendimento/totem-inicio.jpg" alt="Totem: tela de boas-vindas com as fotos dos pratos" loading="lazy" data-zoom>
-              <img src="../imagens/autoatendimento/totem-cardapio.jpg" alt="Totem: cardápio com categorias e produtos" loading="lazy" data-zoom>
-              <img src="../imagens/autoatendimento/totem-pagamento.jpg" alt="Totem: escolha da forma de pagamento" loading="lazy" data-zoom>
+              <img class="on" src="../imagens/autoatendimento/totem-boas-vindas.webp" alt="Totem: tela de boas-vindas com as fotos dos pratos" loading="lazy" data-zoom>
+              <img src="../imagens/autoatendimento/totem-cardapio-itens.webp" alt="Totem: cardápio com categorias e produtos" loading="lazy" data-zoom>
+              <img src="../imagens/autoatendimento/totem-pagamento.webp" alt="Totem: escolha da forma de pagamento" loading="lazy" data-zoom>
             </div>
             </div>
             <div class="dev-totem-modulo" aria-hidden="true">
@@ -1650,8 +1719,43 @@
   </div>
 </section>
 
+<!-- Demonstração ao vivo -->
+<section id="demonstracao">
+  <div class="container">
+    <div class="demo-band reveal">
+      <div>
+        <span class="kicker">Demonstração ao vivo</span>
+        <h2 class="h2">Não acredite só nas imagens.<br>Teste agora.</h2>
+        <p class="lead">Navegue pela loja de demonstração como cliente, entre no painel do lojista ou faça um pedido no totem e no tablet — direto aqui na página, sem cadastro.</p>
+      </div>
+      <div class="demo-tiles">
+        <button type="button" class="tile" data-demo="cliente">
+          <span class="tile-ico"><svg class="i"><use href="#i-phone"/></svg></span>
+          <span><b>App do cliente</b><small>Monte um pedido como o seu cliente faria</small></span>
+          <svg class="i"><use href="#i-arrow"/></svg>
+        </button>
+        <button type="button" class="tile" data-demo="lojista">
+          <span class="tile-ico"><svg class="i"><use href="#i-monitor"/></svg></span>
+          <span><b>Painel do lojista</b><small>Entra direto, sem login: veja os pedidos e gerencie tudo</small></span>
+          <svg class="i"><use href="#i-arrow"/></svg>
+        </button>
+        <button type="button" class="tile" data-demo="totem">
+          <span class="tile-ico"><svg class="i"><use href="#i-zap"/></svg></span>
+          <span><b>Totem de autoatendimento</b><small>Faça um pedido como no balcão, até a tela do Pix</small></span>
+          <svg class="i"><use href="#i-arrow"/></svg>
+        </button>
+        <button type="button" class="tile" data-demo="tablet">
+          <span class="tile-ico"><svg class="i"><use href="#i-book"/></svg></span>
+          <span><b>Tablet na mesa</b><small>Escolha uma mesa e veja o cardápio em tela cheia</small></span>
+          <svg class="i"><use href="#i-arrow"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Avaliações: depoimento do Avenidão, pedidos ao vivo e avaliações aprovadas no Super Admin -->
-<section class="section" id="avaliacoes" style="padding-top:0">
+<section class="section" id="avaliacoes">
   <div class="container">
     <div class="head center reveal">
       <span class="kicker">Avaliações</span>
@@ -1701,41 +1805,6 @@
     <button type="button" class="btn btn-line" data-close>Fechar</button>
   </div>
 </dialog>
-
-<!-- Demonstração ao vivo -->
-<section id="demonstracao">
-  <div class="container">
-    <div class="demo-band reveal">
-      <div>
-        <span class="kicker">Demonstração ao vivo</span>
-        <h2 class="h2">Não acredite só nas imagens.<br>Teste agora.</h2>
-        <p class="lead">Navegue pela loja de demonstração como cliente, entre no painel do lojista ou faça um pedido no totem e no tablet — direto aqui na página, sem cadastro.</p>
-      </div>
-      <div class="demo-tiles">
-        <button type="button" class="tile" data-demo="cliente">
-          <span class="tile-ico"><svg class="i"><use href="#i-phone"/></svg></span>
-          <span><b>App do cliente</b><small>Monte um pedido como o seu cliente faria</small></span>
-          <svg class="i"><use href="#i-arrow"/></svg>
-        </button>
-        <button type="button" class="tile" data-demo="lojista">
-          <span class="tile-ico"><svg class="i"><use href="#i-monitor"/></svg></span>
-          <span><b>Painel do lojista</b><small>Entra direto, sem login: veja os pedidos e gerencie tudo</small></span>
-          <svg class="i"><use href="#i-arrow"/></svg>
-        </button>
-        <button type="button" class="tile" data-demo="totem">
-          <span class="tile-ico"><svg class="i"><use href="#i-zap"/></svg></span>
-          <span><b>Totem de autoatendimento</b><small>Faça um pedido como no balcão, até a tela do Pix</small></span>
-          <svg class="i"><use href="#i-arrow"/></svg>
-        </button>
-        <button type="button" class="tile" data-demo="tablet">
-          <span class="tile-ico"><svg class="i"><use href="#i-book"/></svg></span>
-          <span><b>Tablet na mesa</b><small>Escolha uma mesa e veja o cardápio em tela cheia</small></span>
-          <svg class="i"><use href="#i-arrow"/></svg>
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- Calculadora: comissão dos aplicativos x plano fixo -->
 <section class="section calc-sec" id="economia">
@@ -2163,6 +2232,7 @@
       <span>Feito para restaurantes que querem crescer.</span>
     </div>
   </div>
+  <div class="foot-marca" aria-hidden="true">Huga Huga</div>
 </footer>
 
 
@@ -2202,11 +2272,11 @@
     </span>
     <div class="slides" aria-hidden="true">
       <div class="slide on">
-        <div class="slide-art"><div class="browser"><div class="browser-bar"><i></i><i></i><i></i><span>hugahuga.com.br</span></div><img src="../imagens/admin/telaadmin.png" alt=""></div></div>
+        <div class="slide-art"><div class="browser"><div class="browser-bar"><i></i><i></i><i></i><span>hugahuga.com.br</span></div><img src="../imagens/admin/telaadmin.webp" alt="" loading="lazy"></div></div>
         <div><h3>Todos os pedidos em um só lugar</h3><p class="t">Delivery, retirada e mesas chegando ao vivo no painel, com impressão automática na cozinha.</p></div>
       </div>
       <div class="slide">
-        <div class="slide-art"><div class="phone"><div class="phone-screen"><img class="on" src="../imagens/cliente/temaclaro/telahome.jpeg" alt=""></div></div></div>
+        <div class="slide-art"><div class="phone"><div class="phone-screen"><img class="on" src="../imagens/cliente/temaclaro/telahome.webp" alt="" loading="lazy"></div></div></div>
         <div><h3>Seu cardápio no celular do cliente</h3><p class="t">Link próprio da sua loja, PIX e cartão com confirmação automática. Sem instalar nada.</p></div>
       </div>
       <div class="slide">
@@ -3313,6 +3383,103 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 <!-- cinema:fim -->
+<!-- cinema-site:inicio — efeitos do resto da página (títulos por máscara, linha do "Como funciona", faixa de integrações,
+     brilho que segue o mouse nos cartões, números da calculadora contando). Para desfazer: apague este bloco e o CSS cinema-site. -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var calmo = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // brilho que acompanha o mouse nos cartões
+  document.querySelectorAll('.tudo-grade li, .plan, .addons-list li, .start-step').forEach(function (el) {
+    el.addEventListener('pointermove', function (e) {
+      var r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+
+  // integrações: faixa contínua (a cópia é só visual, aria-hidden)
+  var lista = document.querySelector('.int-list');
+  if (lista && calmo) {
+    var trilho = document.createElement('div');
+    trilho.className = 'mq-trilho';
+    var originais = Array.prototype.slice.call(lista.children);
+    originais.forEach(function (s) { trilho.appendChild(s); });
+    originais.forEach(function (s) { var c = s.cloneNode(true); c.setAttribute('aria-hidden', 'true'); trilho.appendChild(c); });
+    lista.appendChild(trilho);
+    lista.closest('.integrations').classList.add('mq-on');
+  }
+
+  if (!calmo || !window.gsap || !window.ScrollTrigger) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  // títulos das seções: cada palavra sobe por uma máscara quando o título aparece
+  function mascarar(el) {
+    var saida = [], atual = null;
+    function fecha() {
+      if (!atual) return;
+      var m = document.createElement('span'), d = document.createElement('span');
+      m.className = 'm'; atual.forEach(function (n) { d.appendChild(n); }); m.appendChild(d); saida.push(m); atual = null;
+    }
+    Array.prototype.slice.call(el.childNodes).forEach(function (n) {
+      if (n.nodeName === 'BR') { fecha(); saida.push(n); return; }
+      if (n.nodeType !== 3) { (atual = atual || []).push(n); return; }
+      n.textContent.split(/(\s+)/).forEach(function (p) {
+        if (!p) return;
+        if (/^\s+$/.test(p)) { fecha(); saida.push(document.createTextNode(' ')); }
+        else (atual = atual || []).push(document.createTextNode(p));
+      });
+    });
+    fecha();
+    el.textContent = '';
+    saida.forEach(function (n) { el.appendChild(n); });
+    return el.querySelectorAll('.m > span');
+  }
+  document.querySelectorAll('main .h2').forEach(function (h) {
+    if (h.closest('.cine')) return;
+    gsap.from(mascarar(h), { yPercent: 115, duration: 1.1, stagger: .055, ease: 'expo.out', scrollTrigger: { trigger: h, start: 'top 90%', once: true } });
+  });
+
+  // como funciona: a linha laranja percorre os passos e cada um acende na sua vez
+  var start = document.querySelector('.start');
+  if (start) {
+    var passos = start.querySelectorAll('.start-step');
+    var linha = document.createElement('div');
+    linha.className = 'start-linha'; linha.setAttribute('aria-hidden', 'true'); linha.innerHTML = '<i></i>';
+    start.appendChild(linha);
+    gsap.to(linha.firstChild, {
+      scaleX: 1, ease: 'none',
+      scrollTrigger: {
+        trigger: start, start: 'top 72%', end: 'bottom 38%', scrub: .6,
+        onUpdate: function (st) { passos.forEach(function (p, i) { p.classList.toggle('aceso', st.progress >= i / (passos.length - 1) - 0.02); }); }
+      }
+    });
+  }
+
+  // calculadora: os valores contam de 0 até o resultado quando ela aparece (uma vez)
+  var res = document.querySelector('.calc-resultado'), calc = document.querySelector('.calc');
+  if (res && calc) {
+    var tw = null;
+    var campos = ['cVendas', 'cComissao', 'cEconomia', 'cEconomiaAno'].map(function (id) { return document.getElementById(id); }).filter(Boolean);
+    ScrollTrigger.create({
+      trigger: res, start: 'top 78%', once: true,
+      onEnter: function () {
+        var finais = campos.map(function (el) { return el.textContent; });
+        var alvos = finais.map(function (t) { return Number(t.replace(/[^\d,]/g, '').replace(',', '.')) || 0; });
+        var o = { p: 0 };
+        tw = gsap.to(o, {
+          p: 1, duration: 1.8, ease: 'power3.out',
+          onUpdate: function () { campos.forEach(function (el, i) { el.textContent = 'R$ ' + Math.round(alvos[i] * o.p).toLocaleString('pt-BR'); }); },
+          onComplete: function () { campos.forEach(function (el, i) { el.textContent = finais[i]; }); var e = document.querySelector('.calc-economia'); if (e) e.classList.add('brilha'); tw = null; }
+        });
+      }
+    });
+    // se a pessoa mexer na calculadora durante a contagem, a contagem para e vale o cálculo de verdade
+    ['input', 'change'].forEach(function (ev) { calc.addEventListener(ev, function () { if (tw) { tw.kill(); tw = null; } }, true); });
+  }
+});
+</script>
+<!-- cinema-site:fim -->
 
 </body>
 </html>
