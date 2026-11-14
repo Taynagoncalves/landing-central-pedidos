@@ -1061,7 +1061,7 @@
     html.lenis, html.lenis body { height: auto; }
     .lenis.lenis-smooth { scroll-behavior: auto !important; }
     .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
-    .lenis.lenis-stopped { overflow: hidden; }
+    .lenis.lenis-stopped { overflow: clip; }
 
     /* menu escuro enquanto o hero está atrás dele */
     .nav.nav-cine { background: rgba(11,11,12,.62); border-bottom-color: rgba(255,255,255,.07); }
@@ -1222,6 +1222,11 @@
     .cine-dica i::after { content: ""; position: absolute; left: 0; top: -40%; width: 1px; height: 40%; background: var(--brand); animation: cineDica 1.8s cubic-bezier(.6,0,.4,1) infinite; }
     @keyframes cineDica { to { transform: translateY(350%); } }
     .cine-pausa .cine-grao, .cine-pausa .cine-dica i::after { animation-play-state: paused; }
+    /* apresentação automática: botão para pular, só aparece enquanto ela roda */
+    .cine-pular { position: absolute; right: 4vw; bottom: 4.5vh; z-index: 11; display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border-radius: 999px; background: rgba(14,14,16,.72); border: 1px solid rgba(255,255,255,.16); color: #fff; font-size: 13.5px; font-weight: 600; opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .35s ease, transform .35s ease, visibility .35s, background .2s ease; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+    .cine-pular .i { width: 16px; height: 16px; }
+    .cine-pular:hover { background: var(--brand); border-color: transparent; }
+    .cine-auto .cine-pular { opacity: 1; visibility: visible; transform: none; }
 
     /* celular: a mesma cena, com a rolagem mais curta (≈220vh) e sem prender a tela */
     @media (max-width: 899px) {
@@ -1249,6 +1254,7 @@
     @media (max-width: 680px) {
       .cine { margin-top: -64px; }
       .cine-texto { top: calc(64px + 2.6vh); padding: 0 16px; }
+      .cine-pular { right: 16px; bottom: 3vh; height: 38px; font-size: 13px; }
     }
     /* cinema:fim */
 
@@ -3200,6 +3206,94 @@ document.addEventListener('DOMContentLoaded', function () {
   // onde o "dedo" toca em cada tela do totem (fração da tela)
   var TOQUES = [[.5, .935], [.26, .58], [.375, .764], [.6, .975], [.27, .55]];
 
+  // ── apresentação automática: no 1º gesto para baixo no topo, a página rola sozinha cena a cena.
+  //    Qualquer gesto da pessoa (rodinha, toque, teclado, clique) devolve o controle na hora. ──
+  function criarAuto(st) {
+    // [progresso da história, segundos até chegar, segundos parado na cena]
+    var PARADAS = [[.10, 1.6, .5], [.305, 5.6, .8], [.52, 3.4, 1.7], [.695, 2.8, 1.7], [.81, 2.3, 1.5], [1, 3.2, 0]];
+    var tl = null, armado = true, graca = 0, gracaMax = 0, toqueDoInicio = false, tY = null;
+    var botao = document.createElement('button');
+    botao.type = 'button';
+    botao.className = 'cine-pular';
+    botao.innerHTML = 'Pular apresentação <svg class="i"><use href="#i-arrow"/></svg>';
+    palco.appendChild(botao);
+
+    function alvo(p) { return st.start + (st.end - st.start) * p; }
+    // durante a apresentação o Lenis fica pausado e a página é rolada direto (os dois juntos brigam)
+    function rolar(v) { window.scrollTo({ top: v, behavior: 'instant' }); }
+    function lenisPausa(on) { if (!lenis) return; if (on) lenis.stop(); else { lenis.start(); lenis.scrollTo(window.scrollY, { immediate: true, force: true }); } }
+    function parar() { if (tl) { tl.kill(); tl = null; lenisPausa(false); } palco.classList.remove('cine-auto'); toqueDoInicio = false; }
+    function anima(o, destino, dur, ease) { return { v: destino, duration: dur, ease: ease, onUpdate: function () { rolar(o.v); } }; }
+    function iniciar(porToque) {
+      armado = false;
+      var agora = performance.now();
+      graca = agora + 700; gracaMax = agora + 2200; toqueDoInicio = !!porToque;
+      var o = { v: window.scrollY };
+      lenisPausa(true);
+      tl = gsap.timeline({ onComplete: parar });
+      PARADAS.forEach(function (pp) {
+        tl.to(o, anima(o, alvo(pp[0]), pp[1], 'sine.inOut'));
+        if (pp[2]) tl.to({}, { duration: pp[2] });
+      });
+      palco.classList.add('cine-auto');
+    }
+    function pular() {
+      parar();
+      var o = { v: window.scrollY };
+      lenisPausa(true);
+      tl = gsap.to(o, Object.assign(anima(o, alvo(1), 1.4, 'power2.inOut'), { onComplete: parar }));
+    }
+    function engole(e) { if (e.cancelable) e.preventDefault(); e.stopImmediatePropagation(); }
+    // decide o que fazer com cada gesto de rolagem
+    function gesto(e, desce, porToque) {
+      if (tl) {
+        var agora = performance.now();
+        // ainda é o mesmo gesto que começou a apresentação (inércia do trackpad / mesmo arraste): segura
+        if ((agora < graca && agora < gracaMax) || (porToque && toqueDoInicio)) { if (!porToque) graca = agora + 250; engole(e); return; }
+        parar();
+        return;
+      }
+      if (armado && desce && window.scrollY < 40 && !document.querySelector('dialog[open]')) { iniciar(porToque); engole(e); }
+    }
+    function onWheel(e) { if (Math.abs(e.deltaY) > 1) gesto(e, e.deltaY > 0, false); }
+    function onTouchStart(e) { tY = e.touches[0].clientY; if (tl && !toqueDoInicio) parar(); }
+    function onTouchMove(e) { if (tY == null) return; var d = tY - e.touches[0].clientY; if (Math.abs(d) < 6) return; gesto(e, d > 0, true); }
+    function onTouchEnd() { tY = null; toqueDoInicio = false; }
+    function onKey(e) {
+      var desce = ['ArrowDown', 'PageDown', ' ', 'Spacebar', 'End'].indexOf(e.key) >= 0;
+      var sobe = ['ArrowUp', 'PageUp', 'Home'].indexOf(e.key) >= 0;
+      if (!desce && !sobe) return;
+      if (e.target && e.target.closest && e.target.closest('input, textarea, select, button, a, [contenteditable]')) { if (tl) parar(); return; }
+      gesto(e, desce, false);
+    }
+    function onPointer(e) { if (tl && !(e.target.closest && e.target.closest('.cine-pular'))) parar(); }
+    function onScroll() { if (!tl && window.scrollY < 5) armado = true; }
+    function onResize() { if (tl) parar(); }
+    botao.addEventListener('click', pular);
+    window.addEventListener('wheel', onWheel, { capture: true, passive: false });
+    window.addEventListener('touchstart', onTouchStart, { capture: true, passive: true });
+    window.addEventListener('touchmove', onTouchMove, { capture: true, passive: false });
+    window.addEventListener('touchend', onTouchEnd, { capture: true, passive: true });
+    window.addEventListener('keydown', onKey, true);
+    window.addEventListener('pointerdown', onPointer, true);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onResize);
+    return {
+      parar: function () {
+        parar();
+        botao.remove();
+        window.removeEventListener('wheel', onWheel, { capture: true });
+        window.removeEventListener('touchstart', onTouchStart, { capture: true });
+        window.removeEventListener('touchmove', onTouchMove, { capture: true });
+        window.removeEventListener('touchend', onTouchEnd, { capture: true });
+        window.removeEventListener('keydown', onKey, true);
+        window.removeEventListener('pointerdown', onPointer, true);
+        window.removeEventListener('scroll', onScroll);
+        window.removeEventListener('resize', onResize);
+      }
+    };
+  }
+
   function montar(cel) {
     var C = cel ? GEO.cel : GEO.desk;
     var texto = $('.cine-texto'), badge = texto.querySelector('.badge'), h1 = texto.querySelector('h1'), lead = texto.querySelector('.lead'), ctas = texto.querySelector('.hero-ctas'), trust = texto.querySelector('.trust');
@@ -3372,8 +3466,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     fundo.ativo(cine.getBoundingClientRect().bottom > 0);
     raiz.classList.add('cine-pronto');
+    var auto = criarAuto(T.scrollTrigger);
 
-    return function () { fundo.parar(); corte.desfaz(); };
+    return function () { auto.parar(); fundo.parar(); corte.desfaz(); };
   }
 
   gsap.matchMedia().add({ desk: '(min-width: 900px)', cel: '(max-width: 899px)' }, function (ctx) { return montar(ctx.conditions.cel); });
