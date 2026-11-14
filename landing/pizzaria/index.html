@@ -365,6 +365,7 @@
     .billing button { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 18px; border-radius: 10px; font-size: 14.5px; font-weight: 600; color: var(--muted); }
     .billing button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: var(--shadow-sm); }
     .billing .save { padding: 2px 8px; border-radius: 999px; background: #E9F9EF; color: #15803D; font-size: 12px; }
+    @media (max-width: 480px) { .billing { max-width: 100%; } .billing button { gap: 5px; padding: 0 10px; font-size: 13.5px; } .billing .save { padding: 2px 6px; font-size: 11.5px; } }
     .pay-note { margin-top: 10px; font-size: 13.5px; color: var(--muted); }
     .pay-note b { color: var(--ink-2); font-weight: 600; }
     .price { margin-top: 18px; }
@@ -1120,6 +1121,204 @@
       .calc { grid-template-columns: 1fr; }
       .calc-campos, .calc-resultado { padding: 22px; }
     }
+
+    /* cinema:inicio ── Hero cinematográfico: fundo escuro, aparelhos em cena e "câmera" que acompanha a rolagem.
+       Sem JS/GSAP ou com "reduzir movimento": este CSS sozinho mostra a cena final parada (aparelhos + título).
+       Com animação, o script cinema (fim da página) liga cine-js / cine-pronto e conta a história.
+       Para desfazer: apague os três blocos cinema:inicio/fim (este CSS, o hero e o script) e volte o hero antigo pelo git. */
+    html.lenis, html.lenis body { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto !important; }
+    .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+    .lenis.lenis-stopped { overflow: hidden; }
+
+    /* menu escuro enquanto o hero está atrás dele */
+    .nav.nav-cine { background: rgba(11,11,12,.62); border-bottom-color: rgba(255,255,255,.07); }
+    .nav.nav-cine .nav-links a { color: rgba(255,255,255,.74); }
+    .nav.nav-cine .nav-links a:hover { background: rgba(255,255,255,.08); color: #fff; }
+    .nav.nav-cine .nav-actions .btn-ghost { color: rgba(255,255,255,.86); }
+    .nav.nav-cine .nav-actions .btn-ghost:hover { background: rgba(255,255,255,.08); }
+    .nav.nav-cine .burger { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.16); color: #fff; }
+
+    /* palco: 100vh, preso (sticky) enquanto a seção rola por baixo */
+    .cine { margin-top: -72px; background: #0B0B0C; color: #fff; }
+    .cine-palco { --u: min(1vw, 1.6vh); position: relative; height: 100vh; height: 100svh; min-height: 600px; overflow: hidden; isolation: isolate;
+      background: radial-gradient(60% 55% at 50% 90%, rgba(255,85,0,.26), transparent 70%), radial-gradient(45% 45% at 12% 18%, rgba(255,85,0,.10), transparent 70%), radial-gradient(40% 40% at 90% 28%, rgba(255,120,40,.08), transparent 70%), #0B0B0C; }
+    .cine-js .cine { height: 550vh; }
+    .cine-js .cine-palco { position: sticky; top: 0; }
+    .cine-js:not(.cine-pronto) .cine-texto, .cine-js:not(.cine-pronto) .cine-mundo { visibility: hidden; }
+
+    .cine-canvas { position: absolute; inset: 0; z-index: 0; display: block; width: 100%; height: 100%; }
+    .cine-palco.com-video .cine-canvas { opacity: .82; }
+    .cine-chao { position: absolute; left: -10%; right: -10%; bottom: 0; height: 30%; z-index: 1; pointer-events: none;
+      background: radial-gradient(55% 90% at 50% 100%, rgba(255,85,0,.22), transparent 70%), linear-gradient(180deg, transparent, rgba(0,0,0,.55)); }
+    .cine-chao::before { content: ""; position: absolute; left: 12%; right: 12%; top: 32%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,150,80,.5), transparent); }
+
+    /* legendas gigantes, com palavras entrando por máscara */
+    .cine-lg { position: absolute; inset: 0; pointer-events: none; }
+    .cine-lg-fundo { z-index: 2; }
+    .cine-lg-frente { z-index: 6; }
+    .lg { position: absolute; margin: 0; font-weight: 800; line-height: .86; letter-spacing: -0.065em; color: #fff; white-space: nowrap; visibility: hidden; }
+    .lg em { font-style: normal; color: var(--brand); }
+    .cine-lg-frente .lg { text-shadow: 0 .04em .35em rgba(0,0,0,.55); }
+    .m { display: inline-block; overflow: hidden; vertical-align: top; padding: .02em .06em .14em; margin: -.02em -.06em -.14em; }
+    .m > span { display: inline-block; }
+    .lg-pediu { left: 0; right: 0; top: 50%; margin-top: -.48em; text-align: center; font-size: 23vw; letter-spacing: -0.075em; }
+    .lg-pediu .m > span { background: linear-gradient(180deg, #FFFFFF 30%, #FFC29A 66%, #FF5500 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .lg-passo { left: 6vw; top: 50%; margin-top: -.45em; font-size: 7vw; }
+    .lg-onde { left: 5vw; top: 22vh; font-size: 7vw; }
+    .lg-onde > span, .lg-cozinha > span { display: block; }
+    .lg-painel { left: 0; right: 0; top: 13vh; text-align: center; font-size: 6.6vw; }
+    .lg-cozinha { left: 6vw; top: 22vh; font-size: 9.6vw; }
+
+    /* aparelhos: molduras detalhadas com as telas reais; tamanhos em cqw (relativos à largura do aparelho) */
+    .cine-mundo { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+    .dv { position: absolute; container-type: inline-size; transform-origin: 50% 50%; }
+    .dv-in { position: relative; }
+    .dv-brilho { position: absolute; left: -45%; right: -45%; top: -15%; bottom: -5%; z-index: -1; opacity: .55; pointer-events: none; background: radial-gradient(closest-side, rgba(255,85,0,.42), rgba(255,85,0,.12) 55%, transparent 100%); }
+    .dv-totem .dv-brilho { opacity: .9; }
+    .dv-sombra { position: absolute; left: -20%; right: -20%; bottom: -5cqw; height: 16cqw; z-index: -1; background: radial-gradient(closest-side, rgba(0,0,0,.9), transparent); }
+    .vidro-reflexo { position: absolute; inset: 0; z-index: 3; pointer-events: none; border-radius: inherit; background: linear-gradient(115deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,.06) 32%, rgba(255,255,255,0) 32.2%, rgba(255,255,255,0) 100%); }
+
+    /* totem de chão */
+    .dv-totem { width: calc(var(--u) * 10.5); left: 11vw; bottom: -2vh; z-index: 5; }
+    .tt-corpo { position: relative; padding: 10cqw 5.5cqw 6cqw; border-radius: 10cqw 10cqw 6cqw 6cqw;
+      background: linear-gradient(90deg, #0d0d0f 0%, #2d2d33 5%, #1a1a1e 16%, #121214 55%, #222227 90%, #39393f 96%, #0c0c0e 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.22), inset 0 0 0 .5cqw rgba(255,255,255,.035), -1.5cqw 0 4cqw -1.5cqw rgba(255,110,40,.7), 0 30cqw 50cqw -18cqw rgba(0,0,0,.95); }
+    .tt-luz { position: absolute; left: 22%; right: 22%; top: 3.6cqw; height: 1.8cqw; border-radius: 2cqw; background: linear-gradient(90deg, rgba(255,85,0,0), #FF8A3D 30%, #FF5500 50%, #FF8A3D 70%, rgba(255,85,0,0)); box-shadow: 0 0 5cqw 1.5cqw rgba(255,85,0,.55); }
+    .tt-tela { position: relative; aspect-ratio: 720 / 1280; border-radius: 2.6cqw; overflow: hidden; background: #000; box-shadow: 0 0 0 1.8cqw #050506, 0 0 0 2.15cqw rgba(255,255,255,.07); }
+    .tt-tela img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .tt-tela img + img { clip-path: inset(100% 0% 0% 0%); }
+    .tt-escuro { position: absolute; inset: 0; z-index: 2; background: #0B0B0C; opacity: 0; }
+    .tt-toque { position: absolute; left: 0; top: 0; z-index: 4; width: 16cqw; height: 16cqw; margin: -8cqw 0 0 -8cqw; border-radius: 50%; background: rgba(255,255,255,.35); box-shadow: 0 0 0 1cqw rgba(255,255,255,.8), 0 0 0 4cqw rgba(255,85,0,.28); opacity: 0; }
+    .tt-modulo { display: flex; align-items: center; gap: 5cqw; margin-top: 7cqw; padding: 4.5cqw 6cqw; border-radius: 4cqw; background: linear-gradient(180deg, #1b1b1f, #0c0c0e); box-shadow: inset 0 1px 0 rgba(255,255,255,.08); }
+    .tt-leitor { position: relative; width: 32cqw; height: 13cqw; border-radius: 3cqw; background: #050506; box-shadow: inset 0 0 0 .5cqw #232327; }
+    .tt-leitor::after { content: ""; position: absolute; right: 3cqw; top: 3cqw; width: 2.6cqw; height: 2.6cqw; border-radius: 50%; background: #22C55E; box-shadow: 0 0 3cqw #22C55E; }
+    .tt-fenda { flex: 1; height: 2.6cqw; border-radius: 2cqw; background: #000; box-shadow: 0 .7cqw 0 rgba(255,255,255,.06); }
+    .tt-coluna { display: block; width: 26%; height: 30cqw; margin: -1cqw auto 0; background: linear-gradient(90deg, #0b0b0d, #34343a 32%, #1b1b1f 62%, #0a0a0b); }
+    .tt-base { display: block; width: 86%; height: 9cqw; margin: -2cqw auto 0; border-radius: 50%; background: radial-gradient(ellipse at 50% 30%, #34343a, #131315 60%, #050506); box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 5cqw 8cqw -2cqw rgba(0,0,0,.95); }
+
+    /* monitor com o painel de pedidos */
+    .dv-monitor { width: calc(var(--u) * 31); left: calc(48vw - var(--u) * 15.5); bottom: 4.5vh; z-index: 2; }
+    .mn-tela { position: relative; padding: 1.2cqw 1.2cqw 1.6cqw; border-radius: 1.8cqw; background: linear-gradient(180deg, #202024, #0b0b0c 70%); box-shadow: inset 0 0 0 .14cqw rgba(255,255,255,.16), 0 3cqw 7cqw -2cqw rgba(0,0,0,.95), 0 0 12cqw -3cqw rgba(255,85,0,.45); }
+    .mn-vidro { position: relative; aspect-ratio: 16 / 9.2; border-radius: .7cqw; overflow: hidden; background: #F5F5F4; }
+    .mn-vidro img { width: 100%; height: 100%; object-fit: cover; object-position: left top; }
+    .mn-flash { position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, rgba(255,150,70,.55), rgba(255,85,0,.12)); opacity: 0; }
+    .mn-aviso { position: absolute; left: 50%; top: -3.4cqw; z-index: 4; display: inline-flex; align-items: center; gap: 1.2cqw; padding: 1.2cqw 2.4cqw 1.2cqw 1.6cqw; border-radius: 99cqw; background: rgba(18,18,20,.95); border: .15cqw solid rgba(255,255,255,.14); box-shadow: 0 2cqw 5cqw -1cqw rgba(0,0,0,.9), 0 0 6cqw -1cqw rgba(255,85,0,.6); font-size: 2.1cqw; font-weight: 600; color: #fff; white-space: nowrap; opacity: 0; }
+    .mn-aviso i { width: 1.6cqw; height: 1.6cqw; border-radius: 50%; background: var(--brand); box-shadow: 0 0 0 .7cqw rgba(255,85,0,.25); }
+    .mn-aviso b { color: #FF8A4C; }
+    .mn-aviso small { font-size: inherit; font-weight: 500; color: #A1A1AA; }
+    .mn-hud { position: absolute; right: -8cqw; top: 14%; z-index: 4; display: grid; gap: 1.4cqw; opacity: 0; }
+    .mn-hud span { display: block; min-width: 19cqw; padding: 1.6cqw 2.2cqw; border-radius: 1.8cqw; background: rgba(18,18,20,.94); border: .15cqw solid rgba(255,255,255,.12); box-shadow: 0 2cqw 5cqw -1cqw rgba(0,0,0,.9); }
+    .mn-hud small { display: block; font-size: 1.5cqw; font-weight: 600; color: #A1A1AA; }
+    .mn-hud b { display: block; font-size: 3.6cqw; line-height: 1.1; font-weight: 800; letter-spacing: -0.03em; color: #fff; font-variant-numeric: tabular-nums; }
+    .mn-pe { display: block; width: 11%; height: 10cqw; margin: 0 auto; background: linear-gradient(90deg, #141417, #4b4b53 40%, #2a2a30 62%, #101012); clip-path: polygon(22% 0, 78% 0, 100% 100%, 0 100%); }
+    .mn-base { display: block; width: 36%; height: 1.8cqw; margin: 0 auto; border-radius: 1cqw 1cqw .5cqw .5cqw; background: linear-gradient(180deg, #45454c, #161618); box-shadow: 0 3cqw 4cqw -1cqw rgba(0,0,0,.95); }
+
+    /* impressora térmica com o cupom */
+    .dv-impressora { width: calc(var(--u) * 8); left: calc(48vw + var(--u) * 14.5); bottom: 4vh; z-index: 3; }
+    .im-papel { position: relative; width: 72%; height: 96cqw; margin: 0 auto -4cqw; overflow: hidden; }
+    .im-cupom { position: absolute; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; gap: 1.4cqw; padding: 9cqw 6.5cqw 10cqw; background: linear-gradient(180deg, #FFFFFF, #F1EEE8); color: #3F3F46; font: 600 5.4cqw/1.3 ui-monospace, Menlo, Consolas, monospace; box-shadow: inset 0 -2cqw 3cqw -2cqw rgba(0,0,0,.25); }
+    .im-cupom b { color: #0C0C0E; font-size: 6.2cqw; }
+    .im-cupom i { display: block; margin: 1.5cqw 0; border-top: .4cqw dashed #A1A1AA; }
+    .im-cupom .l { display: flex; justify-content: space-between; gap: 2cqw; }
+    .im-cupom em { font-style: normal; }
+    .im-cupom small { margin-top: 2cqw; text-align: center; color: #16A34A; font-size: 5.6cqw; font-weight: 800; }
+    .im-corpo { position: relative; height: 48cqw; border-radius: 9cqw 9cqw 5cqw 5cqw; background: linear-gradient(180deg, #2c2c31, #141416 55%, #0a0a0b); box-shadow: inset 0 1px 0 rgba(255,255,255,.22), inset 0 0 0 .6cqw rgba(255,255,255,.03), 0 12cqw 16cqw -5cqw rgba(0,0,0,.95), -2cqw 0 6cqw -2cqw rgba(255,110,40,.55); }
+    .im-fenda { position: absolute; left: 10%; right: 10%; top: 5cqw; height: 3cqw; border-radius: 2cqw; background: #000; box-shadow: 0 1cqw 0 rgba(255,255,255,.05); }
+    .im-led { position: absolute; right: 11cqw; bottom: 11cqw; width: 4cqw; height: 4cqw; border-radius: 50%; background: #22C55E; box-shadow: 0 0 5cqw #22C55E; }
+    .im-botao { position: absolute; left: 11cqw; bottom: 9cqw; width: 14cqw; height: 7cqw; border-radius: 2cqw; background: linear-gradient(180deg, #26262b, #0e0e10); box-shadow: inset 0 1px 0 rgba(255,255,255,.12); }
+
+    /* tablet no suporte de mesa */
+    .dv-tablet { width: calc(var(--u) * 17); left: calc(48vw + var(--u) * 25); bottom: 8vh; z-index: 2; }
+    .tb-corpo { position: relative; padding: 2.6cqw; border-radius: 5cqw; background: linear-gradient(145deg, #34343a, #0d0d0f 40%, #18181b 75%, #2c2c31); box-shadow: inset 0 0 0 .35cqw rgba(255,255,255,.07), inset 0 1px 0 rgba(255,255,255,.25), 1.6cqw 0 4cqw -1.6cqw rgba(255,110,40,.6), 0 10cqw 16cqw -5cqw rgba(0,0,0,.95); transform: perspective(140cqw) rotateY(-12deg) rotateX(4deg); }
+    .tb-tela { position: relative; aspect-ratio: 3 / 2; border-radius: 2.2cqw; overflow: hidden; background: #000; }
+    .tb-tela img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .tb-haste { display: block; width: 4cqw; height: 13cqw; margin: -1cqw auto 0; border-radius: 1cqw; background: linear-gradient(90deg, #121214, #5a5a62 45%, #26262b 72%, #0c0c0e); }
+    .tb-pe { display: block; width: 34%; height: 4.4cqw; margin: -1.8cqw auto 0; border-radius: 50%; background: radial-gradient(ellipse at 50% 30%, #4a4a52, #161618 62%, #060607); box-shadow: 0 3cqw 5cqw -1cqw rgba(0,0,0,.9); }
+
+    /* celular com o app do cliente */
+    .dv-celular { width: calc(var(--u) * 5.6); left: calc(48vw + var(--u) * 43.5); bottom: 4vh; z-index: 4; }
+    .cl-corpo { position: relative; padding: 3.4cqw; border-radius: 16cqw; background: linear-gradient(135deg, #6b6b73, #1d1d21 18%, #0b0b0c 50%, #26262b 82%, #77777f); box-shadow: inset 0 0 0 1.4cqw #050506, -2.5cqw 0 7cqw -2.5cqw rgba(255,100,30,.65), 0 12cqw 20cqw -6cqw rgba(0,0,0,.95); transform: rotate(6deg); }
+    .cl-tela { position: relative; aspect-ratio: 738 / 1600; border-radius: 13cqw; overflow: hidden; background: #fff; }
+    .cl-tela img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .cl-ilha { position: absolute; top: 2.8cqw; left: 50%; z-index: 2; width: 30cqw; height: 8.5cqw; margin-left: -15cqw; border-radius: 6cqw; background: #000; }
+
+    /* plaquinha de acrílico com o QR Code da mesa */
+    .dv-qr { width: calc(var(--u) * 5.4); left: calc(48vw - var(--u) * 23); bottom: 2.5vh; z-index: 4; }
+    .qr-placa { padding: 7cqw; border-radius: 9cqw; background: linear-gradient(160deg, rgba(255,255,255,.26), rgba(255,255,255,.07) 45%, rgba(255,255,255,.14)); box-shadow: inset 0 0 0 .8cqw rgba(255,255,255,.22), inset 0 1px 0 rgba(255,255,255,.5), 0 12cqw 18cqw -6cqw rgba(0,0,0,.95); }
+    .qr-cartao { display: flex; flex-direction: column; align-items: center; gap: 4cqw; padding: 9cqw 8cqw 8cqw; border-radius: 6cqw; background: #fff; text-align: center; }
+    .qr-cartao small { font-size: 10cqw; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--brand); }
+    .qr-cartao img { width: 86%; aspect-ratio: 1; }
+    .qr-cartao span { font-size: 7.5cqw; font-weight: 700; line-height: 1.2; color: #3F3F46; }
+    .qr-pe { display: block; width: 76%; height: 7cqw; margin: -1cqw auto 0; border-radius: 0 0 4cqw 4cqw; background: linear-gradient(180deg, rgba(255,255,255,.3), rgba(255,255,255,.06)); }
+
+    /* cartão do pedido que atravessa a tela */
+    .cine-cartao { position: absolute; left: 50%; top: 50%; z-index: 5; width: min(400px, 84vw); padding: 22px 24px 20px 26px; border-radius: 22px; color: #fff; visibility: hidden;
+      background: linear-gradient(160deg, rgba(40,40,45,.97), rgba(14,14,16,.97)); border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 50px 90px -30px rgba(0,0,0,.95), 0 0 80px -16px rgba(255,85,0,.6), inset 0 1px 0 rgba(255,255,255,.12); }
+    .cine-cartao::before { content: ""; position: absolute; left: 0; top: 18px; bottom: 18px; width: 3px; border-radius: 0 3px 3px 0; background: var(--brand); box-shadow: 0 0 14px var(--brand); }
+    .ct-topo { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .ct-topo b { font-size: 34px; font-weight: 800; letter-spacing: -0.04em; }
+    .ct-pago { padding: 5px 10px; border-radius: 99px; background: rgba(34,197,94,.14); color: #4ADE80; font-size: 13px; font-weight: 700; }
+    .ct-itens { margin: 10px 0 16px; color: #D4D4D8; font-size: 17px; }
+    .ct-rodape { display: flex; justify-content: space-between; align-items: baseline; padding-top: 14px; border-top: 1px dashed rgba(255,255,255,.16); color: #A1A1AA; font-size: 13.5px; }
+    .ct-rodape b { color: #fff; font-size: 24px; font-weight: 800; letter-spacing: -0.03em; }
+
+    /* título, texto e botões reais */
+    .cine-texto { position: absolute; left: 0; right: 0; top: calc(72px + 3.6vh); z-index: 7; padding: 0 24px; text-align: center; pointer-events: none; }
+    .cine-texto > * { pointer-events: auto; }
+    .cine-texto .badge { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.12); color: #D4D4D8; box-shadow: none; }
+    .cine-texto .badge b { background: rgba(255,85,0,.18); color: #FF9A5C; }
+    .cine-texto h1 { max-width: 13em; margin: 2.2vh auto 1.8vh; font-size: min(5.9vw, 9.3vh); font-weight: 800; line-height: .94; letter-spacing: -0.058em; color: #fff; text-shadow: 0 .05em .5em rgba(0,0,0,.4); }
+    .cine-texto .lead { max-width: 640px; margin: 0 auto; color: #A1A1AA; }
+    .cine-texto .hero-ctas { margin-top: 3vh; }
+    .cine-texto .btn-line { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18); color: #fff; box-shadow: none; }
+    .cine-texto .btn-line:hover { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.3); }
+    .cine-texto .trust { margin-top: 2vh; color: #A1A1AA; }
+    .cine-texto .trust .i { color: #4ADE80; }
+
+    /* grão de filme, vinheta e dica de rolagem */
+    .cine-grao { position: absolute; inset: -60%; z-index: 8; pointer-events: none; opacity: .11;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+      animation: cineGrao .9s steps(5) infinite; }
+    @keyframes cineGrao { 0% { transform: translate(0, 0); } 20% { transform: translate(-3%, 2%); } 40% { transform: translate(2%, -3%); } 60% { transform: translate(-2%, -1%); } 80% { transform: translate(3%, 3%); } 100% { transform: translate(0, 0); } }
+    .cine-vinheta { position: absolute; inset: 0; z-index: 9; pointer-events: none; background: radial-gradient(ellipse 80% 75% at 50% 48%, transparent 52%, rgba(0,0,0,.62) 100%); }
+    .cine-dica { position: absolute; left: 4vw; bottom: 4.5vh; z-index: 10; display: none; width: 200px; text-align: left; color: rgba(255,255,255,.7); font-size: 11.5px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; pointer-events: none; }
+    .cine-js .cine-dica { display: block; }
+    .cine-dica > span { display: block; }
+    .cine-dica i { position: relative; display: block; width: 1px; height: 38px; margin: 10px 0 0; overflow: hidden; background: rgba(255,255,255,.18); }
+    .cine-dica i::after { content: ""; position: absolute; left: 0; top: -40%; width: 1px; height: 40%; background: var(--brand); animation: cineDica 1.8s cubic-bezier(.6,0,.4,1) infinite; }
+    @keyframes cineDica { to { transform: translateY(350%); } }
+    .cine-pausa .cine-grao, .cine-pausa .cine-dica i::after { animation-play-state: paused; }
+
+    /* celular: a mesma cena, com a rolagem mais curta (≈220vh) e sem prender a tela */
+    @media (max-width: 899px) {
+      .cine-js .cine { height: 320vh; height: 320svh; }
+      .cine-palco { --u: 1vw; min-height: 520px; }
+      .cine-texto h1 { max-width: none; font-size: min(10.6vw, 6.6vh); line-height: .98; }
+      .cine-texto .lead { font-size: 15px; line-height: 1.5; }
+      .cine-texto .trust { flex-direction: row; justify-content: center; gap: 4px 14px; font-size: 12.5px; }
+      .dv-totem { width: 17vw; left: 3vw; bottom: -3vh; }
+      .dv-monitor { width: 52vw; left: 24vw; bottom: 5.5vh; }
+      .dv-impressora { width: 12vw; left: 66vw; bottom: 4vh; }
+      .dv-tablet { width: 27vw; left: 70vw; bottom: 12vh; }
+      .dv-celular { width: 9vw; left: 88vw; bottom: 3vh; }
+      .dv-qr { width: 9.5vw; left: 17vw; bottom: 1.5vh; }
+      .mn-hud { right: 2cqw; top: auto; bottom: 6%; grid-auto-flow: column; }
+      .lg-pediu { top: 12vh; margin-top: 0; font-size: 29vw; }
+      .lg-passo { top: 12vh; margin-top: 0; font-size: 15vw; }
+      .lg-onde { left: 6vw; top: 13vh; font-size: 13vw; }
+      .lg-painel { top: 12vh; font-size: 10vw; }
+      .lg-cozinha { top: 9vh; font-size: 14.5vw; }
+      .cine-cartao { width: min(330px, 84vw); padding: 18px 20px 16px 22px; }
+      .ct-topo b { font-size: 28px; }
+      .ct-itens { font-size: 15.5px; }
+    }
+    @media (max-width: 680px) {
+      .cine { margin-top: -64px; }
+      .cine-texto { top: calc(64px + 2.6vh); padding: 0 16px; }
+    }
+    /* cinema:fim */
   </style>
   <script>
     /* Medição de visitas e cadastros.
@@ -1220,80 +1419,117 @@
 
 <main>
 
-<!-- Hero -->
-<section class="hero">
-  <div class="container">
-    <span class="badge"><b>7 dias grátis</b> Sem cartão, sem compromisso</span>
-    <h1>O sistema completo para a sua <span class="brand-c">pizzaria</span>.</h1>
-    <p class="lead">Pizza com vários sabores e bordas, delivery com motoboys, mesas, tablet, totem e impressão na cozinha num só painel — sem comissão por pedido.</p>
-    <div class="hero-ctas">
-      <a href="#planos" class="btn btn-brand btn-lg" data-sign>Assinar agora <svg class="i"><use href="#i-arrow"/></svg></a>
-      <button type="button" class="btn btn-line btn-lg" data-demo="cliente"><svg class="i"><use href="#i-play"/></svg> Testar o sistema ao vivo</button>
-    </div>
-    <div class="trust">
-      <span><svg class="i"><use href="#i-check"/></svg>100% online, sem instalar app</span>
-      <span><svg class="i"><use href="#i-check"/></svg>PIX integrado</span>
-      <span><svg class="i"><use href="#i-check"/></svg>Implementação grátis</span>
-      <span><svg class="i"><use href="#i-check"/></svg>Suporte dedicado</span>
+<!-- cinema:inicio — Hero cinematográfico. O H1, o texto e os botões são os reais (SEO); o resto é cenário e leva aria-hidden.
+     Sem animação (reduzir movimento, sem GSAP ou CDN fora do ar) aparece a cena final parada. -->
+<script>(function (d) { try { if (!matchMedia('(prefers-reduced-motion: reduce)').matches) { d.classList.add('cine-js'); setTimeout(function () { if (!window.__cine) d.classList.remove('cine-js'); }, 5000); } } catch (e) {} })(document.documentElement);</script>
+<section class="cine" aria-label="Apresentação do Huga Huga">
+  <div class="cine-palco">
+    <canvas class="cine-canvas" aria-hidden="true"></canvas>
+    <div class="cine-chao" aria-hidden="true"></div>
+
+    <!-- legendas atrás dos aparelhos -->
+    <div class="cine-lg cine-lg-fundo" aria-hidden="true">
+      <p class="lg lg-pediu"><span class="m"><span>P</span></span><span class="m"><span>E</span></span><span class="m"><span>D</span></span><span class="m"><span>I</span></span><span class="m"><span>U</span></span><span class="m"><span>.</span></span></p>
     </div>
 
-    <div class="cena" role="img" aria-label="Painel no monitor, totem, tablet na mesa, impressora imprimindo o pedido, QR Code da mesa e o app do cliente no celular">
-      <div class="cena-palco">
-        <!-- totem de chão -->
-        <div class="cn cn-totem">
-          <div class="cn-totem-corpo"><span class="cn-totem-topo">Peça aqui</span><img src="../imagens/autoatendimento/totem-inicio.jpg" alt="" loading="lazy"></div>
-          <span class="cn-totem-pe"></span><span class="cn-totem-base"></span>
-        </div>
-
-        <!-- monitor com o painel -->
-        <div class="cn cn-monitor">
-          <div class="cn-monitor-tela"><img src="../imagens/admin/telaadmin.png" alt=""></div>
-          <span class="cn-monitor-pe"></span><span class="cn-monitor-base"></span>
-        </div>
-
-        <!-- impressora térmica imprimindo -->
-        <div class="cn cn-impressora">
-          <div class="cn-papel">
-            <div class="cn-papel-conteudo">
-              <b>PEDIDO #1291</b>
-              <span>1x X-Burguer</span><span>1x Batata frita</span><span>1x Refrigerante</span>
-              <i></i>
-              <b>TOTAL R$ 48,00</b>
-              <small>Pago no Pix</small>
-            </div>
+    <!-- aparelhos (a posição de cada um aqui é a da cena final) -->
+    <div class="cine-mundo" aria-hidden="true">
+      <div class="dv dv-totem"><div class="dv-in">
+        <span class="dv-brilho"></span><span class="dv-sombra"></span>
+        <div class="tt-corpo">
+          <span class="tt-luz"></span>
+          <div class="tt-tela">
+            <img src="../imagens/autoatendimento/totem-boas-vindas.webp" alt="" width="720" height="1275">
+            <img src="../imagens/autoatendimento/totem-onde-comer.webp" alt="" width="720" height="1277" loading="lazy">
+            <img src="../imagens/autoatendimento/totem-cardapio-itens.webp" alt="" width="720" height="1290" loading="lazy">
+            <img src="../imagens/autoatendimento/totem-produto.webp" alt="" width="720" height="1290" loading="lazy">
+            <img src="../imagens/autoatendimento/totem-pagamento.webp" alt="" width="720" height="1281" loading="lazy">
+            <span class="tt-escuro"></span><span class="tt-toque"></span><span class="vidro-reflexo"></span>
           </div>
-          <div class="cn-impressora-corpo"><span class="cn-luz"></span></div>
+          <div class="tt-modulo"><span class="tt-leitor"></span><span class="tt-fenda"></span></div>
         </div>
+        <span class="tt-coluna"></span><span class="tt-base"></span>
+      </div></div>
 
-        <!-- tablet no suporte de mesa -->
-        <div class="cn cn-tablet">
-          <div class="cn-tablet-tela"><img src="../imagens/autoatendimento/tablet-cardapio.jpg" alt="" loading="lazy"></div>
-          <span class="cn-tablet-haste"></span><span class="cn-tablet-base"></span>
+      <div class="dv dv-monitor"><div class="dv-in">
+        <span class="dv-brilho"></span><span class="dv-sombra"></span>
+        <div class="mn-tela">
+          <div class="mn-vidro"><img src="../imagens/admin/telaadmin.webp" alt="" width="1600" height="798" loading="lazy"><span class="mn-flash"></span><span class="vidro-reflexo"></span></div>
+          <div class="mn-aviso"><i></i>Novo pedido <b>#1291</b> <small>· Totem · R$ 48,00</small></div>
+          <div class="mn-hud"><span><small>Pedidos hoje</small><b data-conta="73">73</b></span><span><small>Faturamento</small><b data-conta="3266" data-moeda>R$ 3.266</b></span></div>
         </div>
+        <span class="mn-pe"></span><span class="mn-base"></span>
+      </div></div>
 
-        <!-- QR Code da mesa -->
-        <div class="cn cn-qr">
-          <div class="cn-qr-placa"><small>Mesa 05</small><img src="../imagens/qr-mesa.svg" alt=""><span>Peça pelo celular</span></div>
-        </div>
+      <div class="dv dv-impressora"><div class="dv-in">
+        <span class="dv-brilho"></span><span class="dv-sombra"></span>
+        <div class="im-papel"><div class="im-cupom">
+          <b>PEDIDO #1291</b><span>Totem · 19:42</span><i></i>
+          <span class="l"><em>1x X-Burguer</em><em>28,00</em></span><span class="l"><em>1x Batata</em><em>12,00</em></span><span class="l"><em>1x Refri</em><em>8,00</em></span>
+          <i></i><span class="l"><b>TOTAL</b><b>R$ 48,00</b></span><small>✓ PAGO NO PIX</small>
+        </div></div>
+        <div class="im-corpo"><span class="im-fenda"></span><span class="im-botao"></span><span class="im-led"></span></div>
+      </div></div>
 
-        <!-- celular com o app do cliente -->
-        <div class="cn cn-celular">
-          <div class="cn-celular-tela"><img src="../imagens/cliente/temaclaro/telahome.jpeg" alt="" loading="lazy"></div>
-        </div>
+      <div class="dv dv-tablet"><div class="dv-in">
+        <span class="dv-brilho"></span><span class="dv-sombra"></span>
+        <div class="tb-corpo"><div class="tb-tela"><img src="../imagens/autoatendimento/tablet-mesa-cardapio.webp" alt="" width="1296" height="865" loading="lazy"><span class="vidro-reflexo"></span></div></div>
+        <span class="tb-haste"></span><span class="tb-pe"></span>
+      </div></div>
 
-        <div class="cena-balcao"></div>
-      </div>
-      <ul class="cena-legenda">
-        <li><svg class="i"><use href="#i-zap"/></svg>Totem</li>
-        <li><svg class="i"><use href="#i-monitor"/></svg>Painel</li>
-        <li><svg class="i"><use href="#i-printer"/></svg>Impressão automática</li>
-        <li><svg class="i"><use href="#i-book"/></svg>Tablet na mesa</li>
-        <li><svg class="i"><use href="#i-qr"/></svg>QR Code da mesa</li>
-        <li><svg class="i"><use href="#i-phone"/></svg>App do cliente</li>
-      </ul>
+      <div class="dv dv-celular"><div class="dv-in">
+        <span class="dv-brilho"></span><span class="dv-sombra"></span>
+        <div class="cl-corpo"><div class="cl-tela"><span class="cl-ilha"></span><img src="../imagens/cliente/temaclaro/telahome.webp" alt="" width="738" height="1600" loading="lazy"><span class="vidro-reflexo"></span></div></div>
+      </div></div>
+
+      <div class="dv dv-qr"><div class="dv-in">
+        <span class="dv-sombra"></span>
+        <div class="qr-placa"><div class="qr-cartao"><small>Mesa 05</small><img src="../imagens/qr-mesa.svg" alt="" width="100" height="100" loading="lazy"><span>Peça pelo celular</span></div></div>
+        <span class="qr-pe"></span>
+      </div></div>
     </div>
+
+    <!-- o pedido que atravessa a tela -->
+    <div class="cine-cartao" aria-hidden="true">
+      <div class="ct-topo"><b>#1291</b><span class="ct-pago">✓ Pago no Pix</span></div>
+      <p class="ct-itens">X-Burguer, Batata, Refri</p>
+      <div class="ct-rodape"><span>Totem · agora</span><b>R$ 48,00</b></div>
+    </div>
+
+    <!-- legendas na frente dos aparelhos -->
+    <div class="cine-lg cine-lg-frente" aria-hidden="true">
+      <p class="lg lg-passo"><span class="m"><span>Toca.</span></span></p>
+      <p class="lg lg-passo"><span class="m"><span><em>Escolhe.</em></span></span></p>
+      <p class="lg lg-passo"><span class="m"><span>Personaliza.</span></span></p>
+      <p class="lg lg-passo"><span class="m"><span><em>Paga.</em></span></span></p>
+      <p class="lg lg-onde"><span><span class="m"><span>Na</span></span> <span class="m"><span><em>mesa.</em></span></span></span><span><span class="m"><span>No</span></span> <span class="m"><span><em>celular.</em></span></span></span><span><span class="m"><span>No</span></span> <span class="m"><span><em>totem.</em></span></span></span></p>
+      <p class="lg lg-painel"><span class="m"><span>No</span></span> <span class="m"><span>painel,</span></span> <span class="m"><span><em>na</em></span></span> <span class="m"><span><em>hora.</em></span></span></p>
+      <p class="lg lg-cozinha"><span><span class="m"><span>Direto</span></span> <span class="m"><span>na</span></span></span><span><span class="m"><span><em>cozinha.</em></span></span></span></p>
+    </div>
+
+    <!-- conteúdo real do topo -->
+    <div class="cine-texto">
+      <span class="badge"><b>7 dias grátis</b> Sem cartão, sem compromisso</span>
+      <h1>O sistema completo para a sua <span class="brand-c">pizzaria</span>.</h1>
+      <p class="lead">Pizza com vários sabores e bordas, delivery com motoboys, mesas, tablet, totem e impressão na cozinha num só painel — sem comissão por pedido.</p>
+      <div class="hero-ctas">
+        <a href="#planos" class="btn btn-brand btn-lg" data-sign>Assinar agora <svg class="i"><use href="#i-arrow"/></svg></a>
+        <button type="button" class="btn btn-line btn-lg" data-demo="cliente"><svg class="i"><use href="#i-play"/></svg> Testar o sistema ao vivo</button>
+      </div>
+      <div class="trust">
+        <span><svg class="i"><use href="#i-check"/></svg>100% online, sem instalar app</span>
+        <span><svg class="i"><use href="#i-check"/></svg>PIX integrado</span>
+        <span><svg class="i"><use href="#i-check"/></svg>Implementação grátis</span>
+        <span><svg class="i"><use href="#i-check"/></svg>Suporte dedicado</span>
+      </div>
+    </div>
+
+    <div class="cine-grao" aria-hidden="true"></div>
+    <div class="cine-vinheta" aria-hidden="true"></div>
+    <div class="cine-dica" aria-hidden="true"><span>Role para assistir<i></i></span></div>
   </div>
 </section>
+<!-- cinema:fim -->
 
 <!-- Integrações -->
 <div class="integrations">
@@ -2700,6 +2936,383 @@
   window.addEventListener('resize', conferirMenu);
   conferirMenu();
 </script>
+
+<!-- cinema:inicio — Hero cinematográfico: GSAP + ScrollTrigger + Lenis. Só uma camada por cima do HTML.
+     Para desfazer: apague os blocos cinema:inicio/fim (CSS, hero e este script) e volte o hero antigo pelo git. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var raiz = document.documentElement;
+  var cine = document.querySelector('.cine');
+  if (!cine) return;
+  var palco = cine.querySelector('.cine-palco');
+  var nav = document.getElementById('nav');
+
+  // menu escuro enquanto o hero escuro está atrás dele (vale também na versão parada)
+  function navCine() { if (nav) nav.classList.toggle('nav-cine', cine.getBoundingClientRect().bottom > nav.offsetHeight + 2); }
+  window.addEventListener('scroll', navCine, { passive: true });
+  window.addEventListener('resize', navCine);
+
+  // sem GSAP, com "reduzir movimento" ou se o carregamento demorou demais: fica a cena final parada
+  if (!raiz.classList.contains('cine-js') || !window.gsap || !window.ScrollTrigger) { raiz.classList.remove('cine-js'); navCine(); return; }
+  window.__cine = true;
+  gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.config({ ignoreMobileResize: true });
+  navCine();
+
+  // ── rolagem suave (Lenis) ligada ao ScrollTrigger; só com mouse/trackpad, no toque a rolagem é a nativa ──
+  if (window.Lenis && matchMedia('(pointer: fine)').matches) {
+    var lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
+    gsap.ticker.lagSmoothing(0);
+    // janelas (formulário, demonstração, políticas) rolam por conta própria
+    document.querySelectorAll('dialog').forEach(function (d) { d.setAttribute('data-lenis-prevent', ''); });
+    // links do menu (#planos, #faq...) com a mesma rolagem suave; quem já trata o clique (data-sign etc.) fica de fora
+    document.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var a = e.target.closest && e.target.closest('a[href^="#"]');
+      if (!a) return;
+      var id = a.getAttribute('href');
+      if (id === '#') { e.preventDefault(); lenis.scrollTo(0); return; }
+      var alvo = null;
+      try { alvo = document.querySelector(id); } catch (err) { return; }
+      if (!alvo) return;
+      e.preventDefault();
+      lenis.scrollTo(alvo, { offset: -88 });
+      if (history.pushState) history.pushState(null, '', id);
+    });
+  }
+
+  var $ = function (s) { return palco.querySelector(s); };
+  var $$ = function (s) { return Array.prototype.slice.call(palco.querySelectorAll(s)); };
+  function W() { return palco.clientWidth; }
+  function H() { return palco.clientHeight; }
+  // posição do elemento no palco SEM os transforms (é a posição da cena final)
+  function caixa(el) { var x = 0, y = 0, e = el; while (e && e !== palco) { x += e.offsetLeft; y += e.offsetTop; e = e.offsetParent; } return { x: x, y: y, w: el.offsetWidth, h: el.offsetHeight }; }
+
+  // quebra o H1 em palavras com máscara, sem mudar o texto; desfaz() devolve o HTML original
+  function mascarar(el) {
+    var original = el.innerHTML, saida = [], atual = null;
+    function fecha() {
+      if (!atual) return;
+      var m = document.createElement('span'), d = document.createElement('span');
+      m.className = 'm'; atual.forEach(function (n) { d.appendChild(n); }); m.appendChild(d); saida.push(m); atual = null;
+    }
+    Array.prototype.slice.call(el.childNodes).forEach(function (n) {
+      if (n.nodeType !== 3) { (atual = atual || []).push(n); return; }
+      n.textContent.split(/(\s+)/).forEach(function (p) {
+        if (!p) return;
+        if (/^\s+$/.test(p)) { fecha(); saida.push(document.createTextNode(' ')); }
+        else (atual = atual || []).push(document.createTextNode(p));
+      });
+    });
+    fecha();
+    el.textContent = '';
+    saida.forEach(function (n) { el.appendChild(n); });
+    return { w: el.querySelectorAll('.m > span'), desfaz: function () { el.innerHTML = original; } };
+  }
+
+  // ── fundo em <canvas>: sequência de quadros (estilo Apple) ou, sem quadros, luz laranja se movendo ──
+  // Os quadros ficam em imagens/cinema/hero/ (desktop) e imagens/cinema/hero-celular/, com o índice quadros.json
+  // gerado por ferramentas/extrair-quadros.js. Com total 0 (ou sem índice), fica o fundo animado.
+  function criarFundo(cel) {
+    var cv = palco.querySelector('.cine-canvas'), g = cv.getContext('2d');
+    var pasta = cel ? '../imagens/cinema/hero-celular/' : '../imagens/cinema/hero/';
+    var p = 0, ligado = false, raf = 0, total = 0, quadros = [], pronto = false, ultimo = null, morto = false;
+    function medir() {
+      var r = pronto ? Math.min(window.devicePixelRatio || 1, 2) : 0.5;
+      var w = Math.max(1, Math.round(cv.clientWidth * r)), h = Math.max(1, Math.round(cv.clientHeight * r));
+      if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; ultimo = null; }
+    }
+    function luz(x, y, r, cor) {
+      var gr = g.createRadialGradient(x, y, 0, x, y, r);
+      gr.addColorStop(0, cor); gr.addColorStop(1, 'rgba(255,85,0,0)');
+      g.fillStyle = gr; g.fillRect(0, 0, cv.width, cv.height);
+    }
+    function placeholder(t) {
+      var w = cv.width, h = cv.height, m = Math.max(w, h), a = t * 0.00022;
+      g.globalCompositeOperation = 'source-over';
+      g.fillStyle = '#0B0B0C'; g.fillRect(0, 0, w, h);
+      g.globalCompositeOperation = 'lighter';
+      luz(w * (0.5 + 0.3 * Math.sin(p * 4 + a)), h * (0.62 + 0.12 * Math.cos(p * 3 + a * 1.3)), m * 0.55, 'rgba(255,85,0,0.26)');
+      luz(w * (0.15 + 0.7 * p), h * (0.22 + 0.1 * Math.sin(a * 1.7)), m * 0.34, 'rgba(255,140,60,0.12)');
+      luz(w * (0.9 - 0.6 * p), h * 0.95, m * 0.42, 'rgba(255,60,0,0.16)');
+      g.globalCompositeOperation = 'source-over';
+    }
+    function maisPerto(i) {
+      for (var d = 0; d < total; d++) {
+        if (quadros[i - d] && quadros[i - d].ok) return quadros[i - d];
+        if (quadros[i + d] && quadros[i + d].ok) return quadros[i + d];
+      }
+      return null;
+    }
+    function desenharQuadro() {
+      var img = maisPerto(Math.min(total - 1, Math.round(p * (total - 1))));
+      if (!img || img === ultimo) return; // redesenha só quando o quadro muda
+      ultimo = img;
+      var w = cv.width, h = cv.height, r = Math.max(w / img.naturalWidth, h / img.naturalHeight), iw = img.naturalWidth * r, ih = img.naturalHeight * r;
+      g.drawImage(img, (w - iw) / 2, (h - ih) / 2, iw, ih);
+    }
+    function laco(t) {
+      raf = 0;
+      if (morto) return;
+      medir();
+      if (pronto) desenharQuadro(); else placeholder(t || performance.now());
+      if (ligado && !pronto) raf = requestAnimationFrame(laco);
+    }
+    function pedir() { if (!raf && !morto) raf = requestAnimationFrame(laco); }
+    // pré-carregamento progressivo: 1º quadro, depois de 16 em 16, 8 em 8... até todos (6 downloads por vez)
+    function carregar(n) {
+      total = n; quadros = new Array(n);
+      var ordem = [], visto = {};
+      [n, 16, 8, 4, 2, 1].forEach(function (passo) { for (var i = 0; i < n; i += passo) if (!visto[i]) { visto[i] = 1; ordem.push(i); } });
+      var k = 0, ativos = 0;
+      function proximo() {
+        while (ativos < 6 && k < ordem.length && !morto) (function (i) {
+          var im = new Image();
+          im.decoding = 'async';
+          ativos++;
+          im.onload = function () {
+            im.ok = true; ativos--;
+            if (!pronto) { pronto = true; palco.classList.add('com-video'); ultimo = null; }
+            pedir(); proximo();
+          };
+          im.onerror = function () { ativos--; proximo(); };
+          im.src = pasta + String(i + 1).padStart(4, '0') + '.webp';
+          quadros[i] = im;
+        })(ordem[k++]);
+      }
+      proximo();
+    }
+    if (window.fetch) fetch(pasta + 'quadros.json', { cache: 'no-cache' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) { if (d && d.total > 1 && !morto) carregar(d.total); })
+      .catch(function () {});
+    window.addEventListener('resize', pedir);
+    return {
+      progresso: function (v) { p = v; if (pronto) pedir(); },
+      ativo: function (on) { ligado = on; if (on) pedir(); },
+      parar: function () {
+        morto = true; if (raf) cancelAnimationFrame(raf);
+        window.removeEventListener('resize', pedir);
+        quadros.forEach(function (im) { if (im && !im.ok) im.src = ''; });
+        palco.classList.remove('com-video');
+      }
+    };
+  }
+
+  // ── geometria das cenas: x/y = centro do aparelho em fração do palco; w/h = largura/altura em fração do palco ──
+  var GEO = {
+    desk: {
+      t1: { x: .5, y: .56, h: .8 }, t1b: { x: .5, y: .53, h: .86 },
+      zoom: { x: .68, y: .5, h: .86 },
+      tb: { x: .7, y: .42, w: .42 }, tb2: { x: .65, y: .43, w: .44 }, tbOut: { x: -.35, y: .43, w: .44 },
+      cl: { x: .92, y: .63, h: .5 }, cl2: { x: .86, y: .62, h: .52 }, clOut: { x: -.15, y: .62, h: .52 },
+      qr: { x: .6, y: .83, w: .075 }, qr2: { x: .55, y: .83, w: .08 }, qrOut: { x: -.25, y: .83, w: .08 },
+      card: { x: -.2, y: .3, r: -6, s: .7 },
+      monIn: { x: 1.5, y: .62, w: .56 }, mon: { x: .5, y: .62, w: .56 }, alvo: [.14, .34],
+      impIn: { x: 1.9, y: .8, w: .1 }, imp: { x: .86, y: .79, w: .1 },
+      mon2: { x: .2, y: .32, w: .72, a: .26 }, imp2: { x: .68, y: .56, w: .25 }
+    },
+    cel: {
+      t1: { x: .5, y: .66, h: .56 }, t1b: { x: .5, y: .63, h: .6 },
+      zoom: { x: .5, y: .58, h: .6 },
+      tb: { x: .52, y: .48, w: .9 }, tb2: { x: .47, y: .48, w: .92 }, tbOut: { x: -.7, y: .48, w: .92 },
+      cl: { x: .82, y: .74, h: .32 }, cl2: { x: .76, y: .73, h: .33 }, clOut: { x: -.4, y: .73, h: .33 },
+      qr: { x: .22, y: .8, w: .22 }, qr2: { x: .18, y: .8, w: .23 }, qrOut: { x: -.5, y: .8, w: .23 },
+      card: { x: 0, y: .37, r: -4, s: .62 },
+      monIn: { x: 1.7, y: .5, w: .94 }, mon: { x: .5, y: .5, w: .94 }, alvo: [.14, .34],
+      impIn: { x: 1.9, y: .77, w: .24 }, imp: { x: .78, y: .77, w: .24 },
+      mon2: { x: .5, y: .33, w: .96, a: .22 }, imp2: { x: .5, y: .68, w: .46 }
+    }
+  };
+  // onde o "dedo" toca em cada tela do totem (fração da tela)
+  var TOQUES = [[.5, .935], [.26, .58], [.375, .764], [.6, .975], [.27, .55]];
+
+  function montar(cel) {
+    var C = cel ? GEO.cel : GEO.desk;
+    var texto = $('.cine-texto'), badge = texto.querySelector('.badge'), h1 = texto.querySelector('h1'), lead = texto.querySelector('.lead'), ctas = texto.querySelector('.hero-ctas'), trust = texto.querySelector('.trust');
+    var totem = $('.dv-totem'), totemIn = totem.querySelector('.dv-in'), totemBrilho = totem.querySelector('.dv-brilho');
+    var monitor = $('.dv-monitor'), vidro = $('.mn-vidro'), aviso = $('.mn-aviso'), flash = $('.mn-flash'), hud = $('.mn-hud'), monBrilho = monitor.querySelector('.dv-brilho'), nums = $$('[data-conta]');
+    var imp = $('.dv-impressora'), cupom = $('.im-cupom');
+    var tablet = $('.dv-tablet'), celular = $('.dv-celular'), qr = $('.dv-qr');
+    var tela = $('.tt-tela'), telas = $$('.tt-tela img'), escuro = $('.tt-escuro'), toque = $('.tt-toque');
+    var cartao = $('.cine-cartao'), dica = $('.cine-dica'), dicaIn = dica.firstElementChild;
+    var pediu = $('.lg-pediu'), passos = $$('.lg-passo'), onde = $('.lg-onde'), linhasOnde = $$('.lg-onde > span'), painel = $('.lg-painel'), cozinha = $('.lg-cozinha');
+    var corte = mascarar(h1);
+    var fundo = criarFundo(cel);
+
+    // pose: transform que leva o aparelho (que está na posição final) para o ponto da cena
+    function pose(el, c, extra) {
+      var o = {
+        x: function () { var b = caixa(el); return c.x * W() - (b.x + b.w / 2); },
+        y: function () { var b = caixa(el); return c.y * H() - (b.y + b.h / 2); },
+        scale: function () { var b = caixa(el); return c.w ? c.w * W() / b.w : c.h ? c.h * H() / b.h : 1; }
+      };
+      for (var k in extra) o[k] = extra[k];
+      return o;
+    }
+    // câmera na tela do totem: põe o centro da tela em (x, y) com a altura pedida, ou cobrindo o palco inteiro
+    function foco(c, extra) {
+      function calc() {
+        var b = caixa(totem), t = caixa(tela);
+        var s = c.cobrir ? Math.max(W() / t.w, H() / t.h) * 1.12 : c.h * H() / t.h;
+        var dx = (t.x + t.w / 2) - (b.x + b.w / 2), dy = (t.y + t.h / 2) - (b.y + b.h / 2);
+        return { s: s, x: c.x * W() - (b.x + b.w / 2) - dx * s, y: c.y * H() - (b.y + b.h / 2) - dy * s };
+      }
+      var o = { x: function () { return calc().x; }, y: function () { return calc().y; }, scale: function () { return calc().s; } };
+      for (var k in extra) o[k] = extra[k];
+      return o;
+    }
+    // ponto da coluna "Novos pedidos" na tela do monitor, já na cena do painel (relativo ao centro do palco)
+    function alvoCartao() {
+      var bm = caixa(monitor), v = caixa(vidro), s = C.mon.w * W() / bm.w;
+      var lx = (v.x - bm.x) + C.alvo[0] * v.w - bm.w / 2, ly = (v.y - bm.y) + C.alvo[1] * v.h - bm.h / 2;
+      return { x: C.mon.x * W() + lx * s - W() / 2, y: C.mon.y * H() + ly * s - H() / 2 };
+    }
+    // máscara circular centrada na tela do totem
+    var bT = caixa(totem), tT = caixa(tela);
+    var cx = ((tT.x + tT.w / 2 - bT.x) / bT.w * 100).toFixed(2), cy = ((tT.y + tT.h / 2 - bT.y) / bT.h * 100).toFixed(2);
+    function circ(r) { return 'circle(' + r + '% at ' + cx + '% ' + cy + '%)'; }
+    function letras(el) { return el.querySelectorAll('.m > span'); }
+
+    // estado inicial: só o totem e o "PEDIU." em cena; o resto entra pela rolagem
+    var legendas = [].concat(passos, [onde, painel, cozinha]);
+    gsap.set(legendas.map(letras).reduce(function (a, l) { return a.concat(Array.prototype.slice.call(l)); }, []), { yPercent: 115 });
+    gsap.set(legendas.concat(pediu), { visibility: 'visible' });
+    gsap.set([monitor, imp, tablet, celular, qr], { autoAlpha: 0 });
+    gsap.set([badge, lead, ctas, trust], { autoAlpha: 0, y: 30 });
+    gsap.set(corte.w, { yPercent: 115 });
+    gsap.set(cartao, { xPercent: -50, yPercent: -50, autoAlpha: 0, transformPerspective: 1000 });
+    gsap.set(cupom, { yPercent: 100 });
+    gsap.set(aviso, { xPercent: -50, autoAlpha: 0 });
+    gsap.set(hud, { autoAlpha: 0, x: 24 });
+    gsap.set(monBrilho, { opacity: .4 });
+    gsap.set(totem, { clipPath: circ(150) });
+    var conta = { v: 0 };
+    function escreverNumeros() {
+      nums.forEach(function (n) {
+        var x = Math.round(+n.getAttribute('data-conta') * conta.v);
+        n.textContent = (n.hasAttribute('data-moeda') ? 'R$ ' : '') + x.toLocaleString('pt-BR');
+      });
+    }
+    escreverNumeros();
+
+    var T = gsap.timeline({
+      defaults: { ease: 'power2.inOut', duration: 4 },
+      scrollTrigger: {
+        trigger: cine, start: 'top top', end: 'bottom bottom', scrub: cel ? 0.5 : 0.8, invalidateOnRefresh: true,
+        onUpdate: function (st) { fundo.progresso(st.progress); }
+      }
+    });
+    function entra(el, t, dur) { T.to(letras(el), { yPercent: 0, duration: 1.5, stagger: .22, ease: 'power3.out' }, t).fromTo(el, { y: 40 }, { y: -40, duration: dur || 5, ease: 'none', immediateRender: false }, t); }
+    function sai(el, t) { T.to(letras(el), { yPercent: -115, duration: 1.2, stagger: .1, ease: 'power2.in' }, t); }
+
+    // 1 · abertura: "PEDIU." gigante e o totem saindo da escuridão (0–10)
+    T.fromTo(totem, pose(totem, C.t1), pose(totem, C.t1b, { duration: 10, ease: 'none' }), 0)
+      .to(pediu, { yPercent: -14, duration: 10, ease: 'none' }, 0)
+      .to(dica, { autoAlpha: 0, duration: 2.5 }, 0);
+
+    // 2 · a câmera entra na tela do totem e o cliente monta o pedido (10–31)
+    T.to(totem, foco(C.zoom, { duration: 4.2, ease: 'power3.inOut' }), 10)
+      .to(pediu, { scale: 1.5, autoAlpha: 0, duration: 3.6, ease: 'power2.in' }, 10);
+    var inicio = [14.4, 18.4, 22.4, 26.4, 29.4];
+    TOQUES.forEach(function (pt, i) {
+      var t = inicio[i];
+      T.set(toque, { x: function () { return pt[0] * tela.offsetWidth; }, y: function () { return pt[1] * tela.offsetHeight; } }, t)
+        .fromTo(toque, { autoAlpha: 0, scale: .3 }, { autoAlpha: 1, scale: 1, duration: .6, ease: 'power2.out' }, t)
+        .to(toque, { autoAlpha: 0, scale: 1.8, duration: .8, ease: 'power1.out' }, t + .7);
+      if (telas[i + 1]) T.fromTo(telas[i + 1], { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.6, ease: 'power3.inOut' }, t + 1.1);
+    });
+    [[13.6, 17.6], [17.9, 21.7], [22, 25.8], [26.1, 30.6]].forEach(function (j, i) { entra(passos[i], j[0], j[1] - j[0] + 1.2); sai(passos[i], j[1]); });
+
+    // 3 · zoom até a tela virar o fundo; o pedido vira um cartão; a máscara circular abre a cena da mesa (31–55)
+    T.to(totem, foco({ x: .5, y: .5, cobrir: true }, { duration: 6, ease: 'power3.in' }), 31)
+      .to(escuro, { opacity: .74, duration: 3, ease: 'none' }, 34.6)
+      .fromTo(cartao, { autoAlpha: 0, scale: .35, rotationX: 55, y: 60 }, { autoAlpha: 1, scale: 1, rotationX: 0, y: 0, duration: 4, ease: 'power3.out', immediateRender: false }, 36.4)
+      .fromTo(tablet, pose(tablet, C.tb, { autoAlpha: 1 }), pose(tablet, C.tb2, { autoAlpha: 1, duration: 17, ease: 'none', immediateRender: false }), 38)
+      .fromTo(celular, pose(celular, C.cl, { autoAlpha: 1 }), pose(celular, C.cl2, { autoAlpha: 1, duration: 17, ease: 'none', immediateRender: false }), 38)
+      .fromTo(qr, pose(qr, C.qr, { autoAlpha: 1 }), pose(qr, C.qr2, { autoAlpha: 1, duration: 17, ease: 'none', immediateRender: false }), 38)
+      .fromTo(totem, { clipPath: circ(150) }, { clipPath: circ(0), duration: 5, ease: 'power2.inOut', immediateRender: false }, 39.6)
+      .set(totem, { autoAlpha: 0 }, 44.7)
+      .to(cartao, { x: function () { return C.card.x * W(); }, y: function () { return C.card.y * H(); }, rotation: C.card.r, scale: C.card.s, duration: 11.5, ease: 'sine.inOut' }, 42.6);
+    T.to(letras(linhasOnde[0]), { yPercent: 0, duration: 1.5, stagger: .2, ease: 'power3.out' }, 45.2)
+      .to(letras(linhasOnde[1]), { yPercent: 0, duration: 1.5, stagger: .2, ease: 'power3.out' }, 47.4)
+      .to(letras(linhasOnde[2]), { yPercent: 0, duration: 1.5, stagger: .2, ease: 'power3.out' }, 49.6)
+      .fromTo(onde, { y: 30 }, { y: -50, duration: 11, ease: 'none', immediateRender: false }, 45);
+    sai(onde, 54.6);
+
+    // 4 · a câmera passa para o painel; o cartão cai no monitor, que acende e conta os números (55–70)
+    T.to(tablet, pose(tablet, C.tbOut, { duration: 6, ease: 'power2.in' }), 55)
+      .to(qr, pose(qr, C.qrOut, { duration: 5, ease: 'power2.in' }), 55.3)
+      .to(celular, pose(celular, C.clOut, { duration: 6, ease: 'power2.in' }), 55.6)
+      .set([tablet, celular, qr], { autoAlpha: 0 }, 61.8)
+      .fromTo(monitor, pose(monitor, C.monIn, { autoAlpha: 1 }), pose(monitor, C.mon, { autoAlpha: 1, duration: 6.5, ease: 'power3.out', immediateRender: false }), 55.2)
+      .fromTo(imp, pose(imp, C.impIn, { autoAlpha: 1 }), pose(imp, C.imp, { autoAlpha: 1, duration: 6.8, ease: 'power3.out', immediateRender: false }), 55.8)
+      .to(cartao, { x: function () { return alvoCartao().x; }, y: function () { return alvoCartao().y; }, scale: .16, rotation: 0, duration: 4.4, ease: 'power2.in' }, 61.2)
+      .to(cartao, { autoAlpha: 0, duration: .7, ease: 'none' }, 65)
+      .to(flash, { opacity: .7, duration: .6, ease: 'power1.out' }, 65.2)
+      .to(flash, { opacity: 0, duration: 2.6, ease: 'power1.in' }, 65.9)
+      .to(monBrilho, { opacity: 1, duration: 2 }, 65.2)
+      .fromTo(aviso, { autoAlpha: 0, y: 14, scale: .85 }, { autoAlpha: 1, y: 0, scale: 1, duration: 1.4, ease: 'back.out(2)', immediateRender: false }, 65.3)
+      .to(hud, { autoAlpha: 1, x: 0, duration: 1.6, ease: 'power3.out' }, 65.8)
+      .to(conta, { v: 1, duration: 4.2, ease: 'power1.out', onUpdate: escreverNumeros }, 66.2);
+    entra(painel, 62.4, 8); sai(painel, 69.6);
+
+    // 5 · close na impressora: o cupom sai junto com a rolagem (70–83)
+    T.to([aviso, hud], { autoAlpha: 0, duration: 1.2 }, 70.2)
+      .to(monitor, pose(monitor, C.mon2, { autoAlpha: C.mon2.a, duration: 6, ease: 'power3.inOut' }), 70.4)
+      .to(imp, pose(imp, C.imp2, { duration: 6, ease: 'power3.inOut' }), 70.4)
+      .to(cupom, { yPercent: 0, duration: 7, ease: 'none' }, 74);
+    entra(cozinha, 73.4, 9.5); sai(cozinha, 81.8);
+
+    // 6 · a câmera se afasta: todos os aparelhos juntos, e entram o título, o texto e os botões (83–100)
+    T.set(totem, { clipPath: circ(150), autoAlpha: 0, x: 0, y: 40, scale: 1.2 }, 83)
+      .set(telas.slice(1), { clipPath: 'inset(100% 0% 0% 0%)' }, 83)
+      .set(escuro, { opacity: 0 }, 83)
+      .to(totem, { autoAlpha: 1, x: 0, y: 0, scale: 1, duration: 7, ease: 'power3.out' }, 83.4)
+      .to(monitor, { autoAlpha: 1, x: 0, y: 0, scale: 1, duration: 7, ease: 'power3.inOut' }, 83)
+      .to(imp, { x: 0, y: 0, scale: 1, duration: 7, ease: 'power3.inOut' }, 83)
+      .to(monBrilho, { opacity: .55, duration: 4 }, 83)
+      .to([tablet, celular, qr], { autoAlpha: 1, x: 0, y: 0, scale: 1, duration: 7, stagger: .5, ease: 'power3.out' }, 84)
+      .to(badge, { autoAlpha: 1, y: 0, duration: 2, ease: 'power3.out' }, 89.6)
+      .to(corte.w, { yPercent: 0, duration: 2.6, stagger: .3, ease: 'power4.out' }, 90.2)
+      .to(lead, { autoAlpha: 1, y: 0, duration: 2.2, ease: 'power3.out' }, 93.2)
+      .to(ctas, { autoAlpha: 1, y: 0, duration: 2.2, ease: 'power3.out' }, 94.4)
+      .to(trust, { autoAlpha: 1, y: 0, duration: 2.2, ease: 'power3.out' }, 95.4)
+      .set({}, {}, 100);
+
+    // abertura (por tempo, não por rolagem): só para quem chega no topo; espera o logo de abertura sair
+    var intro = gsap.timeline({ paused: true })
+      .fromTo(letras(pediu), { yPercent: 115 }, { yPercent: 0, duration: 1.3, stagger: .07, ease: 'expo.out' })
+      .fromTo(totemIn, { autoAlpha: 0, y: 90, scale: .9 }, { autoAlpha: 1, y: 0, scale: 1, duration: 1.9, ease: 'expo.out' }, .2)
+      .fromTo(totemBrilho, { autoAlpha: 0, scale: .5 }, { autoAlpha: .9, scale: 1, duration: 2.2, ease: 'power2.out' }, .3)
+      .fromTo(dicaIn, { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, duration: .8 }, 1.1);
+    if (window.scrollY > 20) intro.progress(1);
+    else (function esperar() {
+      var ab = document.getElementById('hhAbertura');
+      if (ab && !ab.classList.contains('saindo')) setTimeout(esperar, 120); else intro.play();
+    })();
+
+    // pausa o fundo animado e o grão quando o hero sai da tela
+    ScrollTrigger.create({
+      trigger: cine, start: 'top bottom', end: 'bottom top',
+      onToggle: function (st) { fundo.ativo(st.isActive); palco.classList.toggle('cine-pausa', !st.isActive); }
+    });
+    fundo.ativo(cine.getBoundingClientRect().bottom > 0);
+    raiz.classList.add('cine-pronto');
+
+    return function () { fundo.parar(); corte.desfaz(); };
+  }
+
+  gsap.matchMedia().add({ desk: '(min-width: 900px)', cel: '(max-width: 899px)' }, function (ctx) { return montar(ctx.conditions.cel); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
+});
+</script>
+<!-- cinema:fim -->
 
 </body>
 </html>
