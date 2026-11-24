@@ -1392,6 +1392,81 @@
     }
     @media (prefers-reduced-motion: reduce) { .mq-trilho { animation: none; } }
     /* cinema-site:fim */
+
+    /* ── Notificação a cada etapa do pedido (celular simulado) ── */
+    .notif-sec { padding-top: 0; }
+    .notif-palco {
+      position: relative; overflow: hidden;
+      display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 56px;
+      padding: 64px 56px 0; border-radius: 32px;
+      background:
+        radial-gradient(55% 70% at 80% 30%, rgba(255,85,0,.14), transparent 70%),
+        radial-gradient(45% 60% at 10% 90%, rgba(255,85,0,.07), transparent 70%),
+        var(--subtle);
+      border: 1px solid var(--line);
+    }
+    .notif-texto { padding-bottom: 64px; }
+    .notif-texto .h2 { margin-top: 12px; }
+    .notif-texto .lead { margin-bottom: 26px; }
+    .notif-texto .lead b { color: var(--ink); font-weight: 600; }
+    .notif-etapas { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 26px; padding: 0; }
+    .notif-etapas li { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-size: 14px; font-weight: 600; color: var(--ink-2); }
+    .notif-etapas li span { width: 8px; height: 8px; border-radius: 50%; background: var(--brand); }
+
+    /* o celular */
+    .ncel { position: relative; justify-self: center; align-self: end; width: min(330px, 100%); }
+    .ncel-corpo {
+      position: relative; aspect-ratio: 9 / 18.5; padding: 11px; border-radius: 48px 48px 0 0;
+      background: linear-gradient(160deg, #2a2a2e, #0e0e10); box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.12), 0 40px 80px -30px rgba(0,0,0,.8), 0 0 80px -20px rgba(255,85,0,.25);
+    }
+    .ncel-tela {
+      position: relative; height: 100%; overflow: hidden; border-radius: 38px 38px 0 0;
+      background:
+        radial-gradient(90% 60% at 50% 0%, rgba(255,120,40,.55), transparent 70%),
+        radial-gradient(80% 50% at 0% 100%, rgba(120,40,200,.35), transparent 70%),
+        linear-gradient(180deg, #3a1d10, #120b16 60%, #0b0b10);
+      color: #fff; padding: 14px 12px 0;
+    }
+    .ncel-ilha { width: 92px; height: 26px; margin: 0 auto; border-radius: 999px; background: #000; }
+    .ncel-hora { margin-top: 26px; text-align: center; }
+    .ncel-hora small { display: block; font-size: 13px; font-weight: 600; opacity: .85; letter-spacing: .01em; }
+    .ncel-hora strong { display: block; font-size: 64px; font-weight: 700; line-height: 1; letter-spacing: -0.03em; margin-top: 2px; }
+    .ncel-pilha { display: grid; gap: 8px; margin-top: 30px; }
+    .ncel-notif {
+      display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 10px; align-items: start;
+      padding: 10px 12px; border-radius: 18px;
+      background: rgba(245, 240, 235, .82); color: #111; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 8px 20px -12px rgba(0,0,0,.6);
+    }
+    .ncel-app { width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center; background: var(--brand); color: #fff; font-size: 12px; font-weight: 800; letter-spacing: -0.02em; }
+    .ncel-notif header { display: flex; justify-content: space-between; gap: 8px; font-size: 11.5px; color: #555; margin-bottom: 1px; }
+    .ncel-notif header b { color: #333; font-weight: 600; text-transform: uppercase; letter-spacing: .02em; font-size: 10.5px; }
+    .ncel-notif strong { display: block; font-size: 13.5px; font-weight: 700; line-height: 1.25; }
+    .ncel-notif p { margin: 1px 0 0; font-size: 12.5px; line-height: 1.3; color: #333; }
+    .ncel-notif.velha { opacity: .72; transform: scale(.97); }
+
+    /* as notificações chegam uma a uma quando a seção aparece */
+    @keyframes ncelChega { from { opacity: 0; transform: translateY(-14px) scale(.96); } to { opacity: 1; transform: none; } }
+    .js .ncel .ncel-notif { opacity: 0; }
+    .js .reveal.in .ncel .ncel-notif { animation: ncelChega .55s var(--ease) forwards; }
+    .js .reveal.in .ncel .ncel-notif.velha { animation-name: ncelChegaVelha; }
+    @keyframes ncelChegaVelha { from { opacity: 0; transform: translateY(-14px) scale(.93); } to { opacity: .72; transform: scale(.97); } }
+    .js .reveal.in .ncel .ncel-notif:nth-child(4) { animation-delay: .3s; }
+    .js .reveal.in .ncel .ncel-notif:nth-child(3) { animation-delay: .9s; }
+    .js .reveal.in .ncel .ncel-notif:nth-child(2) { animation-delay: 1.5s; }
+    .js .reveal.in .ncel .ncel-notif:nth-child(1) { animation-delay: 2.1s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .js .ncel .ncel-notif { opacity: 1; animation: none !important; }
+      .js .ncel .ncel-notif.velha { opacity: .72; }
+    }
+    @media (max-width: 900px) {
+      .notif-palco { grid-template-columns: 1fr; gap: 28px; padding: 40px 24px 0; }
+      .notif-texto { padding-bottom: 0; }
+    }
+    @media (max-width: 420px) {
+      .ncel-hora strong { font-size: 54px; }
+    }
   </style>
   <script>
     /* Medição de visitas e cadastros.
@@ -1452,6 +1527,7 @@
   <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><line x1="11" y1="18" x2="13" y2="18"/></symbol>
   <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></symbol>
   <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4"/><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
 </svg>
 
 <!-- Nav -->
@@ -1652,7 +1728,7 @@
       <div class="start-step reveal"><span class="n-badge">1</span><h3>O cliente pede</h3><p>Pelo link, pelo QR Code da mesa, no tablet ou no totem.</p></div>
       <div class="start-step reveal"><span class="n-badge">2</span><h3>Paga na hora</h3><p>Pix ou cartão, com confirmação automática.</p></div>
       <div class="start-step reveal"><span class="n-badge">3</span><h3>A cozinha recebe</h3><p>O pedido aparece no painel e sai impresso.</p></div>
-      <div class="start-step reveal"><span class="n-badge">4</span><h3>Entrega ou retira</h3><p>O motoboy leva e o cliente é avisado no WhatsApp.</p></div>
+      <div class="start-step reveal"><span class="n-badge">4</span><h3>Entrega ou retira</h3><p>O motoboy leva e o cliente é avisado no WhatsApp e no celular.</p></div>
     </div>
   </div>
 </section>
@@ -1720,6 +1796,57 @@
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- Notificação no celular a cada etapa do pedido -->
+<section class="section notif-sec" id="notificacoes">
+  <div class="container">
+    <div class="notif-palco reveal">
+      <div class="notif-texto">
+        <span class="kicker"><svg class="i"><use href="#i-bell"/></svg>Notificação no celular</span>
+        <h2 class="h2">Notificação a cada etapa do pedido.</h2>
+        <p class="lead">Seu cliente recebe no celular cada passo do pedido: <b>em preparo, pronto, saiu para entrega e chegou</b>. Funciona mesmo com o site fechado, sem precisar baixar nenhum app.</p>
+        <ul class="notif-etapas" aria-label="Etapas avisadas">
+          <li><span></span>Em preparo</li>
+          <li><span></span>Pronto</li>
+          <li><span></span>Saiu para entrega</li>
+          <li><span></span>Chegou</li>
+        </ul>
+        <ul class="ticks">
+          <li><svg class="i"><use href="#i-check"/></svg>O cliente ativa com um toque ao acompanhar o pedido</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Chega mesmo com o site fechado</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Funciona junto com as mensagens do WhatsApp</li>
+        </ul>
+      </div>
+
+      <div class="ncel" role="img" aria-label="Celular com as notificações do pedido: em preparo, pronto, saiu para entrega e chegou">
+        <div class="ncel-corpo">
+          <div class="ncel-tela">
+            <div class="ncel-ilha"></div>
+            <div class="ncel-hora"><small>terça-feira, 24 de novembro</small><strong>20:34</strong></div>
+            <div class="ncel-pilha" aria-hidden="true">
+              <div class="ncel-notif">
+                <span class="ncel-app">BP</span>
+                <div><header><b>Burger da Praça</b><span>agora</span></header><strong>Seu pedido chegou!</strong><p>O entregador está na porta.</p></div>
+              </div>
+              <div class="ncel-notif">
+                <span class="ncel-app">BP</span>
+                <div><header><b>Burger da Praça</b><span>4 min</span></header><strong>Pedido #1312 saiu para entrega</strong><p>O entregador já está a caminho.</p></div>
+              </div>
+              <div class="ncel-notif velha">
+                <span class="ncel-app">BP</span>
+                <div><header><b>Burger da Praça</b><span>12 min</span></header><strong>Pedido #1312 PRONTO!</strong><p>Já vai sair para entrega.</p></div>
+              </div>
+              <div class="ncel-notif velha">
+                <span class="ncel-app">BP</span>
+                <div><header><b>Burger da Praça</b><span>28 min</span></header><strong>Pedido #1312 em preparo</strong><p>A Burger da Praça já está preparando seu pedido.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
